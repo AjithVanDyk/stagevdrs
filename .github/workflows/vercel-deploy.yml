@@ -33,7 +33,7 @@ jobs:
         uses: vercel/repository-dispatch/actions/status@v1
         with:
           name: 'Vercel - stagevdrs: lint'
-          status: ${{ job.status == 'success' && 'success' || 'failure' }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   type-check:
     name: Type Check
@@ -59,7 +59,7 @@ jobs:
         uses: vercel/repository-dispatch/actions/status@v1
         with:
           name: 'Vercel - stagevdrs: type-check'
-          status: ${{ job.status == 'success' && 'success' || 'failure' }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     name: Build
@@ -94,7 +94,7 @@ jobs:
         uses: vercel/repository-dispatch/actions/status@v1
         with:
           name: 'Vercel - stagevdrs: build'
-          status: ${{ job.status == 'success' && 'success' || 'failure' }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-preview:
     name: Deploy Preview
@@ -143,7 +143,7 @@ jobs:
         uses: vercel/repository-dispatch/actions/status@v1
         with:
           name: 'Vercel - stagevdrs: deploy-preview'
-          status: ${{ job.status == 'success' && 'success' || 'failure' }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-production:
     name: Deploy Production
@@ -178,5 +178,5 @@ jobs:
         uses: vercel/repository-dispatch/actions/status@v1
         with:
           name: 'Vercel - stagevdrs: deploy-production'
-          status: ${{ job.status == 'success' && 'success' || 'failure' }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 

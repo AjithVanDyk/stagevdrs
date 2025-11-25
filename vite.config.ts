@@ -34,6 +34,13 @@ export default defineConfig({
     target: 'esnext',
     cssCodeSplit: true,
     rollupOptions: {
+      onwarn(warning, warn) {
+        // Suppress "didn't resolve at build time" warnings for public assets
+        if (warning.code === 'UNRESOLVED_IMPORT' && warning.id?.includes('/Images/')) {
+          return;
+        }
+        warn(warning);
+      },
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
