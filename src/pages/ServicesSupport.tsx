@@ -326,7 +326,7 @@ const ServicesSupport = () => {
                 e.stopPropagation();
                 card.ctaAction?.();
               }}
-              className="text-vd-orange font-semibold inline-flex items-center hover:text-vd-orange-alt transition-colors group/btn"
+              className="text-vd-orange font-semibold inline-flex items-center hover:text-vd-blue transition-colors group/btn"
             >
               {card.cta}
               <motion.div
@@ -343,7 +343,7 @@ const ServicesSupport = () => {
                 e.stopPropagation();
                 window.open(card.ctaLink, '_blank', 'noopener,noreferrer');
               }}
-              className="text-vd-orange font-semibold inline-flex items-center hover:text-vd-orange-alt transition-colors group/btn"
+              className="text-vd-orange font-semibold inline-flex items-center hover:text-vd-blue transition-colors group/btn"
             >
               {card.cta}
               <ExternalLink className="w-4 h-4 ml-1" />
@@ -354,7 +354,7 @@ const ServicesSupport = () => {
                 e.stopPropagation();
                 navigate(card.ctaLink || '#');
               }}
-              className="text-vd-orange font-semibold inline-flex items-center hover:text-vd-orange-alt transition-colors group/btn"
+              className="text-vd-orange font-semibold inline-flex items-center hover:text-vd-blue transition-colors group/btn"
             >
               {card.cta}
               <ArrowRight className="w-4 h-4 ml-1" />

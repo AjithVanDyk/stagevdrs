@@ -308,6 +308,10 @@ const EquipmentModal: React.FC<EquipmentModalProps> = ({ equipment, isOpen, onCl
 						exit={{ opacity: 0, scale: 0.9, y: 20 }}
 						className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
 						onClick={(e) => e.stopPropagation()}
+						role="dialog"
+						aria-modal="true"
+						aria-labelledby="equipment-page-modal-title"
+						aria-describedby="equipment-page-modal-description"
 					>
 						{/* Header */}
 						<div className="relative h-64 bg-gradient-to-r from-vd-blue-dark to-vd-blue">

@@ -29,6 +29,10 @@ const EquipmentModal: React.FC<EquipmentModalProps> = ({ equipment, isOpen, onCl
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="equipment-modal-title"
+            aria-describedby="equipment-modal-description"
           >
             {/* Header */}
             <div className="relative h-64 bg-gradient-to-r from-vd-blue-dark to-vd-blue">
@@ -45,9 +49,9 @@ const EquipmentModal: React.FC<EquipmentModalProps> = ({ equipment, isOpen, onCl
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-6 left-6 text-white">
-                <h2 className="text-4xl font-bold text-white mb-2 leading-tight">{equipment.name}</h2>
+                <h2 id="equipment-modal-title" className="text-4xl font-bold text-white mb-2 leading-tight">{equipment.name}</h2>
                 {equipment.description && (
-                  <p className="text-lg opacity-90">{equipment.description}</p>
+                  <p id="equipment-modal-description" className="text-lg opacity-90">{equipment.description}</p>
                 )}
               </div>
               <button

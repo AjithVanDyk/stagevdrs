@@ -150,13 +150,13 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                       {t('cookieConsent.message')}
                     </p>
                     
-                    <div className="flex items-center space-x-2 text-sm text-gray-600">
-                      <LinkIcon className="w-4 h-4" />
-                      <Link to="/cookie-policy" className="text-vd-blue hover:text-vd-blue-dark underline">
+                    <div className="flex items-center space-x-2 text-sm">
+                      <LinkIcon className="w-4 h-4 text-vd-blue" aria-hidden="true" />
+                      <Link to="/cookie-policy" className="text-vd-blue hover:text-vd-blue-dark underline font-medium">
                         {t('cookieConsent.cookiePolicyLink')}
                       </Link>
-                      <span className="mx-2">•</span>
-                      <Link to="/privacy-policy" className="text-vd-blue hover:text-vd-blue-dark underline">
+                      <span className="mx-2 text-vd-blue" aria-hidden="true">•</span>
+                      <Link to="/privacy-policy" className="text-vd-blue hover:text-vd-blue-dark underline font-medium">
                         {t('cookieConsent.privacyPolicyLink')}
                       </Link>
                     </div>

@@ -389,7 +389,7 @@ const Videos = () => {
                     href={selectedVideo.videoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-vd-orange hover:text-vd-orange-alt font-semibold transition-colors"
+                    className="inline-flex items-center text-vd-orange hover:text-vd-blue font-semibold transition-colors"
                   >
                     <Play className="w-5 h-5 mr-2" />
                     Open on YouTube

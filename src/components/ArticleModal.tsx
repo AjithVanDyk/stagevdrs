@@ -51,6 +51,10 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, isOpen, onClose })
           exit={{ scale: 0.9, opacity: 0 }}
           className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden relative"
           onClick={(e) => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="article-modal-title"
+          aria-describedby="article-modal-description"
         >
           <button
             onClick={onClose}
@@ -80,8 +84,8 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, isOpen, onClose })
             </div>
 
             {/* Content */}
-            <div className="p-8">
-              <h1 className="text-3xl font-bold text-vd-blue mb-4">{article.title}</h1>
+            <div id="article-modal-description" className="p-8">
+              <h1 id="article-modal-title" className="text-3xl font-bold text-vd-blue mb-4">{article.title}</h1>
               
               <div className="flex items-center gap-6 text-gray-600 mb-6">
                 <div className="flex items-center gap-2">

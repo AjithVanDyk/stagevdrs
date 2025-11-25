@@ -270,7 +270,9 @@ function App() {
               <div className="min-h-screen bg-white">
                 <Navbar />
                 <SmoothScrollHandler />
-                <AppRoutes />
+                <main role="main">
+                  <AppRoutes />
+                </main>
                 <Footer />
                 <Chatbot />
                 <CookieConsentBanner />

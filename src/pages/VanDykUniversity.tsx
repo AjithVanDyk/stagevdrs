@@ -357,7 +357,7 @@ const VanDykUniversity = () => {
         <div className="bg-white shadow-sm border-b">
           <div className="container mx-auto px-4">
             <div className="flex flex-col items-center py-4">
-              <span className="uppercase text-xs font-semibold tracking-widest text-gray-500 mb-3">
+              <span className="uppercase text-xs font-semibold tracking-widest text-vd-blue mb-3">
                 Explore
               </span>
               <div className="flex flex-wrap justify-center gap-3">

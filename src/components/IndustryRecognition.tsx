@@ -205,7 +205,7 @@ const IndustryRecognition: React.FC<IndustryRecognitionProps> = ({
                   {newsItems[currentNewsIndex].type === 'featured' && (
                     <Award className="w-5 h-5 text-vd-orange" />
                   )}
-                  <span className="text-sm text-vd-orange font-semibold uppercase tracking-wide">
+                  <span className="text-sm text-vd-blue font-semibold uppercase tracking-wide">
                     {newsItems[currentNewsIndex].type === 'featured' ? t('industryRecognition.featured') : 
                      newsItems[currentNewsIndex].type === 'trade-show' ? t('industryRecognition.tradeShow') : t('industryRecognition.news')}
                   </span>
@@ -226,7 +226,7 @@ const IndustryRecognition: React.FC<IndustryRecognitionProps> = ({
                 {newsItems[currentNewsIndex].link && (
                   <Link
                     to={newsItems[currentNewsIndex].link!}
-                    className="inline-flex items-center text-vd-orange hover:text-vd-orange-alt font-semibold transition-colors"
+                    className="inline-flex items-center text-vd-orange hover:text-vd-blue font-semibold transition-colors"
                   >
                     {t('industryRecognition.learnMore')}
                     <ExternalLink className="w-4 h-4 ml-2" />

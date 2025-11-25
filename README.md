@@ -2,6 +2,11 @@
 
 **Official website for Van Dyk Recycling Solutions** - Showcasing cutting-edge recycling equipment, innovative solutions, and comprehensive services.
 
+[![Deployment Status](https://img.shields.io/badge/deployment-vercel-blue)](https://stagevdrs.vercel.app)
+[![React](https://img.shields.io/badge/React-18.3-blue)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.3-purple)](https://vitejs.dev/)
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -12,7 +17,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/AjithVanDyk/vdrsnewv1.git
+git clone https://github.com/AjithVanDyk/stagevdrs.git
 cd staging_vdrs
 
 # Install dependencies
@@ -34,41 +39,64 @@ The development server will start at `http://localhost:5173`
 | **Lint** | `npm run lint` | Run ESLint for code quality checks |
 | **Type Check** | `npm run type-check` | Run TypeScript compiler without emitting files |
 | **Vercel Build** | `npm run build:vercel` | Type check + build (optimized for Vercel) |
+| **Image Analysis** | `npm run analyze:images` | Analyze unused images |
+| **Translation Audit** | `npm run audit:translations` | Audit translation coverage |
 
 ## 🛠️ Tech Stack
 
-- **React 18** - Latest React with concurrent features
-- **TypeScript** - Type-safe development
-- **Vite 6** - Lightning-fast build tool and dev server
-- **Tailwind CSS** - Utility-first CSS framework
-- **Framer Motion** - Smooth animations with reduced motion support
-- **React Router DOM** - Client-side routing
-- **React Hook Form** - Form handling with validation
-- **Zod** - Schema validation
-- **Sentry** - Error monitoring and tracking
+- **React 18.3** - Latest React with concurrent features
+- **TypeScript 5.5** - Type-safe development
+- **Vite 6.3** - Lightning-fast build tool and dev server
+- **Tailwind CSS 3.4** - Utility-first CSS framework
+- **Framer Motion 11.5** - Smooth animations with reduced motion support
+- **React Router DOM 6.26** - Client-side routing
+- **React Hook Form 7.52** - Form handling with validation
+- **Zod 3.23** - Schema validation
+- **Sentry 10.20** - Error monitoring and tracking
+- **React Helmet Async 2.0** - SEO management
 
 ## 📁 Project Structure
 
 ```
 staging_vdrs/
 ├── public/                 # Static assets
-│   ├── Images/             # Image assets
+│   ├── Images/             # Image assets (252+ files)
+│   │   ├── Equipment/      # Equipment images
+│   │   ├── Logos/          # Brand logos
+│   │   └── ...             # Other image categories
 │   ├── favicon.ico         # Site favicon
 │   ├── manifest.json       # PWA manifest
 │   ├── robots.txt          # SEO robots file
 │   └── sitemap.xml         # Site map
 ├── src/
 │   ├── components/         # Reusable React components
+│   │   ├── Navbar.tsx      # Main navigation
+│   │   ├── Footer.tsx      # Site footer
+│   │   ├── Modal.tsx       # Modal component
+│   │   ├── CookieConsentBanner.tsx
+│   │   └── ...             # Other components
 │   ├── config/             # Configuration files
-│   │   ├── images.ts       # Centralized image paths
-│   │   └── translations.ts # Multi-language translations
+│   │   ├── images.ts       # Centralized image paths (URL-encoded)
+│   │   └── translations.ts # Multi-language translations (EN/FR/ES)
 │   ├── contexts/           # React contexts
-│   │   └── LanguageContext.tsx
+│   │   └── LanguageContext.tsx # Language management
 │   ├── data/               # Static data
+│   │   ├── equipmentData.ts
+│   │   └── solutionsData.ts
 │   ├── hooks/              # Custom React hooks
+│   │   ├── useTranslation.ts
+│   │   ├── usePrefersReducedMotion.ts
+│   │   └── useScrollAnimation.ts
 │   ├── pages/              # Page components
+│   │   ├── Home.tsx
+│   │   ├── Equipment.tsx
+│   │   ├── Solutions.tsx
+│   │   └── ...             # 40+ page components
 │   ├── types/              # TypeScript type definitions
 │   └── utils/              # Utility functions
+│       ├── animations.ts   # Animation configurations
+│       ├── imageLoader.ts  # Image loading utilities
+│       └── ...             # Other utilities
 ├── vercel.json             # Vercel deployment configuration
 ├── vite.config.ts          # Vite configuration
 └── package.json            # Dependencies and scripts
@@ -77,38 +105,43 @@ staging_vdrs/
 ## 🌐 Features
 
 ### Core Features
-- ✅ **Multi-language Support** - English, French, and Spanish
+- ✅ **Multi-language Support** - English, French, and Spanish with browser-based detection
 - ✅ **Responsive Design** - Optimized for all devices (mobile, tablet, desktop)
 - ✅ **Modern UI/UX** - Glass morphism design with smooth animations
 - ✅ **SEO Optimized** - Meta tags, structured data, and sitemap
 - ✅ **Performance Optimized** - Code splitting, lazy loading, image optimization
-- ✅ **Accessibility** - WCAG compliant with keyboard navigation and screen reader support
+- ✅ **Accessibility (WCAG 2 AA)** - Keyboard navigation, screen reader support, ARIA labels
 - ✅ **Error Handling** - Comprehensive error boundaries and monitoring
+- ✅ **Cookie Consent** - GDPR-compliant cookie management
+- ✅ **Newsletter Popup** - Email subscription functionality
 
 ### Pages & Sections
-- **Home** - Hero section, services overview, statistics
-- **Equipment** - Equipment catalog with detailed pages
-- **Solutions** - Recycling solutions portfolio
-- **Services & Support** - Support services, PMI, training
-- **News & Media** - Latest news, articles, and updates
-- **About** - Company information and leadership
-- **Careers** - Job openings and company culture
-- **Contact** - Contact forms and information
+- **Home** - Hero section, services overview, statistics, training info
+- **Equipment** - Equipment catalog with detailed modal pages (12+ equipment types)
+- **Solutions** - Recycling solutions portfolio (15+ solution types)
+- **Services & Support** - Support services, PMI, training, test center
+- **News & Media** - Latest news, articles, videos, expert tips
+- **About** - Company information, leadership team, history
+- **Careers** - Job openings, company culture, benefits
+- **Contact** - Contact forms, location, business hours
+- **Privacy Policy** - Comprehensive privacy policy
+- **Cookie Policy** - Detailed cookie policy
 
 ## 🎨 Styling & Design
 
 ### Design System
-- **Primary Color**: Van Dyk Orange (`#F97316`)
-- **Secondary Color**: Van Dyk Blue (`#1E40AF`)
-- **Typography**: System font stack with fallbacks
+- **Primary Color**: Van Dyk Blue (`#154B7F`)
+- **Secondary Color**: Van Dyk Orange (`#E66538`)
+- **Typography**: Franklin Gothic & Helvetica
 - **Spacing**: Tailwind's spacing scale
 - **Breakpoints**: Mobile-first responsive design
 
 ### Animations
 - All animations respect `prefers-reduced-motion` preference
 - Smooth page transitions with Framer Motion
-- Scroll-triggered animations
+- Scroll-triggered animations using Intersection Observer
 - Hover effects on interactive elements
+- Modal and dropdown animations
 
 ## 🔧 Configuration
 
@@ -122,19 +155,18 @@ NODE_ENV=production
 
 # Build Configuration
 VITE_APP_NAME=Van Dyk Recycling Solutions
-VITE_APP_VERSION=2.0.0
-
-# Analytics (optional)
-# VITE_GA_TRACKING_ID=your_ga_id_here
-# VITE_GTM_ID=your_gtm_id_here
+VITE_APP_VERSION=1.0.0
 ```
 
 ### Image Management
 
 All images are managed through `src/config/images.ts`:
-- Centralized image paths
+- Centralized image paths with URL encoding for spaces
 - Fallback images for error handling
 - Organized by page/section
+- All paths URL-encoded for Vercel compatibility (case-sensitive Linux)
+
+**Important**: All image paths with spaces are URL-encoded (e.g., `Product image_baler.jpg` → `Product%20image_baler.jpg`) to work correctly on Vercel's case-sensitive file system.
 
 ### Translations
 
@@ -143,60 +175,135 @@ Translations are managed in `src/config/translations.ts`:
 - French (fr)
 - Spanish (es)
 
+**Language Detection**:
+- Checks `localStorage` for saved preference
+- Falls back to browser language (`navigator.language`)
+- Uses timezone detection for French/Spanish regions
+- Defaults to English if detection fails
+
 To add a new translation:
-1. Add the key to all language objects
+1. Add the key to all language objects in `src/config/translations.ts`
 2. Use `useTranslation()` hook in components
 3. Access translations with `t('key.path')`
 
 ## 🚢 Deployment
 
-### Vercel Deployment
+### Automatic Vercel Deployment
 
-This project is configured for Vercel deployment:
+This project uses **GitHub Actions** for automatic deployment to Vercel with status checks.
 
-1. **Connect Repository** to Vercel
-2. **Build Settings**:
-   - Build Command: `npm run build:vercel`
+#### Setup Instructions
+
+1. **Vercel Token** (Required):
+   - Go to [Vercel Settings > Tokens](https://vercel.com/account/tokens)
+   - Create a new token
+   - Add it to GitHub Secrets: `Settings > Secrets and variables > Actions`
+   - Secret name: `VERCEL_TOKEN`
+
+2. **Vercel Project**:
+   - Connect your GitHub repository to Vercel
+   - Project name: `stagevdrs`
+   - Framework Preset: Vite
+   - Build Command: `npm run build`
    - Output Directory: `dist`
-   - Install Command: `npm install`
-3. **Environment Variables**: Add any required env vars in Vercel dashboard
-4. **Deploy**: Push to main branch for automatic deployment
+
+3. **Automatic Deployment**:
+   - **Push to `main`**: Automatically deploys to production
+   - **Pull Requests**: Automatically creates preview deployments
+   - **Status Checks**: All checks must pass before deployment
+
+#### GitHub Actions Workflows
+
+The project includes two workflows:
+
+1. **`.github/workflows/ci.yml`** - Code quality checks:
+   - ESLint validation
+   - TypeScript type checking
+   - Build verification
+   - Image path validation
+   - Console.log detection
+
+2. **`.github/workflows/vercel-deploy.yml`** - Vercel deployment:
+   - Lint check with Vercel status update
+   - Type check with Vercel status update
+   - Build check with Vercel status update
+   - Preview deployment for PRs
+   - Production deployment for main branch
+
+#### Status Checks
+
+All workflows send status updates to Vercel:
+- ✅ `Vercel - stagevdrs: lint`
+- ✅ `Vercel - stagevdrs: type-check`
+- ✅ `Vercel - stagevdrs: build`
+- ✅ `Vercel - stagevdrs: quality-checks`
+- ✅ `Vercel - stagevdrs: deploy-preview` (PRs only)
+- ✅ `Vercel - stagevdrs: deploy-production` (main only)
+
+#### Manual Deployment
+
+If you need to deploy manually:
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Deploy
+vercel --prod
+```
 
 ### Build Configuration
 
 The `vercel.json` file includes:
-- SPA routing rewrites
-- Cache headers for static assets
-- Security headers
-- Image optimization settings
+- SPA routing rewrites (excludes static files)
+- Cache headers for static assets (Images, CSS, JS)
+- Security headers (XSS, Frame Options, etc.)
+- Proper handling of file extensions
+
+### GitHub Actions Integration
+
+The project uses GitHub Actions for:
+- **Automatic CI/CD**: Runs on every push and PR
+- **Quality Checks**: Lint, type-check, and build verification
+- **Vercel Integration**: Status checks sent to Vercel dashboard
+- **Preview Deployments**: Automatic preview URLs for PRs
+- **Production Deployments**: Automatic deployment on merge to main
+
+**Required GitHub Secrets**:
+- `VERCEL_TOKEN` - Vercel authentication token (get from [Vercel Settings](https://vercel.com/account/tokens))
+
+### Image Deployment
+
+**Critical**: All images in `public/Images/` are tracked in git and deployed to Vercel. The `.gitignore` has been updated to ensure images are included.
 
 ### Pre-deployment Checklist
 
-- [ ] Run `npm run type-check` - No TypeScript errors
-- [ ] Run `npm run lint` - No linting errors
-- [ ] Run `npm run build` - Successful build
-- [ ] Test production build locally: `npm run preview`
-- [ ] Verify all routes work correctly
-- [ ] Check image paths and loading
-- [ ] Test forms and interactions
-- [ ] Verify translations in all languages
-- [ ] Check mobile responsiveness
-- [ ] Test accessibility features
+- [x] Run `npm run type-check` - No TypeScript errors
+- [x] Run `npm run lint` - No linting errors
+- [x] Run `npm run build` - Successful build
+- [x] All images URL-encoded for spaces
+- [x] All translations complete (EN/FR/ES)
+- [x] Accessibility fixes applied (WCAG 2 AA)
+- [x] All modals have proper ARIA labels
+- [x] Main landmark added to document structure
+- [x] Color contrast meets WCAG standards
 
 ## 🧪 Testing
 
 ### Manual Testing Checklist
 
-- [ ] **Navigation** - All links and routes working
-- [ ] **Forms** - Quote and contact forms functional
-- [ ] **Images** - All images load correctly
-- [ ] **Translations** - Language switching works
-- [ ] **Responsive** - Test on mobile, tablet, desktop
-- [ ] **Browser Compatibility** - Chrome, Firefox, Safari, Edge
-- [ ] **Performance** - Page load times acceptable
-- [ ] **Accessibility** - Keyboard navigation, screen readers
-- [ ] **Animations** - Smooth and respect reduced motion
-- [ ] **Error Handling** - Error boundaries work correctly
+- [x] **Navigation** - All links and routes working
+- [x] **Forms** - Quote and contact forms functional
+- [x] **Images** - All images load correctly (URL-encoded paths)
+- [x] **Translations** - Language switching works (3 languages)
+- [x] **Responsive** - Test on mobile, tablet, desktop
+- [x] **Browser Compatibility** - Chrome, Firefox, Safari, Edge
+- [x] **Performance** - Page load times acceptable
+- [x] **Accessibility** - Keyboard navigation, screen readers, ARIA labels
+- [x] **Animations** - Smooth and respect reduced motion
+- [x] **Error Handling** - Error boundaries work correctly
+- [x] **Cookie Consent** - Banner appears and functions correctly
+- [x] **Newsletter Popup** - Subscription functionality works
 
 ## 📝 Code Quality
 
@@ -204,6 +311,7 @@ The `vercel.json` file includes:
 - Strict type checking enabled
 - All components properly typed
 - No `any` types (where possible)
+- Type-safe translations and configurations
 
 ### ESLint
 - React hooks rules
@@ -214,6 +322,7 @@ The `vercel.json` file includes:
 - Consistent formatting
 - Component-based architecture
 - Reusable utilities and hooks
+- Centralized configurations
 
 ## 🔒 Security
 
@@ -222,37 +331,59 @@ The `vercel.json` file includes:
 - **XSS Protection** - Enabled
 - **HTTPS Only** - Enforced in production
 - **Input Validation** - Zod schemas for all forms
-- **reCAPTCHA** - Form spam protection
+- **Cookie Consent** - GDPR-compliant cookie management
 
 ## 📊 Performance
 
 ### Optimizations
-- Code splitting by route
-- Lazy loading for images
-- Asset optimization
+- Code splitting by route and vendor
+- Lazy loading for images and components
+- Asset optimization and minification
 - CSS code splitting
 - Tree shaking
-- Minification
+- Image path optimization for Vercel
 
 ### Core Web Vitals
-- **LCP** (Largest Contentful Paint): < 2.5s
-- **FID** (First Input Delay): < 100ms
-- **CLS** (Cumulative Layout Shift): < 0.1
+- **LCP** (Largest Contentful Paint): Optimized with eager loading for hero images
+- **FID** (First Input Delay): < 100ms target
+- **CLS** (Cumulative Layout Shift): < 0.1 target
+
+## ♿ Accessibility
+
+### WCAG 2 AA Compliance
+- ✅ Color contrast ratios meet minimum thresholds
+- ✅ Keyboard navigation support
+- ✅ Screen reader announcements
+- ✅ ARIA labels on all interactive elements
+- ✅ Modal dialogs have proper titles and descriptions
+- ✅ Main landmark in document structure
+- ✅ Reduced motion support
+- ✅ Focus management
+
+### Accessibility Features
+- Screen reader announcements for page changes
+- Keyboard navigation for all interactive elements
+- Focus traps in modals
+- Skip to main content links
+- Alt text for all images
+- Semantic HTML structure
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
+
+**Images not loading on Vercel**
+- ✅ Fixed: All image paths are URL-encoded for spaces
+- ✅ Fixed: Images folder is tracked in git
+- ✅ Fixed: Vercel rewrite rules exclude static files
+- Check browser console for 404 errors
+- Verify image exists in `public/Images/` with exact case
 
 **Build fails with TypeScript errors**
 ```bash
 npm run type-check
 # Fix any reported errors
 ```
-
-**Images not loading**
-- Check image paths in `src/config/images.ts`
-- Verify images exist in `public/Images/`
-- Check browser console for 404 errors
 
 **Translations not working**
 - Verify translation keys exist in `src/config/translations.ts`
@@ -263,6 +394,11 @@ npm run type-check
 - Verify `usePrefersReducedMotion` hook is used
 - Check `getMotionConfig` utility is used for animations
 
+**Accessibility warnings**
+- ✅ Fixed: All modals have proper ARIA labels
+- ✅ Fixed: Color contrast issues resolved
+- ✅ Fixed: Main landmark added
+
 ## 📞 Support
 
 ### Development Team
@@ -270,7 +406,8 @@ npm run type-check
 - **Organization**: Van Dyk Recycling Solutions
 
 ### Resources
-- **Repository**: https://github.com/AjithVanDyk/vdrsnewv1
+- **Repository**: https://github.com/AjithVanDyk/stagevdrs.git
+- **Live Site**: https://stagevdrs.vercel.app
 - **Documentation**: See inline code comments
 - **Issues**: Report via GitHub Issues
 
@@ -278,16 +415,31 @@ npm run type-check
 
 UNLICENSED - Proprietary code for Van Dyk Recycling Solutions
 
-## 🔄 Version History
+## 🔄 Recent Updates
 
-- **v2.0.0** - Current version
-  - Multi-language support
-  - Performance optimizations
-  - Accessibility improvements
-  - Vercel deployment ready
+### v1.0.0 (Current)
+- ✅ Complete multi-language support (EN/FR/ES)
+- ✅ Browser-based language detection
+- ✅ All images URL-encoded for Vercel compatibility
+- ✅ Comprehensive accessibility fixes (WCAG 2 AA)
+- ✅ Cookie consent banner with GDPR compliance
+- ✅ Newsletter popup functionality
+- ✅ All modals have proper ARIA labels
+- ✅ Color contrast improvements
+- ✅ Main landmark added to document
+- ✅ Performance optimizations
+- ✅ Error boundaries and monitoring
+- ✅ Vercel deployment ready
+
+### Key Fixes
+- **Images**: All paths URL-encoded, Images folder added to git
+- **Accessibility**: WCAG 2 AA compliance, ARIA labels, color contrast
+- **Translations**: Complete coverage for all pages
+- **Deployment**: Vercel configuration optimized
 
 ---
 
 **Last Updated**: January 2025  
-**Status**: Production Ready  
-**Environment**: Staging → Production
+**Status**: Production Ready ✅  
+**Environment**: Staging → Production  
+**Deployment**: Vercel (https://stagevdrs.vercel.app)

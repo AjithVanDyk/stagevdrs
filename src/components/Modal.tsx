@@ -54,12 +54,16 @@ const Modal: React.FC<ModalProps> = ({
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             className={`bg-white rounded-2xl shadow-2xl w-full ${sizeClasses[size]} ${className}`}
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={title ? "modal-title" : undefined}
+            aria-describedby="modal-description"
           >
             {/* Header */}
             {(title || showCloseButton) && (
               <div className="flex items-center justify-between p-6 border-b border-gray-200">
                 {title && (
-                  <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+                  <h2 id="modal-title" className="text-2xl font-bold text-gray-900">{title}</h2>
                 )}
                 {showCloseButton && (
                   <button
@@ -73,7 +77,7 @@ const Modal: React.FC<ModalProps> = ({
             )}
             
             {/* Content */}
-            <div className="p-6">
+            <div id="modal-description" className="p-6">
               {children}
             </div>
           </motion.div>

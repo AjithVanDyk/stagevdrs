@@ -307,6 +307,10 @@ const AboutCareersContact = () => {
         exit={{ scale: 0.95, opacity: 0 }}
         className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="job-modal-title"
+        aria-describedby="job-modal-description"
       >
         {/* Header with gradient */}
         <div className={`bg-gradient-to-r ${job.color} text-white p-6 rounded-t-2xl`}>

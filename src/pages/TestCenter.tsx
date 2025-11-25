@@ -657,7 +657,7 @@ const TestCenter: React.FC = () => {
 								<div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-vd-blue/5 to-white flex-shrink-0">
 									<div>
 										<p className="text-xs uppercase tracking-wider text-vd-orange font-semibold mb-1">Immersive View</p>
-										<h4 className="text-2xl font-bold text-vd-blue">Van Dyk Test Center Layout</h4>
+										<h4 id="test-center-modal-title" className="text-2xl font-bold text-vd-blue">Van Dyk Test Center Layout</h4>
 									</div>
 									<div className="flex items-center gap-3">
 										<div className="flex items-center gap-2 bg-gray-100 rounded-xl p-1">

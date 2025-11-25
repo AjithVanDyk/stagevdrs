@@ -265,7 +265,7 @@ const Home = () => {
                   <div className="p-4 sm:p-6 flex flex-col flex-grow min-h-[200px]">
                     <h3 className="text-lg sm:text-xl font-semibold text-vd-blue mb-2">{service.title}</h3>
                     <p className="text-gray-600 mb-4 text-sm sm:text-base flex-grow">{service.description}</p>
-                    <span className="text-vd-orange font-medium inline-flex items-center hover:text-vd-orange-alt transition-colors text-sm sm:text-base">
+                    <span className="text-vd-orange font-semibold inline-flex items-center hover:text-vd-blue transition-colors text-sm sm:text-base">
                       {service.linkText} →
                     </span>
                   </div>

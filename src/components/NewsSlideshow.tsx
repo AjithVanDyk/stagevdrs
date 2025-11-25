@@ -132,7 +132,7 @@ const NewsSlideshow: React.FC<NewsSlideshowProps> = ({ className = '' }) => {
                 {/* Content Section */}
                 <div className="p-6 md:p-8 flex flex-col justify-center bg-white">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-vd-orange font-semibold text-sm uppercase tracking-wide">
+                    <span className="text-vd-blue font-semibold text-sm uppercase tracking-wide">
                       {currentArticle.category}
                     </span>
                     <div className="flex items-center text-gray-500 text-sm">
@@ -155,7 +155,7 @@ const NewsSlideshow: React.FC<NewsSlideshowProps> = ({ className = '' }) => {
                   
                   <Link
                     to={currentArticle.link}
-                    className="inline-flex items-center text-vd-orange hover:text-vd-orange-alt font-semibold transition-colors group"
+                    className="inline-flex items-center text-vd-orange hover:text-vd-blue font-semibold transition-colors group"
                   >
                     Read Full Article
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

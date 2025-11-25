@@ -633,7 +633,7 @@ const NewsMedia = () => {
                       href={selectedArticle.link} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="inline-flex items-center text-vd-orange hover:text-vd-orange-alt font-medium"
+                      className="inline-flex items-center text-vd-orange hover:text-vd-blue font-semibold"
                     >
                       {t('newsMedia.readFullArticle')}
                       <ExternalLink className="inline-block w-4 h-4 ml-1" />

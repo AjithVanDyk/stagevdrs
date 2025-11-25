@@ -239,7 +239,7 @@ hts-cache/
 *.old
 
 # Images directory at root (if not needed)
-Images/
+# Images/ - COMMENTED OUT - we need public/Images for the website
 
 # Large video files (already covered by *.mp4 but being explicit)
 Image_to_Spinner_Loading_Video.mp4

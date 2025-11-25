@@ -142,7 +142,7 @@ const About = () => {
                     <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-vd-blue transition-colors">
                       {leader.name}
                     </h3>
-                    <p className="text-vd-orange font-semibold mb-4 text-sm uppercase tracking-wide">
+                    <p className="text-vd-blue font-semibold mb-4 text-sm uppercase tracking-wide">
                       {leader.position}
                     </p>
                     
