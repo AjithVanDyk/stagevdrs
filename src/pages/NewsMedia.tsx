@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 import { animationConfig } from '../utils/animations';
+import { IMAGE_ASSIGNMENTS } from '../config/images';
 
 interface Article {
   id: number;
@@ -278,14 +279,16 @@ const NewsMedia = () => {
       <section className="relative text-white py-24 -mt-20 pt-24 overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="/Images/pollutec-trade-show.jpg"
+            src={IMAGE_ASSIGNMENTS.newsMedia.hero}
             alt="News & Media"
             className="w-full h-full object-cover object-center scale-105"
             loading="eager"
             fetchPriority="high"
             onError={(e) => {
-              console.log('Hero image failed to load, using fallback');
-              e.currentTarget.src = '/Images/first.jpg';
+              if (import.meta.env.DEV) {
+                console.log('Hero image failed to load, using fallback');
+              }
+              e.currentTarget.src = IMAGE_ASSIGNMENTS.homepage.heroFallback;
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-vd-blue-dark/95 via-vd-blue/90 to-vd-blue-dark/95" />

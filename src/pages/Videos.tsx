@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Calendar, Clock, Eye, X } from 'lucide-react';
 import { animationConfig } from '../utils/animations';
+import { IMAGE_ASSIGNMENTS } from '../config/images';
 
 interface Video {
   id: number;
@@ -186,7 +187,7 @@ const Videos = () => {
       <section className="relative text-white py-24 -mt-20 pt-24 overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="/Images/pollutec-trade-show.jpg"
+            src={IMAGE_ASSIGNMENTS.newsMedia.hero}
             alt="Videos"
             className="w-full h-full object-cover object-center scale-105"
             loading="eager"
