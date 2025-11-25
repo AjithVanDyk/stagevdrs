@@ -32,7 +32,7 @@ jobs:
         if: always()
         uses: vercel/repository-dispatch/actions/status@v1
         with:
-          name: Vercel - stagevdrs: lint
+          name: 'Vercel - stagevdrs: lint'
           status: ${{ job.status == 'success' && 'success' || 'failure' }}
 
   type-check:
@@ -58,7 +58,7 @@ jobs:
         if: always()
         uses: vercel/repository-dispatch/actions/status@v1
         with:
-          name: Vercel - stagevdrs: type-check
+          name: 'Vercel - stagevdrs: type-check'
           status: ${{ job.status == 'success' && 'success' || 'failure' }}
 
   build:
@@ -93,7 +93,7 @@ jobs:
         if: always()
         uses: vercel/repository-dispatch/actions/status@v1
         with:
-          name: Vercel - stagevdrs: build
+          name: 'Vercel - stagevdrs: build'
           status: ${{ job.status == 'success' && 'success' || 'failure' }}
 
   deploy-preview:
@@ -142,7 +142,7 @@ jobs:
         if: always()
         uses: vercel/repository-dispatch/actions/status@v1
         with:
-          name: Vercel - stagevdrs: deploy-preview
+          name: 'Vercel - stagevdrs: deploy-preview'
           status: ${{ job.status == 'success' && 'success' || 'failure' }}
 
   deploy-production:
@@ -177,6 +177,6 @@ jobs:
         if: always()
         uses: vercel/repository-dispatch/actions/status@v1
         with:
-          name: Vercel - stagevdrs: deploy-production
+          name: 'Vercel - stagevdrs: deploy-production'
           status: ${{ job.status == 'success' && 'success' || 'failure' }}
 
