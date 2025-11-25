@@ -69,7 +69,7 @@ const PMI = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-vd-blue-dark to-vd-blue text-white py-20 -mt-20 pt-20">
-        <div className="absolute inset-0 bg-[url('/Images/image-1749759459073.png')] bg-cover bg-center opacity-20" />
+        <div className="absolute inset-0 bg-cover bg-center opacity-20" style={{ backgroundImage: "url('/Images/image-1749759459073.png')" }} />
         <div className="container mx-auto px-4 relative pt-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

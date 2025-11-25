@@ -384,10 +384,10 @@ const ServicesSupport = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <div className="relative bg-gradient-to-r from-vd-blue-dark to-vd-blue text-white py-20 overflow-hidden">
         {/* Main hero background image */}
-        <div className="absolute inset-0 bg-[url('/Images/contact-team-photo.jpg')] bg-center bg-no-repeat bg-cover opacity-40" />
+        <div className="absolute inset-0 bg-center bg-no-repeat bg-cover opacity-40" style={{ backgroundImage: "url('/Images/contact-team-photo.jpg')" }} />
         <div className="absolute inset-0 bg-gradient-to-r from-vd-blue-dark/85 to-vd-blue/85" />
         {/* Additional overlay pattern for depth */}
-        <div className="absolute inset-0 bg-[url('/Images/commercial-waste-processing.jpg')] bg-center bg-no-repeat bg-cover opacity-15 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-center bg-no-repeat bg-cover opacity-15 mix-blend-overlay" style={{ backgroundImage: "url('/Images/commercial-waste-processing.jpg')" }} />
         <div className="container mx-auto px-4 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -449,7 +449,7 @@ const ServicesSupport = () => {
       {/* Statistics Section */}
       <section id="stats-section" className="py-20 bg-gradient-to-br from-gray-900 via-vd-blue-dark to-gray-900 text-white relative overflow-hidden">
         {/* Enhanced animated background pattern */}
-        <div className="absolute inset-0 bg-[url('/Images/commercial-waste-processing.jpg')] bg-center bg-no-repeat bg-cover opacity-10" />
+        <div className="absolute inset-0 bg-center bg-no-repeat bg-cover opacity-10" style={{ backgroundImage: "url('/Images/commercial-waste-processing.jpg')" }} />
         <div className="absolute inset-0 bg-gradient-to-br from-vd-blue-dark/95 via-vd-blue/90 to-vd-blue-dark/95" />
         
         {/* Enhanced floating geometric shapes with blending */}
@@ -614,7 +614,7 @@ const ServicesSupport = () => {
       {/* Testimonials Section */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
         {/* Background pattern */}
-        <div className="absolute inset-0 bg-[url('/Images/organics-processing.jpg')] bg-center bg-no-repeat bg-cover opacity-5" />
+        <div className="absolute inset-0 bg-center bg-no-repeat bg-cover opacity-5" style={{ backgroundImage: "url('/Images/organics-processing.jpg')" }} />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

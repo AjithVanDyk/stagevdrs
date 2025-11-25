@@ -29,7 +29,7 @@ const equipmentItems = [
 	{
 		id: 1,
 		name: 'Bollegraaf Balers',
-		image: '/Images/Equipment/Bollegraaf/Product image_baler.jpg',
+		image: '/Images/Equipment/Bollegraaf/Product%20image_baler.jpg',
 		description: 'Industry-leading single ram balers with no-shear design for maximum efficiency and density. Single ram uses 1/3 power of two-ram balers and operates automatically without dedicated operator.',
 		features: [
 			'Single ram uses 1/3 power of two-ram balers',
@@ -59,7 +59,7 @@ const equipmentItems = [
 	{
 		id: 2,
 		name: 'Lubo Screens',
-		image: '/Images/Equipment/Lubo Screens/Product image_lubo screens.jpg',
+		image: '/Images/Equipment/Lubo%20Screens/Product%20image_lubo%20screens.jpg',
 		description: 'Patented StarScreen® technology with non-wrapping ONP screens, elliptical separators, and high-capacity 880 screens. Lubo USA LLC, founded in 1996, is a sister company of Van Dyk Recycling Solutions and exclusive distributor.',
 		features: [
 			'Patented StarScreen® technology with various star sizes',
@@ -84,7 +84,7 @@ const equipmentItems = [
 	{
 		id: 3,
 		name: 'Tomra Optical Sort',
-		image: '/Images/Equipment/Tomra Optical sorters/product image_tomra.jpg',
+		image: '/Images/Equipment/Tomra%20Optical%20sorters/product%20image_tomra.jpg',
 		description: 'Worldwide leader in optical sorting with industry-highest NIR resolution BY FAR and patented FLYING BEAM® illumination. Scanner placement up to 5 feet above conveyors (5x distance of competitors) with 95%+ purity rates maintained over long periods.',
 		features: [
 			'Industry-highest NIR resolution BY FAR - 5x distance capability',
@@ -109,7 +109,7 @@ const equipmentItems = [
 	{
 		id: 4,
 		name: 'Pellenc ST Optical Sorting',
-		image: '/Images/Equipment/Pellenc optical sorters/Product image_pellenc.JPG',
+		image: '/Images/Equipment/Pellenc%20optical%20sorters/Product%20image_pellenc.JPG',
 		description: 'AI-powered optical sorting with intelligent material recognition and high-speed processing. Advanced algorithms provide superior material identification and separation accuracy.',
 		features: [
 			'AI-powered material recognition',
@@ -132,7 +132,7 @@ const equipmentItems = [
 	{
 		id: 6,
 		name: 'Smicon Food Waste Depackagers',
-		image: '/Images/Equipment/Smicon Food Waste Depackagers/VDRS Smicon system Sunnyvale.jpeg',
+		image: '/Images/Equipment/Smicon%20Food%20Waste%20Depackagers/VDRS%20Smicon%20system%20Sunnyvale.jpeg',
 		description: 'Advanced food waste processing equipment for organic material separation and depackaging.',
 		features: [
 			'Food waste processing',
@@ -152,7 +152,7 @@ const equipmentItems = [
 	{
 		id: 7,
 		name: 'GÜNTHER Screens',
-		image: '/Images/Equipment/Gunther screens/IMG_8615.jpg',
+		image: '/Images/Equipment/Gunther%20screens/IMG_8615.jpg',
 		description: 'High-performance screening equipment for material separation and classification.',
 		features: [
 			'Material screening',
@@ -172,7 +172,7 @@ const equipmentItems = [
 	{
 		id: 8,
 		name: 'Centriair Odor Control',
-		image: '/Images/Equipment/Centriair Odor Control/Emscher_09 S 010a_P1001419.JPG',
+		image: '/Images/Equipment/Centriair%20Odor%20Control/Emscher_09%20S%20010a_P1001419.JPG',
 		description: 'Advanced odor control systems for waste processing facilities. Effective air treatment solutions for maintaining air quality.',
 		features: [
 			'Effective odor control',
@@ -192,7 +192,7 @@ const equipmentItems = [
 	{
 		id: 9,
 		name: 'Greyparrot AI',
-		image: '/Images/Equipment/Greyparrot AI/Greyparrot-GP5-on-belt.png',
+		image: '/Images/Equipment/Greyparrot%20AI/Greyparrot-GP5-on-belt.png',
 		description: 'AI-powered waste analytics and material recognition. Advanced computer vision technology for waste stream analysis.',
 		features: [
 			'AI-powered analytics',
@@ -212,7 +212,7 @@ const equipmentItems = [
 	{
 		id: 10,
 		name: 'Densimetric Table',
-		image: '/Images/Equipment/Densimetric table/Densimetric table_Zbest.jpeg',
+		image: '/Images/Equipment/Densimetric%20table/Densimetric%20table_Zbest.jpeg',
 		description: 'Advanced density separation technology for material recovery. Efficient separation of materials based on density differences.',
 		features: [
 			'Density-based separation',
@@ -232,7 +232,7 @@ const equipmentItems = [
 	{
 		id: 11,
 		name: 'BeeFoam Dust Suppression',
-		image: '/Images/Equipment/Beefoam dust suppression/after beefoam.JPG',
+		image: '/Images/Equipment/Beefoam%20dust%20suppression/after%20beefoam.JPG',
 		description: 'Advanced dust suppression system using foam technology. Effective dust control for improved air quality and worker safety.',
 		features: [
 			'Foam-based dust suppression',
@@ -252,7 +252,7 @@ const equipmentItems = [
 	{
 		id: 12,
 		name: 'Reckelberg Environmental Technologies',
-		image: '/Images/Equipment/Reckelberg Environmental Technologies/impactreactor.webp',
+		image: '/Images/Equipment/Reckelberg%20Environmental%20Technologies/impactreactor.webp',
 		description: 'Specialized environmental technology solutions for waste processing. Advanced systems for environmental compliance and efficiency.',
 		features: [
 			'Environmental compliance',
@@ -271,7 +271,7 @@ const equipmentItems = [
 	{
 		id: 13,
 		name: 'Certified Pre-Owned Equipment',
-		image: '/Images/Equipment/Certified Pre-owned Equipment/rebuilt baler.png',
+		image: '/Images/Equipment/Certified%20Pre-owned%20Equipment/rebuilt%20baler.png',
 		description: 'Certified pre-owned equipment with full warranty and support. Quality used equipment at competitive prices.',
 		features: [
 			'Certified pre-owned equipment',
