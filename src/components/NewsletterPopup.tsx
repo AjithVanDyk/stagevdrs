@@ -25,8 +25,6 @@ const NewsletterPopup: React.FC<NewsletterPopupProps> = ({
   onSubscribe,
   onMaybeLater
 }) => {
-  if (!isOpen) return null;
-
   // Prevent body scroll when modal is open and ensure modal is visible
   useEffect(() => {
     if (isOpen) {
@@ -41,6 +39,8 @@ const NewsletterPopup: React.FC<NewsletterPopupProps> = ({
       document.body.style.overflow = '';
     };
   }, [isOpen]);
+
+  if (!isOpen) return null;
 
   return (
     <AnimatePresence>
