@@ -519,7 +519,7 @@ const Equipment = () => {
 			<section className="relative text-white py-24 -mt-20 pt-24 overflow-hidden">
 				<div className="absolute inset-0">
 					<img 
-						src="/Images/Equipment/Header image for Equipment grid.jpg"
+						src="/Images/Equipment/Header%20image%20for%20Equipment%20grid.jpg"
 						alt={t('common.advancedRecyclingEquipment')}
 						className="w-full h-full object-cover object-center scale-105"
 						loading="eager"

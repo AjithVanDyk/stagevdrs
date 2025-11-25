@@ -146,14 +146,19 @@ const Footer: React.FC = () => {
             aria-label="Company Information"
           >
             <img 
-              src="/Images/VAN DYK-logo-WHITE.png" 
+              src="/Images/VAN%20DYK-logo-WHITE.png" 
               alt="Van Dyk Recycling Solutions Logo" 
               className="max-h-12 md:max-h-16 w-auto mb-4 object-contain" 
               loading="lazy"
               decoding="async"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
+                // Try unencoded version or alternative
+                if (target.src.includes('%20')) {
+                  target.src = '/Images/VAN DYK-logo-WHITE.png';
+                } else {
+                  target.src = '/Images/van-dyk-logo-white.svg';
+                }
               }} 
             />
             <p className="text-white mb-6 text-sm leading-relaxed">

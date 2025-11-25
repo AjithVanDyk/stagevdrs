@@ -172,6 +172,15 @@ const Navbar = () => {
                   src="/Images/van-dyk-logo-cmyk-no-r.png"
                   alt="Van Dyk Recycling Solutions Logo"
                   className="h-8 sm:h-10 md:h-12 lg:h-14 w-auto object-contain transition-all duration-300"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    // Try alternative case-sensitive paths
+                    if (!target.src.includes('VAN')) {
+                      target.src = '/Images/VAN DYK-logo-CMYK no R.png';
+                    } else if (!target.src.includes('van-dyk-logo-cmyk')) {
+                      target.src = '/Images/van-dyk-logo-cmyk.jpg';
+                    }
+                  }}
                 />
               </div>
             </div>

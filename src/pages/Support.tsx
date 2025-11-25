@@ -277,7 +277,7 @@ const remoteSteps = [
       <div className="relative bg-gradient-to-r from-vd-blue-dark to-vd-blue text-white py-20 -mt-20 pt-20">
         <div className="absolute inset-0">
           <img 
-            src="/Images/Services/Support/Header image_Support.jpeg"
+            src="/Images/Services/Support/Header%20image_Support.jpeg"
             alt="Unmatched Customer Support"
             className="w-full h-full object-cover object-center"
             onError={(e) => {

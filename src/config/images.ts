@@ -1,5 +1,6 @@
 // Centralized Image Configuration
 // This file manages all image assignments across the website to ensure no repetition
+// Note: All paths with spaces are URL-encoded for Vercel compatibility (case-sensitive Linux server)
 
 export const IMAGE_ASSIGNMENTS = {
   // HOMEPAGE IMAGES
@@ -12,7 +13,7 @@ export const IMAGE_ASSIGNMENTS = {
       expertConsulting: '/Images/van-dyk-direct-logo.png',
       globalSupport: '/Images/van-dyk-university.jpg'
     },
-    training: '/Images/Logos/Van Dyk University logo.png',
+    training: '/Images/Logos/Van%20Dyk%20University%20logo.png',
     orderParts: '/Images/van-dyk-direct.jpg',
     orderPartsFallback: '/Images/image-1749759453479.png'
   },
@@ -43,19 +44,19 @@ export const IMAGE_ASSIGNMENTS = {
   equipment: {
     hero: '/Images/equipment-hero.jpg',
     categories: {
-      bollegraaf: '/Images/Equipment/Bollegraaf/Product image_baler.jpg',
-      tomra: '/Images/Equipment/Tomra Optical sorters/product image_tomra.jpg',
-      pellenc: '/Images/Equipment/Pellenc optical sorters/Product image_pellenc.JPG',
-      lubo: '/Images/Equipment/Lubo Screens/Product image_lubo screens.jpg',
-      gunther: '/Images/Equipment/Gunther screens/IMG_8615.jpg',
-      smicon: '/Images/Equipment/Smicon Food Waste Depackagers/VDRS Smicon system Sunnyvale.jpeg',
-      centriair: '/Images/Equipment/Centriair Odor Control/Emscher_09 S 010a_P1001419.JPG',
-      greyparrot: '/Images/Equipment/Greyparrot AI/Greyparrot-GP5-on-belt.png',
-      densimetric: '/Images/Equipment/Densimetric table/Densimetric table_Zbest.jpeg',
-      beefoam: '/Images/Equipment/Beefoam dust suppression/after beefoam.JPG',
-      reckelberg: '/Images/Equipment/Reckelberg Environmental Technologies/impactreactor.webp',
+      bollegraaf: '/Images/Equipment/Bollegraaf/Product%20image_baler.jpg',
+      tomra: '/Images/Equipment/Tomra%20Optical%20sorters/product%20image_tomra.jpg',
+      pellenc: '/Images/Equipment/Pellenc%20optical%20sorters/Product%20image_pellenc.JPG',
+      lubo: '/Images/Equipment/Lubo%20Screens/Product%20image_lubo%20screens.jpg',
+      gunther: '/Images/Equipment/Gunther%20screens/IMG_8615.jpg',
+      smicon: '/Images/Equipment/Smicon%20Food%20Waste%20Depackagers/VDRS%20Smicon%20system%20Sunnyvale.jpeg',
+      centriair: '/Images/Equipment/Centriair%20Odor%20Control/Emscher_09%20S%20010a_P1001419.JPG',
+      greyparrot: '/Images/Equipment/Greyparrot%20AI/Greyparrot-GP5-on-belt.png',
+      densimetric: '/Images/Equipment/Densimetric%20table/Densimetric%20table_Zbest.jpeg',
+      beefoam: '/Images/Equipment/Beefoam%20dust%20suppression/after%20beefoam.JPG',
+      reckelberg: '/Images/Equipment/Reckelberg%20Environmental%20Technologies/impactreactor.webp',
       walair: '/Images/walair-density-separation.jpg',
-      certified: '/Images/Equipment/Certified Pre-owned Equipment/rebuilt baler.png'
+      certified: '/Images/Equipment/Certified%20Pre-owned%20Equipment/rebuilt%20baler.png'
     }
   },
 
@@ -123,7 +124,7 @@ export const IMAGE_ASSIGNMENTS = {
 
   // NEWS & MEDIA PAGE IMAGES
   newsMedia: {
-    hero: '/Images/Equipment/Header image for Equipment grid.jpg',
+    hero: '/Images/Equipment/Header%20image%20for%20Equipment%20grid.jpg',
     featured: [
       '/Images/image-1749759487003.png',
       '/Images/image-1749759499434.png',

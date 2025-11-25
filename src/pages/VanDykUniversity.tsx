@@ -575,7 +575,7 @@ const VanDykUniversity = () => {
                     </div>
                     <div className="relative">
                       <img
-                        src="/Images/Training School/FullSizeRender.jpg"
+                        src="/Images/Training%20School/FullSizeRender.jpg"
                         alt="Van Dyk Training Facility"
                         className="w-full h-64 object-cover rounded-lg shadow-lg"
                         loading="lazy"
