@@ -1,0 +1,81 @@
+{
+  "name": "Van Dyk Recycling Solutions",
+  "short_name": "Van Dyk",
+  "description": "Leading provider of recycling equipment and solutions since 1984",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e3a8a",
+  "theme_color": "#f97316",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/Images/vdrslogo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Images/vdrslogo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/Images/image-1749759459073.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Equipment",
+      "short_name": "Equipment",
+      "description": "View our equipment portfolio",
+      "url": "/equipment",
+      "icons": [
+        {
+          "src": "/Images/vdrslogo.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Solutions",
+      "short_name": "Solutions",
+      "description": "Explore our recycling solutions",
+      "url": "/solutions",
+      "icons": [
+        {
+          "src": "/Images/vdrslogo.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch with us",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/Images/vdrslogo.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
+
+
+
+
+
+

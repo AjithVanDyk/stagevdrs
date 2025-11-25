@@ -1,0 +1,67 @@
+{
+  "name": "van-dyk-recycling-solutions-website",
+  "description": "Official website for Van Dyk Recycling Solutions - showcasing cutting-edge recycling equipment, innovative solutions, and comprehensive services",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "author": "Van Dyk Recycling Solutions",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/AjithVanDyk/vdrsnewv1#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AjithVanDyk/vdrsnewv1.git"
+  },
+  "keywords": [
+    "recycling",
+    "waste-management",
+    "mrf",
+    "material-recovery",
+    "optical-sorting",
+    "balers",
+    "react",
+    "typescript",
+    "vite",
+    "tailwindcss"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "start": "vite preview --port 3000",
+    "type-check": "tsc --noEmit",
+    "build:vercel": "npm run type-check && npm run build",
+    "analyze:images": "node scripts/analyze-unused-images.js",
+    "audit:translations": "node scripts/audit-translations.js"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
+    "@sentry/react": "^10.20.0",
+    "framer-motion": "^11.5.4",
+    "lucide-react": "^0.344.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
+    "react-hook-form": "^7.52.2",
+    "react-router-dom": "^6.26.1",
+    "update-browserslist-db": "^1.1.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.18",
+    "eslint": "^9.9.1",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.11",
+    "globals": "^15.9.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "terser": "^5.44.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.3.0",
+    "vite": "^6.3.5"
+  }
+}

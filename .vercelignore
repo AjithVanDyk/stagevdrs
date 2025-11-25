@@ -1,0 +1,42 @@
+# Old website backups and archives
+My Web Sites/
+Old WebPage/
+VDRS Website - 06192025/
+
+# Documentation and reports
+COMPREHENSIVE_CODE_ANALYSIS_REPORT.md
+OPTIMIZATION_REPORT.md
+VERCEL_DEPLOYMENT_GUIDE.md
+README.md
+
+# Website update materials
+Website updates/
+
+# Development files
+*.md
+.vscode/
+.idea/
+
+# Media files not needed for deployment
+*.mp4
+Image_to_Spinner_Loading_Video.mp4
+plastics-recycling-white-bg.mp4
+
+# System files
+Thumbs.db
+.DS_Store
+
+# PDF files in source
+src/components/*.pdf
+
+# Office documents
+*.docx
+*.pptx
+
+# Example files
+env.example
+
+
+
+
+
