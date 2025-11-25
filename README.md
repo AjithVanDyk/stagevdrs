@@ -54,6 +54,8 @@ The development server will start at `http://localhost:5173`
 - **Zod 3.23** - Schema validation
 - **Sentry 10.20** - Error monitoring and tracking
 - **React Helmet Async 2.0** - SEO management
+- **Vercel Analytics** - Web analytics and visitor tracking
+- **Vercel Speed Insights** - Real-time performance metrics
 
 ## 📁 Project Structure
 
@@ -114,6 +116,8 @@ staging_vdrs/
 - ✅ **Error Handling** - Comprehensive error boundaries and monitoring
 - ✅ **Cookie Consent** - GDPR-compliant cookie management
 - ✅ **Newsletter Popup** - Email subscription functionality
+- ✅ **Vercel Analytics** - Real-time visitor tracking and page view analytics
+- ✅ **Vercel Speed Insights** - Performance metrics and Core Web Vitals tracking
 
 ### Pages & Sections
 - **Home** - Hero section, services overview, statistics, training info

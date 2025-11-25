@@ -276,6 +276,8 @@ function App() {
                 <Footer />
                 <Chatbot />
                 <CookieConsentBanner />
+                <SpeedInsights />
+                <Analytics />
               </div>
             </Router>
           </ErrorBoundaryWrapper>
