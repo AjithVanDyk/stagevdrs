@@ -16,13 +16,13 @@ const Careers = () => {
 
   // Gallery images (using gallery versions from slideshow array)
   const galleryImages = [
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[0], title: 'Front Lobby', description: 'Welcoming reception area' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[1], title: 'Board Room', description: 'Executive meeting and conference space' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[2], title: 'Employee Cafe', description: 'Comfortable dining and break space' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[3], title: 'Building Exterior', description: 'Modern facility exterior view' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[4], title: 'Fitness Center', description: 'Employee gym and wellness center' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[5], title: 'Living Wall', description: 'Green living wall for natural ambiance' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[6], title: 'Employee Lounge', description: 'Relaxing lounge area for employees' }
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[0], title: t('careers.galleryFrontLobby'), description: t('careers.galleryFrontLobbyDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[1], title: t('careers.galleryBoardRoom'), description: t('careers.galleryBoardRoomDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[2], title: t('careers.galleryEmployeeCafe'), description: t('careers.galleryEmployeeCafeDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[3], title: t('careers.galleryBuildingExterior'), description: t('careers.galleryBuildingExteriorDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[4], title: t('careers.galleryFitnessCenter'), description: t('careers.galleryFitnessCenterDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[5], title: t('careers.galleryLivingWall'), description: t('careers.galleryLivingWallDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[6], title: t('careers.galleryEmployeeLounge'), description: t('careers.galleryEmployeeLoungeDesc') }
   ];
 
   useEffect(() => {

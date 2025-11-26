@@ -145,23 +145,25 @@ const Footer: React.FC = () => {
             role="region"
             aria-label="Company Information"
           >
-            <img 
-              src="/Images/Logos/VAN%20DYK-logo-WHITE.svg" 
-              alt="Van Dyk Recycling Solutions Logo" 
-              className="h-20 md:h-24 lg:h-28 xl:h-32 w-auto mb-4 object-contain" 
-              style={{ maxHeight: '128px' }}
-              loading="lazy"
-              decoding="async"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                // Fallback to alternative logo if primary fails
-                if (!target.src.includes('van-dyk-logo-white')) {
-                  target.src = '/Images/van-dyk-logo-white.svg';
-                } else {
-                  target.style.display = 'none';
-                }
-              }} 
-            />
+            <div className="mb-6 flex items-start">
+              <img 
+                src="/Images/Logos/VAN%20DYK-logo-WHITE.svg" 
+                alt="Van Dyk Recycling Solutions Logo" 
+                className="h-24 md:h-28 lg:h-32 xl:h-36 w-auto object-contain max-w-full" 
+                style={{ maxHeight: '144px', minHeight: '96px' }}
+                loading="lazy"
+                decoding="async"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  // Fallback to alternative logo if primary fails
+                  if (!target.src.includes('van-dyk-logo-white')) {
+                    target.src = '/Images/van-dyk-logo-white.svg';
+                  } else {
+                    target.style.display = 'none';
+                  }
+                }} 
+              />
+            </div>
             <p className="text-white mb-6 text-sm leading-relaxed">
               {t('footer.companyDescription')}
             </p>
