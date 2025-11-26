@@ -159,20 +159,20 @@ const Navbar = () => {
 
   return (
     <nav className={`w-full z-50 sticky top-0 smooth-scroll-enhanced transition-all duration-500 backdrop-blur-md`} style={{
-      background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 15%, rgba(21,72,125,0.4) 100%)'
+      background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.92) 15%, rgba(21,72,125,0.25) 100%)'
     }}>
       <div className="container mx-auto px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center h-14 sm:h-16 lg:h-18">
           {/* Logo - Far Left */}
           <Link to="/" className="flex items-center z-10 group">
             <div className="relative">
-              {/* Logo */}
-              <div className="relative">
+              {/* Logo - More subtle, properly scaled */}
+              <div className="relative opacity-90 hover:opacity-100 transition-opacity duration-300">
                 <img
                   src="/Images/Logos/realvdrs.png"
                   alt="Van Dyk Recycling Solutions Logo"
-                  className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain transition-all duration-300"
-                  style={{ maxHeight: '64px' }}
+                  className="h-8 sm:h-9 md:h-10 lg:h-11 w-auto object-contain transition-all duration-300"
+                  style={{ maxHeight: '44px', maxWidth: '200px' }}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     // Fallback to alternative logo if primary fails
