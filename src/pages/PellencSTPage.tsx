@@ -1,35 +1,30 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const PellencSTPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 4,
-    name: 'Pellenc ST Optical Sorting',
+    name: t('equipment.equipment4Name'),
     image: '/Images/Equipment/Pellenc%20optical%20sorters/Product%20image_pellenc.JPG',
-    description: 'Advanced AI-powered optical sorting systems for precise material identification and separation. Pellenc ST technology delivers exceptional accuracy and efficiency in waste processing operations.',
+    description: t('equipment.equipment4Description'),
     features: [
-      'AI-powered material recognition technology',
-      'High-speed sorting capabilities up to 15 tph',
-      'Multi-material detection and separation',
-      'Advanced near-infrared (NIR) spectroscopy',
-      'Real-time quality control and monitoring',
-      'Modular design for easy integration',
-      'Low maintenance and energy efficient',
-      'Precise ejection system for accurate sorting',
-      'Compatible with various material streams',
-      'Advanced data analytics and reporting'
+      t('equipment.equipment4Feature1'),
+      t('equipment.equipment4Feature2'),
+      t('equipment.equipment4Feature3'),
+      t('equipment.equipment4Feature4'),
+      t('equipment.equipment4Feature5'),
+      t('equipment.equipment4Feature6'),
+      t('equipment.equipment4Feature7'),
+      t('equipment.equipment4Feature8'),
     ],
     specifications: {
-      'Sorting Speed': 'Up to 15 tons per hour',
-      'Detection Accuracy': '99.5% material identification',
-      'Technology': 'Near-infrared (NIR) spectroscopy',
-      'Ejection Precision': '99.8% accuracy',
-      'Power Consumption': 'Low energy efficient design',
-      'Maintenance': 'Minimal maintenance required',
-      'Integration': 'Modular design for easy installation',
-      'Data Analytics': 'Real-time monitoring and reporting',
-      'Material Types': 'Plastics, paper, cardboard, metals',
-      'Operating Temperature': '-10°C to +50°C'
+      [t('equipment.equipment4Spec1Key')]: t('equipment.equipment4Spec1Value'),
+      [t('equipment.equipment4Spec2Key')]: t('equipment.equipment4Spec2Value'),
+      [t('equipment.equipment4Spec3Key')]: t('equipment.equipment4Spec3Value'),
+      [t('equipment.equipment4Spec4Key')]: t('equipment.equipment4Spec4Value'),
+      [t('equipment.equipment4Spec5Key')]: t('equipment.equipment4Spec5Value'),
     },
     applications: [
       { name: 'Single stream recycling', link: '/solutions/single-stream-recycling' },

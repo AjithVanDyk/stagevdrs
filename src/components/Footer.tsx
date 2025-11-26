@@ -148,8 +148,8 @@ const Footer: React.FC = () => {
             <img 
               src="/Images/Logos/VAN%20DYK-logo-WHITE.svg" 
               alt="Van Dyk Recycling Solutions Logo" 
-              className="h-12 md:h-16 lg:h-20 w-auto mb-4 object-contain" 
-              style={{ maxHeight: '80px' }}
+              className="h-20 md:h-24 lg:h-28 xl:h-32 w-auto mb-4 object-contain" 
+              style={{ maxHeight: '128px' }}
               loading="lazy"
               decoding="async"
               onError={(e) => {

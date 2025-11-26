@@ -1,42 +1,45 @@
 import React from 'react';
 import SolutionPageTemplate from '../components/SolutionPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const CentriairOdorControlSolutionPage: React.FC = () => {
+  const { t } = useTranslation();
   const solution = {
-    id: 10,
-    name: 'Centriair Odor Control',
+    id: 15,
+    name: t('solutions.solution15Name'),
     image: '/Images/centriair-new-1.jpg',
-    description: 'Advanced odor control solutions for waste processing facilities. Centriair technology effectively eliminates odors while maintaining operational efficiency and environmental compliance.',
+    description: t('solutions.solution15Description'),
     features: [
-      'Advanced odor elimination technology',
-      'Multi-stage filtration system',
-      'High-efficiency odor removal',
-      'Automated operation',
-      'Low maintenance requirements',
-      'Energy efficient design',
-      'Modular system configuration',
-      'Environmental compliance',
-      'Easy installation and setup',
-      'Comprehensive odor control solutions'
+      t('solutions.solution15Feature1'),
+      t('solutions.solution15Feature2'),
+      t('solutions.solution15Feature3'),
+      t('solutions.solution15Feature4'),
+      t('solutions.solution15Feature5'),
+      t('solutions.solution15Feature6'),
+      t('solutions.solution15Feature7'),
+      t('solutions.solution15Feature8'),
     ],
     specifications: {
-      'Air Flow Capacity': 'Up to 50,000 CFM',
-      'Odor Removal Efficiency': '99.9%+ elimination',
-      'Filtration Stages': 'Multi-stage system',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Low maintenance requirements',
-      'Construction': 'Modular design',
-      'Materials': 'Corrosion-resistant construction',
-      'Compliance': 'Environmental regulations',
-      'Installation': 'Turnkey installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('solutions.solution15Spec1Key')]: t('solutions.solution15Spec1Value'),
+      [t('solutions.solution15Spec2Key')]: t('solutions.solution15Spec2Value'),
+      [t('solutions.solution15Spec3Key')]: t('solutions.solution15Spec3Value'),
+      [t('solutions.solution15Spec4Key')]: t('solutions.solution15Spec4Value'),
+      [t('solutions.solution15Spec5Key')]: t('solutions.solution15Spec5Value'),
+      [t('solutions.solution15Spec6Key')]: t('solutions.solution15Spec6Value'),
     },
     applications: [
-      { name: 'Biogas systems', link: '/solutions/organics-processing' },
-      { name: 'Waste water treatment', link: '/solutions/organics-processing' },
-      { name: 'Food waste processing', link: '/solutions/organics-processing' },
-      { name: 'MSW processing', link: '/solutions/msw-processing' },
-      { name: 'Waste to Energy', link: '/solutions/waste-to-energy' }
+      { name: t('solutions.solution15App1') },
+      { name: t('solutions.solution15App2') },
+      { name: t('solutions.solution15App3') },
+      { name: t('solutions.solution15App4') },
+      { name: t('solutions.solution15App5') },
+    ],
+    benefits: [
+      t('solutions.solution15Benefit1'),
+      t('solutions.solution15Benefit2'),
+      t('solutions.solution15Benefit3'),
+      t('solutions.solution15Benefit4'),
+      t('solutions.solution15Benefit5'),
     ],
     equipment: [
       { name: 'Centriair', link: '/equipment/centriair-odor-control' }

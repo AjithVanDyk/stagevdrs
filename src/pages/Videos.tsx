@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Calendar, Clock, Eye, X } from 'lucide-react';
 import { animationConfig } from '../utils/animations';
 import { IMAGE_ASSIGNMENTS } from '../config/images';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface Video {
   id: number;
@@ -30,6 +31,7 @@ const getEmbeddedUrl = (url: string) => {
 };
 
 const Videos = () => {
+  const { t } = useTranslation();
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const fadeInUp = animationConfig.fadeInUp;
@@ -37,9 +39,9 @@ const Videos = () => {
   const videos: Video[] = [
     {
       id: 1,
-      title: 'A New Way to Sort Single Stream',
-      description: 'Revolutionary single stream sorting technology that maximizes material recovery and efficiency.',
-      category: 'Single Stream',
+      title: t('videos.video1Title'),
+      description: t('videos.video1Description'),
+      category: t('videos.categorySingleStream'),
       date: '2024-12-20',
       duration: '3:45',
       thumbnail: '/Images/single-stream-recycling.jpg',
@@ -50,9 +52,9 @@ const Videos = () => {
     },
     {
       id: 2,
-      title: 'Bollegraaf HBC 140 Baler at Yes Recycling Newark NJ',
-      description: 'High-capacity baler demonstration showing exceptional performance in real-world conditions.',
-      category: 'Equipment',
+      title: t('videos.video2Title'),
+      description: t('videos.video2Description'),
+      category: t('videos.categoryEquipment'),
       date: '2024-12-18',
       duration: '4:20',
       thumbnail: '/Images/bollegraaf-products.jpg',
@@ -62,9 +64,9 @@ const Videos = () => {
     },
     {
       id: 3,
-      title: 'E-Scrap Processing with Tomra Autosort Fines Optical Sorter',
-      description: 'Advanced optical sorting technology for electronic waste processing and material recovery.',
-      category: 'E-Scrap',
+      title: t('videos.video3Title'),
+      description: t('videos.video3Description'),
+      category: t('videos.categoryEScrap'),
       date: '2024-12-15',
       duration: '5:30',
       thumbnail: '/Images/tomra-optical-sorting.jpg',
@@ -74,9 +76,9 @@ const Videos = () => {
     },
     {
       id: 4,
-      title: 'VDRS Smimo Depackager',
-      description: 'Food waste depackaging technology for efficient organic waste processing.',
-      category: 'Food Waste',
+      title: t('videos.video4Title'),
+      description: t('videos.video4Description'),
+      category: t('videos.categoryFoodWaste'),
       date: '2024-12-12',
       duration: '2:45',
       thumbnail: '/Images/smicon-depackager.jpg',
@@ -85,9 +87,9 @@ const Videos = () => {
     },
     {
       id: 5,
-      title: 'Single Stream Recycling Tour Material Recovery Facility',
-      description: 'Complete tour of a modern MRF facility showcasing advanced sorting technology.',
-      category: 'Single Stream',
+      title: t('videos.video5Title'),
+      description: t('videos.video5Description'),
+      category: t('videos.categorySingleStream'),
       date: '2024-12-10',
       duration: '8:15',
       thumbnail: '/Images/mrf-systems.jpg',
@@ -97,9 +99,9 @@ const Videos = () => {
     },
     {
       id: 6,
-      title: 'Construction and Demolition Waste Sorting System',
-      description: 'Comprehensive C&D waste processing system for maximum material recovery.',
-      category: 'C&D',
+      title: t('videos.video6Title'),
+      description: t('videos.video6Description'),
+      category: t('videos.categoryCD'),
       date: '2024-12-08',
       duration: '6:20',
       thumbnail: '/Images/cd-recycling.jpg',
@@ -108,9 +110,9 @@ const Videos = () => {
     },
     {
       id: 7,
-      title: 'E-Scrap E-Waste Sorting with Artificial Intelligence',
-      description: 'AI-powered sorting technology revolutionizing electronic waste processing.',
-      category: 'E-Scrap',
+      title: t('videos.video7Title'),
+      description: t('videos.video7Description'),
+      category: t('videos.categoryEScrap'),
       date: '2024-12-05',
       duration: '4:50',
       thumbnail: '/Images/greyparrot-ai-recognition.jpg',
@@ -120,9 +122,9 @@ const Videos = () => {
     },
     {
       id: 8,
-      title: 'Compost Cleaning with an Allgaier Densimetric Table',
-      description: 'Advanced compost refining technology for high-quality organic material production.',
-      category: 'Composting',
+      title: t('videos.video8Title'),
+      description: t('videos.video8Description'),
+      category: t('videos.categoryComposting'),
       date: '2024-12-03',
       duration: '3:30',
       thumbnail: '/Images/densimetric-table-new.jpg',
@@ -131,9 +133,9 @@ const Videos = () => {
     },
     {
       id: 9,
-      title: 'Container Line Featuring Optical Sorting',
-      description: 'Modern container processing line with advanced optical sorting capabilities.',
-      category: 'Plastics',
+      title: t('videos.video9Title'),
+      description: t('videos.video9Description'),
+      category: t('videos.categoryPlastics'),
       date: '2024-12-01',
       duration: '5:15',
       thumbnail: '/Images/plastics-recycling.jpg',
@@ -142,9 +144,9 @@ const Videos = () => {
     },
     {
       id: 10,
-      title: 'Lubo StarScreen Sorting MSW',
-      description: 'Municipal solid waste sorting with advanced screening technology.',
-      category: 'MSW',
+      title: t('videos.video10Title'),
+      description: t('videos.video10Description'),
+      category: t('videos.categoryMSW'),
       date: '2024-11-28',
       duration: '4:05',
       thumbnail: '/Images/msw-processing.jpg',
@@ -205,16 +207,21 @@ const Videos = () => {
         <div className="container mx-auto px-4 relative z-10 pt-20">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <motion.div
-              initial={fadeInUp.initial}
-              animate={fadeInUp.animate}
-              transition={fadeInUp.transition}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                type: 'spring',
+                stiffness: 200,
+                damping: 25,
+                duration: 0.6
+              }}
               className="max-w-3xl w-full"
             >
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                Videos
+                {t('videos.pageTitle')}
               </h1>
               <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                Watch our latest videos showcasing recycling technology, equipment demonstrations, and industry insights.
+                {t('videos.pageDescription')}
               </p>
             </motion.div>
           </div>
@@ -368,7 +375,7 @@ const Videos = () => {
                   <span>•</span>
                   <span>{selectedVideo.duration}</span>
                   <span>•</span>
-                  <span>{selectedVideo.views} views</span>
+                  <span>{selectedVideo.views} {t('videos.views')}</span>
                 </div>
                 <div className="space-y-5">
                   <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden shadow-xl">
@@ -392,7 +399,7 @@ const Videos = () => {
                     className="inline-flex items-center text-vd-orange hover:text-vd-blue font-semibold transition-colors"
                   >
                     <Play className="w-5 h-5 mr-2" />
-                    Open on YouTube
+                    {t('videos.openOnYouTube')}
                   </a>
                 </div>
               </div>

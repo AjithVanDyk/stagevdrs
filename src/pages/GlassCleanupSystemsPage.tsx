@@ -1,47 +1,34 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const GlassCleanupSystemsPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
-    id: 14,
-    name: 'Glass Cleanup Systems',
+    id: 11,
+    name: t('equipment.equipment11Name'),
     image: '/Images/glass-cleanup.jpg',
-    description: 'Specialized glass cleanup and processing systems for contaminated glass streams. Our advanced technology purifies glass materials and prepares them for market-ready applications.',
+    description: t('equipment.equipment11Description'),
     features: [
-      'Contaminated glass processing',
-      'Advanced cleaning technology',
-      'Market-ready glass production',
-      'Contamination removal systems',
-      'Quality control monitoring',
-      'Automated processing',
-      'Energy efficient operation',
-      'Modular system design',
-      'Flexible processing capabilities',
-      'High-purity glass output'
+      t('equipment.equipment11Feature1'),
+      t('equipment.equipment11Feature2'),
+      t('equipment.equipment11Feature3'),
+      t('equipment.equipment11Feature4'),
+      t('equipment.equipment11Feature5'),
+      t('equipment.equipment11Feature6'),
     ],
     specifications: {
-      'Processing Capacity': 'Up to 25 tons per hour',
-      'Glass Purity': '99%+ contamination removal',
-      'Processing Efficiency': '95%+ glass recovery',
-      'Contamination Removal': 'Advanced cleaning technology',
-      'Glass Types': 'Mixed glass streams',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Low maintenance requirements',
-      'System Design': 'Modular and scalable',
-      'Installation': 'Turnkey installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('equipment.equipment11Spec1Key')]: t('equipment.equipment11Spec1Value'),
+      [t('equipment.equipment11Spec2Key')]: t('equipment.equipment11Spec2Value'),
+      [t('equipment.equipment11Spec3Key')]: t('equipment.equipment11Spec3Value'),
+      [t('equipment.equipment11Spec4Key')]: t('equipment.equipment11Spec4Value'),
     },
     applications: [
-      'Glass recycling facilities',
-      'Material recovery facilities (MRF)',
-      'Single stream recycling',
-      'Mixed waste processing',
-      'Commercial recycling centers',
-      'Municipal recycling programs',
-      'Industrial waste management',
-      'Construction waste processing',
-      'Event waste management',
-      'Disaster waste processing'
+      { name: t('equipment.equipment11App1') },
+      { name: t('equipment.equipment11App2') },
+      { name: t('equipment.equipment11App3') },
+      { name: t('equipment.equipment11App4') },
+      { name: t('equipment.equipment11App5') },
     ],
     videos: [
       'https://youtu.be/6QVk7q7OEqo', // Eddy Current

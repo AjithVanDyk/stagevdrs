@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, X, CheckCircle, Quote } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import QuoteForm from '../components/QuoteForm';
-import { IMAGE_ASSIGNMENTS } from '../config/images';
 import { useTranslation } from '../hooks/useTranslation';
 import { animationConfig } from '../utils/animations';
 
@@ -24,272 +23,8 @@ interface EquipmentModalProps {
 	navigate: (path: string) => void;
 }
 
-// Comprehensive equipment items from original website
-const equipmentItems = [
-	{
-		id: 1,
-		name: 'Bollegraaf Balers',
-		image: '/Images/Equipment/Bollegraaf/Product%20image_baler.jpg',
-		description: 'Industry-leading single ram balers with no-shear design for maximum efficiency and density. Single ram uses 1/3 power of two-ram balers and operates automatically without dedicated operator.',
-		features: [
-			'Single ram uses 1/3 power of two-ram balers',
-			'Operates automatically without dedicated operator',
-			'Instant material switching capability',
-			'Denser, uniform bales with pre-press flap',
-			'Production speeds over 35 tph',
-			'50% reduction in electricity costs',
-			'Low maintenance robust design',
-			'No-shear compression technology',
-			'Flexible material processing (fiber, cardboard, plastic, steel, aluminum)',
-			'Pre-press flap eliminates shearing'
-		],
-		specifications: {
-			'Production Speed': 'Over 35 tons per hour',
-			'Power Efficiency': '50% reduction vs two-ram balers',
-			'Bale Density': 'Superior compression with pre-press flap',
-			'Operation': 'Fully automated',
-			'Maintenance': 'Low maintenance robust design',
-			'Material Switching': 'Instant capability',
-			'Design': 'Single ram, no-shear',
-			'Applications': 'Fiber, cardboard, plastic containers, steel, aluminum',
-			'Power Usage': '1/3 of traditional two-ram balers',
-			'Technology': 'Pre-press flap compression'
-		}
-	},
-	{
-		id: 2,
-		name: 'Lubo Screens',
-		image: '/Images/Equipment/Lubo%20Screens/Product%20image_lubo%20screens.jpg',
-		description: 'Patented StarScreen® technology with non-wrapping ONP screens, elliptical separators, and high-capacity 880 screens. Lubo USA LLC, founded in 1996, is a sister company of Van Dyk Recycling Solutions and exclusive distributor.',
-		features: [
-			'Patented StarScreen® technology with various star sizes',
-			'Non-wrapping ONP screens resist wrapping for entire shifts',
-			'Elliptical Separator with ballistic separation for 2D/3D sorting',
-			'880 Screen processing up to 50 tons per hour',
-			'95% fines diversion capability',
-			'OCC Screen with adjustable star/disk spacing',
-			'Specially designed stars prevent loading with film',
-			'Large diameter stars with virtually no wrapping'
-		],
-		specifications: {
-			'Processing Capacity': 'Up to 50 tons per hour',
-			'Fines Diversion': '95% of materials under 2 inches',
-			'Star Diameter': '200-400 mm (large diameter)',
-			'Screen Width': '2000-4000 mm (customizable)',
-			'Maintenance': 'Minutes to clean, no daily maintenance',
-			'Technology': 'Patented StarScreen® non-wrapping',
-			'Applications': 'Single stream, C&D, MSW, green waste'
-		}
-	},
-	{
-		id: 3,
-		name: 'Tomra Optical Sort',
-		image: '/Images/Equipment/Tomra%20Optical%20sorters/product%20image_tomra.jpg',
-		description: 'Worldwide leader in optical sorting with industry-highest NIR resolution BY FAR and patented FLYING BEAM® illumination. Scanner placement up to 5 feet above conveyors (5x distance of competitors) with 95%+ purity rates maintained over long periods.',
-		features: [
-			'Industry-highest NIR resolution BY FAR - 5x distance capability',
-			'FLYING BEAM® illumination with rotating polygon mirror',
-			'SHARP EYE™ ultra-high NIR resolution for difficult materials',
-			'DEEP LAISER™ laser sensor for black plastics and glass',
-			'GAINnext™ Artificial Intelligence with deep-learning',
-			'High-resolution metal detection combined with NIR',
-			'Scanner placement up to 5 feet above conveyors',
-			'AUTOSORT FLAKE technology for simultaneous detection'
-		],
-		specifications: {
-			'Scanner Height': 'Up to 5 feet above conveyors (5x competition)',
-			'NIR Resolution': 'Highest available in optical sorting industry',
-			'Purity Rates': '95%+ maintained in dirty MRF environments',
-			'Material Recognition': 'PE, PP, PET, HDPE, PS, PVC, black plastics',
-			'Performance Proven': '60% increase PET recovery, 15% HDPE',
-			'Technology': 'FLYING BEAM® illumination, GAINnext™ AI',
-			'Applications': 'Single stream, plastics, mixed waste processing'
-		}
-	},
-	{
-		id: 4,
-		name: 'Pellenc ST Optical Sorting',
-		image: '/Images/Equipment/Pellenc%20optical%20sorters/Product%20image_pellenc.JPG',
-		description: 'AI-powered optical sorting with intelligent material recognition and high-speed processing. Advanced algorithms provide superior material identification and separation accuracy.',
-		features: [
-			'AI-powered material recognition',
-			'High-speed processing capabilities',
-			'Intelligent sorting algorithms',
-			'Superior material identification',
-			'Advanced separation technology',
-			'Real-time learning capabilities',
-			'High accuracy rates',
-			'Flexible material processing'
-		],
-		specifications: {
-			'Processing Speed': 'High-speed continuous operation',
-			'Accuracy': 'Superior material identification',
-			'Technology': 'AI-powered optical sorting',
-			'Learning': 'Real-time algorithm adaptation',
-			'Applications': 'Mixed waste, plastics, recyclables'
-		}
-	},
-	{
-		id: 6,
-		name: 'Smicon Food Waste Depackagers',
-		image: '/Images/Equipment/Smicon%20Food%20Waste%20Depackagers/VDRS%20Smicon%20system%20Sunnyvale.jpeg',
-		description: 'Advanced food waste processing equipment for organic material separation and depackaging.',
-		features: [
-			'Food waste processing',
-			'Organic material separation',
-			'Depackaging technology',
-			'High efficiency operation',
-			'Easy maintenance',
-			'Flexible applications'
-		],
-		specifications: {
-			'Processing': 'Food waste depackaging',
-			'Efficiency': 'High organic separation rates',
-			'Technology': 'Advanced depackaging systems',
-			'Applications': 'Food waste, organic processing'
-		}
-	},
-	{
-		id: 7,
-		name: 'GÜNTHER Screens',
-		image: '/Images/Equipment/Gunther%20screens/IMG_8615.jpg',
-		description: 'High-performance screening equipment for material separation and classification.',
-		features: [
-			'Material screening',
-			'High performance separation',
-			'Durable design',
-			'Easy maintenance',
-			'Flexible configurations',
-			'Consistent performance'
-		],
-		specifications: {
-			'Capacity': 'High-volume processing',
-			'Technology': 'Advanced screening',
-			'Maintenance': 'Low maintenance design',
-			'Applications': 'Material separation, classification'
-		}
-	},
-	{
-		id: 8,
-		name: 'Centriair Odor Control',
-		image: '/Images/Equipment/Centriair%20Odor%20Control/Emscher_09%20S%20010a_P1001419.JPG',
-		description: 'Advanced odor control systems for waste processing facilities. Effective air treatment solutions for maintaining air quality.',
-		features: [
-			'Effective odor control',
-			'Air quality improvement',
-			'Energy efficient operation',
-			'Low maintenance requirements',
-			'Customizable solutions',
-			'Environmental compliance'
-		],
-		specifications: {
-			'Efficiency': 'High odor removal efficiency',
-			'Technology': 'Advanced air treatment',
-			'Energy': 'Energy efficient operation',
-			'Applications': 'Waste processing facilities'
-		}
-	},
-	{
-		id: 9,
-		name: 'Greyparrot AI',
-		image: '/Images/Equipment/Greyparrot%20AI/Greyparrot-GP5-on-belt.png',
-		description: 'AI-powered waste analytics and material recognition. Advanced computer vision technology for waste stream analysis.',
-		features: [
-			'AI-powered analytics',
-			'Computer vision technology',
-			'Real-time material recognition',
-			'Data-driven insights',
-			'Automated reporting',
-			'Performance optimization'
-		],
-		specifications: {
-			'Technology': 'AI and computer vision',
-			'Analytics': 'Real-time waste stream analysis',
-			'Accuracy': 'High material recognition accuracy',
-			'Applications': 'Waste analytics, material recovery'
-		}
-	},
-	{
-		id: 10,
-		name: 'Densimetric Table',
-		image: '/Images/Equipment/Densimetric%20table/Densimetric%20table_Zbest.jpeg',
-		description: 'Advanced density separation technology for material recovery. Efficient separation of materials based on density differences.',
-		features: [
-			'Density-based separation',
-			'High recovery rates',
-			'Efficient material processing',
-			'Low energy consumption',
-			'Robust construction',
-			'Flexible applications'
-		],
-		specifications: {
-			'Separation': 'Density-based material separation',
-			'Efficiency': 'High recovery rates',
-			'Energy': 'Low energy consumption',
-			'Applications': 'Material recovery, waste processing'
-		}
-	},
-	{
-		id: 11,
-		name: 'BeeFoam Dust Suppression',
-		image: '/Images/Equipment/Beefoam%20dust%20suppression/after%20beefoam.JPG',
-		description: 'Advanced dust suppression system using foam technology. Effective dust control for improved air quality and worker safety.',
-		features: [
-			'Foam-based dust suppression',
-			'Effective dust control',
-			'Improved air quality',
-			'Worker safety enhancement',
-			'Low water consumption',
-			'Easy maintenance'
-		],
-		specifications: {
-			'Technology': 'Foam-based suppression',
-			'Efficiency': 'High dust suppression effectiveness',
-			'Water Usage': 'Low water consumption',
-			'Applications': 'Dust control, air quality improvement'
-		}
-	},
-	{
-		id: 12,
-		name: 'Reckelberg Environmental Technologies',
-		image: '/Images/Equipment/Reckelberg%20Environmental%20Technologies/impactreactor.webp',
-		description: 'Specialized environmental technology solutions for waste processing. Advanced systems for environmental compliance and efficiency.',
-		features: [
-			'Environmental compliance',
-			'Advanced technology solutions',
-			'Efficient processing systems',
-			'Regulatory compliance',
-			'Customizable solutions',
-			'Performance optimization'
-		],
-		specifications: {
-			'Compliance': 'Environmental regulatory compliance',
-			'Technology': 'Advanced environmental solutions',
-			'Applications': 'Environmental processing, compliance'
-		}
-	},
-	{
-		id: 13,
-		name: 'Certified Pre-Owned Equipment',
-		image: '/Images/Equipment/Certified%20Pre-owned%20Equipment/rebuilt%20baler.png',
-		description: 'Certified pre-owned equipment with full warranty and support. Quality used equipment at competitive prices.',
-		features: [
-			'Certified pre-owned equipment',
-			'Full warranty coverage',
-			'Quality assurance',
-			'Competitive pricing',
-			'Professional inspection',
-			'Support services available'
-		],
-		specifications: {
-			'Quality': 'Certified and inspected',
-			'Warranty': 'Full warranty coverage',
-			'Support': 'Complete support services',
-			'Applications': 'Cost-effective equipment solutions'
-		}
-	},
-];
 const EquipmentModal: React.FC<EquipmentModalProps> = ({ equipment, isOpen, onClose, navigate }) => {
+	const { t } = useTranslation();
 	if (!equipment) return null;
 
 	return (
@@ -475,26 +210,290 @@ const Equipment = () => {
 	const [showEquipmentModal, setShowEquipmentModal] = useState(false);
 	const [showQuoteForm, setShowQuoteForm] = useState(false);
 
+	// Equipment items with translations - moved inside component to access t()
+	const equipmentItems: Equipment[] = [
+		{
+			id: 1,
+			name: t('equipment.equipment1Name'),
+			image: '/Images/Equipment/Bollegraaf/Product%20image_baler.jpg',
+			description: t('equipment.equipment1Description'),
+			features: [
+				t('equipment.equipment1Feature1'),
+				t('equipment.equipment1Feature2'),
+				t('equipment.equipment1Feature3'),
+				t('equipment.equipment1Feature4'),
+				t('equipment.equipment1Feature5'),
+				t('equipment.equipment1Feature6'),
+				t('equipment.equipment1Feature7'),
+				t('equipment.equipment1Feature8'),
+				t('equipment.equipment1Feature9'),
+				t('equipment.equipment1Feature10'),
+			],
+			specifications: {
+				[t('equipment.equipment1Spec1Key')]: t('equipment.equipment1Spec1Value'),
+				[t('equipment.equipment1Spec2Key')]: t('equipment.equipment1Spec2Value'),
+				[t('equipment.equipment1Spec3Key')]: t('equipment.equipment1Spec3Value'),
+				[t('equipment.equipment1Spec4Key')]: t('equipment.equipment1Spec4Value'),
+				[t('equipment.equipment1Spec5Key')]: t('equipment.equipment1Spec5Value'),
+				[t('equipment.equipment1Spec6Key')]: t('equipment.equipment1Spec6Value'),
+				[t('equipment.equipment1Spec7Key')]: t('equipment.equipment1Spec7Value'),
+				[t('equipment.equipment1Spec8Key')]: t('equipment.equipment1Spec8Value'),
+				[t('equipment.equipment1Spec9Key')]: t('equipment.equipment1Spec9Value'),
+				[t('equipment.equipment1Spec10Key')]: t('equipment.equipment1Spec10Value'),
+			}
+		},
+		{
+			id: 2,
+			name: t('equipment.equipment2Name'),
+			image: '/Images/Equipment/Lubo%20Screens/Product%20image_lubo%20screens.jpg',
+			description: t('equipment.equipment2Description'),
+			features: [
+				t('equipment.equipment2Feature1'),
+				t('equipment.equipment2Feature2'),
+				t('equipment.equipment2Feature3'),
+				t('equipment.equipment2Feature4'),
+				t('equipment.equipment2Feature5'),
+				t('equipment.equipment2Feature6'),
+				t('equipment.equipment2Feature7'),
+				t('equipment.equipment2Feature8'),
+			],
+			specifications: {
+				[t('equipment.equipment2Spec1Key')]: t('equipment.equipment2Spec1Value'),
+				[t('equipment.equipment2Spec2Key')]: t('equipment.equipment2Spec2Value'),
+				[t('equipment.equipment2Spec3Key')]: t('equipment.equipment2Spec3Value'),
+				[t('equipment.equipment2Spec4Key')]: t('equipment.equipment2Spec4Value'),
+				[t('equipment.equipment2Spec5Key')]: t('equipment.equipment2Spec5Value'),
+				[t('equipment.equipment2Spec6Key')]: t('equipment.equipment2Spec6Value'),
+				[t('equipment.equipment2Spec7Key')]: t('equipment.equipment2Spec7Value'),
+			}
+		},
+		{
+			id: 3,
+			name: t('equipment.equipment3Name'),
+			image: '/Images/Equipment/Tomra%20Optical%20sorters/product%20image_tomra.jpg',
+			description: t('equipment.equipment3Description'),
+			features: [
+				t('equipment.equipment3Feature1'),
+				t('equipment.equipment3Feature2'),
+				t('equipment.equipment3Feature3'),
+				t('equipment.equipment3Feature4'),
+				t('equipment.equipment3Feature5'),
+				t('equipment.equipment3Feature6'),
+				t('equipment.equipment3Feature7'),
+				t('equipment.equipment3Feature8'),
+			],
+			specifications: {
+				[t('equipment.equipment3Spec1Key')]: t('equipment.equipment3Spec1Value'),
+				[t('equipment.equipment3Spec2Key')]: t('equipment.equipment3Spec2Value'),
+				[t('equipment.equipment3Spec3Key')]: t('equipment.equipment3Spec3Value'),
+				[t('equipment.equipment3Spec4Key')]: t('equipment.equipment3Spec4Value'),
+				[t('equipment.equipment3Spec5Key')]: t('equipment.equipment3Spec5Value'),
+				[t('equipment.equipment3Spec6Key')]: t('equipment.equipment3Spec6Value'),
+				[t('equipment.equipment3Spec7Key')]: t('equipment.equipment3Spec7Value'),
+			}
+		},
+		{
+			id: 4,
+			name: t('equipment.equipment4Name'),
+			image: '/Images/Equipment/Pellenc%20optical%20sorters/Product%20image_pellenc.JPG',
+			description: t('equipment.equipment4Description'),
+			features: [
+				t('equipment.equipment4Feature1'),
+				t('equipment.equipment4Feature2'),
+				t('equipment.equipment4Feature3'),
+				t('equipment.equipment4Feature4'),
+				t('equipment.equipment4Feature5'),
+				t('equipment.equipment4Feature6'),
+				t('equipment.equipment4Feature7'),
+				t('equipment.equipment4Feature8'),
+			],
+			specifications: {
+				[t('equipment.equipment4Spec1Key')]: t('equipment.equipment4Spec1Value'),
+				[t('equipment.equipment4Spec2Key')]: t('equipment.equipment4Spec2Value'),
+				[t('equipment.equipment4Spec3Key')]: t('equipment.equipment4Spec3Value'),
+				[t('equipment.equipment4Spec4Key')]: t('equipment.equipment4Spec4Value'),
+				[t('equipment.equipment4Spec5Key')]: t('equipment.equipment4Spec5Value'),
+			}
+		},
+		{
+			id: 6,
+			name: t('equipment.equipment6Name'),
+			image: '/Images/Equipment/Smicon%20Food%20Waste%20Depackagers/VDRS%20Smicon%20system%20Sunnyvale.jpeg',
+			description: t('equipment.equipment6Description'),
+			features: [
+				t('equipment.equipment6Feature1'),
+				t('equipment.equipment6Feature2'),
+				t('equipment.equipment6Feature3'),
+				t('equipment.equipment6Feature4'),
+				t('equipment.equipment6Feature5'),
+				t('equipment.equipment6Feature6'),
+			],
+			specifications: {
+				[t('equipment.equipment6Spec1Key')]: t('equipment.equipment6Spec1Value'),
+				[t('equipment.equipment6Spec2Key')]: t('equipment.equipment6Spec2Value'),
+				[t('equipment.equipment6Spec3Key')]: t('equipment.equipment6Spec3Value'),
+				[t('equipment.equipment6Spec4Key')]: t('equipment.equipment6Spec4Value'),
+			}
+		},
+		{
+			id: 7,
+			name: t('equipment.equipment7Name'),
+			image: '/Images/Equipment/Gunther%20screens/IMG_8615.jpg',
+			description: t('equipment.equipment7Description'),
+			features: [
+				t('equipment.equipment7Feature1'),
+				t('equipment.equipment7Feature2'),
+				t('equipment.equipment7Feature3'),
+				t('equipment.equipment7Feature4'),
+				t('equipment.equipment7Feature5'),
+				t('equipment.equipment7Feature6'),
+			],
+			specifications: {
+				[t('equipment.equipment7Spec1Key')]: t('equipment.equipment7Spec1Value'),
+				[t('equipment.equipment7Spec2Key')]: t('equipment.equipment7Spec2Value'),
+				[t('equipment.equipment7Spec3Key')]: t('equipment.equipment7Spec3Value'),
+				[t('equipment.equipment7Spec4Key')]: t('equipment.equipment7Spec4Value'),
+			}
+		},
+		{
+			id: 8,
+			name: t('equipment.equipment8Name'),
+			image: '/Images/Equipment/Centriair%20Odor%20Control/Emscher_09%20S%20010a_P1001419.JPG',
+			description: t('equipment.equipment8Description'),
+			features: [
+				t('equipment.equipment8Feature1'),
+				t('equipment.equipment8Feature2'),
+				t('equipment.equipment8Feature3'),
+				t('equipment.equipment8Feature4'),
+				t('equipment.equipment8Feature5'),
+				t('equipment.equipment8Feature6'),
+			],
+			specifications: {
+				[t('equipment.equipment8Spec1Key')]: t('equipment.equipment8Spec1Value'),
+				[t('equipment.equipment8Spec2Key')]: t('equipment.equipment8Spec2Value'),
+				[t('equipment.equipment8Spec3Key')]: t('equipment.equipment8Spec3Value'),
+				[t('equipment.equipment8Spec4Key')]: t('equipment.equipment8Spec4Value'),
+			}
+		},
+		{
+			id: 9,
+			name: t('equipment.equipment9Name'),
+			image: '/Images/Equipment/Greyparrot%20AI/Greyparrot-GP5-on-belt.png',
+			description: t('equipment.equipment9Description'),
+			features: [
+				t('equipment.equipment9Feature1'),
+				t('equipment.equipment9Feature2'),
+				t('equipment.equipment9Feature3'),
+				t('equipment.equipment9Feature4'),
+				t('equipment.equipment9Feature5'),
+				t('equipment.equipment9Feature6'),
+			],
+			specifications: {
+				[t('equipment.equipment9Spec1Key')]: t('equipment.equipment9Spec1Value'),
+				[t('equipment.equipment9Spec2Key')]: t('equipment.equipment9Spec2Value'),
+				[t('equipment.equipment9Spec3Key')]: t('equipment.equipment9Spec3Value'),
+				[t('equipment.equipment9Spec4Key')]: t('equipment.equipment9Spec4Value'),
+			}
+		},
+		{
+			id: 10,
+			name: t('equipment.equipment10Name'),
+			image: '/Images/Equipment/Densimetric%20table/Densimetric%20table_Zbest.jpeg',
+			description: t('equipment.equipment10Description'),
+			features: [
+				t('equipment.equipment10Feature1'),
+				t('equipment.equipment10Feature2'),
+				t('equipment.equipment10Feature3'),
+				t('equipment.equipment10Feature4'),
+				t('equipment.equipment10Feature5'),
+				t('equipment.equipment10Feature6'),
+			],
+			specifications: {
+				[t('equipment.equipment10Spec1Key')]: t('equipment.equipment10Spec1Value'),
+				[t('equipment.equipment10Spec2Key')]: t('equipment.equipment10Spec2Value'),
+				[t('equipment.equipment10Spec3Key')]: t('equipment.equipment10Spec3Value'),
+				[t('equipment.equipment10Spec4Key')]: t('equipment.equipment10Spec4Value'),
+			}
+		},
+		{
+			id: 11,
+			name: t('equipment.equipment11Name'),
+			image: '/Images/Equipment/Beefoam%20dust%20suppression/after%20beefoam.JPG',
+			description: t('equipment.equipment11Description'),
+			features: [
+				t('equipment.equipment11Feature1'),
+				t('equipment.equipment11Feature2'),
+				t('equipment.equipment11Feature3'),
+				t('equipment.equipment11Feature4'),
+				t('equipment.equipment11Feature5'),
+				t('equipment.equipment11Feature6'),
+			],
+			specifications: {
+				[t('equipment.equipment11Spec1Key')]: t('equipment.equipment11Spec1Value'),
+				[t('equipment.equipment11Spec2Key')]: t('equipment.equipment11Spec2Value'),
+				[t('equipment.equipment11Spec3Key')]: t('equipment.equipment11Spec3Value'),
+				[t('equipment.equipment11Spec4Key')]: t('equipment.equipment11Spec4Value'),
+			}
+		},
+		{
+			id: 12,
+			name: t('equipment.equipment12Name'),
+			image: '/Images/Equipment/Reckelberg%20Environmental%20Technologies/impactreactor.webp',
+			description: t('equipment.equipment12Description'),
+			features: [
+				t('equipment.equipment12Feature1'),
+				t('equipment.equipment12Feature2'),
+				t('equipment.equipment12Feature3'),
+				t('equipment.equipment12Feature4'),
+				t('equipment.equipment12Feature5'),
+				t('equipment.equipment12Feature6'),
+			],
+			specifications: {
+				[t('equipment.equipment12Spec1Key')]: t('equipment.equipment12Spec1Value'),
+				[t('equipment.equipment12Spec2Key')]: t('equipment.equipment12Spec2Value'),
+				[t('equipment.equipment12Spec3Key')]: t('equipment.equipment12Spec3Value'),
+			}
+		},
+		{
+			id: 13,
+			name: t('equipment.equipment13Name'),
+			image: '/Images/Equipment/Certified%20Pre-owned%20Equipment/rebuilt%20baler.png',
+			description: t('equipment.equipment13Description'),
+			features: [
+				t('equipment.equipment13Feature1'),
+				t('equipment.equipment13Feature2'),
+				t('equipment.equipment13Feature3'),
+				t('equipment.equipment13Feature4'),
+				t('equipment.equipment13Feature5'),
+				t('equipment.equipment13Feature6'),
+			],
+			specifications: {
+				[t('equipment.equipment13Spec1Key')]: t('equipment.equipment13Spec1Value'),
+				[t('equipment.equipment13Spec2Key')]: t('equipment.equipment13Spec2Value'),
+				[t('equipment.equipment13Spec3Key')]: t('equipment.equipment13Spec3Value'),
+				[t('equipment.equipment13Spec4Key')]: t('equipment.equipment13Spec4Value'),
+			}
+		},
+	];
+
 	const handleLearnMore = (equipment: Equipment) => {
-		// Map equipment IDs and names to their individual page routes
-		const equipmentRoutes: { [key: string]: string } = {
-			'Bollegraaf Balers': '/equipment/bollegraaf',
-			'Lubo Screens': '/equipment/lubo-screening',
-			'Tomra Optical Sort': '/equipment/tomra',
-			'Pellenc ST Optical Sorting': '/equipment/pellenc-st',
-			'Walair Density Separation': '/equipment/walair-density-separation',
-			'Smicon Food Waste Depackagers': '/equipment/smicon-depackager',
-			'GÜNTHER Screens': '/equipment/gunther-screens',
-			'Centriair Odor Control': '/equipment/centriair-odor-control',
-			'Greyparrot AI': '/equipment/greyparrot-ai',
-			'Densimetric Table': '/equipment/densimetric-table',
-			'BeeFoam Dust Suppression': '/equipment/beefoam-dust-suppression',
-			'Reckelberg Environmental Technologies': '/equipment/reckelberg-environmental',
-			'Certified Pre-Owned Equipment': '/equipment/certified-pre-owned',
-			'Glass Cleanup Systems': '/equipment/glass-cleanup-systems'
+		// Map equipment IDs to their individual page routes (using IDs for language-independent routing)
+		const equipmentRoutes: { [key: number]: string } = {
+			1: '/equipment/bollegraaf',
+			2: '/equipment/lubo-screening',
+			3: '/equipment/tomra',
+			4: '/equipment/pellenc-st',
+			6: '/equipment/smicon-depackager',
+			7: '/equipment/gunther-screens',
+			8: '/equipment/centriair-odor-control',
+			9: '/equipment/greyparrot-ai',
+			10: '/equipment/densimetric-table',
+			11: '/equipment/beefoam-dust-suppression',
+			12: '/equipment/reckelberg-environmental',
+			13: '/equipment/certified-pre-owned',
 		};
 
-		const route = equipmentRoutes[equipment.name];
+		const route = equipment.id ? equipmentRoutes[equipment.id] : undefined;
 
 		if (route) {
 			// Scroll to top before navigation

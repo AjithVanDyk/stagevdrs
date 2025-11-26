@@ -1,13 +1,15 @@
 // Centralized animation configurations for smooth, intuitive animations
 // Using optimized easing curves and spring physics for natural motion
 
+import type { Variant, Transition, ViewportProps } from 'framer-motion';
+
 type MotionDefinition = {
-  initial?: Record<string, unknown>;
-  animate?: Record<string, unknown>;
-  exit?: Record<string, unknown>;
-  transition?: Record<string, unknown>;
-  whileInView?: Record<string, unknown>;
-  viewport?: Record<string, unknown>;
+  initial?: Variant;
+  animate?: Variant;
+  exit?: Variant;
+  transition?: Transition;
+  whileInView?: Variant;
+  viewport?: ViewportProps;
 };
 
 const reducedMotionState = { opacity: 1, scale: 1, x: 0, y: 0 };

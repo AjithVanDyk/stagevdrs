@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, Eye, X, BookOpen, Lightbulb } from 'lucide-react';
 import { animationConfig } from '../utils/animations';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface ExpertTip {
   id: number;
@@ -19,6 +20,7 @@ interface ExpertTip {
 }
 
 const ExpertTips = () => {
+  const { t } = useTranslation();
   const [selectedTip, setSelectedTip] = useState<ExpertTip | null>(null);
   const [showTipModal, setShowTipModal] = useState(false);
   const fadeInUp = animationConfig.fadeInUp;
@@ -26,9 +28,9 @@ const ExpertTips = () => {
   const expertTips: ExpertTip[] = [
     {
       id: 1,
-      title: 'Maximizing Baler Efficiency: 10 Essential Maintenance Tips',
-      description: 'Learn the critical maintenance practices that keep your balers running at peak performance and extend their operational life.',
-      category: 'Maintenance',
+      title: t('expertTips.tip1Title'),
+      description: t('expertTips.tip1Description'),
+      category: t('expertTips.categoryMaintenance'),
       date: '2024-12-20',
       readTime: '8 min read',
       image: '/Images/bollegraaf-products.jpg',
@@ -36,13 +38,13 @@ const ExpertTips = () => {
       views: '2.3k',
       featured: true,
       trending: true,
-      fullContent: '<p>Proper maintenance is crucial for maximizing baler efficiency and longevity. Here are 10 essential tips...</p>'
+      fullContent: `<p>${t('expertTips.tip1Content')}</p>`
     },
     {
       id: 2,
-      title: 'Optical Sorting Optimization: Getting the Best Results',
-      description: 'Expert guidance on configuring and optimizing optical sorting systems for maximum material recovery rates.',
-      category: 'Technology',
+      title: t('expertTips.tip2Title'),
+      description: t('expertTips.tip2Description'),
+      category: t('expertTips.categoryTechnology'),
       date: '2024-12-18',
       readTime: '6 min read',
       image: '/Images/tomra-optical-sorting.jpg',
@@ -52,9 +54,9 @@ const ExpertTips = () => {
     },
     {
       id: 3,
-      title: 'Single Stream Processing: Common Mistakes to Avoid',
-      description: 'Avoid costly mistakes in single stream processing with these expert insights and best practices.',
-      category: 'Processing',
+      title: t('expertTips.tip3Title'),
+      description: t('expertTips.tip3Description'),
+      category: t('expertTips.categoryProcessing'),
       date: '2024-12-15',
       readTime: '7 min read',
       image: '/Images/single-stream-recycling.jpg',
@@ -64,9 +66,9 @@ const ExpertTips = () => {
     },
     {
       id: 4,
-      title: 'Food Waste Depackaging: Safety and Efficiency Guidelines',
-      description: 'Essential safety protocols and efficiency tips for food waste depackaging operations.',
-      category: 'Safety',
+      title: t('expertTips.tip4Title'),
+      description: t('expertTips.tip4Description'),
+      category: t('expertTips.categorySafety'),
       date: '2024-12-12',
       readTime: '5 min read',
       image: '/Images/smicon-depackager.jpg',
@@ -75,9 +77,9 @@ const ExpertTips = () => {
     },
     {
       id: 5,
-      title: 'MRF Design: Layout Optimization for Maximum Throughput',
-      description: 'Strategic layout design principles for material recovery facilities to maximize processing efficiency.',
-      category: 'Design',
+      title: t('expertTips.tip5Title'),
+      description: t('expertTips.tip5Description'),
+      category: t('expertTips.categoryDesign'),
       date: '2024-12-10',
       readTime: '9 min read',
       image: '/Images/mrf-systems.jpg',
@@ -87,9 +89,9 @@ const ExpertTips = () => {
     },
     {
       id: 6,
-      title: 'Odor Control: Best Practices for Waste Processing Facilities',
-      description: 'Comprehensive guide to effective odor management in waste processing operations.',
-      category: 'Environmental',
+      title: t('expertTips.tip6Title'),
+      description: t('expertTips.tip6Description'),
+      category: t('expertTips.categoryEnvironmental'),
       date: '2024-12-08',
       readTime: '6 min read',
       image: '/Images/centriair-equipment.jpg',
@@ -98,9 +100,9 @@ const ExpertTips = () => {
     },
     {
       id: 7,
-      title: 'Equipment Troubleshooting: Quick Diagnostic Methods',
-      description: 'Fast and effective troubleshooting techniques for common equipment issues in recycling facilities.',
-      category: 'Troubleshooting',
+      title: t('expertTips.tip7Title'),
+      description: t('expertTips.tip7Description'),
+      category: t('expertTips.categoryTroubleshooting'),
       date: '2024-12-05',
       readTime: '8 min read',
       image: '/Images/image-1749759453479.png', // Fallback: equipment-maintenance.jpg not found
@@ -110,9 +112,9 @@ const ExpertTips = () => {
     },
     {
       id: 8,
-      title: 'Energy Efficiency: Reducing Power Consumption in MRFs',
-      description: 'Practical strategies for reducing energy consumption while maintaining processing efficiency.',
-      category: 'Efficiency',
+      title: t('expertTips.tip8Title'),
+      description: t('expertTips.tip8Description'),
+      category: t('expertTips.categoryEfficiency'),
       date: '2024-12-03',
       readTime: '7 min read',
       image: '/Images/image-1749759453479.png', // Fallback: energy-efficiency.jpg not found
@@ -121,9 +123,9 @@ const ExpertTips = () => {
     },
     {
       id: 9,
-      title: 'Material Quality: Ensuring High-Quality Output',
-      description: 'Techniques for maintaining consistent material quality throughout the recycling process.',
-      category: 'Quality',
+      title: t('expertTips.tip9Title'),
+      description: t('expertTips.tip9Description'),
+      category: t('expertTips.categoryQuality'),
       date: '2024-12-01',
       readTime: '6 min read',
       image: '/Images/image-1749759453479.png', // Fallback: material-quality.jpg not found
@@ -132,9 +134,9 @@ const ExpertTips = () => {
     },
     {
       id: 10,
-      title: 'Staff Training: Building a Skilled Workforce',
-      description: 'Effective training programs for developing skilled operators and maintenance personnel.',
-      category: 'Training',
+      title: t('expertTips.tip10Title'),
+      description: t('expertTips.tip10Description'),
+      category: t('expertTips.categoryTraining'),
       date: '2024-11-28',
       readTime: '5 min read',
       image: '/Images/van-dyk-university.jpg', // Using training-related image

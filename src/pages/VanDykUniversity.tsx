@@ -8,32 +8,34 @@ import {
 import SEO from '../components/SEO';
 import { SEOData } from '../utils/seo';
 import { submitContactForm } from '../utils/formSubmission';
-
-// Training School photos - moved outside component to prevent recreation on each render
-const trainingSchoolPhotos = [
-  {
-    image: '/Images/Logos/Van%20Dyk%20University%20logo.png',
-    title: 'Van Dyk University',
-    description: 'Professional training programs for recycling equipment excellence'
-  },
-  {
-    image: '/Images/Training School/FullSizeRender%5B1%5D.jpg',
-    title: 'Hands-On Equipment Training',
-    description: 'Learn on real production equipment with expert guidance'
-  },
-  {
-    image: '/Images/Training School/FullSizeRender%5B2%5D.jpg',
-    title: 'Expert Instruction',
-    description: 'Learn from industry veterans with decades of real-world experience'
-  },
-  {
-    image: '/Images/Training School/FullSizeRender%5B3%5D.jpg',
-    title: 'Collaborative Learning',
-    description: 'Network with peers and build lasting professional relationships'
-  }
-];
+import { useTranslation } from '../hooks/useTranslation';
 
 const VanDykUniversity = () => {
+  const { t } = useTranslation();
+
+  // Training School photos - moved inside component to use translations
+  const trainingSchoolPhotos = [
+    {
+      image: '/Images/Logos/Van%20Dyk%20University%20logo.png',
+      title: t('vanDykUniversity.photo1Title'),
+      description: t('vanDykUniversity.photo1Description')
+    },
+    {
+      image: '/Images/Training School/FullSizeRender%5B1%5D.jpg',
+      title: t('vanDykUniversity.photo2Title'),
+      description: t('vanDykUniversity.photo2Description')
+    },
+    {
+      image: '/Images/Training School/FullSizeRender%5B2%5D.jpg',
+      title: t('vanDykUniversity.photo3Title'),
+      description: t('vanDykUniversity.photo3Description')
+    },
+    {
+      image: '/Images/Training School/FullSizeRender%5B3%5D.jpg',
+      title: t('vanDykUniversity.photo4Title'),
+      description: t('vanDykUniversity.photo4Description')
+    }
+  ];
   const [activeTab, setActiveTab] = useState('overview');
   const [trainingRequest, setTrainingRequest] = useState({
     name: '',
@@ -102,81 +104,81 @@ const VanDykUniversity = () => {
   const trainingPrograms = [
     {
       id: 'bollegraaf-training',
-      title: 'Bollegraaf Baler',
-      duration: '3 Days',
-      level: 'Intermediate',
-      description: 'Comprehensive training on Bollegraaf baler operation, maintenance, and troubleshooting.',
+      title: t('vanDykUniversity.program1Title'),
+      duration: t('vanDykUniversity.program1Duration'),
+      level: t('vanDykUniversity.program1Level'),
+      description: t('vanDykUniversity.program1Description'),
       topics: [
-        'Baler operation fundamentals',
-        'Preventive maintenance procedures',
-        'Troubleshooting common issues',
-        'Safety protocols and procedures',
-        'Performance optimization techniques'
+        t('vanDykUniversity.program1Topic1'),
+        t('vanDykUniversity.program1Topic2'),
+        t('vanDykUniversity.program1Topic3'),
+        t('vanDykUniversity.program1Topic4'),
+        t('vanDykUniversity.program1Topic5')
       ],
-      prerequisites: 'Basic mechanical knowledge recommended',
-      certification: 'Bollegraaf Baler Operator Certificate'
+      prerequisites: t('vanDykUniversity.program1Prerequisites'),
+      certification: t('vanDykUniversity.program1Certification')
     },
     {
       id: 'tomra-training',
-      title: 'Tomra Autosort',
-      duration: '2 Days',
-      level: 'Beginner to Advanced',
-      description: 'Advanced training on TOMRA Autosort systems with AI-powered material recognition.',
+      title: t('vanDykUniversity.program2Title'),
+      duration: t('vanDykUniversity.program2Duration'),
+      level: t('vanDykUniversity.program2Level'),
+      description: t('vanDykUniversity.program2Description'),
       topics: [
-        'Optical sorting principles',
-        'AI and machine learning applications',
-        'System configuration and optimization',
-        'Quality control and monitoring',
-        'Integration with existing systems'
+        t('vanDykUniversity.program2Topic1'),
+        t('vanDykUniversity.program2Topic2'),
+        t('vanDykUniversity.program2Topic3'),
+        t('vanDykUniversity.program2Topic4'),
+        t('vanDykUniversity.program2Topic5')
       ],
-      prerequisites: 'Basic understanding of recycling processes',
-      certification: 'TOMRA Optical Sorting Specialist Certificate'
+      prerequisites: t('vanDykUniversity.program2Prerequisites'),
+      certification: t('vanDykUniversity.program2Certification')
     },
     {
       id: 'pellenc-training',
-      title: 'Pellenc Mistral+',
-      duration: '3 Days',
-      level: 'Intermediate',
-      description: 'In-depth training on Pellenc Mistral+ optical sorters, calibration, and maintenance best practices.',
+      title: t('vanDykUniversity.program3Title'),
+      duration: t('vanDykUniversity.program3Duration'),
+      level: t('vanDykUniversity.program3Level'),
+      description: t('vanDykUniversity.program3Description'),
       topics: [
-        'Mistral+ system architecture',
-        'Profile Detection configuration',
-        'Material recipe optimization',
-        'Preventive maintenance routines',
-        'Hands-on troubleshooting labs'
+        t('vanDykUniversity.program3Topic1'),
+        t('vanDykUniversity.program3Topic2'),
+        t('vanDykUniversity.program3Topic3'),
+        t('vanDykUniversity.program3Topic4'),
+        t('vanDykUniversity.program3Topic5')
       ],
-      prerequisites: 'Experience with optical sorters recommended',
-      certification: 'Pellenc Mistral+ Specialist Certificate'
+      prerequisites: t('vanDykUniversity.program3Prerequisites'),
+      certification: t('vanDykUniversity.program3Certification')
     }
   ];
 
   const upcomingSessions = [
     {
       id: 1,
-      program: 'Bollegraaf Baler',
+      program: t('vanDykUniversity.program1Title'),
       date: 'March 18-20, 2024',
       location: 'Norwalk, CT',
       isOpen: false
     },
     {
       id: 2,
-      program: 'Tomra Autosort',
+      program: t('vanDykUniversity.program2Title'),
       date: 'April 8-9, 2024',
       location: 'Norwalk, CT',
       isOpen: true
     },
     {
       id: 3,
-      program: 'Pellenc Mistral+',
+      program: t('vanDykUniversity.program3Title'),
       date: 'April 22-24, 2024',
       location: 'Norwalk, CT',
       isOpen: true
     }
   ];
   const trainingClasses = [
-    'Bollegraaf Baler',
-    'Tomra Autosort',
-    'Pellenc Mistral+'
+    t('vanDykUniversity.program1Title'),
+    t('vanDykUniversity.program2Title'),
+    t('vanDykUniversity.program3Title')
   ];
 
   const handleTrainingRequestSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -196,7 +198,7 @@ const VanDykUniversity = () => {
     if (result.success) {
       setFormStatus({
         type: 'success',
-        message: 'Request submitted successfully. Our team monitoring training@vdrs.com will get back to you shortly.'
+        message: t('vanDykUniversity.formSuccess')
       });
       setTrainingRequest({
         name: '',
@@ -209,7 +211,7 @@ const VanDykUniversity = () => {
     } else {
       setFormStatus({
         type: 'error',
-        message: result.message || 'Unable to submit your request. Please try again.'
+        message: result.message || t('vanDykUniversity.formError')
       });
     }
 
@@ -330,23 +332,23 @@ const VanDykUniversity = () => {
                 <GraduationCap className="w-8 h-8 text-white" />
               </motion.div>
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                Van Dyk University
+                {t('vanDykUniversity.pageTitle')}
               </h1>
               <p className="text-xl text-gray-200 mb-6">
-                Professional Training Programs for Recycling Equipment Excellence
+                {t('vanDykUniversity.pageSubtitle')}
               </p>
               <div className="flex flex-wrap justify-center gap-4 text-sm">
                 <div className="flex items-center">
                   <Award className="w-4 h-4 mr-2" />
-                  Industry-Recognized Certifications
+                  {t('vanDykUniversity.industryRecognizedCertifications')}
                 </div>
                 <div className="flex items-center">
                   <Users className="w-4 h-4 mr-2" />
-                  Expert Instructors
+                  {t('vanDykUniversity.expertInstructors')}
                 </div>
                 <div className="flex items-center">
                   <Globe className="w-4 h-4 mr-2" />
-                  Global Training Network
+                  {t('vanDykUniversity.globalTrainingNetwork')}
                 </div>
               </div>
             </div>
@@ -362,10 +364,10 @@ const VanDykUniversity = () => {
               </span>
               <div className="flex flex-wrap justify-center gap-3">
                 {[
-                { id: 'overview', label: 'Overview', icon: BookOpen },
-                { id: 'programs', label: 'Training Programs', icon: GraduationCap },
-                { id: 'schedule', label: 'Upcoming Sessions', icon: Calendar },
-                { id: 'testimonials', label: 'Success Stories', icon: Star }
+                { id: 'overview', label: t('vanDykUniversity.overview'), icon: BookOpen },
+                { id: 'programs', label: t('vanDykUniversity.trainingPrograms'), icon: GraduationCap },
+                { id: 'schedule', label: t('vanDykUniversity.upcomingSessions'), icon: Calendar },
+                { id: 'testimonials', label: t('vanDykUniversity.successStories'), icon: Star }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -398,10 +400,10 @@ const VanDykUniversity = () => {
               <motion.section variants={fadeInUp} className="mb-16">
                 <div className="text-center mb-12">
                   <h2 className="text-3xl md:text-4xl font-bold text-vd-blue-dark mb-4">
-                    Why Choose Van Dyk University?
+                    {t('vanDykUniversity.whyChooseTitle')}
                   </h2>
                   <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                    Our comprehensive training programs are designed by industry experts to provide hands-on experience with the latest recycling technology.
+                    {t('vanDykUniversity.whyChooseDescription')}
                   </p>
                 </div>
 
@@ -409,23 +411,23 @@ const VanDykUniversity = () => {
                   {[
                     {
                       icon: Award,
-                      title: 'Industry Certifications',
-                      description: 'Receive recognized certificates that enhance your professional credentials'
+                      title: t('vanDykUniversity.industryCertificationsTitle'),
+                      description: t('vanDykUniversity.industryCertificationsDescription')
                     },
                     {
                       icon: Users,
-                      title: 'Expert Instructors',
-                      description: 'Learn from experienced professionals with decades of industry knowledge'
+                      title: t('vanDykUniversity.expertInstructorsTitle'),
+                      description: t('vanDykUniversity.expertInstructorsDescription')
                     },
                     {
                       icon: Wrench,
-                      title: 'Hands-On Training',
-                      description: 'Practical experience with real equipment in our state-of-the-art facility'
+                      title: t('vanDykUniversity.handsOnTrainingTitle'),
+                      description: t('vanDykUniversity.handsOnTrainingDescription')
                     },
                     {
                       icon: Globe,
-                      title: 'Global Network',
-                      description: 'Join a worldwide community of recycling professionals and experts'
+                      title: t('vanDykUniversity.globalNetworkTitle'),
+                      description: t('vanDykUniversity.globalNetworkDescription')
                     }
                   ].map((feature, index) => (
                     <motion.div
@@ -451,10 +453,10 @@ const VanDykUniversity = () => {
               <motion.section variants={fadeInUp} className="mb-16">
                 <div className="text-center mb-8">
                   <h2 className="text-3xl md:text-4xl font-bold text-vd-blue-dark mb-4">
-                    Experience Our Training School
+                    {t('vanDykUniversity.experienceTrainingSchoolTitle')}
                   </h2>
                   <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                    Step inside our world-class training facility where professionals from across the industry come to master the latest recycling technology.
+                    {t('vanDykUniversity.experienceTrainingSchoolDescription')}
                   </p>
                 </div>
                 <div className="max-w-5xl mx-auto">
@@ -599,10 +601,10 @@ const VanDykUniversity = () => {
             >
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-vd-blue-dark mb-4">
-                  Training Programs
+                  {t('vanDykUniversity.trainingPrograms')}
                 </h2>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                  Comprehensive training programs designed to enhance your skills and advance your career in recycling technology.
+                  {t('vanDykUniversity.trainingProgramsDescription')}
                 </p>
               </div>
 
@@ -640,7 +642,7 @@ const VanDykUniversity = () => {
                       </p>
 
                       <div className="mb-4">
-                        <h4 className="font-semibold text-gray-900 mb-2">Topics Covered:</h4>
+                        <h4 className="font-semibold text-gray-900 mb-2">{t('vanDykUniversity.topics')}:</h4>
                         <ul className="space-y-1">
                           {program.topics.map((topic, topicIndex) => (
                             <li key={topicIndex} className="flex items-center text-sm text-gray-600">
@@ -652,12 +654,12 @@ const VanDykUniversity = () => {
                       </div>
 
                       <div className="mb-4">
-                        <h4 className="font-semibold text-gray-900 mb-1">Prerequisites:</h4>
+                        <h4 className="font-semibold text-gray-900 mb-1">{t('vanDykUniversity.prerequisites')}:</h4>
                         <p className="text-sm text-gray-600">{program.prerequisites}</p>
                       </div>
 
                       <div className="mb-6">
-                        <h4 className="font-semibold text-gray-900 mb-1">Certification:</h4>
+                        <h4 className="font-semibold text-gray-900 mb-1">{t('vanDykUniversity.certification')}:</h4>
                         <p className="text-sm text-gray-600">{program.certification}</p>
                       </div>
 
@@ -681,10 +683,10 @@ const VanDykUniversity = () => {
             >
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-vd-blue-dark mb-4">
-                  Upcoming Training Sessions
+                  {t('vanDykUniversity.upcomingTrainingSessionsTitle')}
                 </h2>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                  Request a seat in our hands-on training sessions. Each request is reviewed by our training coordinators.
+                  {t('vanDykUniversity.upcomingTrainingSessionsDescription')}
                 </p>
               </div>
 
@@ -713,13 +715,13 @@ const VanDykUniversity = () => {
 
                       <div className="flex items-center justify-between">
                         <div className={`text-sm font-semibold ${session.isOpen ? 'text-green-600' : 'text-red-600'}`}>
-                          {session.isOpen ? 'Open' : 'Closed'}
+                          {session.isOpen ? t('vanDykUniversity.open') : t('vanDykUniversity.closed')}
                         </div>
                         <button
                           className="bg-vd-orange hover:bg-vd-orange-alt text-white px-4 py-2 rounded transition-colors"
                           onClick={() => scrollToRequestForm(session.program)}
                         >
-                          Request a Seat
+                          {t('vanDykUniversity.formRequestSeat')}
                         </button>
                       </div>
                     </div>
@@ -732,7 +734,7 @@ const VanDykUniversity = () => {
                 className="mt-12"
               >
                 <div className="bg-white rounded-2xl shadow-lg p-8">
-                  <h3 className="text-2xl font-bold text-vd-blue-dark mb-4">Request a Seat</h3>
+                  <h3 className="text-2xl font-bold text-vd-blue-dark mb-4">{t('vanDykUniversity.requestSeatTitle')}</h3>
                   <p className="text-gray-600 mb-6">
                     Complete the form below to request a seat. Requests are routed directly to <span className="font-semibold">training@vdrs.com</span> (monitored by Victoria).
                   </p>
@@ -750,7 +752,7 @@ const VanDykUniversity = () => {
                   <form onSubmit={handleTrainingRequestSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">First & Last Name</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t('vanDykUniversity.formFirstName')}</label>
                         <input
                           type="text"
                           value={trainingRequest.name}
@@ -760,7 +762,7 @@ const VanDykUniversity = () => {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Company</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t('vanDykUniversity.formCompany')}</label>
                         <input
                           type="text"
                           value={trainingRequest.company}
@@ -772,7 +774,7 @@ const VanDykUniversity = () => {
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t('vanDykUniversity.formEmail')}</label>
                         <input
                           type="email"
                           value={trainingRequest.email}
@@ -782,7 +784,7 @@ const VanDykUniversity = () => {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t('vanDykUniversity.formPhone')}</label>
                         <input
                           type="tel"
                           value={trainingRequest.phone}
@@ -794,7 +796,7 @@ const VanDykUniversity = () => {
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Training Class</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t('vanDykUniversity.formTrainingClass')}</label>
                         <select
                           value={trainingRequest.className}
                           onChange={(e) => setTrainingRequest((prev) => ({ ...prev, className: e.target.value }))}
@@ -808,13 +810,13 @@ const VanDykUniversity = () => {
                         </select>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Additional Notes (Optional)</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{t('vanDykUniversity.formAdditionalNotes')}</label>
                         <input
                           type="text"
                           value={trainingRequest.notes}
                           onChange={(e) => setTrainingRequest((prev) => ({ ...prev, notes: e.target.value }))}
                           className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-vd-orange focus:ring-2 focus:ring-vd-orange/30"
-                          placeholder="Preferred dates, team size, etc."
+                          placeholder={t('vanDykUniversity.formPlaceholderNotes')}
                         />
                       </div>
                     </div>
@@ -823,7 +825,7 @@ const VanDykUniversity = () => {
                       disabled={isSubmitting}
                       className="w-full md:w-auto bg-vd-orange hover:bg-vd-orange-alt text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      {isSubmitting ? 'Sending...' : 'Request a Seat'}
+                      {isSubmitting ? t('vanDykUniversity.formSending') : t('vanDykUniversity.formRequestSeat')}
                     </button>
                   </form>
                 </div>
@@ -831,13 +833,13 @@ const VanDykUniversity = () => {
 
               <div className="mt-12 text-center">
                 <div className="bg-vd-blue text-white rounded-xl p-8">
-                  <h3 className="text-xl font-bold mb-4">Custom Training Programs</h3>
+                  <h3 className="text-xl font-bold mb-4">{t('vanDykUniversity.customTrainingProgramsTitle')}</h3>
                   <p className="text-gray-200 mb-6">
-                    Need specialized training for your team? We offer custom training programs tailored to your specific equipment and requirements.
+                    {t('vanDykUniversity.customTrainingProgramsDescription')}
                   </p>
                   <button className="bg-vd-orange hover:bg-vd-orange-alt text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center mx-auto">
                     <ExternalLink className="w-4 h-4 mr-2" />
-                    Request Custom Training
+                    {t('vanDykUniversity.requestCustomTraining')}
                   </button>
                 </div>
               </div>
@@ -853,7 +855,7 @@ const VanDykUniversity = () => {
             >
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-vd-blue-dark mb-4">
-                  Success Stories
+                  {t('vanDykUniversity.successStories')}
                 </h2>
                 <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                   Hear from professionals who have advanced their careers through Van Dyk University training programs.

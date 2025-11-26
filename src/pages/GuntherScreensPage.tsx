@@ -1,35 +1,27 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const GuntherScreensPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 7,
-    name: 'GÜNTHER Screens',
+    name: t('equipment.equipment7Name'),
     image: '/Images/gunther-screens-new.jpg',
-    description: 'Advanced screening technology with innovative design for efficient material separation and sizing. GÜNTHER screens deliver superior performance in waste processing operations.',
+    description: t('equipment.equipment7Description'),
     features: [
-      'Innovative screening technology',
-      'High-efficiency material separation',
-      'Multiple screen configurations',
-      'Self-cleaning screen design',
-      'Low maintenance requirements',
-      'Energy efficient operation',
-      'Modular construction',
-      'Easy installation and setup',
-      'Durable construction materials',
-      'Precise sizing capabilities'
+      t('equipment.equipment7Feature1'),
+      t('equipment.equipment7Feature2'),
+      t('equipment.equipment7Feature3'),
+      t('equipment.equipment7Feature4'),
+      t('equipment.equipment7Feature5'),
+      t('equipment.equipment7Feature6'),
     ],
     specifications: {
-      'Screen Area': 'Up to 150 sq ft per deck',
-      'Throughput': 'Up to 80 tons per hour',
-      'Screen Decks': '1-3 deck configurations',
-      'Aperture Size': '1mm to 150mm',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Low maintenance requirements',
-      'Construction': 'Modular design',
-      'Materials': 'High-grade steel construction',
-      'Installation': 'Easy setup and installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('equipment.equipment7Spec1Key')]: t('equipment.equipment7Spec1Value'),
+      [t('equipment.equipment7Spec2Key')]: t('equipment.equipment7Spec2Value'),
+      [t('equipment.equipment7Spec3Key')]: t('equipment.equipment7Spec3Value'),
+      [t('equipment.equipment7Spec4Key')]: t('equipment.equipment7Spec4Value'),
     },
     applications: [
       { name: 'Single stream recycling', link: '/solutions/single-stream-recycling' },

@@ -1,35 +1,37 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const BollegraafPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 1,
-    name: 'Bollegraaf Balers',
+    name: t('equipment.equipment1Name'),
     image: '/Images/Equipment/Bollegraaf/Product%20image_baler.jpg',
-    description: 'Industry-leading single ram balers with no-shear design for maximum efficiency and density. Single ram uses 1/3 power of two-ram balers and operates automatically without dedicated operator.',
+    description: t('equipment.equipment1Description'),
     features: [
-      'Single ram uses 1/3 power of two-ram balers',
-      'Operates automatically without dedicated operator',
-      'Instant material switching capability',
-      'Denser, uniform bales with pre-press flap',
-      'Production speeds over 35 tph',
-      '50% reduction in electricity costs',
-      'Low maintenance robust design',
-      'No-shear compression technology',
-      'Flexible material processing (fiber, cardboard, plastic, steel, aluminum)',
-      'Pre-press flap eliminates shearing'
+      t('equipment.equipment1Feature1'),
+      t('equipment.equipment1Feature2'),
+      t('equipment.equipment1Feature3'),
+      t('equipment.equipment1Feature4'),
+      t('equipment.equipment1Feature5'),
+      t('equipment.equipment1Feature6'),
+      t('equipment.equipment1Feature7'),
+      t('equipment.equipment1Feature8'),
+      t('equipment.equipment1Feature9'),
+      t('equipment.equipment1Feature10'),
     ],
     specifications: {
-      'Production Speed': 'Over 35 tons per hour',
-      'Power Efficiency': '50% reduction vs two-ram balers',
-      'Bale Density': 'Superior compression with pre-press flap',
-      'Operation': 'Fully automated',
-      'Maintenance': 'Low maintenance robust design',
-      'Material Switching': 'Instant capability',
-      'Design': 'Single ram, no-shear',
-      'Materials': 'Fiber, cardboard, plastic, steel, aluminum',
-      'Bale Weight': 'Up to 2,200 lbs',
-      'Warranty': 'Comprehensive 2-year warranty'
+      [t('equipment.equipment1Spec1Key')]: t('equipment.equipment1Spec1Value'),
+      [t('equipment.equipment1Spec2Key')]: t('equipment.equipment1Spec2Value'),
+      [t('equipment.equipment1Spec3Key')]: t('equipment.equipment1Spec3Value'),
+      [t('equipment.equipment1Spec4Key')]: t('equipment.equipment1Spec4Value'),
+      [t('equipment.equipment1Spec5Key')]: t('equipment.equipment1Spec5Value'),
+      [t('equipment.equipment1Spec6Key')]: t('equipment.equipment1Spec6Value'),
+      [t('equipment.equipment1Spec7Key')]: t('equipment.equipment1Spec7Value'),
+      [t('equipment.equipment1Spec8Key')]: t('equipment.equipment1Spec8Value'),
+      [t('equipment.equipment1Spec9Key')]: t('equipment.equipment1Spec9Value'),
+      [t('equipment.equipment1Spec10Key')]: t('equipment.equipment1Spec10Value'),
     },
     applications: [
       { name: 'High production balers', link: '/solutions/bollegraaf-balers' },

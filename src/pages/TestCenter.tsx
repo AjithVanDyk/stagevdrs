@@ -183,20 +183,26 @@ const TestCenter: React.FC = () => {
 									{t('testCenter.heroSubtitle')}
 								</p>
 								<div className="flex flex-col sm:flex-row gap-4 justify-center">
-									<a
-										href="tel:203-967-1100"
+									<button
+										onClick={() => {
+											// Scroll to form section
+											const formSection = document.getElementById('test-center-form');
+											if (formSection) {
+												formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+											}
+										}}
 										className="bg-vd-orange hover:bg-vd-orange-alt text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
 									>
-										<Phone className="w-5 h-5" />
-										<span>{t('testCenter.callButton')}</span>
-									</a>
-									<a
-										href="mailto:info@vdrs.com"
+										<Mail className="w-5 h-5" />
+										<span>Schedule Test Form below</span>
+									</button>
+									<button
+										onClick={() => openImageModal()}
 										className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/20 px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
 									>
-										<Mail className="w-5 h-5" />
-										<span>{t('testCenter.emailButton')}</span>
-									</a>
+										<Maximize2 className="w-5 h-5" />
+										<span>Virtual Tour our Test Center</span>
+									</button>
 								</div>
 							</motion.div>
 						</div>
@@ -483,6 +489,7 @@ const TestCenter: React.FC = () => {
 
 				{/* 4. Schedule Your Material Test Today & Contact Form Section */}
 				<motion.section
+					id="test-center-form"
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6, delay: 0.6 }}

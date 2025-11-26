@@ -1,37 +1,46 @@
 import React from 'react';
 import SolutionPageTemplate from '../components/SolutionPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const BatteryRecyclingSystemsPage: React.FC = () => {
+  const { t } = useTranslation();
   const solution = {
-    id: 2,
-    name: 'Battery Recycling Systems',
+    id: 16,
+    name: t('solutions.solution16Name'),
     image: '/Images/battery-recycling.jpg',
-    description: 'Advanced battery recycling solutions for lithium-ion, lead-acid, and other battery types. Safe handling and processing of batteries with maximum material recovery.',
+    description: t('solutions.solution16Description'),
     features: [
-      'Lithium-ion battery processing',
-      'Lead-acid battery recycling',
-      'Safe handling protocols',
-      'Material recovery systems',
-      'Environmental compliance',
-      'Automated sorting technology',
-      'Hazardous material management',
-      'Resource optimization',
-      'Automated processing systems',
-      'Comprehensive battery recovery'
+      t('solutions.solution16Feature1'),
+      t('solutions.solution16Feature2'),
+      t('solutions.solution16Feature3'),
+      t('solutions.solution16Feature4'),
+      t('solutions.solution16Feature5'),
+      t('solutions.solution16Feature6'),
+      t('solutions.solution16Feature7'),
+      t('solutions.solution16Feature8'),
     ],
     specifications: {
-      'Battery Types': 'Li-ion, Lead-acid, NiMH, NiCd',
-      'Processing Capacity': 'Up to 5 tons per hour',
-      'Recovery Rate': '90%+ material recovery',
-      'Safety': 'DOT and EPA compliant',
-      'Technology': 'Automated sorting and processing',
-      'Certification': 'ISO 14001 certified',
-      'Metal Recovery': 'Precious metal extraction',
-      'Hazardous Handling': 'Safe disposal protocols',
-      'Installation': 'Turnkey installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('solutions.solution16Spec1Key')]: t('solutions.solution16Spec1Value'),
+      [t('solutions.solution16Spec2Key')]: t('solutions.solution16Spec2Value'),
+      [t('solutions.solution16Spec3Key')]: t('solutions.solution16Spec3Value'),
+      [t('solutions.solution16Spec4Key')]: t('solutions.solution16Spec4Value'),
+      [t('solutions.solution16Spec5Key')]: t('solutions.solution16Spec5Value'),
+      [t('solutions.solution16Spec6Key')]: t('solutions.solution16Spec6Value'),
     },
-    applications: [],
+    applications: [
+      { name: t('solutions.solution16App1') },
+      { name: t('solutions.solution16App2') },
+      { name: t('solutions.solution16App3') },
+      { name: t('solutions.solution16App4') },
+      { name: t('solutions.solution16App5') },
+    ],
+    benefits: [
+      t('solutions.solution16Benefit1'),
+      t('solutions.solution16Benefit2'),
+      t('solutions.solution16Benefit3'),
+      t('solutions.solution16Benefit4'),
+      t('solutions.solution16Benefit5'),
+    ],
     equipment: [
       { name: 'Reckelberg', link: '/equipment/reckelberg-environmental' }
     ],

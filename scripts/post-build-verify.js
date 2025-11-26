@@ -88,3 +88,4 @@ if (missingCritical > 0) {
 console.log('\n✅ Build verification complete! All images are present.');
 process.exit(0);
 
+

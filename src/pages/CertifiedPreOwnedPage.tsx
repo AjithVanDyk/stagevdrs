@@ -1,35 +1,27 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const CertifiedPreOwnedPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 13,
-    name: 'Certified Pre-Owned Equipment',
+    name: t('equipment.equipment13Name'),
     image: '/Images/certified-pre-owned.jpg',
-    description: 'High-quality certified pre-owned recycling equipment that has been thoroughly inspected, refurbished, and certified to meet original manufacturer standards. Get premium equipment at reduced costs.',
+    description: t('equipment.equipment13Description'),
     features: [
-      'Thoroughly inspected equipment',
-      'Factory-certified refurbishment',
-      'Original manufacturer standards',
-      'Comprehensive warranty coverage',
-      'Cost-effective solutions',
-      'Quality assurance program',
-      'Professional installation support',
-      'Maintenance and service support',
-      'Equipment history documentation',
-      'Performance guarantees'
+      t('equipment.equipment13Feature1'),
+      t('equipment.equipment13Feature2'),
+      t('equipment.equipment13Feature3'),
+      t('equipment.equipment13Feature4'),
+      t('equipment.equipment13Feature5'),
+      t('equipment.equipment13Feature6'),
     ],
     specifications: {
-      'Inspection Process': 'Comprehensive multi-point inspection',
-      'Refurbishment': 'Factory-certified restoration',
-      'Warranty Coverage': 'Full warranty included',
-      'Quality Standards': 'Original manufacturer specifications',
-      'Documentation': 'Complete equipment history',
-      'Support': 'Full installation and service support',
-      'Performance': 'Performance guarantees included',
-      'Maintenance': 'Maintenance support available',
-      'Installation': 'Professional installation included',
-      'Warranty': 'Comprehensive warranty coverage'
+      [t('equipment.equipment13Spec1Key')]: t('equipment.equipment13Spec1Value'),
+      [t('equipment.equipment13Spec2Key')]: t('equipment.equipment13Spec2Value'),
+      [t('equipment.equipment13Spec3Key')]: t('equipment.equipment13Spec3Value'),
+      [t('equipment.equipment13Spec4Key')]: t('equipment.equipment13Spec4Value'),
     },
     applications: [
       { name: 'Bollegraaf balers', link: '/equipment/bollegraaf' },

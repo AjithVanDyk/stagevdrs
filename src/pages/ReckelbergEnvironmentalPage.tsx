@@ -1,35 +1,26 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const ReckelbergEnvironmentalPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 12,
-    name: 'Reckelberg Environmental Technologies',
+    name: t('equipment.equipment12Name'),
     image: '/Images/reckelberg-impact-reactor-new.jpg',
-    description: 'Advanced environmental technology solutions including impact reactors and processing systems. Reckelberg Environmental Technologies provides innovative solutions for waste processing and environmental protection.',
+    description: t('equipment.equipment12Description'),
     features: [
-      'Impact reactor technology',
-      'Advanced processing systems',
-      'Environmental protection solutions',
-      'High-efficiency processing',
-      'Automated operation',
-      'Low maintenance requirements',
-      'Energy efficient design',
-      'Modular system configuration',
-      'Durable construction materials',
-      'Comprehensive environmental solutions'
+      t('equipment.equipment12Feature1'),
+      t('equipment.equipment12Feature2'),
+      t('equipment.equipment12Feature3'),
+      t('equipment.equipment12Feature4'),
+      t('equipment.equipment12Feature5'),
+      t('equipment.equipment12Feature6'),
     ],
     specifications: {
-      'Processing Capacity': 'Up to 60 tons per hour',
-      'Processing Efficiency': '95%+ efficiency',
-      'Technology': 'Impact reactor system',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Low maintenance requirements',
-      'Construction': 'Modular design',
-      'Materials': 'High-grade steel construction',
-      'Installation': 'Easy setup and installation',
-      'Control': 'Automated operation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('equipment.equipment12Spec1Key')]: t('equipment.equipment12Spec1Value'),
+      [t('equipment.equipment12Spec2Key')]: t('equipment.equipment12Spec2Value'),
+      [t('equipment.equipment12Spec3Key')]: t('equipment.equipment12Spec3Value'),
     },
     applications: [
       { name: 'Battery recycling', link: '/solutions/battery-recycling-systems' }

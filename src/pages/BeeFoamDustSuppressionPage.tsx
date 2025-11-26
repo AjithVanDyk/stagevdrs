@@ -1,35 +1,27 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const BeeFoamDustSuppressionPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 11,
-    name: 'BeeFoam Dust Suppression',
+    name: t('equipment.equipment11Name'),
     image: '/Images/beefoam-after-new.jpg',
-    description: 'Advanced dust suppression technology using BeeFoam technology for effective dust control in waste processing operations. Our systems provide superior dust suppression while maintaining operational efficiency.',
+    description: t('equipment.equipment11Description'),
     features: [
-      'BeeFoam dust suppression technology',
-      'High-efficiency dust control',
-      'Automated foam application',
-      'Low water consumption',
-      'Environmentally friendly solution',
-      'Easy operation and maintenance',
-      'Modular system design',
-      'Flexible application methods',
-      'Durable construction materials',
-      'Comprehensive dust control'
+      t('equipment.equipment11Feature1'),
+      t('equipment.equipment11Feature2'),
+      t('equipment.equipment11Feature3'),
+      t('equipment.equipment11Feature4'),
+      t('equipment.equipment11Feature5'),
+      t('equipment.equipment11Feature6'),
     ],
     specifications: {
-      'Dust Suppression Efficiency': '99%+ dust control',
-      'Water Consumption': 'Low water usage',
-      'Foam Application': 'Automated system',
-      'Coverage Area': 'Up to 500 sq ft',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Low maintenance requirements',
-      'Construction': 'Modular design',
-      'Materials': 'Corrosion-resistant construction',
-      'Installation': 'Easy setup and installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('equipment.equipment11Spec1Key')]: t('equipment.equipment11Spec1Value'),
+      [t('equipment.equipment11Spec2Key')]: t('equipment.equipment11Spec2Value'),
+      [t('equipment.equipment11Spec3Key')]: t('equipment.equipment11Spec3Value'),
+      [t('equipment.equipment11Spec4Key')]: t('equipment.equipment11Spec4Value'),
     },
     applications: [
       { name: 'C&D recycling', link: '/solutions/cd-recycling' },

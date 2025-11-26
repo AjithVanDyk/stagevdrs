@@ -1,35 +1,27 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const CentriairOdorControlPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 8,
-    name: 'Centriair Odor Control',
+    name: t('equipment.equipment8Name'),
     image: '/Images/centriair-new-1.jpg',
-    description: 'Advanced odor control systems for waste processing facilities. Centriair technology effectively eliminates odors while maintaining operational efficiency.',
+    description: t('equipment.equipment8Description'),
     features: [
-      'Advanced odor elimination technology',
-      'Multi-stage filtration system',
-      'High-efficiency odor removal',
-      'Automated operation',
-      'Low maintenance requirements',
-      'Energy efficient design',
-      'Modular system configuration',
-      'Easy installation and setup',
-      'Durable construction materials',
-      'Comprehensive odor control'
+      t('equipment.equipment8Feature1'),
+      t('equipment.equipment8Feature2'),
+      t('equipment.equipment8Feature3'),
+      t('equipment.equipment8Feature4'),
+      t('equipment.equipment8Feature5'),
+      t('equipment.equipment8Feature6'),
     ],
     specifications: {
-      'Air Flow Capacity': 'Up to 50,000 CFM',
-      'Odor Removal Efficiency': '99.9%+ elimination',
-      'Filtration Stages': 'Multi-stage system',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Low maintenance requirements',
-      'Construction': 'Modular design',
-      'Materials': 'Corrosion-resistant construction',
-      'Installation': 'Easy setup and installation',
-      'Control': 'Automated operation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('equipment.equipment8Spec1Key')]: t('equipment.equipment8Spec1Value'),
+      [t('equipment.equipment8Spec2Key')]: t('equipment.equipment8Spec2Value'),
+      [t('equipment.equipment8Spec3Key')]: t('equipment.equipment8Spec3Value'),
+      [t('equipment.equipment8Spec4Key')]: t('equipment.equipment8Spec4Value'),
     },
     applications: [
       { name: 'Biogas systems', link: '/solutions/organics-processing' },

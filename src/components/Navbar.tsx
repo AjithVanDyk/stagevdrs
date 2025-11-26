@@ -159,7 +159,9 @@ const Navbar = () => {
 
   return (
     <nav className={`w-full z-50 sticky top-0 smooth-scroll-enhanced transition-all duration-500 backdrop-blur-md`} style={{
-      background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.92) 15%, rgba(21,72,125,0.25) 100%)'
+      background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.98) 15%, rgba(255,255,255,0.95) 30%, rgba(255,255,255,0.85) 50%, rgba(255,255,255,0.7) 70%, rgba(255,255,255,0.5) 85%, rgba(255,255,255,0.3) 100%)',
+      backdropFilter: 'blur(12px)',
+      WebkitBackdropFilter: 'blur(12px)'
     }}>
       <div className="container mx-auto px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center h-14 sm:h-16 lg:h-18">

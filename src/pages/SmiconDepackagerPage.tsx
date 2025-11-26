@@ -1,35 +1,27 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const SmiconDepackagerPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 6,
-    name: 'Smicon Food Waste Depackagers',
+    name: t('equipment.equipment6Name'),
     image: '/Images/smicon-depackager-new.jpg',
-    description: 'Advanced food waste depackaging systems designed to efficiently separate organic materials from packaging. Smicon technology maximizes organic recovery while minimizing contamination.',
+    description: t('equipment.equipment6Description'),
     features: [
-      'High-efficiency depackaging technology',
-      'Gentle separation of organic materials',
-      'Minimal packaging contamination',
-      'Robust construction for heavy-duty use',
-      'Easy maintenance and cleaning',
-      'Flexible processing capabilities',
-      'Low energy consumption',
-      'Automated operation with minimal supervision',
-      'Compatible with various packaging types',
-      'Advanced material handling systems'
+      t('equipment.equipment6Feature1'),
+      t('equipment.equipment6Feature2'),
+      t('equipment.equipment6Feature3'),
+      t('equipment.equipment6Feature4'),
+      t('equipment.equipment6Feature5'),
+      t('equipment.equipment6Feature6'),
     ],
     specifications: {
-      'Processing Capacity': 'Up to 25 tons per hour',
-      'Organic Recovery': '95%+ organic material recovery',
-      'Contamination Level': '<5% packaging contamination',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Low maintenance requirements',
-      'Operation': 'Fully automated operation',
-      'Packaging Types': 'Plastic, cardboard, metal containers',
-      'Material Handling': 'Gentle processing technology',
-      'Installation': 'Modular design for easy installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('equipment.equipment6Spec1Key')]: t('equipment.equipment6Spec1Value'),
+      [t('equipment.equipment6Spec2Key')]: t('equipment.equipment6Spec2Value'),
+      [t('equipment.equipment6Spec3Key')]: t('equipment.equipment6Spec3Value'),
+      [t('equipment.equipment6Spec4Key')]: t('equipment.equipment6Spec4Value'),
     },
     applications: [
       { name: 'Food waste depackaging', link: '/solutions/food-waste-depackaging' },

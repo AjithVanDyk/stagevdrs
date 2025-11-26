@@ -1,37 +1,46 @@
 import React from 'react';
 import SolutionPageTemplate from '../components/SolutionPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const PlasticsRecyclingPage: React.FC = () => {
+  const { t } = useTranslation();
   const solution = {
     id: 2,
-    name: 'Plastics Recycling',
+    name: t('solutions.solution2Name'),
     image: '/Images/plastics-recycling.jpg',
-    description: 'Advanced plastics recycling solutions for efficient processing and recovery of various plastic materials. Our technology maximizes plastic recovery while minimizing contamination.',
+    description: t('solutions.solution2Description'),
     features: [
-      'Multi-plastic type processing',
-      'Advanced optical sorting technology',
-      'High-purity plastic recovery',
-      'Automated sorting and baling',
-      'Contamination reduction systems',
-      'Flexible processing capabilities',
-      'Energy efficient operation',
-      'Modular system design',
-      'Real-time quality monitoring',
-      'Comprehensive plastic recovery'
+      t('solutions.solution2Feature1'),
+      t('solutions.solution2Feature2'),
+      t('solutions.solution2Feature3'),
+      t('solutions.solution2Feature4'),
+      t('solutions.solution2Feature5'),
+      t('solutions.solution2Feature6'),
+      t('solutions.solution2Feature7'),
+      t('solutions.solution2Feature8'),
     ],
     specifications: {
-      'Processing Capacity': 'Up to 30 tons per hour',
-      'Plastic Recovery': '98%+ recovery rate',
-      'Contamination Level': '<2% contamination',
-      'Sorting Accuracy': '99.5%+ material identification',
-      'Plastic Types': 'PET, HDPE, PP, PS, PVC',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Low maintenance requirements',
-      'System Design': 'Modular and scalable',
-      'Installation': 'Turnkey installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('solutions.solution2Spec1Key')]: t('solutions.solution2Spec1Value'),
+      [t('solutions.solution2Spec2Key')]: t('solutions.solution2Spec2Value'),
+      [t('solutions.solution2Spec3Key')]: t('solutions.solution2Spec3Value'),
+      [t('solutions.solution2Spec4Key')]: t('solutions.solution2Spec4Value'),
+      [t('solutions.solution2Spec5Key')]: t('solutions.solution2Spec5Value'),
+      [t('solutions.solution2Spec6Key')]: t('solutions.solution2Spec6Value'),
     },
-    applications: [],
+    applications: [
+      { name: t('solutions.solution2App1') },
+      { name: t('solutions.solution2App2') },
+      { name: t('solutions.solution2App3') },
+      { name: t('solutions.solution2App4') },
+      { name: t('solutions.solution2App5') },
+    ],
+    benefits: [
+      t('solutions.solution2Benefit1'),
+      t('solutions.solution2Benefit2'),
+      t('solutions.solution2Benefit3'),
+      t('solutions.solution2Benefit4'),
+      t('solutions.solution2Benefit5'),
+    ],
     equipment: [
       { name: 'Bollegraaf', link: '/equipment/bollegraaf' },
       { name: 'Lubo', link: '/equipment/lubo-screening' },

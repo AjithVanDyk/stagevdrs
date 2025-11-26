@@ -1,35 +1,32 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const LuboScreeningPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 2,
-    name: 'Lubo StarScreen® Technology',
+    name: t('equipment.equipment2Name'),
     image: '/Images/Equipment/Lubo%20Screens/Product%20image_lubo%20screens.jpg',
-    description: 'Advanced screening technology with StarScreen® design for efficient material separation and sizing. Lubo screens deliver superior performance in waste processing operations.',
+    description: t('equipment.equipment2Description'),
     features: [
-      'StarScreen® patented design',
-      'High-efficiency material separation',
-      'Multiple screen deck configurations',
-      'Self-cleaning screen technology',
-      'Low maintenance requirements',
-      'Energy efficient operation',
-      'Modular construction',
-      'Easy installation and setup',
-      'Durable construction materials',
-      'Precise sizing capabilities'
+      t('equipment.equipment2Feature1'),
+      t('equipment.equipment2Feature2'),
+      t('equipment.equipment2Feature3'),
+      t('equipment.equipment2Feature4'),
+      t('equipment.equipment2Feature5'),
+      t('equipment.equipment2Feature6'),
+      t('equipment.equipment2Feature7'),
+      t('equipment.equipment2Feature8'),
     ],
     specifications: {
-      'Screen Area': 'Up to 200 sq ft per deck',
-      'Throughput': 'Up to 100 tons per hour',
-      'Screen Decks': '1-4 deck configurations',
-      'Aperture Size': '0.5mm to 200mm',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Low maintenance requirements',
-      'Construction': 'Modular design',
-      'Materials': 'High-grade steel construction',
-      'Installation': 'Easy setup and installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('equipment.equipment2Spec1Key')]: t('equipment.equipment2Spec1Value'),
+      [t('equipment.equipment2Spec2Key')]: t('equipment.equipment2Spec2Value'),
+      [t('equipment.equipment2Spec3Key')]: t('equipment.equipment2Spec3Value'),
+      [t('equipment.equipment2Spec4Key')]: t('equipment.equipment2Spec4Value'),
+      [t('equipment.equipment2Spec5Key')]: t('equipment.equipment2Spec5Value'),
+      [t('equipment.equipment2Spec6Key')]: t('equipment.equipment2Spec6Value'),
+      [t('equipment.equipment2Spec7Key')]: t('equipment.equipment2Spec7Value'),
     },
     applications: [
       { name: 'Single stream recycling', link: '/solutions/single-stream-recycling' },

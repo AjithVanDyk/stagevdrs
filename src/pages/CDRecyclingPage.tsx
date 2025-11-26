@@ -1,37 +1,46 @@
 import React from 'react';
 import SolutionPageTemplate from '../components/SolutionPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const CDRecyclingPage: React.FC = () => {
+  const { t } = useTranslation();
   const solution = {
-    id: 3,
-    name: 'C&D Recycling',
+    id: 7,
+    name: t('solutions.solution7Name'),
     image: '/Images/cd-recycling.jpg',
-    description: 'Specialized Construction and Demolition (C&D) waste recycling solutions for construction sites, demolition projects, and renovation activities. Our systems efficiently process C&D materials with maximum recovery and minimal environmental impact.',
+    description: t('solutions.solution7Description'),
     features: [
-      'C&D waste processing systems',
-      'High-efficiency material recovery',
-      'Heavy-duty processing equipment',
-      'Flexible material handling',
-      'Dust suppression systems',
-      'Quality control monitoring',
-      'Modular processing systems',
-      'Easy maintenance access',
-      'Environmental compliance',
-      'Comprehensive C&D solutions'
+      t('solutions.solution7Feature1'),
+      t('solutions.solution7Feature2'),
+      t('solutions.solution7Feature3'),
+      t('solutions.solution7Feature4'),
+      t('solutions.solution7Feature5'),
+      t('solutions.solution7Feature6'),
+      t('solutions.solution7Feature7'),
+      t('solutions.solution7Feature8'),
     ],
     specifications: {
-      'Processing Capacity': 'Up to 100 tons per hour',
-      'Material Recovery': '80%+ recovery rate',
-      'Material Types': 'Concrete, wood, metal, drywall',
-      'Processing Efficiency': '85%+ efficiency rate',
-      'Technology': 'Heavy-duty processing systems',
-      'Maintenance': 'Low maintenance requirements',
-      'System Design': 'Modular and scalable',
-      'Compliance': 'Environmental regulations',
-      'Installation': 'Turnkey installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('solutions.solution7Spec1Key')]: t('solutions.solution7Spec1Value'),
+      [t('solutions.solution7Spec2Key')]: t('solutions.solution7Spec2Value'),
+      [t('solutions.solution7Spec3Key')]: t('solutions.solution7Spec3Value'),
+      [t('solutions.solution7Spec4Key')]: t('solutions.solution7Spec4Value'),
+      [t('solutions.solution7Spec5Key')]: t('solutions.solution7Spec5Value'),
+      [t('solutions.solution7Spec6Key')]: t('solutions.solution7Spec6Value'),
     },
-    applications: [],
+    applications: [
+      { name: t('solutions.solution7App1') },
+      { name: t('solutions.solution7App2') },
+      { name: t('solutions.solution7App3') },
+      { name: t('solutions.solution7App4') },
+      { name: t('solutions.solution7App5') },
+    ],
+    benefits: [
+      t('solutions.solution7Benefit1'),
+      t('solutions.solution7Benefit2'),
+      t('solutions.solution7Benefit3'),
+      t('solutions.solution7Benefit4'),
+      t('solutions.solution7Benefit5'),
+    ],
     equipment: [
       { name: 'Bollegraaf', link: '/equipment/bollegraaf' },
       { name: 'Lubo', link: '/equipment/lubo-screening' },

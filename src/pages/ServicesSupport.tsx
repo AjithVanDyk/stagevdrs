@@ -17,48 +17,48 @@ const ServicesSupport = () => {
 
   // Statistics data
   const stats = [
-    { number: '50+', label: 'Field Service Technicians', icon: Users },
-    { number: '$35M', label: 'Parts Inventory Value', icon: Package },
-    { number: '24/7', label: 'Technical Support', icon: Clock },
-    { number: '40+', label: 'Years of Experience', icon: Award }
+    { number: '50+', label: t('servicesSupport.fieldServiceTechniciansLabel'), icon: Users },
+    { number: '$35M', label: t('servicesSupport.partsInventoryValue'), icon: Package },
+    { number: '24/7', label: t('servicesSupport.technicalSupportLabel'), icon: Clock },
+    { number: '40+', label: t('servicesSupport.yearsOfExperienceLabel'), icon: Award }
   ];
 
   // Testimonials data
   const testimonials = [
     {
-      quote: "Van Dyk's 24/7 support saved us from a major production shutdown. Their response time and expertise are unmatched.",
-      author: "Mike Johnson",
-      company: "Metro Recycling Solutions",
+      quote: t('servicesSupport.testimonial1Quote'),
+      author: t('servicesSupport.testimonial1Author'),
+      company: t('servicesSupport.testimonial1Company'),
       rating: 5
     },
     {
-      quote: "Todd presented the information in an easy to understand format and was very thorough in his explanations. The small class size gave us the ability to dive deep into technical details.",
-      author: "Kevin Hanner",
-      company: "Smurfit Westrock",
+      quote: t('servicesSupport.testimonial2Quote'),
+      author: t('servicesSupport.testimonial2Author'),
+      company: t('servicesSupport.testimonial2Company'),
       rating: 5
     },
     {
-      quote: "OUTSTANDING. Well versed and personable. Much more in-depth than other training programs. Very beneficial for knowledgeable maintenance staff which is key to efficient operations.",
-      author: "An Kruan",
-      company: "WM Germantown",
+      quote: t('servicesSupport.testimonial3Quote'),
+      author: t('servicesSupport.testimonial3Author'),
+      company: t('servicesSupport.testimonial3Company'),
       rating: 5
     },
     {
-      quote: "The instructor's knowledge was superior and his ability to relate it to most techs' knowledge level was outstanding. This was my first training on balers and I can't imagine a better structured course.",
-      author: "Brian Cuth",
-      company: "Salem Recycle Center",
+      quote: t('servicesSupport.testimonial4Quote'),
+      author: t('servicesSupport.testimonial4Author'),
+      company: t('servicesSupport.testimonial4Company'),
       rating: 5
     },
     {
-      quote: "Wim is extremely knowledgeable and a great teacher. 10/10. The hydraulic troubleshooting was the most helpful. Extremely in-depth training.",
-      author: "Josh Turner",
-      company: "Salem, OR",
+      quote: t('servicesSupport.testimonial5Quote'),
+      author: t('servicesSupport.testimonial5Author'),
+      company: t('servicesSupport.testimonial5Company'),
       rating: 5
     },
     {
-      quote: "Both hydraulic and electrical troubleshooting were beneficial. Extremely in-depth and valuable training. Everybody was extremely knowledgeable.",
-      author: "Kyle Barela",
-      company: "Denver",
+      quote: t('servicesSupport.testimonial6Quote'),
+      author: t('servicesSupport.testimonial6Author'),
+      company: t('servicesSupport.testimonial6Company'),
       rating: 5
     }
   ];
@@ -582,10 +582,10 @@ const ServicesSupport = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { image: '/Images/bollegraaf-products.jpg', title: 'Bollegraaf Partnership', description: 'Exclusive North American distributor' },
-              { image: '/Images/tomra-optical-sorting.jpg', title: 'TOMRA Technology', description: 'Advanced optical sorting solutions' },
-              { image: '/Images/pellenc-optical-new.jpg', title: 'Pellenc ST', description: 'AI-powered sorting systems' },
-              { image: '/Images/greyparrot-ai.jpg', title: 'Greyparrot AI', description: 'Intelligent waste analytics' }
+              { image: '/Images/bollegraaf-products.jpg', title: t('servicesSupport.bollegraafPartnership'), description: t('servicesSupport.exclusiveNorthAmericanDistributor') },
+              { image: '/Images/tomra-optical-sorting.jpg', title: t('servicesSupport.tomraTechnology'), description: t('servicesSupport.advancedOpticalSortingSolutions') },
+              { image: '/Images/pellenc-optical-new.jpg', title: t('servicesSupport.pellencST'), description: t('servicesSupport.aiPoweredSortingSystems') },
+              { image: '/Images/greyparrot-ai.jpg', title: t('servicesSupport.greyparrotAI'), description: t('servicesSupport.intelligentWasteAnalytics') }
             ].map((item, index) => (
               <motion.div
                 key={index}
