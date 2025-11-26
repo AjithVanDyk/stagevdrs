@@ -21,8 +21,20 @@ interface LanguageProviderProps {
   children: ReactNode;
 }
 
+// Translation version for cache busting - increment this when translations change
+const TRANSLATION_VERSION = '2.0.1';
+const TRANSLATION_VERSION_KEY = 'vdrs-translation-version';
+
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
+    // Check if translation version has changed - clear cache if needed
+    const savedVersion = localStorage.getItem(TRANSLATION_VERSION_KEY);
+    if (savedVersion !== TRANSLATION_VERSION) {
+      // Clear old language preference if version changed
+      localStorage.removeItem('vdrs-language');
+      localStorage.setItem(TRANSLATION_VERSION_KEY, TRANSLATION_VERSION);
+    }
+    
     // Get language from localStorage first
     const savedLanguage = localStorage.getItem('vdrs-language') as Language;
     if (savedLanguage && ['en', 'fr', 'es'].includes(savedLanguage)) {
@@ -90,6 +102,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('vdrs-language', lang);
+    // Force a re-render by updating document language immediately
+    document.documentElement.lang = lang;
+    // Trigger a custom event for components that need to react to language changes
+    window.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: lang } }));
   };
 
   useEffect(() => {

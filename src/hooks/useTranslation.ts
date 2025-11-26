@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../config/translations';
 
@@ -18,6 +18,18 @@ const lookupValue = (tree: TranslationTree, keys: string[]): unknown => {
 
 export const useTranslation = () => {
   const { language } = useLanguage();
+  const [, forceUpdate] = React.useReducer(x => x + 1, 0);
+
+  // Listen for language changes to force re-render
+  React.useEffect(() => {
+    const handleLanguageChange = () => {
+      forceUpdate();
+    };
+    window.addEventListener('languageChanged', handleLanguageChange);
+    return () => {
+      window.removeEventListener('languageChanged', handleLanguageChange);
+    };
+  }, []);
 
   const t = useCallback(
     (key: string, fallback?: string): string => {

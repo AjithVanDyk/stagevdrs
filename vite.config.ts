@@ -27,36 +27,37 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
   },
-  build: {
-    outDir: 'dist',
-    sourcemap: false,
-    minify: 'esbuild',
-    target: 'esnext',
-    cssCodeSplit: true,
-    rollupOptions: {
-      onwarn(warning, warn) {
-        // Suppress "didn't resolve at build time" warnings for public assets
-        if (warning.code === 'UNRESOLVED_IMPORT' && warning.id?.includes('/Images/')) {
-          return;
-        }
-        warn(warning);
-      },
-      output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'router': ['react-router-dom'],
-          'motion': ['framer-motion'],
-          'icons': ['lucide-react'],
-          'forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
-          'seo': ['react-helmet-async'],
-          'monitoring': ['@sentry/react']
+      build: {
+        outDir: 'dist',
+        sourcemap: false,
+        minify: 'esbuild',
+        target: 'esnext',
+        cssCodeSplit: true,
+        rollupOptions: {
+          onwarn(warning, warn) {
+            // Suppress "didn't resolve at build time" warnings for public assets
+            if (warning.code === 'UNRESOLVED_IMPORT' && warning.id?.includes('/Images/')) {
+              return;
+            }
+            warn(warning);
+          },
+          output: {
+            manualChunks: {
+              'react-vendor': ['react', 'react-dom'],
+              'router': ['react-router-dom'],
+              'motion': ['framer-motion'],
+              'icons': ['lucide-react'],
+              'forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
+              'seo': ['react-helmet-async'],
+              'monitoring': ['@sentry/react'],
+              'translations': ['./src/config/translations']
+            },
+            chunkFileNames: 'assets/[name]-[hash].js',
+            entryFileNames: 'assets/[name]-[hash].js',
+            assetFileNames: 'assets/[name]-[hash].[ext]'
+          }
         },
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
-      }
-    },
-    chunkSizeWarningLimit: 1000
-  },
+        chunkSizeWarningLimit: 1000
+      },
   base: '/',
 });

@@ -243,11 +243,21 @@ function App() {
     // Temporarily disable service worker to fix module loading issues
     // serviceWorkerManager.register();
     
-    // Unregister any existing service workers
+    // Unregister any existing service workers to prevent caching issues
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(registrations => {
         registrations.forEach(registration => {
           registration.unregister();
+        });
+      });
+    }
+    
+    // Clear browser cache for translations on version change
+    if ('caches' in window) {
+      caches.keys().then(names => {
+        names.forEach(name => {
+          // Clear all caches to ensure fresh translations
+          caches.delete(name);
         });
       });
     }
