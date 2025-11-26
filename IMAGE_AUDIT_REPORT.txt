@@ -1,0 +1,399 @@
+﻿≡ƒöì COMPREHENSIVE IMAGE AUDIT FOR ALL 50 PAGES
+
+================================================================================
+
+≡ƒôü Scanning public/Images directory...
+   Found 252 image files
+
+≡ƒôä Found 30 page files
+
+≡ƒº⌐ Found 2 component files
+
+================================================================================
+
+≡ƒôè AUDIT RESULTS BY FILE:
+
+
+≡ƒôä pages\AIWasteAnalysisPage.tsx
+   Found 3 image reference(s)
+   Γ£à /Images/greyparrot-ai-new.jpg
+   Γ£à /Images/greyparrot-ai-recognition.jpg
+   Γ£à /Images/greyparrot-ai.jpg
+
+≡ƒôä pages\BatteryRecyclingSystemsPage.tsx
+   Found 1 image reference(s)
+   Γ£à /Images/battery-recycling.jpg
+
+≡ƒôä pages\BeeFoamDustSuppressionPage.tsx
+   Found 4 image reference(s)
+   Γ£à /Images/beefoam-after-new.jpg
+   Γ£à /Images/Equipment/Beefoam dust suppression/after beefoam.JPG
+   Γ£à /Images/Equipment/Beefoam dust suppression/Beepro application.png
+   Γ£à /Images/Equipment/Beefoam dust suppression/before beefoam.JPG
+
+≡ƒôä pages\BollegraafBalersSolutionPage.tsx
+   Found 3 image reference(s)
+   Γ£à /Images/bollegraaf-new-1.jpg
+   Γ£à /Images/bollegraaf-products.jpg
+   Γ£à /Images/bollegraaf-baler.jpg
+
+≡ƒôä pages\BollegraafPage.tsx
+   Found 13 image reference(s)
+   Γ£à /Images/Equipment/Bollegraaf/Product image_baler.jpg
+   Γ£à /Images/Equipment/Bollegraaf/Gallery 1_WM Mesquite Creek-6.jpg
+   Γ£à /Images/Equipment/Bollegraaf/Gallery 2_WM Mesquite Creek-7.jpg
+   Γ£à /Images/Equipment/Bollegraaf/Gallery 4_VanDyk_jp mascaro.jpg
+   Γ£à /Images/Equipment/Bollegraaf/Gallery 5_Mazza hbc120.png
+   Γ£à /Images/Equipment/Bollegraaf/Gallery 6_vandyk_plano229.jpg
+   Γ£à /Images/Equipment/Bollegraaf/Gallery 7_p2-van-sanco-144.jpg
+   Γ£à /Images/Equipment/Bollegraaf/Gallery 8_USA Berlin 2023 HBC140.png
+   Γ£à /Images/Equipment/Bollegraaf/Gallery 9_Plainfield.JPG
+   Γ£à /Images/Equipment/Bollegraaf/Gallery 10_Yes hbc140.jpg
+   Γ£à /Images/Equipment/Bollegraaf/WM Mesquite Creek-3.jpg
+   Γ£à /Images/Equipment/Bollegraaf/WM Mesquite Creek-6.jpg
+   Γ£à /Images/Equipment/Bollegraaf/WM Mesquite Creek-7.jpg
+
+≡ƒôä pages\CDRecyclingPage.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/cd-recycling.jpg
+   Γ£à /Images/cdrecycle.jpg
+
+≡ƒôä pages\CentriairOdorControlPage.tsx
+   Found 3 image reference(s)
+   Γ£à /Images/centriair-new-1.jpg
+   Γ£à /Images/Equipment/Centriair Odor Control/Emscher_09 S 010a_P1001419.JPG
+   Γ¥î MISSING: /Images/Equipment/Centriair%20Odor%20Control/Screenshot%202025-10-02%20at%201.38.37%3FPM.png
+
+≡ƒôä pages\CentriairOdorControlSolutionPage.tsx
+   Found 3 image reference(s)
+   Γ£à /Images/centriair-new-1.jpg
+   Γ£à /Images/centriair-equipment.jpg
+   Γ£à /Images/centriair-installation.jpg
+
+≡ƒôä pages\CertifiedPreOwnedPage.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/certified-pre-owned.jpg
+   Γ£à /Images/Equipment/Certified Pre-owned Equipment/rebuilt baler.png
+
+≡ƒôä pages\CommercialWastePage.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/commercial-waste-processing.jpg
+   Γ£à /Images/mrf-systems.jpg
+
+≡ƒôä pages\CompostingDensimetricTablesPage.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/densimetric-table-new.jpg
+   Γ£à /Images/composting.jpg
+
+≡ƒôä pages\DensimetricTablePage.tsx
+   Found 5 image reference(s)
+   Γ£à /Images/densimetric-table-new.jpg
+   Γ£à /Images/Equipment/Densimetric table/Densimetric table_Zbest.jpeg
+   Γ£à /Images/Equipment/Densimetric table/Dtable_Clean compost pic.JPG
+   Γ£à /Images/Equipment/Densimetric table/Dtable_Dirty Compost Infeed.JPG
+   Γ£à /Images/Equipment/Densimetric table/Dtable_Heavy contamination.JPG
+
+≡ƒôä pages\ElectronicsWasteRecyclingPage.tsx
+   Found 3 image reference(s)
+   Γ£à /Images/electronics-recycling.jpg
+   Γ£à /Images/cd-recycling.jpg
+   Γ£à /Images/cdrecycle.jpg
+
+≡ƒôä pages\FoodWasteDepackagingPage.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/smicon-food-depackaging.jpg
+   Γ£à /Images/smicon-depackager.jpg
+
+≡ƒôä pages\GlassCleanupPage.tsx
+   Found 3 image reference(s)
+   Γ£à /Images/glass-cleanup.jpg
+   Γ£à /Images/glass-cleanup-1.jpg
+   Γ£à /Images/glass-cleanup-2.jpg
+
+≡ƒôä pages\GlassCleanupSystemsPage.tsx
+   Found 3 image reference(s)
+   Γ£à /Images/glass-cleanup.jpg
+   Γ£à /Images/glass-cleanup-1.jpg
+   Γ£à /Images/glass-cleanup-2.jpg
+
+≡ƒôä pages\GreyparrotAIPage.tsx
+   Found 4 image reference(s)
+   Γ£à /Images/greyparrot-ai-new.jpg
+   Γ£à /Images/Equipment/Greyparrot AI/Greyparrot-GP5-on-belt.png
+   Γ£à /Images/Equipment/Greyparrot AI/_DSF3561 copy.jpg
+   Γ£à /Images/Equipment/Greyparrot AI/_DSF3580 copy.jpg
+
+≡ƒôä pages\GuntherScreensPage.tsx
+   Found 5 image reference(s)
+   Γ£à /Images/gunther-screens-new.jpg
+   Γ£à /Images/Equipment/Gunther screens/IMG_6160.JPG
+   Γ£à /Images/Equipment/Gunther screens/IMG_8615.jpg
+   Γ£à /Images/Equipment/Gunther screens/IMG_8616.jpg
+   Γ£à /Images/Equipment/Gunther screens/IMG_8617.jpg
+
+≡ƒôä pages\LuboScreeningPage.tsx
+   Found 13 image reference(s)
+   Γ£à /Images/Equipment/Lubo Screens/Product image_lubo screens.jpg
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 1_onp.JPG
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 2_onp.jpg
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 3_sbc.jpg
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 4_880 stars.JPG
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 5_sbc.jpg
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 6_OCC.JPG
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 7_onp.jpg
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 8_elliptical.jpg
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 9_elliptical.jpg
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 10_op.jpg
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 11_onp.jpg
+   Γ£à /Images/Equipment/Lubo Screens/Gallery 12_sizing screens.JPG
+
+≡ƒôä pages\MSWProcessingPage.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/msw-processing.jpg
+   Γ£à /Images/mrf-systems.jpg
+
+≡ƒôä pages\MultiMRFSystemsPage.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/mrf-systems.jpg
+   Γ£à /Images/single-stream-recycling.jpg
+
+≡ƒôä pages\OrganicsProcessingPage.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/organics-processing.jpg
+   Γ£à /Images/composting.jpg
+
+≡ƒôä pages\PellencSTPage.tsx
+   Found 9 image reference(s)
+   Γ£à /Images/Equipment/Pellenc optical sorters/Product image_pellenc.JPG
+   Γ£à /Images/Equipment/Pellenc optical sorters/Gallery 1_pellenc.JPG
+   Γ£à /Images/Equipment/Pellenc optical sorters/Gallery 2_pellenc.JPG
+   Γ£à /Images/Equipment/Pellenc optical sorters/Gallery 3_pellenc.JPG
+   Γ£à /Images/Equipment/Pellenc optical sorters/Gallery 4_pellenc.JPG
+   Γ£à /Images/Equipment/Pellenc optical sorters/Gallery 5_pellenc.JPG
+   Γ£à /Images/Equipment/Pellenc optical sorters/Gallery 6_pellenc.JPG
+   Γ£à /Images/Equipment/Pellenc optical sorters/Gallery 7_pellenc.JPG
+   Γ£à /Images/Equipment/Pellenc optical sorters/Gallery 13_pellenc.JPG
+
+≡ƒôä pages\PlasticsRecyclingPage.tsx
+   Found 3 image reference(s)
+   Γ£à /Images/plastics-recycling.jpg
+   Γ¥î MISSING: /Images/plastics-recycling-white-bg.mp4
+   Γ£à /Images/7-Plastics-Recycling-c.jpg
+
+≡ƒôä pages\ReckelbergEnvironmentalPage.tsx
+   Found 4 image reference(s)
+   Γ£à /Images/reckelberg-impact-reactor-new.jpg
+   Γ£à /Images/Equipment/Reckelberg Environmental Technologies/impactreactor.webp
+   Γ£à /Images/Equipment/Reckelberg Environmental Technologies/Dryer.webp
+   Γ£à /Images/Equipment/Reckelberg Environmental Technologies/Discharge.webp
+
+≡ƒôä pages\SingleStreamRecyclingPage.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/single-stream-recycling.jpg
+   Γ£à /Images/mrf-systems.jpg
+
+≡ƒôä pages\SmiconDepackagerPage.tsx
+   Found 5 image reference(s)
+   Γ£à /Images/smicon-depackager-new.jpg
+   Γ£à /Images/Equipment/Smicon Food Waste Depackagers/VDRS Smicon system Sunnyvale.jpeg
+   Γ£à /Images/Equipment/Smicon Food Waste Depackagers/Sunnyvale input material.jpg
+   Γ£à /Images/Equipment/Smicon Food Waste Depackagers/Sunnyvale expelled packaging.png
+   Γ£à /Images/Equipment/Smicon Food Waste Depackagers/Sunnyvale slurry.png
+
+≡ƒôä pages\TOMRAPage.tsx
+   Found 8 image reference(s)
+   Γ£à /Images/Equipment/Tomra Optical sorters/product image_tomra.jpg
+   Γ£à /Images/Equipment/Tomra Optical sorters/Gallery 1_tomra.jpg
+   Γ£à /Images/Equipment/Tomra Optical sorters/Gallery 2_tomra.png
+   Γ£à /Images/Equipment/Tomra Optical sorters/Gallery 3_tomra.png
+   Γ£à /Images/Equipment/Tomra Optical sorters/Gallery 4_tomra.jpeg
+   Γ£à /Images/Equipment/Tomra Optical sorters/Gallery 5_tomra.jpg
+   Γ£à /Images/Equipment/Tomra Optical sorters/Gallery 6_tomra.jpeg
+   Γ£à /Images/Equipment/Tomra Optical sorters/Gallery 7_tomra.png
+
+≡ƒôä pages\WalairDensitySeparationPage.tsx
+   Found 1 image reference(s)
+   Γ£à /Images/walair-density-separation.jpg
+
+≡ƒôä pages\WasteToEnergyPage.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/waste-to-energy.jpg
+   Γ£à /Images/wasttoenergy.jpg
+
+≡ƒôä components\EquipmentPageTemplate.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/mrf-systems.jpg
+   Γ£à /Images/image-1749759453479.png
+
+≡ƒôä components\SolutionPageTemplate.tsx
+   Found 2 image reference(s)
+   Γ£à /Images/mrf-systems.jpg
+   Γ£à /Images/image-1749759453479.png
+
+≡ƒôä config\images.ts
+   Found 78 image reference(s)
+   Γ£à /Images/image-1749759459073.png
+   Γ£à /Images/first.jpg
+   Γ£à /Images/single-stream-recycling.jpg
+   Γ£à /Images/bollegraaf-new-1.jpg
+   Γ£à /Images/van-dyk-direct-logo.png
+   Γ£à /Images/van-dyk-university.jpg
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Logos/Van%20Dyk%20University%20logo.png
+      Should be: /Images/Logos/Van Dyk University logo.png
+   Γ£à /Images/van-dyk-direct.jpg
+   Γ£à /Images/image-1749759453479.png
+   Γ£à /Images/tomra-optical-sorting-new.jpg
+   Γ£à /Images/glass-cleanup-1.jpg
+   Γ£à /Images/smicon-depackager-new.jpg
+   Γ£à /Images/lubo-screening-new.jpg
+   Γ£à /Images/greyparrot-ai-new.jpg
+   Γ£à /Images/centriair-new-1.jpg
+   Γ£à /Images/pellenc-optical-new.jpg
+   Γ£à /Images/gunther-screens-new.jpg
+   Γ£à /Images/leadership-chris-bova.jpg
+   Γ£à /Images/leadership-evd.jpg
+   Γ£à /Images/leadership-mark-neitzey.jpg
+   Γ£à /Images/leadership-pvd.jpg
+   Γ£à /Images/leadership-maarten.jpg
+   Γ£à /Images/equipment-hero.jpg
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Bollegraaf/Product%20image_baler.jpg
+      Should be: /Images/Equipment/Bollegraaf/Product image_baler.jpg
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Tomra%20Optical%20sorters/product%20image_tomra.jpg
+      Should be: /Images/Equipment/Tomra Optical sorters/product image_tomra.jpg
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Pellenc%20optical%20sorters/Product%20image_pellenc.JPG
+      Should be: /Images/Equipment/Pellenc optical sorters/Product image_pellenc.JPG
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Lubo%20Screens/Product%20image_lubo%20screens.jpg
+      Should be: /Images/Equipment/Lubo Screens/Product image_lubo screens.jpg
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Gunther%20screens/IMG_8615.jpg
+      Should be: /Images/Equipment/Gunther screens/IMG_8615.jpg
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Smicon%20Food%20Waste%20Depackagers/VDRS%20Smicon%20system%20Sunnyvale.jpeg
+      Should be: /Images/Equipment/Smicon Food Waste Depackagers/VDRS Smicon system Sunnyvale.jpeg
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Centriair%20Odor%20Control/Emscher_09%20S%20010a_P1001419.JPG
+      Should be: /Images/Equipment/Centriair Odor Control/Emscher_09 S 010a_P1001419.JPG
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Greyparrot%20AI/Greyparrot-GP5-on-belt.png
+      Should be: /Images/Equipment/Greyparrot AI/Greyparrot-GP5-on-belt.png
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Densimetric%20table/Densimetric%20table_Zbest.jpeg
+      Should be: /Images/Equipment/Densimetric table/Densimetric table_Zbest.jpeg
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Beefoam%20dust%20suppression/after%20beefoam.JPG
+      Should be: /Images/Equipment/Beefoam dust suppression/after beefoam.JPG
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Reckelberg%20Environmental%20Technologies/impactreactor.webp
+      Should be: /Images/Equipment/Reckelberg Environmental Technologies/impactreactor.webp
+   Γ£à /Images/walair-density-separation.jpg
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Certified%20Pre-owned%20Equipment/rebuilt%20baler.png
+      Should be: /Images/Equipment/Certified Pre-owned Equipment/rebuilt baler.png
+   Γ£à /Images/image-1749759490576.png
+   Γ£à /Images/plastics-recycling.jpg
+   Γ£à /Images/electronics-recycling.jpg
+   Γ£à /Images/battery-recycling.jpg
+   Γ£à /Images/glass-cleanup-2.jpg
+   Γ£à /Images/composting.jpg
+   Γ£à /Images/bollegraaf-baler.jpg
+   Γ£à /Images/greyparrot-ai-recognition.jpg
+   Γ£à /Images/image-1749759495211.png
+   Γ£à /Images/msw-processing.jpg
+   Γ£à /Images/commercial-waste-processing.jpg
+   Γ£à /Images/cd-recycling.jpg
+   Γ£à /Images/organics-processing.jpg
+   Γ£à /Images/smicon-food-depackaging.jpg
+   Γ£à /Images/waste-to-energy.jpg
+   Γ£à /Images/careers-hero.jpg
+   Γ£à /Images/careers-front-lobby.jpg
+   Γ£à /Images/careers-new-york-board-room.jpg
+   Γ£à /Images/careers-cafe-1.jpg
+   Γ£à /Images/careers-exterior-2.jpg
+   Γ£à /Images/careers-gym.jpg
+   Γ£à /Images/careers-living-wall-2.jpg
+   Γ£à /Images/careers-lounge-1.jpg
+   Γ£à /Images/contact-img-6050.jpg
+   Γ£à /Images/contact-1-01619.jpg
+   Γ£à /Images/contact-1-01725.jpg
+   Γ£à /Images/contact-1-01741.jpg
+   Γ£à /Images/contact-1-01749.jpg
+   Γ£à /Images/contact-img-2299.jpg
+   Γ£à /Images/contact-wm-mesquite-10.jpg
+   Γ£à /Images/contact-wm-mesquite-19.jpg
+   Γ£à /Images/contact-wm-mesquite-5.jpg
+   Γ£à /Images/test-center-hero.jpg
+   Γ£à /Images/image-1749759467073.png
+   Γ£à /Images/image-1749759472678.png
+   Γ£à /Images/image-1749759476027.png
+   Γ£à /Images/image-1749759479881.png
+   ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Header%20image%20for%20Equipment%20grid.jpg
+      Should be: /Images/Equipment/Header image for Equipment grid.jpg
+   Γ£à /Images/image-1749759487003.png
+   Γ£à /Images/image-1749759499434.png
+   Γ£à /Images/image-1749759502636.png
+   Γ£à /Images/image-1749759506179.png
+
+================================================================================
+
+≡ƒôè SUMMARY:
+
+   Total pages/components checked: 33
+   Total unique image references: 160
+   Files with issues: 3
+   Total issues found: 16
+     - Missing images: 2
+     - Case mismatches: 14
+     - Needs URL encoding: 0
+
+================================================================================
+
+≡ƒôï DETAILED TODO LIST:
+
+
+1. pages\CentriairOdorControlPage.tsx
+   1.1 Γ¥î MISSING: /Images/Equipment/Centriair%20Odor%20Control/Screenshot%202025-10-02%20at%201.38.37%3FPM.png
+      Action: Add image file or update reference to existing image
+
+2. pages\PlasticsRecyclingPage.tsx
+   2.1 Γ¥î MISSING: /Images/plastics-recycling-white-bg.mp4
+      Action: Add image file or update reference to existing image
+
+3. config\images.ts
+   3.1 ΓÜá∩╕Å  CASE MISMATCH: /Images/Logos/Van%20Dyk%20University%20logo.png
+      Should be: /Images/Logos/Van Dyk University logo.png
+      Action: Update reference to match exact filename case
+   3.2 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Bollegraaf/Product%20image_baler.jpg
+      Should be: /Images/Equipment/Bollegraaf/Product image_baler.jpg
+      Action: Update reference to match exact filename case
+   3.3 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Tomra%20Optical%20sorters/product%20image_tomra.jpg
+      Should be: /Images/Equipment/Tomra Optical sorters/product image_tomra.jpg
+      Action: Update reference to match exact filename case
+   3.4 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Pellenc%20optical%20sorters/Product%20image_pellenc.JPG
+      Should be: /Images/Equipment/Pellenc optical sorters/Product image_pellenc.JPG
+      Action: Update reference to match exact filename case
+   3.5 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Lubo%20Screens/Product%20image_lubo%20screens.jpg
+      Should be: /Images/Equipment/Lubo Screens/Product image_lubo screens.jpg
+      Action: Update reference to match exact filename case
+   3.6 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Gunther%20screens/IMG_8615.jpg
+      Should be: /Images/Equipment/Gunther screens/IMG_8615.jpg
+      Action: Update reference to match exact filename case
+   3.7 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Smicon%20Food%20Waste%20Depackagers/VDRS%20Smicon%20system%20Sunnyvale.jpeg
+      Should be: /Images/Equipment/Smicon Food Waste Depackagers/VDRS Smicon system Sunnyvale.jpeg
+      Action: Update reference to match exact filename case
+   3.8 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Centriair%20Odor%20Control/Emscher_09%20S%20010a_P1001419.JPG
+      Should be: /Images/Equipment/Centriair Odor Control/Emscher_09 S 010a_P1001419.JPG
+      Action: Update reference to match exact filename case
+   3.9 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Greyparrot%20AI/Greyparrot-GP5-on-belt.png
+      Should be: /Images/Equipment/Greyparrot AI/Greyparrot-GP5-on-belt.png
+      Action: Update reference to match exact filename case
+   3.10 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Densimetric%20table/Densimetric%20table_Zbest.jpeg
+      Should be: /Images/Equipment/Densimetric table/Densimetric table_Zbest.jpeg
+      Action: Update reference to match exact filename case
+   3.11 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Beefoam%20dust%20suppression/after%20beefoam.JPG
+      Should be: /Images/Equipment/Beefoam dust suppression/after beefoam.JPG
+      Action: Update reference to match exact filename case
+   3.12 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Reckelberg%20Environmental%20Technologies/impactreactor.webp
+      Should be: /Images/Equipment/Reckelberg Environmental Technologies/impactreactor.webp
+      Action: Update reference to match exact filename case
+   3.13 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Certified%20Pre-owned%20Equipment/rebuilt%20baler.png
+      Should be: /Images/Equipment/Certified Pre-owned Equipment/rebuilt baler.png
+      Action: Update reference to match exact filename case
+   3.14 ΓÜá∩╕Å  CASE MISMATCH: /Images/Equipment/Header%20image%20for%20Equipment%20grid.jpg
+      Should be: /Images/Equipment/Header image for Equipment grid.jpg
+      Action: Update reference to match exact filename case
+
+================================================================================
+
+Γ¥î AUDIT FAILED - Issues found that need to be fixed
