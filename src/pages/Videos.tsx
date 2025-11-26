@@ -125,7 +125,7 @@ const Videos = () => {
       category: 'Composting',
       date: '2024-12-03',
       duration: '3:30',
-      thumbnail: '/Images/densimetric-table.jpg',
+      thumbnail: '/Images/densimetric-table-new.jpg',
       videoUrl: 'https://youtu.be/5VvtScst8yI',
       views: '7.8k'
     },

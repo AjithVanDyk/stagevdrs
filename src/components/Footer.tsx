@@ -153,11 +153,9 @@ const Footer: React.FC = () => {
               decoding="async"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                // Try alternative paths
+                // Fallback to alternative logo if primary fails
                 if (!target.src.includes('VAN')) {
                   target.src = '/Images/VAN%20DYK-logo-WHITE.svg';
-                } else if (!target.src.includes('van-dyk-direct')) {
-                  target.src = '/Images/van-dyk-direct-logo.png';
                 } else {
                   target.style.display = 'none';
                 }

@@ -103,7 +103,7 @@ const ExpertTips = () => {
       category: 'Troubleshooting',
       date: '2024-12-05',
       readTime: '8 min read',
-      image: '/Images/equipment-maintenance.jpg',
+      image: '/Images/image-1749759453479.png', // Fallback: equipment-maintenance.jpg not found
       link: 'https://vdrs.com/expert-tips/equipment-troubleshooting/',
       views: '1.9k',
       trending: true
@@ -115,7 +115,7 @@ const ExpertTips = () => {
       category: 'Efficiency',
       date: '2024-12-03',
       readTime: '7 min read',
-      image: '/Images/energy-efficiency.jpg',
+      image: '/Images/image-1749759453479.png', // Fallback: energy-efficiency.jpg not found
       link: 'https://vdrs.com/expert-tips/energy-efficiency-mrfs/',
       views: '1.4k'
     },
@@ -126,7 +126,7 @@ const ExpertTips = () => {
       category: 'Quality',
       date: '2024-12-01',
       readTime: '6 min read',
-      image: '/Images/material-quality.jpg',
+      image: '/Images/image-1749759453479.png', // Fallback: material-quality.jpg not found
       link: 'https://vdrs.com/expert-tips/material-quality-control/',
       views: '1.6k'
     },
@@ -137,7 +137,7 @@ const ExpertTips = () => {
       category: 'Training',
       date: '2024-11-28',
       readTime: '5 min read',
-      image: '/Images/staff-training.jpg',
+      image: '/Images/van-dyk-university.jpg', // Using training-related image
       link: 'https://vdrs.com/expert-tips/staff-training-programs/',
       views: '1.3k'
     }

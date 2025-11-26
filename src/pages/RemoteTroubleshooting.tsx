@@ -284,7 +284,7 @@ const RemoteTroubleshooting = () => {
               </div>
               <div className="relative">
                 <img
-                  src="/Images/vision-ar-demo.jpg"
+                  src="/Images/image-1749759453479.png" // Fallback: vision-ar-demo.jpg not found
                   alt="Vision AR Technology Demo"
                   className="w-full h-64 object-cover rounded-lg"
                   onError={(e) => {

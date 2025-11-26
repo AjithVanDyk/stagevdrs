@@ -132,7 +132,7 @@ const OurCustomersInTheNews = () => {
       category: 'Innovation',
       date: '2024-12-03',
       readTime: '4 min read',
-      image: '/Images/densimetric-table.jpg',
+      image: '/Images/densimetric-table-new.jpg',
       link: 'https://vdrs.com/customers/composting-time-reduction/',
       views: '1.5k',
       customer: 'GreenCycle Composting',

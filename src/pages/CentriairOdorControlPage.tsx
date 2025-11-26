@@ -43,7 +43,7 @@ const CentriairOdorControlPage: React.FC = () => {
     ],
     gallery: [
       '/Images/Equipment/Centriair Odor Control/Emscher_09 S 010a_P1001419.JPG',
-      '/Images/Equipment/Centriair Odor Control/Screenshot 2025-10-02 at 1.38.37?PM.png'
+      '/Images/Equipment/Centriair%20Odor%20Control/Screenshot%202025-10-02%20at%201.38.37%3FPM.png'
     ],
     testimonials: [
       {
