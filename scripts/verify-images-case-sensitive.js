@@ -29,11 +29,12 @@ function getAllFiles(dir, basePath = '') {
         files.push(...getAllFiles(fullPath, relativePath));
       } else if (/\.(jpg|jpeg|png|gif|svg|webp|mp4|JPG|JPEG|PNG|GIF|SVG|WEBP|MP4)$/i.test(item.name)) {
         // Normalize to /Images/... path format
-        const imagePath = `/Images/${relativePath.replace(/\\/g, '/')}`;
+        const normalizedPath = relativePath.replace(/\\/g, '/');
+        const imagePath = `/Images/${normalizedPath}`;
         files.push({
           fsPath: fullPath,
           imagePath: imagePath,
-          actualPath: relativePath.replace(/\\/g, '/')
+          actualPath: normalizedPath
         });
       }
     }
