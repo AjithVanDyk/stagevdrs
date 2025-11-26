@@ -106,7 +106,7 @@ function findMatchingFile(imagePath, actualFiles) {
   const pathParts = decodedPath.split('/');
   const filename = pathParts[pathParts.length - 1];
   const dirPath = pathParts.slice(0, -1).join('/');
-  const fullDirPath = join(publicImagesDir, dirPath);
+  const fullDirPath = dirPath ? join(publicImagesDir, dirPath) : publicImagesDir;
   if (existsSync(fullDirPath)) {
     try {
       const dirFiles = readdirSync(fullDirPath);
