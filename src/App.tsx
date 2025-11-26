@@ -15,6 +15,8 @@ import serviceWorkerManager from './utils/serviceWorker';
 import { initializePerformanceMonitoring } from './utils/performanceMonitor';
 import { accessibilityManager } from './utils/accessibility';
 import { initSentry, SentryErrorBoundary } from './utils/sentry';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const Home = React.lazy(() => import('./pages/Home'));
 const Equipment = React.lazy(() => import('./pages/Equipment'));
