@@ -146,18 +146,17 @@ const Footer: React.FC = () => {
             aria-label="Company Information"
           >
             <img 
-              src="/Images/van-dyk-logo-white.svg" 
+              src="/Images/Logos/VAN%20DYK-logo-WHITE.svg" 
               alt="Van Dyk Recycling Solutions Logo" 
-              className="max-h-12 md:max-h-16 w-auto mb-4 object-contain" 
+              className="h-12 md:h-16 lg:h-20 w-auto mb-4 object-contain" 
+              style={{ maxHeight: '80px' }}
               loading="lazy"
               decoding="async"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                // Try alternative logo paths
-                if (!target.src.includes('VAN%20DYK')) {
-                  target.src = '/Images/VAN%20DYK-logo-WHITE.svg';
-                } else if (!target.src.includes('van-dyk-direct')) {
-                  target.src = '/Images/van-dyk-direct-logo.png';
+                // Fallback to alternative logo if primary fails
+                if (!target.src.includes('van-dyk-logo-white')) {
+                  target.src = '/Images/van-dyk-logo-white.svg';
                 } else {
                   target.style.display = 'none';
                 }

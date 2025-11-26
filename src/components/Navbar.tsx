@@ -169,16 +169,15 @@ const Navbar = () => {
               {/* Logo */}
               <div className="relative">
                 <img
-                  src="/Images/van-dyk-logo-white.svg"
+                  src="/Images/Logos/realvdrs.png"
                   alt="Van Dyk Recycling Solutions Logo"
-                  className="h-8 sm:h-10 md:h-12 lg:h-14 w-auto object-contain transition-all duration-300"
+                  className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain transition-all duration-300"
+                  style={{ maxHeight: '64px' }}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    // Try alternative logo paths
-                    if (!target.src.includes('VAN%20DYK')) {
-                      target.src = '/Images/VAN%20DYK-logo-WHITE.svg';
-                    } else if (!target.src.includes('van-dyk-direct')) {
-                      target.src = '/Images/van-dyk-direct-logo.png';
+                    // Fallback to alternative logo if primary fails
+                    if (!target.src.includes('van-dyk-logo-white')) {
+                      target.src = '/Images/van-dyk-logo-white.svg';
                     } else {
                       target.src = '/Images/first.jpg';
                     }
