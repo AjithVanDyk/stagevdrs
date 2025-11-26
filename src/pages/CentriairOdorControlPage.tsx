@@ -42,8 +42,8 @@ const CentriairOdorControlPage: React.FC = () => {
       'https://youtu.be/ircipzTwJRM' // VDRS Smimo Depackager (shows odor control in action)
     ],
     gallery: [
-      '/Images/Equipment/Centriair Odor Control/Emscher_09 S 010a_P1001419.JPG',
-      '/Images/Equipment/Centriair%20Odor%20Control/Screenshot%202025-10-02%20at%201.38.37%3FPM.png'
+      '/Images/Equipment/Centriair%20Odor%20Control/Emscher_09%20S%20010a_P1001419.JPG'
+      // Removed missing Screenshot image - file not found
     ],
     testimonials: [
       {

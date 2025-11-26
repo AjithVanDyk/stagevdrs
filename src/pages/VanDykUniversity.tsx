@@ -12,7 +12,7 @@ import { submitContactForm } from '../utils/formSubmission';
 // Training School photos - moved outside component to prevent recreation on each render
 const trainingSchoolPhotos = [
   {
-    image: '/Images/Logos/Van Dyk University logo.png',
+    image: '/Images/Logos/Van%20Dyk%20University%20logo.png',
     title: 'Van Dyk University',
     description: 'Professional training programs for recycling equipment excellence'
   },

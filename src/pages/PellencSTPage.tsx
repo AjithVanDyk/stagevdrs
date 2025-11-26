@@ -5,7 +5,7 @@ const PellencSTPage: React.FC = () => {
   const equipment = {
     id: 4,
     name: 'Pellenc ST Optical Sorting',
-    image: '/Images/Equipment/Pellenc optical sorters/Product image_pellenc.JPG',
+    image: '/Images/Equipment/Pellenc%20optical%20sorters/Product%20image_pellenc.JPG',
     description: 'Advanced AI-powered optical sorting systems for precise material identification and separation. Pellenc ST technology delivers exceptional accuracy and efficiency in waste processing operations.',
     features: [
       'AI-powered material recognition technology',
@@ -46,14 +46,14 @@ const PellencSTPage: React.FC = () => {
       'https://youtu.be/_AHxVzUYGxE'  // Clean Up Mixed Paper with Laser Object Detection
     ],
     gallery: [
-      '/Images/Equipment/Pellenc optical sorters/Gallery 1_pellenc.JPG',
-      '/Images/Equipment/Pellenc optical sorters/Gallery 2_pellenc.JPG',
-      '/Images/Equipment/Pellenc optical sorters/Gallery 3_pellenc.JPG',
-      '/Images/Equipment/Pellenc optical sorters/Gallery 4_pellenc.JPG',
-      '/Images/Equipment/Pellenc optical sorters/Gallery 5_pellenc.JPG',
-      '/Images/Equipment/Pellenc optical sorters/Gallery 6_pellenc.JPG',
-      '/Images/Equipment/Pellenc optical sorters/Gallery 7_pellenc.JPG',
-      '/Images/Equipment/Pellenc optical sorters/Gallery 13_pellenc.JPG'
+      '/Images/Equipment/Pellenc%20optical%20sorters/Gallery%201_pellenc.JPG',
+      '/Images/Equipment/Pellenc%20optical%20sorters/Gallery%202_pellenc.JPG',
+      '/Images/Equipment/Pellenc%20optical%20sorters/Gallery%203_pellenc.JPG',
+      '/Images/Equipment/Pellenc%20optical%20sorters/Gallery%204_pellenc.JPG',
+      '/Images/Equipment/Pellenc%20optical%20sorters/Gallery%205_pellenc.JPG',
+      '/Images/Equipment/Pellenc%20optical%20sorters/Gallery%206_pellenc.JPG',
+      '/Images/Equipment/Pellenc%20optical%20sorters/Gallery%207_pellenc.JPG',
+      '/Images/Equipment/Pellenc%20optical%20sorters/Gallery%2013_pellenc.JPG'
     ],
     testimonials: [
       {

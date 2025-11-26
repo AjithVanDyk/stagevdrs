@@ -48,9 +48,9 @@ const BeeFoamDustSuppressionPage: React.FC = () => {
       'https://youtu.be/Lt-ZYSw6p3w'  // Lubo Neptune AWS StarScreen Sorting C&D Waste
     ],
     gallery: [
-      '/Images/Equipment/Beefoam dust suppression/after beefoam.JPG',
-      '/Images/Equipment/Beefoam dust suppression/Beepro application.png',
-      '/Images/Equipment/Beefoam dust suppression/before beefoam.JPG'
+      '/Images/Equipment/Beefoam%20dust%20suppression/after%20beefoam.JPG',
+      '/Images/Equipment/Beefoam%20dust%20suppression/Beepro%20application.png',
+      '/Images/Equipment/Beefoam%20dust%20suppression/before%20beefoam.JPG'
     ],
     testimonials: [
       {

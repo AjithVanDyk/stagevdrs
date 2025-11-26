@@ -5,7 +5,7 @@ const BollegraafPage: React.FC = () => {
   const equipment = {
     id: 1,
     name: 'Bollegraaf Balers',
-    image: '/Images/Equipment/Bollegraaf/Product image_baler.jpg',
+    image: '/Images/Equipment/Bollegraaf/Product%20image_baler.jpg',
     description: 'Industry-leading single ram balers with no-shear design for maximum efficiency and density. Single ram uses 1/3 power of two-ram balers and operates automatically without dedicated operator.',
     features: [
       'Single ram uses 1/3 power of two-ram balers',
@@ -45,18 +45,18 @@ const BollegraafPage: React.FC = () => {
       'https://youtu.be/m4VQvwWW9yU'  // Single Ram Baler
     ],
     gallery: [
-      '/Images/Equipment/Bollegraaf/Gallery 1_WM Mesquite Creek-6.jpg',
-      '/Images/Equipment/Bollegraaf/Gallery 2_WM Mesquite Creek-7.jpg',
-      '/Images/Equipment/Bollegraaf/Gallery 4_VanDyk_jp mascaro.jpg',
-      '/Images/Equipment/Bollegraaf/Gallery 5_Mazza hbc120.png',
-      '/Images/Equipment/Bollegraaf/Gallery 6_vandyk_plano229.jpg',
-      '/Images/Equipment/Bollegraaf/Gallery 7_p2-van-sanco-144.jpg',
-      '/Images/Equipment/Bollegraaf/Gallery 8_USA Berlin 2023 HBC140.png',
-      '/Images/Equipment/Bollegraaf/Gallery 9_Plainfield.JPG',
-      '/Images/Equipment/Bollegraaf/Gallery 10_Yes hbc140.jpg',
-      '/Images/Equipment/Bollegraaf/WM Mesquite Creek-3.jpg',
-      '/Images/Equipment/Bollegraaf/WM Mesquite Creek-6.jpg',
-      '/Images/Equipment/Bollegraaf/WM Mesquite Creek-7.jpg'
+      '/Images/Equipment/Bollegraaf/Gallery%201_WM%20Mesquite%20Creek-6.jpg',
+      '/Images/Equipment/Bollegraaf/Gallery%202_WM%20Mesquite%20Creek-7.jpg',
+      '/Images/Equipment/Bollegraaf/Gallery%204_VanDyk_jp%20mascaro.jpg',
+      '/Images/Equipment/Bollegraaf/Gallery%205_Mazza%20hbc120.png',
+      '/Images/Equipment/Bollegraaf/Gallery%206_vandyk_plano229.jpg',
+      '/Images/Equipment/Bollegraaf/Gallery%207_p2-van-sanco-144.jpg',
+      '/Images/Equipment/Bollegraaf/Gallery%208_USA%20Berlin%202023%20HBC140.png',
+      '/Images/Equipment/Bollegraaf/Gallery%209_Plainfield.JPG',
+      '/Images/Equipment/Bollegraaf/Gallery%2010_Yes%20hbc140.jpg',
+      '/Images/Equipment/Bollegraaf/WM%20Mesquite%20Creek-3.jpg',
+      '/Images/Equipment/Bollegraaf/WM%20Mesquite%20Creek-6.jpg',
+      '/Images/Equipment/Bollegraaf/WM%20Mesquite%20Creek-7.jpg'
     ]
   };
 

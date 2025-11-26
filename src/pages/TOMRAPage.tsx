@@ -5,7 +5,7 @@ const TOMRAPage: React.FC = () => {
   const equipment = {
     id: 3,
     name: 'TOMRA Optical Sorting',
-    image: '/Images/Equipment/Tomra Optical sorters/product image_tomra.jpg',
+    image: '/Images/Equipment/Tomra%20Optical%20sorters/product%20image_tomra.jpg',
     description: 'Advanced optical sorting technology using near-infrared spectroscopy and artificial intelligence for precise material identification and separation. TOMRA systems deliver exceptional accuracy and efficiency.',
     features: [
       'Near-infrared (NIR) spectroscopy technology',
@@ -50,13 +50,13 @@ const TOMRAPage: React.FC = () => {
       'https://youtu.be/bnpoNRYk7_I'  // E-Scrap Recycling Processing with Tomra Optical Sorter at Premier Surplus Dawsonville GA
     ],
     gallery: [
-      '/Images/Equipment/Tomra Optical sorters/Gallery 1_tomra.jpg',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 2_tomra.png',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 3_tomra.png',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 4_tomra.jpeg',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 5_tomra.jpg',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 6_tomra.jpeg',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 7_tomra.png'
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%201_tomra.jpg',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%202_tomra.png',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%203_tomra.png',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%204_tomra.jpeg',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%205_tomra.jpg',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%206_tomra.jpeg',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%207_tomra.png'
     ],
     testimonials: [
       {

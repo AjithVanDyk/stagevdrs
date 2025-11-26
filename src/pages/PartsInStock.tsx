@@ -35,19 +35,19 @@ const PartsInStock = () => {
       title: 'Bollegraaf Baler Parts',
       description: 'Complete inventory of Bollegraaf baler components including hydraulic systems, electrical components, and wear parts.',
       parts: ['Hydraulic pumps and valves', 'Electrical control systems', 'Wear plates and knives', 'Safety systems', 'Conveyor components'],
-      image: '/Images/Equipment/Bollegraaf/Product image_baler.jpg'
+      image: '/Images/Equipment/Bollegraaf/Product%20image_baler.jpg'
     },
     {
       title: 'TOMRA Optical Sorter Parts',
       description: 'Optical sorter components including sensors, lasers, air valves, and control systems for optimal performance.',
       parts: ['Optical sensors and lasers', 'Air valve systems', 'Control electronics', 'Belt systems', 'Calibration tools'],
-      image: '/Images/Equipment/Tomra Optical sorters/product image_tomra.jpg'
+      image: '/Images/Equipment/Tomra%20Optical%20sorters/product%20image_tomra.jpg'
     },
     {
       title: 'Screen and Conveyor Parts',
       description: 'Screening equipment parts including screen panels, motors, bearings, and structural components.',
       parts: ['Screen panels and decks', 'Motor and drive systems', 'Bearings and seals', 'Structural components', 'Vibration systems'],
-      image: '/Images/Equipment/Lubo Screens/Product image_lubo screens.jpg'
+      image: '/Images/Equipment/Lubo%20Screens/Product%20image_lubo%20screens.jpg'
     },
     {
       title: 'General Equipment Parts',

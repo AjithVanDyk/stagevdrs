@@ -138,7 +138,7 @@ const ServicesSupport = () => {
         t('servicesSupport.systemMonitoring')
       ],
       contact: '203-967-1100 • service@vdrs.com',
-      image: '/Images/Services/Support/Header image_Support.jpeg',
+      image: '/Images/Services/Support/Header%20image_Support.jpeg',
       imageAlt: '24/7 technical support center',
       icon: Phone,
       imageClass: 'object-cover'
@@ -223,7 +223,7 @@ const ServicesSupport = () => {
       ],
       cta: t('servicesSupport.visitTestCenter'),
       ctaLink: '/test-center',
-      image: '/Images/Services/Test Center/Test Center 2025 best.JPG',
+      image: '/Images/Services/Test%20Center/Test%20Center%202025%20best.JPG',
       imageAlt: 'Material Testing Center with recycling equipment',
       icon: Eye,
       imageClass: 'object-cover'

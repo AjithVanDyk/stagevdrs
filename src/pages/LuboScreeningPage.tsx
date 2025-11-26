@@ -5,7 +5,7 @@ const LuboScreeningPage: React.FC = () => {
   const equipment = {
     id: 2,
     name: 'Lubo StarScreen® Technology',
-    image: '/Images/Equipment/Lubo Screens/Product image_lubo screens.jpg',
+    image: '/Images/Equipment/Lubo%20Screens/Product%20image_lubo%20screens.jpg',
     description: 'Advanced screening technology with StarScreen® design for efficient material separation and sizing. Lubo screens deliver superior performance in waste processing operations.',
     features: [
       'StarScreen® patented design',
@@ -47,18 +47,18 @@ const LuboScreeningPage: React.FC = () => {
       'https://youtu.be/uz4r_gb1Wjs'  // Sizing Screen
     ],
     gallery: [
-      '/Images/Equipment/Lubo Screens/Gallery 1_onp.JPG',
-      '/Images/Equipment/Lubo Screens/Gallery 2_onp.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 3_sbc.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 4_880 stars.JPG',
-      '/Images/Equipment/Lubo Screens/Gallery 5_sbc.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 6_OCC.JPG',
-      '/Images/Equipment/Lubo Screens/Gallery 7_onp.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 8_elliptical.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 9_elliptical.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 10_op.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 11_onp.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 12_sizing screens.JPG'
+      '/Images/Equipment/Lubo%20Screens/Gallery%201_onp.JPG',
+      '/Images/Equipment/Lubo%20Screens/Gallery%202_onp.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%203_sbc.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%204_880%20stars.JPG',
+      '/Images/Equipment/Lubo%20Screens/Gallery%205_sbc.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%206_OCC.JPG',
+      '/Images/Equipment/Lubo%20Screens/Gallery%207_onp.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%208_elliptical.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%209_elliptical.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%2010_op.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%2011_onp.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%2012_sizing%20screens.JPG'
     ],
     testimonials: [
       {

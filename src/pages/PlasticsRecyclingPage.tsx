@@ -47,7 +47,7 @@ const PlasticsRecyclingPage: React.FC = () => {
       'https://youtu.be/r6qxQsl7ABU'  // Cardboard and Paper Separation Purifying Fiber Lines
     ],
     localVideos: [
-      '/Images/plastics-recycling-white-bg.mp4'
+      // Removed missing .mp4 file - use YouTube videos instead
     ],
     gallery: [
       '/Images/plastics-recycling.jpg',
