@@ -30,9 +30,10 @@
     "preview": "vite preview",
     "start": "vite preview --port 3000",
     "type-check": "tsc --noEmit",
-    "build:vercel": "npm run type-check && npm run build",
+    "build:vercel": "npm run type-check && npm run build && node scripts/post-build-verify.js",
     "analyze:images": "node scripts/analyze-unused-images.js",
-    "audit:translations": "node scripts/audit-translations.js"
+    "audit:translations": "node scripts/audit-translations.js",
+    "verify:images": "node scripts/verify-images.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
