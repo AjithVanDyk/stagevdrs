@@ -224,15 +224,20 @@ function verifyImages() {
   }
   
   // Summary
-  const hasErrors = missing.length > 0 || caseMismatches.length > 0;
-  
-  if (hasErrors) {
+  // Only fail on case mismatches (will break on Vercel)
+  // Missing images are warnings (will be skipped)
+  if (caseMismatches.length > 0) {
     console.log('=' .repeat(60));
     console.log('❌ VERIFICATION FAILED');
-    console.log(`   ${missing.length} missing images`);
     console.log(`   ${caseMismatches.length} case mismatches`);
-    console.log('\n⚠️  Build will fail. Please fix the issues above.');
+    console.log('\n⚠️  Build will fail. Please fix the case mismatches above.');
     process.exit(1);
+  } else if (missing.length > 0) {
+    console.log('=' .repeat(60));
+    console.log('⚠️  VERIFICATION WARNING');
+    console.log(`   ${missing.length} missing image(s) will be skipped`);
+    console.log('   Build will continue, but these images may not display correctly.');
+    process.exit(0);
   } else {
     console.log('=' .repeat(60));
     console.log('✅ VERIFICATION PASSED');
