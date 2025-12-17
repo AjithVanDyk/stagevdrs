@@ -1,184 +1,148 @@
-# 🏭 Van Dyk Recycling Solutions - Staging Website
+# 🏭 Van Dyk Recycling Solutions – Staging Website (`stagevdrs`)
 
 **Environment**: Staging  
-**Version**: 5.0  
-**Developer**: Ajith Srikanth  
-**Repository**: https://github.com/AjithVanDyk/stagingvdrs.git
+**Framework**: React 18 + TypeScript + Vite  
+**Hosted**: `stagevdrs.vercel.app`
+
+This repository contains the **staging version** of the Van Dyk Recycling Solutions website. It is used for feature development, QA, and client review before changes are promoted to the main production repository.
 
 ---
 
-## 📋 **Project Overview**
+## 🔧 Tech Stack
 
-This is the **staging environment** for the Van Dyk Recycling Solutions website. This repository contains the latest development version of the website for testing and review before production deployment.
-
-### **🎯 Purpose**
-- **Testing Environment** - Test new features and changes before production
-- **Staging Deployment** - Preview changes in a production-like environment
-- **Quality Assurance** - Review and validate functionality before release
-- **Client Review** - Share preview links for stakeholder approval
+- **React 18** with function components & hooks  
+- **TypeScript** for type‑safe development  
+- **Vite** for dev server and production builds  
+- **Tailwind CSS** for styling  
+- **Framer Motion** for animations  
+- **React Router DOM** for client‑side routing  
+- **Vercel** for staging deployments  
 
 ---
 
-## 🚀 **Quick Start**
+## 🚀 Getting Started
 
-### **Prerequisites**
-- Node.js (version 18 or higher)
-- npm or yarn package manager
-- Git for version control
+### 1. Prerequisites
 
-### **Installation**
+- Node.js **18+**
+- npm (comes with Node)
+
+### 2. Install & Run
 
 ```bash
-# Clone the staging repository
-git clone https://github.com/AjithVanDyk/stagingvdrs.git
-cd stagingvdrs
+git clone https://github.com/AjithVanDyk/stagevdrs.git
+cd stagevdrs
 
 # Install dependencies
 npm install
 
-# Start development server
+# Start dev server (http://localhost:5173)
 npm run dev
 ```
 
-### **Available Scripts**
+### 3. Build & Preview
 
-| Script | Command | Description |
-|--------|---------|-------------|
-| **Development** | `npm run dev` | Start development server on localhost:5173 |
-| **Build** | `npm run build` | Build for production |
-| **Preview** | `npm run preview` | Preview production build locally |
-| **Lint** | `npm run lint` | Run ESLint for code quality |
-| **Type Check** | `npm run type-check` | Run TypeScript compiler |
-
----
-
-## 🛠️ **Tech Stack**
-
-- **React 18** - Latest React with concurrent features
-- **TypeScript** - Type-safe development
-- **Vite** - Lightning-fast build tool
-- **Tailwind CSS** - Utility-first styling
-- **Framer Motion** - Smooth animations
-- **React Router DOM** - Client-side routing
-
----
-
-## 📁 **Key Features**
-
-- ✅ **Responsive Design** - Optimized for all devices
-- ✅ **Modern UI/UX** - Glass morphism design with animations
-- ✅ **Interactive Navigation** - Smart dropdowns with search
-- ✅ **Equipment Showcase** - Detailed equipment cards
-- ✅ **Solutions Portfolio** - Comprehensive recycling solutions
-- ✅ **News & Media** - Latest company news and updates
-- ✅ **Contact Forms** - Quote request and contact forms
-- ✅ **Performance Optimized** - Core Web Vitals compliant
-
----
-
-## 🔄 **Staging Workflow**
-
-### **1. Making Changes**
 ```bash
-# Create feature branch
-git checkout -b feature/feature-name
-
-# Make your changes
-# Test locally
-npm run dev
-
-# Build and verify
+# Production build
 npm run build
+
+# Preview production build locally
 npm run preview
 ```
 
-### **2. Committing Changes**
+### 4. Quality Checks
+
 ```bash
-# Stage changes
-git add .
+# Lint (ESLint)
+npm run lint
 
-# Commit with descriptive message
-git commit -m "feat: add new feature"
-
-# Push to staging
-git push origin main
+# TypeScript type‑check
+npm run type-check
 ```
 
-### **3. Deployment**
-- Changes pushed to `main` branch automatically deploy to staging
-- Staging URL will be available after deployment
-- Review changes in staging environment before production
+---
+
+## 📁 Project Structure (High Level)
+
+```text
+.
+├─ public/                # Static assets (images, favicon, sitemap, manifest, SW)
+├─ src/
+│  ├─ components/         # Shared UI components (Navbar, Footer, Cards, Modals, etc.)
+│  ├─ pages/              # Route-level pages (Home, Solutions, Equipment, Support, etc.)
+│  ├─ config/             # Image assignments, translations, SEO helpers
+│  ├─ data/               # Structured data (equipment, solutions, comparison tables)
+│  ├─ hooks/              # Custom hooks (i18n, animations, language navigation)
+│  ├─ utils/              # Analytics, performance monitor, accessibility, forms, etc.
+│  ├─ contexts/           # `LanguageContext` and related providers
+│  ├─ index.css           # Tailwind base + global styles
+│  └─ main.tsx / App.tsx  # App entry and routing
+├─ api/                   # Vercel serverless functions (forms, newsletter, careers, etc.)
+├─ scripts/               # Build‑time verification scripts (images, post‑build checks)
+├─ vite.config.ts         # Vite configuration
+├─ tailwind.config.js     # Tailwind configuration
+└─ vercel.json            # Vercel routing + security headers
+```
 
 ---
 
-## 🧪 **Testing Checklist**
+## 🌐 Key Features
 
-Before pushing to staging, verify:
-
-- [ ] **Responsive Design** - Test on mobile, tablet, desktop
-- [ ] **Browser Compatibility** - Chrome, Firefox, Safari, Edge
-- [ ] **Navigation** - All links and routes working
-- [ ] **Forms** - Quote and contact forms functional
-- [ ] **Performance** - Page load times acceptable
-- [ ] **No Console Errors** - Check browser console
-- [ ] **Type Checking** - `npm run type-check` passes
-- [ ] **Linting** - `npm run lint` passes
-
----
-
-## 📊 **Recent Updates**
-
-### **News & Media Page**
-- ✅ Removed newsletter popup feature
-- ✅ Fixed article rendering issues
-- ✅ Improved filtering and search functionality
-- ✅ Enhanced article display with grid/list views
+- **Responsive marketing site** for Van Dyk Recycling Solutions
+- **Equipment & Solutions pages** with structured data and SEO metadata
+- **AI Waste Analysis / EPR Compliance Map**  
+  - Interactive map of US, Canada, and Mexico  
+  - Tooltips, zoom, and pan (via `react-simple-maps`)  
+- **Dynamic Homepage CTAs**  
+  - Buttons driven by `trackButtonClick` / `getMostClickedButtons` analytics  
+  - Surfaces the most‑clicked routes for users
+- **Careers & Job Application**  
+  - In‑site application form routed to `achirca@vdrs.com` via API
+- **Contact & Quote forms** with validation and serverless back‑end handlers
+- **Internationalization (i18n)**  
+  - Custom `useTranslation` hook with `LanguageContext` for EN/FR/ES
+- **Accessibility & Performance**  
+  - Accessibility utilities, lazy‑loaded images, preloading of critical assets  
+  - Vercel analytics and Speed Insights integrated in `App.tsx`
 
 ---
 
-## 🔒 **Security & Best Practices**
+## 🔐 Security & Headers
 
-- ✅ **Type Safety** - TypeScript for all components
-- ✅ **Code Quality** - ESLint for code standards
-- ✅ **Error Handling** - Error boundaries implemented
-- ✅ **Form Validation** - Input validation and sanitization
-- ✅ **Security Headers** - CSP and security headers configured
+- Strict **Content Security Policy (CSP)** and security headers defined in `vercel.json`
+- HTTPS enforced via `Strict-Transport-Security`
+- `Referrer-Policy`, `X-Frame-Options`, `X-Content-Type-Options`, and `Permissions-Policy` configured
 
 ---
 
-## 📞 **Support**
+## 🧪 Staging Workflow
 
-### **Technical Support**
-- **Developer**: Ajith Srikanth
-- **Email**: ajithsrikanth.f@northeastern.edu
-- **Role**: Intern
-- **Organization**: Van Dyk Recycling Solutions
+Typical flow for working in this repo:
 
-### **Repository**
-- **Staging Repo**: https://github.com/AjithVanDyk/stagingvdrs.git
-- **Main Repo**: https://github.com/AjithVanDyk/vdrsnewv1.git
-
----
-
-## 📄 **Important Notes**
-
-⚠️ **This is a staging environment** - Do not use production data or credentials
-
-⚠️ **Testing Only** - This environment is for testing and review purposes
-
-⚠️ **Not for Production** - Changes here are not live on the main website
+1. **Create a branch** from `main` for each feature/fix.
+2. Develop locally and verify:
+   - `npm run dev` (no console errors)
+   - `npm run lint`
+   - `npm run type-check`
+   - `npm run build`
+3. **Push to `main`** when approved; Vercel auto‑deploys to the staging URL.
+4. Validate the staging site (`stagevdrs.vercel.app`) before mirroring changes into the main production repo (`vdrsnewv1`).
 
 ---
 
-## 🔄 **Deployment Status**
+## 📎 Notes
 
-- **Environment**: Staging
-- **Auto-Deploy**: Enabled on push to main branch
-- **Build Tool**: Vite
-- **Framework**: React 18 + TypeScript
+- This environment is **staging only** – do not use production credentials or live customer data.
+- Non‑runtime docs, audit scripts, and historical reports are kept under `bin/` locally to keep the root clean; they are **not** required to run or build the app.
 
 ---
 
-**Last Updated**: January 2025  
-**Version**: 5.0  
-**Status**: Active Development
+## 📞 Contact
+
+For questions about this staging project:
+
+- **Developer**: Ajith Srikanth  
+- **Organization**: Van Dyk Recycling Solutions  
+- **Primary Repo**: [`AjithVanDyk/stagevdrs`](https://github.com/AjithVanDyk/stagevdrs)
+
+
