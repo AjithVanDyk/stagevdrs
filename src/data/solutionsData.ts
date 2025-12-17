@@ -1,3 +1,4 @@
+import { IMAGE_ASSIGNMENTS } from '../config/images';
 // Solutions data extracted from Solutions component for better maintainability
 
 export interface Solution {
@@ -15,7 +16,7 @@ export const solutionTypes: Solution[] = [
   {
     id: 1,
     title: 'Single Stream Recycling',
-    image: '/Images/image-1749759453479.png',
+    image: IMAGE_ASSIGNMENTS.solutions.categories.singleStream,
     description: 'Complete single stream recycling solutions for residential and commercial waste processing. Our systems efficiently separate mixed recyclables into clean, marketable materials.',
     features: [
       'Automated material separation',
@@ -48,7 +49,7 @@ export const solutionTypes: Solution[] = [
   {
     id: 2,
     title: 'Commercial & Industrial (C&I)',
-    image: '/Images/image-1749759453479.png',
+    image: IMAGE_ASSIGNMENTS.solutions.categories.commercial,
     description: 'Specialized solutions for commercial and industrial waste streams. Designed to handle high-volume, diverse material types with maximum efficiency.',
     features: [
       'High-volume processing',
@@ -80,7 +81,7 @@ export const solutionTypes: Solution[] = [
   {
     id: 3,
     title: 'Construction & Demolition (C&D)',
-    image: '/Images/image-1749759453479.png',
+    image: IMAGE_ASSIGNMENTS.solutions.categories.cd,
     description: 'Comprehensive C&D waste processing solutions for construction sites and demolition projects. Efficiently recover valuable materials from construction debris.',
     features: [
       'Heavy-duty processing',
@@ -112,7 +113,7 @@ export const solutionTypes: Solution[] = [
   {
     id: 4,
     title: 'Plastics Recycling',
-    image: '/Images/image-1749759453479.png',
+    image: IMAGE_ASSIGNMENTS.solutions.categories.plastics,
     description: 'Advanced plastics recycling solutions for various polymer types. Our systems provide high-purity plastic streams for manufacturing and reprocessing.',
     features: [
       'Polymer identification',

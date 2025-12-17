@@ -1,14 +1,42 @@
+/**
+ * @fileoverview React Error Boundary component for catching and handling React component errors.
+ * Provides user-friendly error UI with retry, reload, and navigation options.
+ * Integrates with error monitoring system and supports multi-language error messages.
+ * @author Van Dyk Recycling Solutions
+ * @module components/ErrorBoundary
+ */
+
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { AlertTriangle, RefreshCw, Home, Bug } from 'lucide-react';
 import { logReactError } from '../utils/errorMonitor';
+import { translations } from '../config/translations';
 
+/**
+ * ErrorBoundary component props.
+ * 
+ * @interface Props
+ * @property {ReactNode} children - Child components to wrap with error boundary
+ * @property {ReactNode} [fallback] - Custom fallback UI to show on error (overrides default)
+ * @property {(error: Error, errorInfo: ErrorInfo) => void} [onError] - Custom error handler callback
+ * @property {'en' | 'fr' | 'es'} [language='en'] - Language for error messages
+ */
 interface Props {
   children: ReactNode;
   fallback?: ReactNode;
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
+  language?: 'en' | 'fr' | 'es';
 }
 
+/**
+ * ErrorBoundary component state.
+ * 
+ * @interface State
+ * @property {boolean} hasError - Whether an error has been caught
+ * @property {Error | null} error - The caught error object
+ * @property {ErrorInfo | null} errorInfo - React error information
+ * @property {string} errorId - Unique identifier for this error instance
+ */
 interface State {
   hasError: boolean;
   error: Error | null;
@@ -16,6 +44,39 @@ interface State {
   errorId: string;
 }
 
+/**
+ * React Error Boundary class component for catching JavaScript errors in child components.
+ * 
+ * Features:
+ * - Catches errors in component tree and displays user-friendly error UI
+ * - Logs errors to monitoring system (Sentry, etc.)
+ * - Provides retry, reload, and navigation options
+ * - Shows error details in development mode
+ * - Supports custom fallback UI and error handlers
+ * - Multi-language error messages
+ * 
+ * @class ErrorBoundary
+ * @extends {Component<Props, State>}
+ * 
+ * @example
+ * ```tsx
+ * // Basic usage
+ * <ErrorBoundary>
+ *   <App />
+ * </ErrorBoundary>
+ * 
+ * // With custom fallback
+ * <ErrorBoundary
+ *   fallback={<CustomErrorUI />}
+ *   onError={(error, errorInfo) => {
+ *     // Custom error handling
+ *   }}
+ *   language="en"
+ * >
+ *   <App />
+ * </ErrorBoundary>
+ * ```
+ */
 class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false,
@@ -61,7 +122,7 @@ class ErrorBoundary extends Component<Props, State> {
       url: window.location.href
     };
     
-    console.log('Error logged:', errorData);
+    console.error('Error logged:', errorData);
   };
 
   private handleRetry = () => {
@@ -87,6 +148,9 @@ class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
 
+      const lang = this.props.language || 'en';
+      const t = translations[lang]?.error || translations.en.error;
+
       return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
           <motion.div
@@ -105,11 +169,11 @@ class ErrorBoundary extends Component<Props, State> {
             </motion.div>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Oops! Something went wrong
+              {t.somethingWentWrong}
             </h2>
             
             <p className="text-gray-600 mb-6">
-              We apologize for the inconvenience. An unexpected error occurred while loading this page.
+              {t.errorDescription}
             </p>
 
             {process.env.NODE_ENV === 'development' && this.state.error && (
@@ -121,7 +185,7 @@ class ErrorBoundary extends Component<Props, State> {
               >
                 <div className="flex items-center mb-2">
                   <Bug className="w-4 h-4 text-gray-600 mr-2" />
-                  <span className="text-sm font-semibold text-gray-700">Error Details (Development)</span>
+                  <span className="text-sm font-semibold text-gray-700">{t.errorDetails}</span>
                 </div>
                 <pre className="text-xs text-gray-600 overflow-auto max-h-32">
                   {this.state.error.toString()}
@@ -142,7 +206,7 @@ class ErrorBoundary extends Component<Props, State> {
                 className="w-full bg-vd-orange hover:bg-vd-orange-alt text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
               >
                 <RefreshCw className="w-4 h-4 mr-2" />
-                Try Again
+                {t.tryAgain}
               </motion.button>
               
               <div className="flex space-x-3">
@@ -153,7 +217,7 @@ class ErrorBoundary extends Component<Props, State> {
                   className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center"
                 >
                   <Home className="w-4 h-4 mr-2" />
-                  Go Home
+                  {t.goHome}
                 </motion.button>
                 
                 <motion.button
@@ -163,13 +227,13 @@ class ErrorBoundary extends Component<Props, State> {
                   className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center"
                 >
                   <RefreshCw className="w-4 h-4 mr-2" />
-                  Reload Page
+                  {t.reloadPage}
                 </motion.button>
               </div>
             </div>
 
             <p className="text-xs text-gray-500 mt-4">
-              Error ID: {this.state.errorId}
+              {t.errorId}: {this.state.errorId}
             </p>
           </motion.div>
         </div>

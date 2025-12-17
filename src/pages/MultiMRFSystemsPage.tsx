@@ -1,37 +1,46 @@
 import React from 'react';
 import SolutionPageTemplate from '../components/SolutionPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const MultiMRFSystemsPage: React.FC = () => {
+  const { t } = useTranslation();
   const solution = {
-    id: 4,
-    name: 'Multi-MRF™ Systems',
+    id: 8,
+    name: t('solutions.solution8Name'),
     image: '/Images/mrf-systems.jpg',
-    description: 'Advanced Multi-Material Recovery Facility (MRF) systems for comprehensive waste processing and material recovery. Our Multi-MRF™ technology provides integrated solutions for multiple waste streams with maximum efficiency and recovery rates.',
+    description: t('solutions.solution8Description'),
     features: [
-      'Multi-material processing capability',
-      'Integrated MRF technology',
-      'High-efficiency material recovery',
-      'Automated sorting systems',
-      'Flexible waste stream handling',
-      'Advanced control systems',
-      'Modular system design',
-      'Easy maintenance access',
-      'Environmental compliance',
-      'Comprehensive MRF solutions'
+      t('solutions.solution8Feature1'),
+      t('solutions.solution8Feature2'),
+      t('solutions.solution8Feature3'),
+      t('solutions.solution8Feature4'),
+      t('solutions.solution8Feature5'),
+      t('solutions.solution8Feature6'),
+      t('solutions.solution8Feature7'),
+      t('solutions.solution8Feature8'),
     ],
     specifications: {
-      'Processing Capacity': 'Up to 200 tons per hour',
-      'Material Recovery': '90%+ recovery rate',
-      'Waste Streams': 'Multiple material types',
-      'Processing Efficiency': '95%+ efficiency rate',
-      'Technology': 'Advanced MRF systems',
-      'Maintenance': 'Low maintenance requirements',
-      'System Design': 'Modular and scalable',
-      'Compliance': 'Environmental regulations',
-      'Installation': 'Turnkey installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('solutions.solution8Spec1Key')]: t('solutions.solution8Spec1Value'),
+      [t('solutions.solution8Spec2Key')]: t('solutions.solution8Spec2Value'),
+      [t('solutions.solution8Spec3Key')]: t('solutions.solution8Spec3Value'),
+      [t('solutions.solution8Spec4Key')]: t('solutions.solution8Spec4Value'),
+      [t('solutions.solution8Spec5Key')]: t('solutions.solution8Spec5Value'),
+      [t('solutions.solution8Spec6Key')]: t('solutions.solution8Spec6Value'),
     },
-    applications: [],
+    applications: [
+      { name: t('solutions.solution8App1') },
+      { name: t('solutions.solution8App2') },
+      { name: t('solutions.solution8App3') },
+      { name: t('solutions.solution8App4') },
+      { name: t('solutions.solution8App5') },
+    ],
+    benefits: [
+      t('solutions.solution8Benefit1'),
+      t('solutions.solution8Benefit2'),
+      t('solutions.solution8Benefit3'),
+      t('solutions.solution8Benefit4'),
+      t('solutions.solution8Benefit5'),
+    ],
     equipment: [
       { name: 'Bollegraaf', link: '/equipment/bollegraaf' },
       { name: 'Lubo', link: '/equipment/lubo-screening' },

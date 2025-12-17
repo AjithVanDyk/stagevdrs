@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Calendar, ArrowRight, ExternalLink } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface NewsArticle {
   id: number;
@@ -19,52 +20,120 @@ interface NewsSlideshowProps {
 }
 
 const NewsSlideshow: React.FC<NewsSlideshowProps> = ({ className = '' }) => {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
 
-  // Recent news articles - you can update this with actual news data
-  const newsArticles: NewsArticle[] = [
-    {
-      id: 1,
-      title: 'Van Dyk Recycling Solutions Celebrates 40 Years of Innovation',
-      excerpt: 'Four decades of pioneering recycling solutions, from humble origins to industry leadership in advanced waste processing and material recovery systems.',
-      category: 'Company News',
-      date: '2024-12-20',
-      image: '/Images/first.jpg',
-      link: '/news-media',
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'New Bollegraaf Baler Technology Increases Efficiency by 35%',
-      excerpt: 'Latest generation balers feature advanced automation and improved material handling capabilities for enhanced productivity.',
-      category: 'Product Updates',
-      date: '2024-12-18',
-      image: '/Images/bollegraaf-products.jpg',
-      link: '/news-media',
-      featured: false
-    },
-    {
-      id: 3,
-      title: 'TOMRA Optical Sorting Systems Revolutionize Material Recovery',
-      excerpt: 'Advanced AI-powered sorting technology enables precise material identification and separation for maximum recovery rates.',
-      category: 'Technology',
-      date: '2024-12-15',
-      image: '/Images/tomra-optical-sorting.jpg',
-      link: '/news-media',
-      featured: false
-    },
-    {
-      id: 4,
-      title: 'Industry Report: Single Stream Recycling Trends 2024',
-      excerpt: 'Comprehensive analysis of current trends, challenges, and opportunities in single stream recycling operations.',
-      category: 'Industry Insights',
-      date: '2024-12-12',
-      image: '/Images/single-stream-recycling.jpg',
-      link: '/news-media',
-      featured: false
-    }
-  ];
+  // Get latest news from NewsMedia page data, sorted by date (most recent first)
+  const newsArticles: NewsArticle[] = useMemo(() => {
+    const allNews = [
+      {
+        id: 1,
+        title: t('newsMediaArticles.article1Title'),
+        excerpt: t('newsMediaArticles.article1Excerpt'),
+        category: t('newsMediaArticles.categoryCompanyNews'),
+        date: '2024-12-20',
+        image: '/Images/first.jpg',
+        link: '/news-media',
+        featured: true
+      },
+      {
+        id: 2,
+        title: t('newsMediaArticles.article2Title'),
+        excerpt: t('newsMediaArticles.article2Excerpt'),
+        category: t('newsMediaArticles.categoryProductUpdates'),
+        date: '2024-12-18',
+        image: '/Images/bollegraaf-products.jpg',
+        link: '/news-media',
+        featured: false
+      },
+      {
+        id: 3,
+        title: t('newsMediaArticles.article3Title'),
+        excerpt: t('newsMediaArticles.article3Excerpt'),
+        category: t('newsMediaArticles.categoryTechnology'),
+        date: '2024-12-15',
+        image: '/Images/tomra-optical-sorting.jpg',
+        link: '/news-media',
+        featured: false
+      },
+      {
+        id: 4,
+        title: t('newsMediaArticles.article4Title'),
+        excerpt: t('newsMediaArticles.article4Excerpt'),
+        category: t('newsMediaArticles.categoryIndustryInsights'),
+        date: '2024-12-12',
+        image: '/Images/single-stream-recycling.jpg',
+        link: '/news-media',
+        featured: true
+      },
+      {
+        id: 5,
+        title: t('newsMediaArticles.article5Title'),
+        excerpt: t('newsMediaArticles.article5Excerpt'),
+        category: t('newsMediaArticles.categoryCompanyNews'),
+        date: '2024-12-10',
+        image: '/Images/van-dyk-university.jpg',
+        link: '/news-media',
+        featured: false
+      },
+      {
+        id: 6,
+        title: t('newsMediaArticles.article6Title'),
+        excerpt: t('newsMediaArticles.article6Excerpt'),
+        category: t('newsMediaArticles.categorySustainability'),
+        date: '2024-12-08',
+        image: '/Images/mrf-systems.jpg',
+        link: '/news-media',
+        featured: false
+      },
+      {
+        id: 7,
+        title: t('newsMediaArticles.article7Title'),
+        excerpt: t('newsMediaArticles.article7Excerpt'),
+        category: t('newsMediaArticles.categoryTechnology'),
+        date: '2024-12-05',
+        image: '/Images/greyparrot-ai-recognition.jpg',
+        link: '/news-media',
+        featured: false
+      },
+      {
+        id: 8,
+        title: t('newsMediaArticles.article8Title'),
+        excerpt: t('newsMediaArticles.article8Excerpt'),
+        category: t('newsMediaArticles.categoryCaseStudies'),
+        date: '2024-12-03',
+        image: '/Images/commercial-waste-processing.jpg',
+        link: '/news-media',
+        featured: true
+      },
+      {
+        id: 9,
+        title: t('newsMediaArticles.article9Title'),
+        excerpt: t('newsMediaArticles.article9Excerpt'),
+        category: t('newsMediaArticles.categoryInnovation'),
+        date: '2024-12-01',
+        image: '/Images/plastics-recycling.jpg',
+        link: '/news-media',
+        featured: false
+      },
+      {
+        id: 10,
+        title: t('newsMediaArticles.article10Title'),
+        excerpt: t('newsMediaArticles.article10Excerpt'),
+        category: t('newsMediaArticles.categoryPartnerships'),
+        date: '2024-11-28',
+        image: '/Images/van-dyk-direct.jpg',
+        link: '/news-media',
+        featured: false
+      }
+    ];
+
+    // Sort by date (most recent first) and take the latest 5
+    return allNews
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 5);
+  }, [t]);
 
   // Auto-rotate slides
   useEffect(() => {
@@ -132,7 +201,7 @@ const NewsSlideshow: React.FC<NewsSlideshowProps> = ({ className = '' }) => {
                 {/* Content Section */}
                 <div className="p-6 md:p-8 flex flex-col justify-center bg-white">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-vd-orange font-semibold text-sm uppercase tracking-wide">
+                    <span className="text-vd-blue font-semibold text-sm uppercase tracking-wide">
                       {currentArticle.category}
                     </span>
                     <div className="flex items-center text-gray-500 text-sm">
@@ -155,7 +224,7 @@ const NewsSlideshow: React.FC<NewsSlideshowProps> = ({ className = '' }) => {
                   
                   <Link
                     to={currentArticle.link}
-                    className="inline-flex items-center text-vd-orange hover:text-vd-orange-alt font-semibold transition-colors group"
+                    className="inline-flex items-center text-vd-orange hover:text-vd-blue font-semibold transition-colors group"
                   >
                     Read Full Article
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -170,14 +239,14 @@ const NewsSlideshow: React.FC<NewsSlideshowProps> = ({ className = '' }) => {
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-vd-orange hover:text-white z-10 border-2 border-gray-200 hover:border-vd-orange"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-8 md:-translate-x-16 lg:-translate-x-20 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-vd-orange hover:text-white z-10 border-2 border-gray-200 hover:border-vd-orange"
                 aria-label="Previous article"
               >
                 <ChevronLeft className="w-6 h-6 text-vd-blue-dark hover:text-white" />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-vd-orange hover:text-white z-10 border-2 border-gray-200 hover:border-vd-orange"
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-8 md:translate-x-16 lg:translate-x-20 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-vd-orange hover:text-white z-10 border-2 border-gray-200 hover:border-vd-orange"
                 aria-label="Next article"
               >
                 <ChevronRight className="w-6 h-6 text-vd-blue-dark hover:text-white" />

@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Settings, Cookie, Shield, ChevronDown, ChevronUp, Link as LinkIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { isConsentCached, saveConsent, getCachedConsent } from '../utils/cookieConsent';
+import { useTranslation } from '../hooks/useTranslation';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
 export interface ConsentPreferences {
   strictlyNecessary: boolean;
@@ -16,6 +18,8 @@ interface CookieConsentBannerProps {
 }
 
 const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) => {
+  const { t } = useTranslation();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [isVisible, setIsVisible] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
   const [preferences, setPreferences] = useState<ConsentPreferences>({
@@ -103,10 +107,10 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
           
           {/* Banner */}
           <motion.div
-            initial={{ y: 100, opacity: 0 }}
+            initial={prefersReducedMotion ? { opacity: 0 } : { y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ 
+            exit={prefersReducedMotion ? { opacity: 0 } : { y: 100, opacity: 0 }}
+            transition={prefersReducedMotion ? { duration: 0.1 } : { 
               type: 'spring',
               damping: 25,
               stiffness: 300,
@@ -127,10 +131,10 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                     </div>
                     <div>
                       <h2 id="cookie-consent-title" className="text-xl font-bold mb-1">
-                        Cookie Preferences
+                        {t('cookieConsent.title')}
                       </h2>
                       <p className="text-sm text-blue-100">
-                        We use cookies to enhance your browsing experience and analyze site traffic
+                        {t('cookieConsent.description')}
                       </p>
                     </div>
                   </div>
@@ -143,17 +147,17 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                   // Simple view
                   <div className="space-y-4">
                     <p className="text-gray-700 leading-relaxed">
-                      We use cookies and similar technologies to help personalize content, tailor and measure ads, and provide a better experience. By clicking "Accept All", you consent to our use of cookies. You can customize your preferences or reject non-essential cookies.
+                      {t('cookieConsent.message')}
                     </p>
                     
-                    <div className="flex items-center space-x-2 text-sm text-gray-600">
-                      <LinkIcon className="w-4 h-4" />
-                      <Link to="/cookie-policy" className="text-vd-blue hover:text-vd-blue-dark underline">
-                        Cookie Policy
+                    <div className="flex items-center space-x-2 text-sm">
+                      <LinkIcon className="w-4 h-4 text-vd-blue" aria-hidden="true" />
+                      <Link to="/cookie-policy" className="text-vd-blue hover:text-vd-blue-dark underline font-medium">
+                        {t('cookieConsent.cookiePolicyLink')}
                       </Link>
-                      <span className="mx-2">•</span>
-                      <Link to="/privacy-policy" className="text-vd-blue hover:text-vd-blue-dark underline">
-                        Privacy Policy
+                      <span className="mx-2 text-vd-blue" aria-hidden="true">•</span>
+                      <Link to="/privacy-policy" className="text-vd-blue hover:text-vd-blue-dark underline font-medium">
+                        {t('cookieConsent.privacyPolicyLink')}
                       </Link>
                     </div>
                   </div>
@@ -162,7 +166,7 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                   <div className="space-y-6">
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                        Customize Your Cookie Preferences
+                        {t('cookieConsent.customizeTitle')}
                       </h3>
                       
                       {/* Cookie Categories */}
@@ -173,16 +177,16 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                             <div className="flex items-center space-x-3">
                               <Shield className="w-5 h-5 text-vd-blue" />
                               <div>
-                                <h4 className="font-semibold text-gray-900">Strictly Necessary</h4>
-                                <p className="text-sm text-gray-600">Required for the site to function</p>
+                                <h4 className="font-semibold text-gray-900">{t('cookieConsent.strictlyNecessary')}</h4>
+                                <p className="text-sm text-gray-600">{t('cookieConsent.strictlyNecessaryDesc')}</p>
                               </div>
                             </div>
                             <div className="bg-vd-blue text-white px-3 py-1 rounded-full text-xs font-semibold">
-                              Always On
+                              {t('cookieConsent.alwaysOn')}
                             </div>
                           </div>
                           <p className="text-sm text-gray-600 mt-2">
-                            These cookies are essential for the website to function properly. They enable core functionality such as security, network management, and accessibility.
+                            {t('cookieConsent.strictlyNecessaryBody')}
                           </p>
                         </div>
 
@@ -192,8 +196,8 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                             <div className="flex items-center space-x-3">
                               <div className="w-5 h-5" />
                               <div>
-                                <h4 className="font-semibold text-gray-900">Performance & Analytics</h4>
-                                <p className="text-sm text-gray-600">Help us improve our website</p>
+                                <h4 className="font-semibold text-gray-900">{t('cookieConsent.performance')}</h4>
+                                <p className="text-sm text-gray-600">{t('cookieConsent.performanceDesc')}</p>
                               </div>
                             </div>
                             <button
@@ -212,7 +216,7 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                             </button>
                           </div>
                           <p className="text-sm text-gray-600 mt-2">
-                            These cookies collect information about how visitors use our website, such as which pages are visited most often and if visitors get error messages.
+                            {t('cookieConsent.performanceBody')}
                           </p>
                         </div>
 
@@ -222,8 +226,8 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                             <div className="flex items-center space-x-3">
                               <div className="w-5 h-5" />
                               <div>
-                                <h4 className="font-semibold text-gray-900">Functional</h4>
-                                <p className="text-sm text-gray-600">Remember your preferences</p>
+                                <h4 className="font-semibold text-gray-900">{t('cookieConsent.functional')}</h4>
+                                <p className="text-sm text-gray-600">{t('cookieConsent.functionalDesc')}</p>
                               </div>
                             </div>
                             <button
@@ -242,7 +246,7 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                             </button>
                           </div>
                           <p className="text-sm text-gray-600 mt-2">
-                            These cookies allow the website to remember choices you make and provide enhanced, personalized features.
+                            {t('cookieConsent.functionalBody')}
                           </p>
                         </div>
 
@@ -252,8 +256,8 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                             <div className="flex items-center space-x-3">
                               <div className="w-5 h-5" />
                               <div>
-                                <h4 className="font-semibold text-gray-900">Advertising & Social</h4>
-                                <p className="text-sm text-gray-600">Used for marketing and social features</p>
+                                <h4 className="font-semibold text-gray-900">{t('cookieConsent.advertising')}</h4>
+                                <p className="text-sm text-gray-600">{t('cookieConsent.advertisingDesc')}</p>
                               </div>
                             </div>
                             <button
@@ -272,7 +276,7 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                             </button>
                           </div>
                           <p className="text-sm text-gray-600 mt-2">
-                            These cookies are used to deliver advertisements and track campaign performance. They may also be used to build a profile of your interests.
+                            {t('cookieConsent.advertisingBody')}
                           </p>
                         </div>
                       </div>
@@ -289,7 +293,7 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                     className="flex items-center space-x-2 text-gray-600 hover:text-vd-blue transition-colors text-sm font-medium"
                   >
                     <Settings className="w-4 h-4" />
-                    <span>{showCustomize ? 'Hide' : 'Customize'} Preferences</span>
+                    <span>{showCustomize ? t('cookieConsent.hideButton') : t('cookieConsent.customizeButton')}</span>
                     {showCustomize ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </button>
                   
@@ -299,7 +303,7 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                         onClick={handleSavePreferences}
                         className="px-6 py-2.5 bg-vd-blue hover:bg-vd-blue-dark text-white font-semibold rounded-lg transition-colors shadow-md hover:shadow-lg"
                       >
-                        Save Preferences
+                        {t('cookieConsent.savePreferences')}
                       </button>
                     ) : (
                       <>
@@ -307,13 +311,13 @@ const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onAccept }) =
                           onClick={handleRejectAll}
                           className="px-6 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-lg transition-colors"
                         >
-                          Reject All
+                          {t('cookieConsent.rejectAll')}
                         </button>
                         <button
                           onClick={handleAcceptAll}
                           className="px-6 py-2.5 bg-vd-orange hover:bg-vd-orange-alt text-white font-semibold rounded-lg transition-colors shadow-md hover:shadow-lg"
                         >
-                          Accept All
+                          {t('cookieConsent.acceptAll')}
                         </button>
                       </>
                     )}

@@ -1,7 +1,27 @@
+/**
+ * @fileoverview Modal/Dialog component with animations, accessibility, and flexible sizing.
+ * Provides backdrop overlay, close button, and keyboard/click-to-close functionality.
+ * @author Van Dyk Recycling Solutions
+ * @module components/Modal
+ */
+
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
+/**
+ * Modal component props.
+ * 
+ * @interface ModalProps
+ * @property {boolean} isOpen - Controls modal visibility
+ * @property {() => void} onClose - Function called when modal should close
+ * @property {string} [title] - Optional modal title (displayed in header)
+ * @property {React.ReactNode} children - Modal content
+ * @property {'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'} [size='lg'] - Modal width size
+ * @property {boolean} [showCloseButton=true] - Whether to show X close button
+ * @property {boolean} [closeOnOverlayClick=true] - Whether clicking backdrop closes modal
+ * @property {string} [className] - Additional CSS classes for modal container
+ */
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -13,6 +33,29 @@ interface ModalProps {
   className?: string;
 }
 
+/**
+ * Modal/Dialog component with smooth animations and accessibility features.
+ * Includes backdrop overlay, optional title, close button, and click-outside-to-close.
+ * Fully accessible with ARIA attributes and keyboard support.
+ * 
+ * @param {ModalProps} props - Modal component props
+ * @returns {JSX.Element | null} Modal element or null if not open
+ * 
+ * @example
+ * ```tsx
+ * const [isOpen, setIsOpen] = useState(false);
+ * 
+ * <Modal
+ *   isOpen={isOpen}
+ *   onClose={() => setIsOpen(false)}
+ *   title="Confirm Action"
+ *   size="md"
+ * >
+ *   <p>Are you sure you want to proceed?</p>
+ *   <Button onClick={() => setIsOpen(false)}>Confirm</Button>
+ * </Modal>
+ * ```
+ */
 const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
@@ -54,12 +97,16 @@ const Modal: React.FC<ModalProps> = ({
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             className={`bg-white rounded-2xl shadow-2xl w-full ${sizeClasses[size]} ${className}`}
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={title ? "modal-title" : undefined}
+            aria-describedby="modal-description"
           >
             {/* Header */}
             {(title || showCloseButton) && (
               <div className="flex items-center justify-between p-6 border-b border-gray-200">
                 {title && (
-                  <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+                  <h2 id="modal-title" className="text-2xl font-bold text-gray-900">{title}</h2>
                 )}
                 {showCloseButton && (
                   <button
@@ -73,7 +120,7 @@ const Modal: React.FC<ModalProps> = ({
             )}
             
             {/* Content */}
-            <div className="p-6">
+            <div id="modal-description" className="p-6">
               {children}
             </div>
           </motion.div>

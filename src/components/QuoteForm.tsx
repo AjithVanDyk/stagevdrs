@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { User, Building2, Mail, Phone, MapPin, Send, AlertCircle, CheckCircle } from 'lucide-react';
 import { z } from 'zod';
+import { useTranslation } from '../hooks/useTranslation';
+import { submitQuoteForm } from '../utils/formSubmission';
 
 interface Equipment {
   id: string;
@@ -191,36 +193,42 @@ const solutionItems: Solution[] = [
   }
 ];
 
-// Zod validation schema
-const quoteFormSchema = z.object({
-  firstName: z.string().min(2, 'First name must be at least 2 characters').max(50, 'First name must be less than 50 characters'),
-  lastName: z.string().min(2, 'Last name must be at least 2 characters').max(50, 'Last name must be less than 50 characters'),
-  email: z.string().email('Please enter a valid email address'),
-  phone: z.string().min(10, 'Phone number must be at least 10 digits').regex(/^[+]?[\d]{10,16}$/, 'Please enter a valid phone number'),
-  company: z.string().min(2, 'Company name must be at least 2 characters').max(100, 'Company name must be less than 100 characters'),
-  city: z.string().min(2, 'City must be at least 2 characters').max(50, 'City must be less than 50 characters'),
-  state: z.string().min(2, 'State must be at least 2 characters').max(50, 'State must be less than 50 characters'),
-  country: z.string().min(2, 'Country must be at least 2 characters').max(50, 'Country must be less than 50 characters'),
-  additionalDetails: z.string().max(1000, 'Additional details must be less than 1000 characters').optional()
-});
-
-type QuoteFormData = z.infer<typeof quoteFormSchema>;
+type QuoteFormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  company: string;
+  city: string;
+  state: string;
+  country: string;
+  additionalDetails?: string;
+};
 
 const QuoteForm = () => {
+  const { t } = useTranslation();
+  
+  // Zod validation schema with translations - reduced to 5 initial fields
+  const quoteFormSchema = useMemo(() => z.object({
+    firstName: z.string().min(2, t('quote.formFirstNameMinError')).max(50, t('quote.formFirstNameMaxError')),
+    email: z.string().email(t('quote.formEmailError')),
+    phone: z.string().min(10, t('quote.formPhoneMinError')).regex(/^[+]?[\d]{10,16}$/, t('quote.formPhoneFormatError')),
+    company: z.string().min(2, t('quote.formCompanyMinError')).max(100, t('quote.formCompanyMaxError')),
+    lastName: z.string().max(50, t('quote.formLastNameMaxError')).optional(),
+    city: z.string().max(50, t('quote.formCityMaxError')).optional(),
+    state: z.string().max(50, t('quote.formStateMaxError')).optional(),
+    country: z.string().max(50, t('quote.formCountryMaxError')).optional(),
+    additionalDetails: z.string().max(1000, t('quote.formAdditionalDetailsMaxError')).optional()
+  }), [t]);
   const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
   const [selectedSolutions, setSelectedSolutions] = useState<number[]>([]);
   const [formData, setFormData] = useState<QuoteFormData>({
     firstName: '',
-    lastName: '',
     email: '',
     phone: '',
-    company: '',
-    city: '',
-    state: '',
-    country: '',
-    additionalDetails: ''
+    company: ''
   });
-  const [errors, setErrors] = useState<Partial<Record<keyof QuoteFormData, string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof QuoteFormData | '_general', string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -283,40 +291,47 @@ const QuoteForm = () => {
       return;
     }
 
+    // Validate that at least one item is selected
+    if (selectedEquipment.length === 0 && selectedSolutions.length === 0) {
+      setSubmitStatus('error');
+      setErrors(prev => ({
+        ...prev,
+        _general: 'Please select at least one equipment item or solution.'
+      }));
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const result = await submitQuoteForm({
+        ...formData,
+        selectedEquipment,
+        selectedSolutions,
+      });
       
-      // In production, replace with actual API call
-      const submissionData = { ...formData, selectedEquipment };
-      
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Quote form submitted:', submissionData);
+      if (result.success) {
+        setSubmitStatus('success');
+        
+        // Reset form after successful submission
+        setTimeout(() => {
+          setFormData({
+            firstName: '',
+            email: '',
+            phone: '',
+            company: ''
+          });
+          setSelectedEquipment([]);
+          setSelectedSolutions([]);
+          setSubmitStatus('idle');
+        }, 3000);
+      } else {
+        setSubmitStatus('error');
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Form submission error:', result.error);
+        }
       }
-      
-      setSubmitStatus('success');
-      
-      // Reset form after successful submission
-      setTimeout(() => {
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          company: '',
-          city: '',
-          state: '',
-          country: '',
-          additionalDetails: ''
-        });
-        setSelectedEquipment([]);
-        setSelectedSolutions([]);
-        setSubmitStatus('idle');
-      }, 3000);
-      
     } catch (error) {
       setSubmitStatus('error');
       if (process.env.NODE_ENV === 'development') {
@@ -442,7 +457,7 @@ const QuoteForm = () => {
 
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                    Last Name *
+                    Last Name (Optional)
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -453,8 +468,7 @@ const QuoteForm = () => {
                       id="lastName"
                       name="lastName"
                       autoComplete="family-name"
-                      required
-                      value={formData.lastName}
+                      value={formData.lastName || ''}
                       onChange={handleInputChange}
                       className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vd-orange focus:border-vd-orange"
                       placeholder="Doe"
@@ -486,7 +500,7 @@ const QuoteForm = () => {
 
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone
+                    Phone *
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -497,6 +511,7 @@ const QuoteForm = () => {
                       id="phone"
                       name="phone"
                       autoComplete="tel"
+                      required
                       value={formData.phone}
                       onChange={handleInputChange}
                       className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vd-orange focus:border-vd-orange"
@@ -529,7 +544,7 @@ const QuoteForm = () => {
 
                 <div>
                   <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
-                    City *
+                    City (Optional)
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -540,8 +555,7 @@ const QuoteForm = () => {
                       id="city"
                       name="city"
                       autoComplete="address-level2"
-                      required
-                      value={formData.city}
+                      value={formData.city || ''}
                       onChange={handleInputChange}
                       className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vd-orange focus:border-vd-orange"
                       placeholder="City"
@@ -551,7 +565,7 @@ const QuoteForm = () => {
 
                 <div>
                   <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">
-                    State *
+                    State (Optional)
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -562,8 +576,7 @@ const QuoteForm = () => {
                       id="state"
                       name="state"
                       autoComplete="address-level1"
-                      required
-                      value={formData.state}
+                      value={formData.state || ''}
                       onChange={handleInputChange}
                       className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vd-orange focus:border-vd-orange"
                       placeholder="State"
@@ -573,7 +586,7 @@ const QuoteForm = () => {
 
                 <div>
                   <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-2">
-                    Country *
+                    Country (Optional)
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -584,8 +597,7 @@ const QuoteForm = () => {
                       id="country"
                       name="country"
                       autoComplete="country"
-                      required
-                      value={formData.country}
+                      value={formData.country || ''}
                       onChange={handleInputChange}
                       className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vd-orange focus:border-vd-orange"
                       placeholder="Country"
@@ -612,6 +624,17 @@ const QuoteForm = () => {
             </div>
 
             {/* Status Messages */}
+            {errors._general && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center"
+              >
+                <AlertCircle className="w-5 h-5 text-red-600 mr-2" />
+                <span className="text-red-800 font-medium">{errors._general}</span>
+              </motion.div>
+            )}
+
             {submitStatus === 'success' && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -623,7 +646,7 @@ const QuoteForm = () => {
               </motion.div>
             )}
             
-            {submitStatus === 'error' && (
+            {submitStatus === 'error' && !errors._general && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

@@ -66,7 +66,7 @@ const About = () => {
             alt="Van Dyk Team"
             className="w-full h-full object-cover object-center scale-105"
             loading="eager"
-            fetchPriority="high"
+            {...({ fetchpriority: "high" } as any)}
             onError={(e) => {
               e.currentTarget.src = '/Images/image-1749759459073.png';
             }}
@@ -104,10 +104,9 @@ const About = () => {
             className="max-w-7xl mx-auto"
           >
             <motion.div variants={fadeInUp} className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Leadership Team</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">{t('about.leadershipTeam')}</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Meet the visionary leaders driving innovation and excellence in recycling technology. 
-                Our experienced team brings decades of industry expertise and a shared vision for sustainable solutions.
+                {t('about.leadershipTeamDescription')}
               </p>
             </motion.div>
 
@@ -116,33 +115,35 @@ const About = () => {
                 <motion.div
                   key={leader.name}
                   variants={fadeInUp}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 group flex flex-col"
                 >
-                  <div className="relative">
-                    <img
-                      src={leader.image}
-                      alt={leader.name}
-                      className={`w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500 ${
-                        leader.name === "Mark Neitzey" ? "object-[center_top]" : "object-center"
-                      }`}
-                      style={leader.name === "Mark Neitzey" ? { objectPosition: "center 30%" } : {}}
-                      loading="eager"
-                      fetchPriority="high"
-                      onError={(e) => {
-                        if (process.env.NODE_ENV === 'development') {
-                          console.error('Failed to load leadership image:', leader.image);
-                        }
-                        e.currentTarget.src = '/Images/image-1749759453479.png';
-                        e.currentTarget.alt = 'Leadership photo';
-                      }}
-                    />
+                  <div className="relative bg-white p-4 flex items-center justify-center">
+                    <div className="relative w-full h-80 bg-white rounded-lg overflow-hidden">
+                      <img
+                        src={leader.image}
+                        alt={leader.name}
+                        className={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ${
+                          leader.name === "Mark Neitzey" ? "object-[center_top]" : "object-center"
+                        }`}
+                        style={leader.name === "Mark Neitzey" ? { objectPosition: "center 30%" } : {}}
+                        loading="eager"
+                        {...({ fetchpriority: "high" } as any)}
+                        onError={(e) => {
+                          if (process.env.NODE_ENV === 'development') {
+                            console.error('Failed to load leadership image:', leader.image);
+                          }
+                          e.currentTarget.src = '/Images/image-1749759453479.png';
+                          e.currentTarget.alt = 'Leadership photo';
+                        }}
+                      />
+                    </div>
                   </div>
                   
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-vd-blue transition-colors">
                       {leader.name}
                     </h3>
-                    <p className="text-vd-orange font-semibold mb-4 text-sm uppercase tracking-wide">
+                    <p className="text-vd-blue font-semibold mb-4 text-sm uppercase tracking-wide">
                       {leader.position}
                     </p>
                     
@@ -153,7 +154,7 @@ const About = () => {
                       className="inline-flex items-center text-vd-blue hover:text-vd-blue-dark font-medium text-sm transition-colors group/link"
                     >
                       <Linkedin className="w-4 h-4 mr-2" />
-                      Connect on LinkedIn
+                      {t('about.connectOnLinkedIn')}
                       <ExternalLink className="w-3 h-3 ml-1 group-hover/link:translate-x-1 transition-transform" />
                     </a>
                   </div>
@@ -175,10 +176,9 @@ const About = () => {
             className="max-w-6xl mx-auto"
           >
             <motion.div variants={fadeInUp} className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Mission & Values</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">{t('about.ourMissionValues')}</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                We're committed to revolutionizing recycling through innovative technology, 
-                exceptional service, and sustainable solutions.
+                {t('about.ourMissionValuesDesc')}
               </p>
             </motion.div>
 
@@ -187,10 +187,9 @@ const About = () => {
                 <div className="bg-vd-blue text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Target className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('about.ourMission')}</h3>
                 <p className="text-gray-600">
-                  To provide cutting-edge recycling solutions that maximize material recovery, 
-                  reduce waste, and create sustainable value for our clients and communities.
+                  {t('about.ourMissionDesc')}
                 </p>
               </motion.div>
 
@@ -198,10 +197,9 @@ const About = () => {
                 <div className="bg-vd-orange text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Lightbulb className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Innovation</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('about.innovation')}</h3>
                 <p className="text-gray-600">
-                  We continuously invest in the latest technology and partner with industry leaders 
-                  to bring you the most advanced recycling solutions available.
+                  {t('about.innovationDesc')}
                 </p>
               </motion.div>
 
@@ -209,10 +207,9 @@ const About = () => {
                 <div className="bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Globe className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Sustainability</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('about.sustainability')}</h3>
                 <p className="text-gray-600">
-                  Every solution we provide is designed to minimize environmental impact while 
-                  maximizing the economic benefits of recycling.
+                  {t('about.sustainabilityDesc')}
                 </p>
               </motion.div>
             </div>
@@ -238,9 +235,9 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold mb-6">Ready to Partner with Us?</h2>
+            <h2 className="text-4xl font-bold mb-6">{t('about.readyToPartner')}</h2>
             <p className="text-xl mb-8 text-blue-100">
-              Let's work together to create a more sustainable future through innovative recycling solutions.
+              {t('about.readyToPartnerDesc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
@@ -249,7 +246,7 @@ const About = () => {
                 whileTap={{ scale: 0.95 }}
                 className="bg-vd-orange hover:bg-vd-orange-alt text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-flex items-center justify-center"
               >
-                Get in Touch
+                {t('about.getInTouch')}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </motion.a>
               <motion.a
@@ -258,7 +255,7 @@ const About = () => {
                 whileTap={{ scale: 0.95 }}
                 className="border-2 border-white text-white hover:bg-white hover:text-vd-blue px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-flex items-center justify-center"
               >
-                View Our Solutions
+                {t('about.viewOurSolutions')}
               </motion.a>
             </div>
           </motion.div>

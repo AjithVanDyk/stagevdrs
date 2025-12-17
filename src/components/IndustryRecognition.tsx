@@ -34,7 +34,6 @@ const IndustryRecognition: React.FC<IndustryRecognitionProps> = ({
   const [autoPlay, setAutoPlay] = useState(true);
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
 
-  // Organization memberships
   const organizations: Organization[] = [
     {
       name: 'NWRA',
@@ -42,16 +41,30 @@ const IndustryRecognition: React.FC<IndustryRecognitionProps> = ({
       url: 'https://www.wasterecycling.org/'
     },
     {
-      name: 'ASR',
-      logo: '/Images/orgs/asr.jpg',
-      url: 'https://www.asrrecycling.org/'
-    },
-    {
       name: 'CDRA',
       logo: '/Images/orgs/CDRA_Logo.jpg',
       url: 'https://www.cdrecycling.org/'
     },
-    // Add more organizations as needed
+    {
+      name: 'APR',
+      logo: '/Images/orgs/apr.jpg',
+      url: 'https://www.plasticsrecycling.org/'
+    },
+    {
+      name: 'ReMA',
+      logo: '/Images/orgs/ReMA-logo.svg',
+      url: 'https://www.recycledmaterials.org/'
+    },
+    {
+      name: 'Recycle Florida Today',
+      logo: '/Images/orgs/logomainweb.png',
+      url: 'https://recyclefloridatoday.org/'
+    },
+    {
+      name: 'CRA',
+      logo: '/Images/orgs/CRA-2014-logo-07-e1408500429259.png',
+      url: 'https://www.cra-recycle.org/'
+    },
   ];
 
   // Recent news, featured articles, and trade show appearances
@@ -125,7 +138,7 @@ const IndustryRecognition: React.FC<IndustryRecognitionProps> = ({
         </p>
       </div>
       
-      <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16 lg:gap-20 max-w-6xl mx-auto">
+      <div className="flex flex-nowrap justify-center items-center gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto px-4 overflow-x-auto">
         {organizations.filter(org => !imageErrors.has(org.name)).map((org, index) => (
           <motion.div
             key={org.name}
@@ -133,7 +146,7 @@ const IndustryRecognition: React.FC<IndustryRecognitionProps> = ({
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="flex items-center justify-center w-32 md:w-40 h-24 md:h-28 transition-transform duration-300 hover:scale-105"
+            className="flex-shrink-0 flex items-center justify-center w-24 md:w-32 lg:w-40 h-20 md:h-24 lg:h-28 transition-transform duration-300 hover:scale-105"
           >
             {org.url ? (
               <a
@@ -205,7 +218,7 @@ const IndustryRecognition: React.FC<IndustryRecognitionProps> = ({
                   {newsItems[currentNewsIndex].type === 'featured' && (
                     <Award className="w-5 h-5 text-vd-orange" />
                   )}
-                  <span className="text-sm text-vd-orange font-semibold uppercase tracking-wide">
+                  <span className="text-sm text-vd-blue font-semibold uppercase tracking-wide">
                     {newsItems[currentNewsIndex].type === 'featured' ? t('industryRecognition.featured') : 
                      newsItems[currentNewsIndex].type === 'trade-show' ? t('industryRecognition.tradeShow') : t('industryRecognition.news')}
                   </span>
@@ -226,7 +239,7 @@ const IndustryRecognition: React.FC<IndustryRecognitionProps> = ({
                 {newsItems[currentNewsIndex].link && (
                   <Link
                     to={newsItems[currentNewsIndex].link!}
-                    className="inline-flex items-center text-vd-orange hover:text-vd-orange-alt font-semibold transition-colors"
+                    className="inline-flex items-center text-vd-orange hover:text-vd-blue font-semibold transition-colors"
                   >
                     {t('industryRecognition.learnMore')}
                     <ExternalLink className="w-4 h-4 ml-2" />
@@ -300,7 +313,7 @@ const IndustryRecognition: React.FC<IndustryRecognitionProps> = ({
         </p>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-10 items-center justify-items-center max-w-5xl mx-auto">
+      <div className="flex items-center justify-center gap-4 md:gap-6 lg:gap-8 flex-wrap md:flex-nowrap max-w-7xl mx-auto px-4">
         {organizations.filter(org => !imageErrors.has(org.name)).map((org, index) => (
           <motion.div
             key={org.name}
@@ -308,34 +321,36 @@ const IndustryRecognition: React.FC<IndustryRecognitionProps> = ({
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="flex items-center justify-center w-full h-24 md:h-28 transition-transform duration-300 hover:scale-105"
+            className="flex-shrink-0 flex-1 min-w-0 max-w-[180px] md:max-w-[200px]"
           >
             {org.url ? (
               <a
                 href={org.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full h-full flex items-center justify-center"
+                className="group block w-full aspect-[4/3] flex items-center justify-center p-3 md:p-4 bg-white rounded-lg shadow-sm hover:shadow-lg border border-gray-200 hover:border-vd-orange/40 transition-all duration-300 hover:-translate-y-1"
                 aria-label={`Visit ${org.name} website`}
               >
                 <img
                   src={org.logo}
                   alt={`${org.name} logo`}
-                  className="max-h-20 md:max-h-24 w-auto object-contain transition-all duration-300"
+                  className="max-h-[60px] md:max-h-[70px] w-auto h-auto object-contain transition-all duration-300 group-hover:scale-110"
                   onError={() => {
                     setImageErrors((prev) => new Set(prev).add(org.name));
                   }}
                 />
               </a>
             ) : (
-              <img
-                src={org.logo}
-                alt={`${org.name} logo`}
-                className="max-h-20 md:max-h-24 w-auto object-contain transition-all duration-300"
-                onError={() => {
-                  setImageErrors((prev) => new Set(prev).add(org.name));
-                }}
-              />
+              <div className="block w-full aspect-[4/3] flex items-center justify-center p-3 md:p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+                <img
+                  src={org.logo}
+                  alt={`${org.name} logo`}
+                  className="max-h-[60px] md:max-h-[70px] w-auto h-auto object-contain transition-all duration-300"
+                  onError={() => {
+                    setImageErrors((prev) => new Set(prev).add(org.name));
+                  }}
+                />
+              </div>
             )}
           </motion.div>
         ))}

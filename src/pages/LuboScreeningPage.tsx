@@ -1,35 +1,32 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const LuboScreeningPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 2,
-    name: 'Lubo StarScreen® Technology',
-    image: '/Images/Equipment/Lubo Screens/Product image_lubo screens.jpg',
-    description: 'Advanced screening technology with StarScreen® design for efficient material separation and sizing. Lubo screens deliver superior performance in waste processing operations.',
+    name: t('equipment.equipment2Name'),
+    image: '/Images/Equipment/Lubo%20Screens/Product%20image_lubo%20screens.jpg',
+    description: t('equipment.equipment2Description'),
     features: [
-      'StarScreen® patented design',
-      'High-efficiency material separation',
-      'Multiple screen deck configurations',
-      'Self-cleaning screen technology',
-      'Low maintenance requirements',
-      'Energy efficient operation',
-      'Modular construction',
-      'Easy installation and setup',
-      'Durable construction materials',
-      'Precise sizing capabilities'
+      t('equipment.equipment2Feature1'),
+      t('equipment.equipment2Feature2'),
+      t('equipment.equipment2Feature3'),
+      t('equipment.equipment2Feature4'),
+      t('equipment.equipment2Feature5'),
+      t('equipment.equipment2Feature6'),
+      t('equipment.equipment2Feature7'),
+      t('equipment.equipment2Feature8'),
     ],
     specifications: {
-      'Screen Area': 'Up to 200 sq ft per deck',
-      'Throughput': 'Up to 100 tons per hour',
-      'Screen Decks': '1-4 deck configurations',
-      'Aperture Size': '0.5mm to 200mm',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Low maintenance requirements',
-      'Construction': 'Modular design',
-      'Materials': 'High-grade steel construction',
-      'Installation': 'Easy setup and installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('equipment.equipment2Spec1Key')]: t('equipment.equipment2Spec1Value'),
+      [t('equipment.equipment2Spec2Key')]: t('equipment.equipment2Spec2Value'),
+      [t('equipment.equipment2Spec3Key')]: t('equipment.equipment2Spec3Value'),
+      [t('equipment.equipment2Spec4Key')]: t('equipment.equipment2Spec4Value'),
+      [t('equipment.equipment2Spec5Key')]: t('equipment.equipment2Spec5Value'),
+      [t('equipment.equipment2Spec6Key')]: t('equipment.equipment2Spec6Value'),
+      [t('equipment.equipment2Spec7Key')]: t('equipment.equipment2Spec7Value'),
     },
     applications: [
       { name: 'Single stream recycling', link: '/solutions/single-stream-recycling' },
@@ -47,18 +44,18 @@ const LuboScreeningPage: React.FC = () => {
       'https://youtu.be/uz4r_gb1Wjs'  // Sizing Screen
     ],
     gallery: [
-      '/Images/Equipment/Lubo Screens/Gallery 1_onp.JPG',
-      '/Images/Equipment/Lubo Screens/Gallery 2_onp.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 3_sbc.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 4_880 stars.JPG',
-      '/Images/Equipment/Lubo Screens/Gallery 5_sbc.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 6_OCC.JPG',
-      '/Images/Equipment/Lubo Screens/Gallery 7_onp.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 8_elliptical.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 9_elliptical.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 10_op.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 11_onp.jpg',
-      '/Images/Equipment/Lubo Screens/Gallery 12_sizing screens.JPG'
+      '/Images/Equipment/Lubo%20Screens/Gallery%201_onp.JPG',
+      '/Images/Equipment/Lubo%20Screens/Gallery%202_onp.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%203_sbc.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%204_880%20stars.JPG',
+      '/Images/Equipment/Lubo%20Screens/Gallery%205_sbc.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%206_OCC.JPG',
+      '/Images/Equipment/Lubo%20Screens/Gallery%207_onp.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%208_elliptical.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%209_elliptical.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%2010_op.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%2011_onp.jpg',
+      '/Images/Equipment/Lubo%20Screens/Gallery%2012_sizing%20screens.JPG'
     ],
     testimonials: [
       {

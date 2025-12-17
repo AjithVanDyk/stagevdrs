@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Briefcase, Wrench, User, FileText, ExternalLink,
   MapPin, Users, Award, Star,
-  CheckCircle, ArrowRight, Globe, Zap, X, ChevronLeft, ChevronRight
+  CheckCircle, ArrowRight, Globe, Zap, X, ChevronLeft, ChevronRight, Calendar
 } from 'lucide-react';
 import { IMAGE_ASSIGNMENTS } from '../config/images';
 import { useTranslation } from '../hooks/useTranslation';
@@ -16,13 +16,13 @@ const Careers = () => {
 
   // Gallery images (using gallery versions from slideshow array)
   const galleryImages = [
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[0], title: 'Front Lobby', description: 'Welcoming reception area' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[1], title: 'Board Room', description: 'Executive meeting and conference space' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[2], title: 'Employee Cafe', description: 'Comfortable dining and break space' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[3], title: 'Building Exterior', description: 'Modern facility exterior view' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[4], title: 'Fitness Center', description: 'Employee gym and wellness center' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[5], title: 'Living Wall', description: 'Green living wall for natural ambiance' },
-    { src: IMAGE_ASSIGNMENTS.careers.slideshow[6], title: 'Employee Lounge', description: 'Relaxing lounge area for employees' }
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[0], title: t('careers.galleryFrontLobby'), description: t('careers.galleryFrontLobbyDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[1], title: t('careers.galleryBoardRoom'), description: t('careers.galleryBoardRoomDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[2], title: t('careers.galleryEmployeeCafe'), description: t('careers.galleryEmployeeCafeDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[3], title: t('careers.galleryBuildingExterior'), description: t('careers.galleryBuildingExteriorDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[4], title: t('careers.galleryFitnessCenter'), description: t('careers.galleryFitnessCenterDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[5], title: t('careers.galleryLivingWall'), description: t('careers.galleryLivingWallDesc') },
+    { src: IMAGE_ASSIGNMENTS.careers.slideshow[6], title: t('careers.galleryEmployeeLounge'), description: t('careers.galleryEmployeeLoungeDesc') }
   ];
 
   useEffect(() => {
@@ -165,110 +165,7 @@ const Careers = () => {
 
       {/* Main Content */}
       <div id="careers-content">
-        {/* Open Positions Section - Moved to Top */}
-        <section id="open-positions" className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="max-w-6xl mx-auto"
-            >
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold text-vd-blue mb-4">{t('careers.openPositions')}</h2>
-                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                  {t('careers.joinTeam')}{' '}
-                  <span className="text-vd-orange font-semibold">{t('careers.multipleOpportunities')}</span>
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2 lg:max-w-4xl lg:mx-auto lg:auto-rows-fr items-stretch">
-                {jobRoles.map((role, index) => (
-                  <motion.div
-                    key={role.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.2 }}
-                    className={`${role.theme.cardBg} ${role.theme.cardBorder} border rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group relative flex flex-col`}
-                  >
-                    {/* Gradient Header */}
-                    <div className={`bg-gradient-to-r ${role.theme.header} p-8 text-white relative overflow-hidden`}>
-                      <div className="absolute inset-0 bg-black/10"></div>
-                      <div className="relative z-10">
-                        <div className="flex items-center mb-4">
-                          <div className={`${role.theme.badgeBg} p-3 rounded-xl mr-4 group-hover:bg-white/30 transition-colors`}>
-                            <role.icon className="h-8 w-8 text-white" />
-                          </div>
-                          <div>
-                            <h3 className="text-2xl font-bold">{role.name}</h3>
-                            <div className="flex items-center text-white/80 mt-1">
-                              <MapPin className="w-4 h-4 mr-1" />
-                              <span className="text-sm">{role.location}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="p-8 flex flex-col flex-grow">
-                      {/* Job Details */}
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                          <div className="text-sm text-gray-500 mb-1">Type</div>
-                          <div className="font-bold text-vd-blue">{role.type}</div>
-                        </div>
-                        <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                          <div className="text-sm text-gray-500 mb-1">Experience</div>
-                          <div className="font-bold text-vd-blue">{role.experience}</div>
-                        </div>
-                      </div>
-
-                      <div className={`bg-gradient-to-r ${role.theme.travelGradient} ${role.theme.travelBorder} rounded-xl p-4 mb-6`}>
-                        <div className={`flex items-center text-sm font-semibold mb-2 ${role.theme.travelAccent}`}>
-                          <Globe className="w-4 h-4 mr-2" />
-                          {t('careers.travelRequirements')}
-                        </div>
-                        <p className="text-sm text-gray-700">{role.travel}</p>
-                      </div>
-                    
-                      <p className="text-gray-700 leading-relaxed mb-8">
-                        {role.id === 'fieldService' && 
-                          "Join our team as a Field Service Technician and work with cutting-edge recycling equipment across North America. Travel to customer sites, install and maintain machinery, and provide expert technical support."
-                        }
-                        {role.id === 'mechanicalInstaller' && 
-                          "Become a Mechanical Installer and help build the future of recycling. Work with conveyors, screens, balers, and optical sorters while gaining hands-on experience with industry-leading technology."
-                        }
-                      </p>
-
-                      <div className="space-y-3 mt-auto">
-                        <button
-                          onClick={() => setSelectedJob(role)}
-                          className={`w-full bg-gradient-to-r ${role.theme.cta} hover:opacity-90 text-white font-bold px-6 py-4 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center`}
-                        >
-                          <ArrowRight className="h-5 w-5 mr-2" />
-                          {t('careers.viewDetails')}
-                        </button>
-                        
-                        <a
-                          href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=7YKQMSwus0K6eGyqSyijxbLJzBecdydNjMz8TRHTYd1UQVNMVFpNMFFGMFpGNVRFMEdVWlZNOVFIQi4u&embed=true"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full bg-vd-blue hover:bg-vd-blue-dark text-white font-bold px-6 py-4 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center"
-                        >
-                          <FileText className="h-5 w-5 mr-2" />
-                          {t('careers.applyNow')}
-                          <ExternalLink className="h-4 w-4 ml-2" />
-                        </a>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Why Work With Us Section (formerly Our Values) */}
+        {/* Why Work With Us Section */}
         <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto px-4">
             <motion.div
@@ -298,6 +195,53 @@ const Careers = () => {
                     </div>
                     <h3 className="text-xl font-bold text-vd-blue mb-4">{value.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Benefits Section */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="max-w-6xl mx-auto"
+            >
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold text-vd-blue mb-4">Benefits</h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  We offer comprehensive benefits to support our employees and their families.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  { icon: Briefcase, title: 'Competitive Salary', description: 'Salaried position with paid overtime (travel and work) for anything beyond 8 hours per business day' },
+                  { icon: Star, title: 'Overtime Pay', description: 'Work and travel on Saturday and Sunday are considered overtime' },
+                  { icon: Calendar, title: 'Paid Time Off', description: '20 paid vacation days and 8 paid holidays' },
+                  { icon: User, title: 'Health Insurance', description: 'Paid health insurance for you, your spouse, and dependent children' },
+                  { icon: CheckCircle, title: 'Dental Insurance', description: 'Paid dental insurance for you, your spouse, and dependent children' },
+                  { icon: Award, title: 'Life Insurance', description: 'Paid $250,000.00 life insurance policy' },
+                  { icon: FileText, title: 'Retirement Plans', description: 'Profit-sharing pension plan as well as an additional 401K plan offer' },
+                  { icon: Zap, title: 'Growth Opportunities', description: 'A varied and challenging position with a high degree of independence within an internationally active organization' },
+                  { icon: Star, title: 'Personal Development', description: 'Plenty of opportunities for personal development' },
+                ].map((benefit, index) => (
+                  <motion.div
+                    key={benefit.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="bg-gradient-to-br from-gray-50 to-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 group border border-gray-100"
+                  >
+                    <div className="bg-vd-orange/10 p-3 rounded-lg w-fit mb-4 group-hover:bg-vd-orange/20 transition-colors">
+                      <benefit.icon className="h-6 w-6 text-vd-orange" />
+                    </div>
+                    <h3 className="text-lg font-bold text-vd-blue mb-2">{benefit.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{benefit.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -404,6 +348,212 @@ const Careers = () => {
           </div>
         </section>
 
+        {/* Open Positions Section */}
+        <section id="open-positions" className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-6xl mx-auto"
+            >
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold text-vd-blue mb-4">{t('careers.openPositions')}</h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  {t('careers.joinTeam')}{' '}
+                  <span className="text-vd-orange font-semibold">{t('careers.multipleOpportunities')}</span>
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2 lg:max-w-4xl lg:mx-auto lg:auto-rows-fr items-stretch">
+                {jobRoles.map((role, index) => (
+                  <motion.div
+                    key={role.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.2 }}
+                    className={`${role.theme.cardBg} ${role.theme.cardBorder} border rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group relative flex flex-col`}
+                  >
+                    {/* Gradient Header */}
+                    <div className={`bg-gradient-to-r ${role.theme.header} p-8 text-white relative overflow-hidden`}>
+                      <div className="absolute inset-0 bg-black/10"></div>
+                      <div className="relative z-10">
+                        <div className="flex items-center mb-4">
+                          <div className={`${role.theme.badgeBg} p-3 rounded-xl mr-4 group-hover:bg-white/30 transition-colors`}>
+                            <role.icon className="h-8 w-8 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-2xl font-bold">{role.name}</h3>
+                            <div className="flex items-center text-white/80 mt-1">
+                              <MapPin className="w-4 h-4 mr-1" />
+                              <span className="text-sm">{role.location}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-8 flex flex-col flex-grow">
+                      {/* Job Details */}
+                      <div className="grid grid-cols-2 gap-4 mb-6">
+                        <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+                          <div className="text-sm text-gray-500 mb-1">Type</div>
+                          <div className="font-bold text-vd-blue">{role.type}</div>
+                        </div>
+                        <div className="bg-white rounded-xl p-4 text-center shadow-sm">
+                          <div className="text-sm text-gray-500 mb-1">Experience</div>
+                          <div className="font-bold text-vd-blue">{role.experience}</div>
+                        </div>
+                      </div>
+
+                      <div className={`bg-gradient-to-r ${role.theme.travelGradient} ${role.theme.travelBorder} rounded-xl p-4 mb-6`}>
+                        <div className={`flex items-center text-sm font-semibold mb-2 ${role.theme.travelAccent}`}>
+                          <Globe className="w-4 h-4 mr-2" />
+                          {t('careers.travelRequirements')}
+                        </div>
+                        <p className="text-sm text-gray-700">{role.travel}</p>
+                      </div>
+
+                      {/* Job Description */}
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-vd-blue mb-3">Job Description</h4>
+                        <div className="text-gray-700 leading-relaxed space-y-3 text-sm">
+                          {role.id === 'fieldService' && (
+                            <>
+                              <p>
+                                Van Dyk Recycling Solutions has several vacancies across the United States, in Canada and in Mexico. 
+                                Van Dyk is a rapidly growing company and we are constantly seeking additional service technicians 
+                                for the installation and service of large industrial recycling equipment installations.
+                              </p>
+                              <div>
+                                <h5 className="font-semibold text-vd-blue mb-2">The Role</h5>
+                                <p>
+                                  You will be responsible for handling turn-key installation, service and maintenance of all machinery 
+                                  sold by Van Dyk. You will troubleshoot, repair and resolve any issues with the associated equipment. 
+                                  Installations and service can be electrical, hydraulic and/or mechanical in nature. You will maintain 
+                                  contact with the customer, as it pertains to the installation, training, or service of the customer's machines. 
+                                  Regularly you will have to perform preventive maintenance inspections on machines. Part of the job is also 
+                                  to train the customer on the safe operating procedures and standard preventative maintenance of all equipment.
+                                </p>
+                                <p className="mt-2">
+                                  <strong>90% of jobs will require you to travel;</strong> 60% of that is within a designated territory (near your home). 
+                                  Deployment in Canada, Mexico and occasionally elsewhere in Central America is also possible.
+                                </p>
+                              </div>
+                            </>
+                          )}
+                          {role.id === 'mechanicalInstaller' && (
+                            <>
+                              <p>
+                                Van Dyk Recycling Solutions has several vacancies across the United States, in Canada and in Mexico. 
+                                Van Dyk is a family-owned, rapidly growing company, and we are constantly seeking additional mechanical 
+                                installers for the installation of large industrial recycling equipment.
+                              </p>
+                              <div>
+                                <h5 className="font-semibold text-vd-blue mb-2">The Role</h5>
+                                <p>
+                                  You will be responsible for mechanical installation of all machinery sold by Van Dyk. Installations may be 
+                                  a single piece of equipment or a complete sorting system. Systems consist of conveyors, screens, balers and 
+                                  optical sorters. You will receive training in the form of hands-on experiential learning, during which you 
+                                  will travel to sites and shadow veteran mechanics on installations, working alongside them. You will maintain 
+                                  contact with the customer as it pertains to the installation.
+                                </p>
+                                <p className="mt-2">
+                                  <strong>90% of jobs will require you to travel</strong> within the United States. Deployment in Canada, 
+                                  Mexico and other locations abroad is also possible.
+                                </p>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Experience Needed */}
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-vd-blue mb-3">Experience Needed</h4>
+                        <ul className="space-y-2 text-gray-700 text-sm">
+                          {role.id === 'fieldService' && (
+                            <>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Knowledge of electrical, mechanical, and/or hydraulic systems and schematics</span>
+                              </li>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Ability to read electrical and hydraulic diagrams, connection drawings and mechanical drawings</span>
+                              </li>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Comfortable working with 480 volt electrical systems</span>
+                              </li>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Experience working with relevant large machinery is beneficial</span>
+                              </li>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Troubleshooting experience is extremely sought after – being able to diagnose issues on site</span>
+                              </li>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Solid verbal communication skills in English (other languages such as Spanish, French, Dutch, German, or Polish are an advantage)</span>
+                              </li>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Excellent customer relations skills and customer focus</span>
+                              </li>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Willingness to work outside normal working hours and spend nights on location if necessary</span>
+                              </li>
+                            </>
+                          )}
+                          {role.id === 'mechanicalInstaller' && (
+                            <>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Experience erecting heavy equipment</span>
+                              </li>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Experience working with related large machinery is a plus</span>
+                              </li>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Strong work ethic and willingness to heed advice are a must</span>
+                              </li>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Ability to work diligently in an unsupervised setting</span>
+                              </li>
+                              <li className="flex items-start">
+                                <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                                <span>Solid verbal communication skills in English (other languages such as Spanish, French, Dutch, German, or Polish are an advantage)</span>
+                              </li>
+                            </>
+                          )}
+                        </ul>
+                      </div>
+
+
+                      {/* Apply Now Button */}
+                      <div className="mt-auto pt-4">
+                        <a
+                          href="/job-application"
+                          className={`w-full bg-gradient-to-r ${role.theme.cta} hover:opacity-90 text-white font-bold px-6 py-4 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center`}
+                        >
+                          <FileText className="h-5 w-5 mr-2" />
+                          {t('careers.applyNow')}
+                        </a>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Call to Action */}
         <section className="py-20 bg-vd-blue text-white">
           <div className="container mx-auto px-4">
@@ -420,9 +570,7 @@ const Careers = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.a
-                  href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=7YKQMSwus0K6eGyqSyijxbLJzBecdydNjMz8TRHTYd1UQVNMVFpNMFFGMFpGNVRFMEdVWlZNOVFIQi4u&embed=true"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/job-application"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-vd-orange hover:bg-vd-orange-alt text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-flex items-center justify-center"
@@ -656,76 +804,15 @@ const Careers = () => {
                 </ul>
               </div>
 
-              {/* Benefits */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-vd-blue mb-3">Benefits</h3>
-                <div className="text-gray-700 leading-relaxed space-y-3">
-                  {(selectedJob.id === 'fieldService' || selectedJob.id === 'mechanicalInstaller') && (
-                    <>
-                      <div className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Salaried position with paid overtime (travel and work) for anything beyond 8 hours per business day</span>
-                      </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Work and travel on Saturday and Sunday are considered overtime</span>
-                      </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>20 paid vacation days and 8 paid holidays</span>
-                      </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Paid health insurance for you, your spouse, and dependent children</span>
-                      </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Paid dental insurance for you, your spouse, and dependent children</span>
-                      </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Paid $250,000.00 life insurance policy</span>
-                      </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Profit-sharing pension plan as well as an additional 401K plan offer</span>
-                      </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>A varied and challenging position with a high degree of independence within an internationally active organization with strong growth ambitions</span>
-                      </div>
-                      <div className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Plenty of opportunities for personal development</span>
-                      </div>
-                      {selectedJob.id === 'mechanicalInstaller' && (
-                        <div className="flex items-start">
-                          <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                          <span>Fully funded health insurance including company-funded HSA to fully cover deductibles</span>
-                        </div>
-                      )}
-                      {selectedJob.id === 'mechanicalInstaller' && (
-                        <div className="flex items-start">
-                          <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                          <span>Profit-sharing pension plan where approx. 7-12% of your salary is put into an account for your future pension</span>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
-              </div>
 
               {/* Action Buttons */}
               <div className="flex gap-3">
                 <a
-                  href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=7YKQMSwus0K6eGyqSyijxbLJzBecdydNjMz8TRHTYd1UQVNMVFpNMFFGMFpGNVRFMEdVWlZNOVFIQi4u&embed=true"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/job-application"
                   className={`flex-1 bg-gradient-to-r ${selectedJob.theme.cta} hover:opacity-90 text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center`}
                 >
                   <FileText className="h-5 w-5 mr-2" />
                   Apply Now
-                  <ExternalLink className="h-4 w-4 ml-2" />
                 </a>
                 <button
                   onClick={() => setSelectedJob(null)}

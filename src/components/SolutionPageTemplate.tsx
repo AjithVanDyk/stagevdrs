@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle, Star, Quote, X, Play, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, CheckCircle, Star, Quote, X, Play, ChevronLeft, ChevronRight, MapPin, ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import QuoteForm from './QuoteForm';
 import { useTranslation } from '../hooks/useTranslation';
@@ -16,6 +16,7 @@ interface EquipmentItem {
 }
 
 interface SolutionPageProps {
+  showCTA?: boolean;
   solution: {
     id: number;
     name: string;
@@ -38,7 +39,7 @@ interface SolutionPageProps {
   };
 }
 
-const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
+const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution, showCTA = true }) => {
   const { t } = useTranslation();
   const [showQuoteForm, setShowQuoteForm] = React.useState(false);
   const [selectedVideo, setSelectedVideo] = React.useState<string | null>(null);
@@ -99,8 +100,31 @@ const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
     }
   };
 
+  const getYouTubeVideoId = (url: string): string | null => {
+    if (!url) return null;
+    
+    // Handle youtu.be format: https://youtu.be/VIDEO_ID
+    const youtuBeMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+    if (youtuBeMatch) return youtuBeMatch[1];
+    
+    // Handle youtube.com/watch?v=VIDEO_ID
+    const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+    if (watchMatch) return watchMatch[1];
+    
+    // Handle youtube.com/embed/VIDEO_ID
+    const embedMatch = url.match(/\/embed\/([a-zA-Z0-9_-]+)/);
+    if (embedMatch) return embedMatch[1];
+    
+    // Fallback: try to extract from URL path
+    const pathMatch = url.split('/').pop()?.split('?')[0];
+    if (pathMatch && pathMatch.length > 5) return pathMatch;
+    
+    return null;
+  };
+
   const getYouTubeEmbedUrl = (url: string) => {
-    const videoId = url.split('v=')[1]?.split('&')[0] || url.split('/').pop();
+    const videoId = getYouTubeVideoId(url);
+    if (!videoId) return '';
     return `https://www.youtube.com/embed/${videoId}`;
   };
 
@@ -119,12 +143,13 @@ const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
           decoding="sync"
           onError={(e) => {
             if (import.meta.env.DEV) {
-              console.log('Hero image failed to load, using fallback');
+              console.warn('Hero image failed to load, using fallback');
             }
             e.currentTarget.src = '/Images/mrf-systems.jpg';
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-vd-blue/40 via-vd-blue/30 to-black/40"></div>
+        <div className="absolute inset-0 bg-gray-600/50"></div>
         <div className="container mx-auto px-4 relative z-10 flex items-center justify-center min-h-[400px]">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -175,7 +200,7 @@ const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
               {t('common.keyFeatures')}
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              {replacePlaceholders(t('common.keyFeaturesDesc'), { name: solution.name })}
+              {t('common.keyFeaturesDesc').replace(/\{name\}/g, '').trim()}
             </p>
           </motion.div>
 
@@ -186,18 +211,48 @@ const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
             viewport={{ once: true }}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {solution.features.map((feature, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="bg-gray-50 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-shadow"
-              >
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-6 h-6 text-vd-orange flex-shrink-0 mt-1" />
-                  <p className="text-gray-700 font-medium">{feature}</p>
-                </div>
-              </motion.div>
-            ))}
+            {solution.features.map((feature, index) => {
+              // Check if this is the EPR Compliance feature (last feature)
+              const isEPRFeature = index === solution.features.length - 1 && feature.includes('EPR Compliance');
+              
+              if (isEPRFeature) {
+                return (
+                  <motion.div
+                    key={index}
+                    variants={fadeInUp}
+                    className="bg-gradient-to-br from-vd-blue/10 to-vd-orange/10 p-6 rounded-xl border-2 border-vd-orange hover:border-vd-blue cursor-pointer transition-all hover:shadow-xl col-span-full md:col-span-2 lg:col-span-3"
+                    onClick={() => {
+                      const eprSection = document.getElementById('epr-compliance-map');
+                      if (eprSection) {
+                        eprSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                  >
+                    <div className="flex items-start space-x-3">
+                      <MapPin className="w-6 h-6 text-vd-orange flex-shrink-0 mt-1" />
+                      <div className="flex-1">
+                        <p className="text-gray-700 font-semibold mb-1">{feature}</p>
+                        <p className="text-sm text-gray-600">Click to view interactive EPR Compliance Map</p>
+                        <ArrowDown className="w-4 h-4 text-vd-orange mt-2" />
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              }
+              
+              return (
+                <motion.div
+                  key={index}
+                  variants={fadeInUp}
+                  className="bg-gray-50 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-shadow"
+                >
+                  <div className="flex items-start space-x-3">
+                    <CheckCircle className="w-6 h-6 text-vd-orange flex-shrink-0 mt-1" />
+                    <p className="text-gray-700 font-medium">{feature}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -248,6 +303,42 @@ const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
         </div>
       </section>
 
+      {/* Use Case Section - Display as single line under Specs */}
+      {solution.applications && solution.applications.length > 0 && (
+        <section className="py-8 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="max-w-4xl mx-auto"
+            >
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-sm font-semibold text-vd-blue-dark mr-2">Use Case:</span>
+                {solution.applications.map((application, index) => (
+                  <React.Fragment key={index}>
+                    {application.link ? (
+                      <Link
+                        to={application.link}
+                        className="text-sm text-vd-blue hover:text-vd-orange transition-colors"
+                      >
+                        {application.name}
+                      </Link>
+                    ) : (
+                      <span className="text-sm text-gray-700">{application.name}</span>
+                    )}
+                    {index < solution.applications.length - 1 && (
+                      <span className="text-gray-400">•</span>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
       {/* Gallery Section - Slideshow */}
       {galleryItems.length > 0 && (
         <section className="py-16 bg-white">
@@ -272,18 +363,21 @@ const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentGallerySlide}
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.5 }}
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
                     className="relative"
                   >
-                    <div className="relative w-full h-[28rem]">
-                      <img
+                    <div className="relative w-full h-[28rem] overflow-hidden">
+                      <motion.img
                         src={galleryItems[currentGallerySlide]}
                         alt={`${solution.name} - ${t('common.image')} ${currentGallerySlide + 1}`}
                         className="w-full h-full object-cover"
                         loading="lazy"
+                        initial={{ scale: 1.1 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.6 }}
                         onError={(e) => {
                           e.currentTarget.src = '/Images/image-1749759453479.png';
                         }}
@@ -369,24 +463,34 @@ const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
                   onClick={() => setSelectedVideo(video)}
                 >
                   <div className="relative overflow-hidden rounded-xl shadow-lg">
-                    <img
-                      src={`https://img.youtube.com/vi/${video.split('v=')[1]?.split('&')[0] || video.split('/').pop()}/maxresdefault.jpg`}
-                      alt={`${solution.name} ${t('common.video')} ${index + 1}`}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        // Fallback to hqdefault if maxresdefault fails
-                        const currentSrc = e.currentTarget.src;
-                        if (currentSrc.includes('maxresdefault')) {
-                          e.currentTarget.src = currentSrc.replace('maxresdefault', 'hqdefault');
-                        } else if (currentSrc.includes('hqdefault')) {
-                          // Final fallback to default thumbnail
-                          e.currentTarget.src = currentSrc.replace('hqdefault', 'default');
-                        } else {
-                          // Ultimate fallback to a placeholder image
-                          e.currentTarget.src = '/Images/image-1749759453479.png';
-                        }
-                      }}
-                    />
+                    {(() => {
+                      const videoId = getYouTubeVideoId(video);
+                      if (!videoId) {
+                        return (
+                          <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+                            <Play className="w-16 h-16 text-gray-400" />
+                          </div>
+                        );
+                      }
+                      return (
+                        <img
+                          src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+                          alt={`${solution.name} ${t('common.video')} ${index + 1}`}
+                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
+                          onError={(e) => {
+                            // Fallback to default thumbnail if hqdefault fails
+                            const currentSrc = e.currentTarget.src;
+                            if (currentSrc.includes('hqdefault')) {
+                              e.currentTarget.src = currentSrc.replace('hqdefault', 'default');
+                            } else {
+                              // Ultimate fallback to a placeholder image
+                              e.currentTarget.src = '/Images/image-1749759453479.png';
+                            }
+                          }}
+                        />
+                      );
+                    })()}
                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:bg-black/60 transition-colors">
                       <Play className="w-16 h-16 text-white" />
                     </div>
@@ -424,58 +528,6 @@ const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
           </div>
         </section>
       ) : null}
-
-      {/* Applications Section */}
-      {solution.applications && solution.applications.length > 0 && (
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-vd-blue-dark mb-4">
-                {t('common.applications')}
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                {t('common.applicationsDesc')}
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={staggerChildren}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {solution.applications.map((application, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeInUp}
-                  className="bg-gradient-to-br from-vd-blue to-vd-blue-dark text-white p-6 rounded-xl"
-                >
-                  <div className="flex items-center space-x-3">
-                    <Star className="w-6 h-6 text-vd-orange" />
-                    {application.link ? (
-                      <Link
-                        to={application.link}
-                        className="font-medium hover:text-vd-orange transition-colors"
-                      >
-                        {application.name}
-                      </Link>
-                    ) : (
-                      <p className="font-medium">{application.name}</p>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-      )}
 
       {/* Equipment Section */}
       {solution.equipment && solution.equipment.length > 0 && (
@@ -529,62 +581,8 @@ const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
         </section>
       )}
 
-      {/* Testimonials Section */}
-      {solution.testimonials && solution.testimonials.length > 0 && (
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-vd-blue-dark mb-4">
-                {t('common.customerTestimonials')}
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                {replacePlaceholders(t('common.customerTestimonialsDesc'), { name: solution.name })}
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={staggerChildren}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {solution.testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeInUp}
-                  className="bg-white p-6 rounded-xl shadow-lg"
-                >
-                  <div className="flex items-center mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-5 h-5 ${
-                          i < testimonial.rating ? 'text-vd-orange' : 'text-gray-300'
-                        }`}
-                        fill={i < testimonial.rating ? 'currentColor' : 'none'}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-gray-700 mb-4 italic">"{testimonial.quote}"</p>
-                  <div>
-                    <p className="font-semibold text-vd-blue-dark">{testimonial.name}</p>
-                    <p className="text-gray-600">{testimonial.company}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-      )}
-
       {/* CTA Section */}
+      {showCTA && (
       <section className="py-20 bg-gradient-to-br from-vd-blue to-vd-blue-dark text-white">
         <div className="container mx-auto px-4 text-center">
           <motion.div
@@ -600,15 +598,18 @@ const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
               {replacePlaceholders(t('common.readyToGetStartedDesc'), { name: solution.name })}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setShowQuoteForm(true)}
-                className="bg-vd-orange hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center space-x-2 transition-colors"
               >
-                <Quote className="w-5 h-5" />
-                <span>{t('common.getAQuote')}</span>
-              </motion.button>
+                <Link
+                  to="/quote"
+                  className="bg-vd-orange hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center space-x-2 transition-colors"
+                >
+                  <Quote className="w-5 h-5" />
+                  <span>{t('common.getAQuote')}</span>
+                </Link>
+              </motion.div>
               <Link
                 to="/contact"
                 className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-vd-blue px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center space-x-2 transition-colors"
@@ -620,6 +621,7 @@ const SolutionPageTemplate: React.FC<SolutionPageProps> = ({ solution }) => {
           </motion.div>
         </div>
       </section>
+      )}
 
       {/* Video Modal */}
       <AnimatePresence>

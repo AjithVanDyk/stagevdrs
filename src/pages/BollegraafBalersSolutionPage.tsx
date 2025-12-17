@@ -1,48 +1,45 @@
 import React from 'react';
 import SolutionPageTemplate from '../components/SolutionPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const BollegraafBalersSolutionPage: React.FC = () => {
+  const { t } = useTranslation();
   const solution = {
-    id: 5,
-    name: 'Bollegraaf Balers',
+    id: 13,
+    name: t('solutions.solution13Name'),
     image: '/Images/bollegraaf-new-1.jpg',
-    description: 'Industry-leading Bollegraaf balers with proven performance in recycling operations. As the exclusive representative of Bollegraaf Recycling Solutions in North and Latin American markets, VAN DYK provides turnkey baler solutions with unmatched speed, productivity, and efficiency.',
+    description: t('solutions.solution13Description'),
     features: [
-      'Single ram design uses 1/3 power of two-ram balers',
-      'Operates automatically without dedicated operator',
-      'Instant material switching capability',
-      'Denser, uniform bales with pre-press flap',
-      'Production speeds over 35 tph',
-      '50% reduction in electricity costs',
-      'Low maintenance robust design',
-      'No-shear compression technology',
-      'Flexible material processing',
-      'Integrated tying system with 5 wires per bale',
-      'Visual SCADA control system',
-      'Ram on wheels technology'
+      t('solutions.solution13Feature1'),
+      t('solutions.solution13Feature2'),
+      t('solutions.solution13Feature3'),
+      t('solutions.solution13Feature4'),
+      t('solutions.solution13Feature5'),
+      t('solutions.solution13Feature6'),
+      t('solutions.solution13Feature7'),
+      t('solutions.solution13Feature8'),
     ],
     specifications: {
-      'Production Speed': 'Over 35 tons per hour',
-      'Power Efficiency': '50% reduction vs two-ram balers',
-      'Bale Density': 'Superior compression with pre-press flap',
-      'Operation': 'Fully automated',
-      'Maintenance': 'Low maintenance robust design',
-      'Material Switching': 'Instant capability',
-      'Design': 'Single ram, no-shear',
-      'Wire System': '5 wires per bale, every time',
-      'Control System': 'Visual SCADA interface',
-      'Warranty': '2-year comprehensive warranty'
+      [t('solutions.solution13Spec1Key')]: t('solutions.solution13Spec1Value'),
+      [t('solutions.solution13Spec2Key')]: t('solutions.solution13Spec2Value'),
+      [t('solutions.solution13Spec3Key')]: t('solutions.solution13Spec3Value'),
+      [t('solutions.solution13Spec4Key')]: t('solutions.solution13Spec4Value'),
+      [t('solutions.solution13Spec5Key')]: t('solutions.solution13Spec5Value'),
+      [t('solutions.solution13Spec6Key')]: t('solutions.solution13Spec6Value'),
     },
     applications: [
-      { name: 'Single stream recycling', link: '/solutions/single-stream-recycling' },
-      { name: 'MSW recycling', link: '/solutions/msw-processing' },
-      { name: 'Commercial waste', link: '/solutions/commercial-waste' },
-      { name: 'Plastics recycling', link: '/solutions/plastics-recycling' },
-      { name: 'Multi-MRF', link: '/solutions/multi-mrf-systems' },
-      { name: 'OCC' },
-      { name: 'Fiber grades' },
-      { name: 'Plastic containers' },
-      { name: 'Ferrous and non-ferrous containers' }
+      { name: t('solutions.solution13App1') },
+      { name: t('solutions.solution13App2') },
+      { name: t('solutions.solution13App3') },
+      { name: t('solutions.solution13App4') },
+      { name: t('solutions.solution13App5') },
+    ],
+    benefits: [
+      t('solutions.solution13Benefit1'),
+      t('solutions.solution13Benefit2'),
+      t('solutions.solution13Benefit3'),
+      t('solutions.solution13Benefit4'),
+      t('solutions.solution13Benefit5'),
     ],
     videos: [
       'https://youtu.be/zqbJbMABi-A', // Bollegraaf HBC 140 Baler at Yes Recycling Newark NJ

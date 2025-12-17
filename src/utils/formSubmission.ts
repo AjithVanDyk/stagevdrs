@@ -16,62 +16,58 @@ export interface FormSubmissionResult {
   error?: string;
 }
 
-// Email service configuration
-const EMAIL_SERVICE_CONFIG = {
-  // Using EmailJS as a simple solution for client-side email sending
-  serviceId: 'service_vdrs',
-  templateId: 'template_contact',
-  publicKey: 'YOUR_EMAILJS_PUBLIC_KEY', // This should be set in environment variables
-};
-
-// Alternative: Form submission to a backend API
+// API endpoints for form submissions
+// Note: API keys and secrets should be stored in Vercel environment variables (server-side only)
+// Never use VITE_ prefix for sensitive data as it becomes public in the client bundle
 const API_ENDPOINTS = {
   contact: '/api/contact',
   quote: '/api/quote',
   application: '/api/application',
+  catalogue: '/api/catalogue',
 };
 
 /**
- * Submit contact form data
- * This is a placeholder implementation - in production, you would:
- * 1. Use a proper email service (SendGrid, Mailgun, etc.)
- * 2. Have a backend API endpoint
- * 3. Implement proper validation and sanitization
- * 4. Add rate limiting and spam protection
+ * Submit contact form data to API endpoint
  */
-export async function submitContactForm(formData: ContactFormData): Promise<FormSubmissionResult> {
+export async function submitContactForm(formData: ContactFormData & { recaptchaToken?: string }): Promise<FormSubmissionResult> {
   try {
-    // Validate required fields
-    if (!formData.name || !formData.email || !formData.message) {
+    // Call API endpoint
+    const response = await fetch(API_ENDPOINTS.contact, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        company: formData.company,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        recaptchaToken: formData.recaptchaToken,
+        applicationType: formData.applicationType,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      // Handle API errors
+      if (response.status === 429) {
+        return {
+          success: false,
+          message: 'Too many requests. Please wait a moment and try again.',
+          error: 'Rate limit exceeded'
+        };
+      }
+
       return {
         success: false,
-        message: 'Please fill in all required fields.',
-        error: 'Missing required fields'
+        message: data.message || 'An error occurred while submitting your form. Please try again.',
+        error: data.errors ? JSON.stringify(data.errors) : 'API error'
       };
     }
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      return {
-        success: false,
-        message: 'Please enter a valid email address.',
-        error: 'Invalid email format'
-      };
-    }
-
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    // In a real implementation, you would:
-    // 1. Send data to your backend API
-    // 2. Backend would send email using a service like SendGrid
-    // 3. Return success/error response
-    
-    // For now, we'll simulate a successful submission
-    // Form submission logged
-    
-    // Track form submission in analytics
+    // Track successful submission in analytics
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'form_submit', {
         event_category: 'contact',
@@ -82,7 +78,7 @@ export async function submitContactForm(formData: ContactFormData): Promise<Form
 
     return {
       success: true,
-      message: 'Thank you for your message! We will get back to you within 24 hours.'
+      message: data.message || 'Thank you for your message! We will get back to you within 24 hours.'
     };
 
   } catch (error) {
@@ -109,28 +105,48 @@ export async function submitContactForm(formData: ContactFormData): Promise<Form
 }
 
 /**
- * Submit quote request form
+ * Submit quote request form to API endpoint
  */
-export async function submitQuoteForm(formData: ContactFormData & {
-  equipment?: string;
-  budget?: string;
-  timeline?: string;
-  location?: string;
+export async function submitQuoteForm(formData: {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  company: string;
+  city: string;
+  state: string;
+  country: string;
+  additionalDetails?: string;
+  selectedEquipment?: string[];
+  selectedSolutions?: number[];
 }): Promise<FormSubmissionResult> {
   try {
-    // Similar validation and submission logic as contact form
-    if (!formData.name || !formData.email || !formData.message) {
+    const response = await fetch(API_ENDPOINTS.quote, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (response.status === 429) {
+        return {
+          success: false,
+          message: 'Too many requests. Please wait a moment and try again.',
+          error: 'Rate limit exceeded'
+        };
+      }
+
       return {
         success: false,
-        message: 'Please fill in all required fields.',
-        error: 'Missing required fields'
+        message: data.message || 'An error occurred while submitting your quote request. Please try again.',
+        error: data.errors ? JSON.stringify(data.errors) : 'API error'
       };
     }
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Quote form submission logged
-    
     // Track quote request in analytics
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'form_submit', {
@@ -142,7 +158,7 @@ export async function submitQuoteForm(formData: ContactFormData & {
 
     return {
       success: true,
-      message: 'Thank you for your quote request! Our sales team will contact you within 24 hours.'
+      message: data.message || 'Thank you for your quote request! Our sales team will contact you within 24 hours.'
     };
 
   } catch (error) {
@@ -157,27 +173,45 @@ export async function submitQuoteForm(formData: ContactFormData & {
 }
 
 /**
- * Submit job application form
+ * Submit job application form to API endpoint
  */
-export async function submitApplicationForm(formData: ContactFormData & {
+export async function submitApplicationForm(formData: {
+  name: string;
+  email: string;
+  phone: string;
   position: string;
-  resume?: File;
+  company?: string;
+  resume?: string; // Base64 encoded or URL
   coverLetter?: string;
   experience?: string;
 }): Promise<FormSubmissionResult> {
   try {
-    if (!formData.name || !formData.email || !formData.position) {
+    const response = await fetch(API_ENDPOINTS.application, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (response.status === 429) {
+        return {
+          success: false,
+          message: 'Too many requests. Please wait a moment and try again.',
+          error: 'Rate limit exceeded'
+        };
+      }
+
       return {
         success: false,
-        message: 'Please fill in all required fields.',
-        error: 'Missing required fields'
+        message: data.message || 'An error occurred while submitting your application. Please try again.',
+        error: data.errors ? JSON.stringify(data.errors) : 'API error'
       };
     }
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Application form submission logged
-    
     // Track job application in analytics
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'form_submit', {
@@ -189,7 +223,7 @@ export async function submitApplicationForm(formData: ContactFormData & {
 
     return {
       success: true,
-      message: 'Thank you for your application! We will review your information and contact you if there\'s a match.'
+      message: data.message || 'Thank you for your application! We will review your information and contact you if there\'s a match.'
     };
 
   } catch (error) {
@@ -198,6 +232,66 @@ export async function submitApplicationForm(formData: ContactFormData & {
     return {
       success: false,
       message: 'Sorry, there was an error submitting your application. Please try again or contact us directly.',
+      error: error instanceof Error ? error.message : 'Unknown error'
+    };
+  }
+}
+
+/**
+ * Submit catalogue request form to API endpoint
+ */
+export async function submitCatalogueRequest(formData: {
+  email: string;
+  equipmentName: string;
+  equipmentId?: string;
+}): Promise<FormSubmissionResult> {
+  try {
+    const response = await fetch(API_ENDPOINTS.catalogue, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (response.status === 429) {
+        return {
+          success: false,
+          message: 'Too many requests. Please wait a moment and try again.',
+          error: 'Rate limit exceeded'
+        };
+      }
+
+      return {
+        success: false,
+        message: data.message || 'An error occurred while submitting your catalogue request. Please try again.',
+        error: data.errors ? JSON.stringify(data.errors) : 'API error'
+      };
+    }
+
+    // Track catalogue request in analytics
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'catalogue_request', {
+        event_category: 'equipment',
+        event_label: formData.equipmentName,
+        value: 1
+      });
+    }
+
+    return {
+      success: true,
+      message: data.message || 'Thank you for your catalogue request! We will send the equipment catalogue to your email shortly.'
+    };
+
+  } catch (error) {
+    console.error('Catalogue request submission error:', error);
+    
+    return {
+      success: false,
+      message: 'Sorry, there was an error submitting your catalogue request. Please try again or contact us directly.',
       error: error instanceof Error ? error.message : 'Unknown error'
     };
   }

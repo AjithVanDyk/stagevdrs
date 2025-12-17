@@ -1,35 +1,38 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
+import SEO from '../components/SEO';
 
 const BollegraafPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 1,
-    name: 'Bollegraaf Balers',
-    image: '/Images/Equipment/Bollegraaf/Product image_baler.jpg',
-    description: 'Industry-leading single ram balers with no-shear design for maximum efficiency and density. Single ram uses 1/3 power of two-ram balers and operates automatically without dedicated operator.',
+    name: t('equipment.equipment1Name'),
+    image: '/Images/Equipment/Bollegraaf/Product%20image_baler.jpg',
+    description: t('equipment.equipment1Description'),
     features: [
-      'Single ram uses 1/3 power of two-ram balers',
-      'Operates automatically without dedicated operator',
-      'Instant material switching capability',
-      'Denser, uniform bales with pre-press flap',
-      'Production speeds over 35 tph',
-      '50% reduction in electricity costs',
-      'Low maintenance robust design',
-      'No-shear compression technology',
-      'Flexible material processing (fiber, cardboard, plastic, steel, aluminum)',
-      'Pre-press flap eliminates shearing'
+      t('equipment.equipment1Feature1'),
+      t('equipment.equipment1Feature2'),
+      t('equipment.equipment1Feature3'),
+      t('equipment.equipment1Feature4'),
+      t('equipment.equipment1Feature5'),
+      t('equipment.equipment1Feature6'),
+      t('equipment.equipment1Feature7'),
+      t('equipment.equipment1Feature8'),
+      t('equipment.equipment1Feature9'),
+      t('equipment.equipment1Feature10'),
     ],
     specifications: {
-      'Production Speed': 'Over 35 tons per hour',
-      'Power Efficiency': '50% reduction vs two-ram balers',
-      'Bale Density': 'Superior compression with pre-press flap',
-      'Operation': 'Fully automated',
-      'Maintenance': 'Low maintenance robust design',
-      'Material Switching': 'Instant capability',
-      'Design': 'Single ram, no-shear',
-      'Materials': 'Fiber, cardboard, plastic, steel, aluminum',
-      'Bale Weight': 'Up to 2,200 lbs',
-      'Warranty': 'Comprehensive 2-year warranty'
+      [t('equipment.equipment1Spec1Key')]: t('equipment.equipment1Spec1Value'),
+      [t('equipment.equipment1Spec2Key')]: t('equipment.equipment1Spec2Value'),
+      [t('equipment.equipment1Spec3Key')]: t('equipment.equipment1Spec3Value'),
+      [t('equipment.equipment1Spec4Key')]: t('equipment.equipment1Spec4Value'),
+      [t('equipment.equipment1Spec5Key')]: t('equipment.equipment1Spec5Value'),
+      [t('equipment.equipment1Spec6Key')]: t('equipment.equipment1Spec6Value'),
+      [t('equipment.equipment1Spec7Key')]: t('equipment.equipment1Spec7Value'),
+      [t('equipment.equipment1Spec8Key')]: t('equipment.equipment1Spec8Value'),
+      [t('equipment.equipment1Spec9Key')]: t('equipment.equipment1Spec9Value'),
+      [t('equipment.equipment1Spec10Key')]: t('equipment.equipment1Spec10Value'),
     },
     applications: [
       { name: 'High production balers', link: '/solutions/bollegraaf-balers' },
@@ -45,22 +48,32 @@ const BollegraafPage: React.FC = () => {
       'https://youtu.be/m4VQvwWW9yU'  // Single Ram Baler
     ],
     gallery: [
-      '/Images/Equipment/Bollegraaf/Gallery 1_WM Mesquite Creek-6.jpg',
-      '/Images/Equipment/Bollegraaf/Gallery 2_WM Mesquite Creek-7.jpg',
-      '/Images/Equipment/Bollegraaf/Gallery 4_VanDyk_jp mascaro.jpg',
-      '/Images/Equipment/Bollegraaf/Gallery 5_Mazza hbc120.png',
-      '/Images/Equipment/Bollegraaf/Gallery 6_vandyk_plano229.jpg',
-      '/Images/Equipment/Bollegraaf/Gallery 7_p2-van-sanco-144.jpg',
-      '/Images/Equipment/Bollegraaf/Gallery 8_USA Berlin 2023 HBC140.png',
-      '/Images/Equipment/Bollegraaf/Gallery 9_Plainfield.JPG',
-      '/Images/Equipment/Bollegraaf/Gallery 10_Yes hbc140.jpg',
-      '/Images/Equipment/Bollegraaf/WM Mesquite Creek-3.jpg',
-      '/Images/Equipment/Bollegraaf/WM Mesquite Creek-6.jpg',
-      '/Images/Equipment/Bollegraaf/WM Mesquite Creek-7.jpg'
+      '/Images/Equipment/Bollegraaf/Gallery%201_WM%20Mesquite%20Creek-6.jpg',
+      '/Images/Equipment/Bollegraaf/Gallery%202_WM%20Mesquite%20Creek-7.jpg',
+      '/Images/Equipment/Bollegraaf/Gallery%204_VanDyk_jp%20mascaro.jpg',
+      '/Images/Equipment/Bollegraaf/Gallery%205_Mazza%20hbc120.png',
+      '/Images/Equipment/Bollegraaf/Gallery%206_vandyk_plano229.jpg',
+      '/Images/Equipment/Bollegraaf/Gallery%207_p2-van-sanco-144.jpg',
+      '/Images/Equipment/Bollegraaf/Gallery%208_USA%20Berlin%202023%20HBC140.png',
+      '/Images/Equipment/Bollegraaf/Gallery%209_Plainfield.JPG',
+      '/Images/Equipment/Bollegraaf/Gallery%2010_Yes%20hbc140.jpg',
+      '/Images/Equipment/Bollegraaf/WM%20Mesquite%20Creek-3.jpg',
+      '/Images/Equipment/Bollegraaf/WM%20Mesquite%20Creek-6.jpg',
+      '/Images/Equipment/Bollegraaf/WM%20Mesquite%20Creek-7.jpg'
     ]
   };
 
-  return <EquipmentPageTemplate equipment={equipment} />;
+  return (
+    <>
+      <SEO data={{
+        title: 'Bollegraaf Balers - High Production Recycling Equipment',
+        description: 'Bollegraaf balers deliver exceptional performance for single stream recycling, MSW processing, and commercial waste. Industry-leading technology with unmatched reliability.',
+        url: '/equipment/bollegraaf',
+        keywords: 'Bollegraaf balers, high production balers, single stream recycling, MSW processing, commercial waste, recycling balers'
+      }} />
+      <EquipmentPageTemplate equipment={equipment} />
+    </>
+  );
 };
 
 export default BollegraafPage;

@@ -5,7 +5,8 @@ import {
   X, Mail, CheckCircle, Clock, Eye
 } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
-import { animationConfig } from '../utils/animations';
+import { IMAGE_ASSIGNMENTS } from '../config/images';
+import { fetchAllNewsMetadata, NewsArticleMetadata } from '../utils/fetchNewsMetadata';
 
 interface Article {
   id: number;
@@ -18,161 +19,281 @@ interface Article {
   featured?: boolean;
   link: string;
   type: 'html' | 'pdf';
-  views: string;
   trending?: boolean;
   fullContent?: string;
 }
 
 const NewsMedia = () => {
   const { t } = useTranslation();
-  const fadeInUp = animationConfig.fadeInUp;
   const [searchTerm, setSearchTerm] = useState('');
   const [showNewsletterPopup, setShowNewsletterPopup] = useState(false);
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [subscriptionSuccess, setSubscriptionSuccess] = useState(false);
-  const [closeTimeoutId, setCloseTimeoutId] = useState<number | null>(null);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [showArticleModal, setShowArticleModal] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(9);
+  const [articleViews, setArticleViews] = useState<{ [key: number]: number }>({});
+  const [externalArticles, setExternalArticles] = useState<NewsArticleMetadata[]>([]);
+  const [isLoadingExternal, setIsLoadingExternal] = useState(true);
+  const [activeCategory, setActiveCategory] = useState<string>('All');
 
-  // Comprehensive news data
+  // Load article views from localStorage on mount
+  useEffect(() => {
+    const storedViews = localStorage.getItem('article-views');
+    if (storedViews) {
+      try {
+        setArticleViews(JSON.parse(storedViews));
+      } catch (e) {
+        console.error('Error parsing article views:', e);
+      }
+    }
+  }, []);
+
+  // Reset visible count when search changes
+  useEffect(() => {
+    setVisibleCount(9);
+  }, [searchTerm]);
+
+  // Fetch external articles on mount
+  useEffect(() => {
+    const loadExternalArticles = async () => {
+      setIsLoadingExternal(true);
+      try {
+        const articles = await fetchAllNewsMetadata();
+        // Sort by publishDate (latest first), then by order in config if no date
+        const sortedArticles = articles.sort((a, b) => {
+          if (a.publishDate && b.publishDate) {
+            return new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime();
+          }
+          if (a.publishDate) return -1; // Articles with dates come first
+          if (b.publishDate) return 1;
+          return 0; // Keep original order if neither has date
+        });
+        setExternalArticles(sortedArticles);
+      } catch (error) {
+        console.error('Failed to load external articles:', error);
+      } finally {
+        setIsLoadingExternal(false);
+      }
+    };
+
+    loadExternalArticles();
+  }, []);
+
+  // Real news data from vdrs.com - sorted by date (latest to oldest)
   const newsData: Article[] = [
     {
       id: 1,
-      title: 'Van Dyk Recycling Solutions Celebrates 40 Years of Innovation in Waste Processing Technology',
-      excerpt: 'Four decades of pioneering recycling solutions, from humble origins to industry leadership in advanced waste processing and material recovery systems.',
-      category: 'Company News',
-      date: '2024-12-20',
-      readTime: '8 min read',
-      image: '/Images/first.jpg',
-      featured: true,
-      link: 'https://example.com/news/40-years-innovation',
-      type: 'html',
-      views: '2.3k',
-      trending: true,
-      fullContent: '<p>Van Dyk Recycling Solutions marks a significant milestone as we celebrate 40 years of innovation in waste processing technology...</p>'
+      title: 'Van Dyk Partners with Reckelberg Environmental Technologies to Enable North American Customers to Recycle EV Batteries',
+      excerpt: 'Van Dyk Recycling Solutions has signed a contract to sell equipment from Reckelberg Environmental Technologies (RET) to recycle lithium-ion batteries of all kinds and scrap fractions from battery production.',
+      category: t('newsMediaArticles.categoryPartnerships'),
+      date: '2024-12-13',
+      readTime: '6 min read',
+      image: '/Images/greyparrot-ai-recognition.jpg',
+      link: 'https://vdrs.com/news-media/van-dyk-partners-with-reckelberg-environmental-technologies-to-enable-north-american-customers-to-recycle-ev-batteries/',
+      type: 'html' as const
     },
     {
       id: 2,
-      title: 'New Bollegraaf Baler Technology Increases Efficiency by 35%',
-      excerpt: 'Latest generation balers feature advanced automation and improved material handling capabilities for enhanced productivity.',
-      category: 'Product Updates',
-      date: '2024-12-18',
-      readTime: '5 min read',
-      image: '/Images/bollegraaf-products.jpg',
-      featured: false,
-      link: 'https://example.com/news/bollegraaf-efficiency',
-      type: 'html',
-      views: '1.8k',
-      trending: true
+      title: 'NWRA Announces 2025 Recycling Awards Recipients',
+      excerpt: 'The National Waste & Recycling Association recognizes outstanding achievements in the recycling industry.',
+      category: t('newsMediaArticles.categoryIndustryInsights'),
+      date: '2024-12-10',
+      readTime: '4 min read',
+      image: '/Images/first.jpg',
+      link: 'https://vdrs.com/news-media/nwra-announces-2025-recycling-awards-recipients/',
+      type: 'html' as const
     },
     {
       id: 3,
-      title: 'TOMRA Optical Sorting Systems Revolutionize Material Recovery',
-      excerpt: 'Advanced AI-powered sorting technology enables precise material identification and separation for maximum recovery rates.',
-      category: 'Technology',
-      date: '2024-12-15',
-      readTime: '6 min read',
-      image: '/Images/tomra-optical-sorting.jpg',
-      featured: false,
-      link: 'https://example.com/news/tomra-optical-sorting',
-      type: 'html',
-      views: '1.5k'
+      title: 'Equipment Enhancements Help Sunnyvale\'s Organics Operations Achieve Close to 90% Organic Recovery',
+      excerpt: 'Advanced equipment upgrades significantly improve organic waste recovery rates at Sunnyvale facility.',
+      category: t('newsMediaArticles.categoryCaseStudies'),
+      date: '2024-11-25',
+      readTime: '7 min read',
+      image: '/Images/mrf-systems.jpg',
+      link: 'https://vdrs.com/news-media/equipment-enhancements-help-sunnyvales-organics-operations-achieve-close-to-90-organic-recovery/',
+      type: 'html' as const
     },
     {
       id: 4,
-      title: 'Industry Report: Single Stream Recycling Trends 2024',
-      excerpt: 'Comprehensive analysis of current trends, challenges, and opportunities in single stream recycling operations.',
-      category: 'Industry Insights',
-      date: '2024-12-12',
-      readTime: '10 min read',
-      image: '/Images/single-stream-recycling.jpg',
-      featured: true,
-      link: 'https://example.com/news/single-stream-trends',
-      type: 'pdf',
-      views: '3.2k',
-      trending: true
+      title: 'Van Dyk in 2023: Major Projects and Expansions',
+      excerpt: 'A comprehensive look at Van Dyk\'s significant projects and facility expansions throughout 2023.',
+      category: t('newsMediaArticles.categoryCompanyNews'),
+      date: '2024-11-20',
+      readTime: '8 min read',
+      image: '/Images/van-dyk-university.jpg',
+      link: 'https://vdrs.com/news-media/van-dyk-in-2023-major-projects-and-expansions/',
+      type: 'html' as const
     },
     {
       id: 5,
-      title: 'Van Dyk University Training Program Expands Nationwide',
-      excerpt: 'Professional training courses now available in 15 states, providing hands-on experience with cutting-edge recycling equipment.',
-      category: 'Company News',
-      date: '2024-12-10',
-      readTime: '4 min read',
-      image: '/Images/van-dyk-university.jpg',
-      featured: false,
-      link: 'https://example.com/news/training-expansion',
-      type: 'html',
-      views: '1.2k'
+      title: 'Santa Barbara County Unveils Renewable Energy Facility in Grand Opening',
+      excerpt: 'New renewable energy facility opens in Santa Barbara County, showcasing innovative waste-to-energy technology.',
+      category: t('newsMediaArticles.categorySustainability'),
+      date: '2024-11-15',
+      readTime: '5 min read',
+      image: '/Images/single-stream-recycling.jpg',
+      link: 'https://vdrs.com/news-media/santa-barbara-county-unveils-renewable-energy-facility-in-grand-opening/',
+      type: 'html' as const
     },
     {
       id: 6,
-      title: 'Sustainability Goals: Achieving Zero Waste to Landfill',
-      excerpt: 'How modern MRF facilities are implementing advanced technologies to achieve zero waste to landfill targets.',
-      category: 'Sustainability',
-      date: '2024-12-08',
-      readTime: '7 min read',
-      image: '/Images/mrf-systems.jpg',
-      featured: false,
-      link: 'https://example.com/news/zero-waste-landfill',
-      type: 'html',
-      views: '2.1k'
+      title: 'Fulcrum BioEnergy: A First in Turning Trash into Fuel',
+      excerpt: 'Revolutionary bioenergy facility transforms municipal waste into sustainable aviation fuel and other valuable products.',
+      category: t('newsMediaArticles.categoryInnovation'),
+      date: '2024-11-10',
+      readTime: '6 min read',
+      image: '/Images/plastics-recycling.jpg',
+      link: 'https://vdrs.com/news-media/fulcrum-bioenergy-a-first-in-turning-trash-into-fuel/',
+      type: 'html' as const
     },
     {
       id: 7,
-      title: 'Greyparrot AI Analytics Platform Launches New Features',
-      excerpt: 'Enhanced waste analytics capabilities provide deeper insights into material composition and processing efficiency.',
-      category: 'Technology',
-      date: '2024-12-05',
-      readTime: '5 min read',
-      image: '/Images/greyparrot-ai-recognition.jpg',
-      featured: false,
-      link: 'https://example.com/news/greyparrot-features',
-      type: 'html',
-      views: '1.7k'
+      title: 'Freepoint Eco-Systems Works with Van Dyk to Open Advanced Plastic Recycling Facility in U.S.',
+      excerpt: 'New state-of-the-art plastic recycling facility opens through partnership between Freepoint Eco-Systems and Van Dyk.',
+      category: t('newsMediaArticles.categoryPartnerships'),
+      date: '2024-11-05',
+      readTime: '7 min read',
+      image: '/Images/bollegraaf-products.jpg',
+      link: 'https://vdrs.com/news-media/freepoint-eco-systems-works-with-van-dyk-to-open-advanced-plastic-recycling-facility-in-u-s/',
+      type: 'html' as const
     },
     {
       id: 8,
-      title: 'Case Study: 50% Increase in Recovery Rates at Municipal MRF',
-      excerpt: 'Detailed analysis of how strategic equipment upgrades and process optimization led to significant performance improvements.',
-      category: 'Case Studies',
-      date: '2024-12-03',
-      readTime: '9 min read',
-      image: '/Images/commercial-waste-processing.jpg',
-      featured: true,
-      link: 'https://example.com/news/mrf-case-study',
-      type: 'html',
-      views: '2.8k'
+      title: 'Van Dyk Recycling Solutions Hires Enrico Siewert as Director of Business Development - Plastics',
+      excerpt: 'Van Dyk strengthens its plastics recycling expertise with the addition of Enrico Siewert to lead business development.',
+      category: t('newsMediaArticles.categoryCompanyNews'),
+      date: '2024-10-30',
+      readTime: '4 min read',
+      image: '/Images/van-dyk-direct.jpg',
+      link: 'https://vdrs.com/news-media/van-dyk-recycling-solutions-hires-enrico-siewert-as-director-of-business-development-plastics/',
+      type: 'html' as const
     },
     {
       id: 9,
-      title: 'Plastics Recycling Innovation: New Processing Methods',
-      excerpt: 'Breakthrough technologies in plastic waste processing enable higher quality recycled materials for manufacturing.',
-      category: 'Innovation',
-      date: '2024-12-01',
+      title: 'Murphy Road Recycling Announces $30 Million State-of-the-Art All American Recycling Facility in Town of Berlin',
+      excerpt: 'Major investment in new recycling facility showcases advanced technology and commitment to sustainable waste management.',
+      category: t('newsMediaArticles.categoryCompanyNews'),
+      date: '2024-10-25',
       readTime: '6 min read',
-      image: '/Images/plastics-recycling.jpg',
-      featured: false,
-      link: 'https://example.com/news/plastics-innovation',
-      type: 'html',
-      views: '1.9k'
+      image: '/Images/commercial-waste-processing.jpg',
+      link: 'https://vdrs.com/news-media/murphy-road-recycling-announces-30-million-state-of-the-art-all-american-recycling-facility-in-town-of-berlin/',
+      type: 'html' as const
     },
     {
       id: 10,
-      title: 'Van Dyk Partners with Leading Universities for R&D',
-      excerpt: 'Collaborative research initiatives focus on next-generation recycling technologies and sustainable waste management solutions.',
-      category: 'Partnerships',
-      date: '2024-11-28',
+      title: '2024 Marks Strong Year for Van Dyk',
+      excerpt: 'Van Dyk Recycling Solutions celebrates a successful year with major installations, partnerships, and technological advancements.',
+      category: t('newsMediaArticles.categoryCompanyNews'),
+      date: '2024-10-20',
+      readTime: '8 min read',
+      image: '/Images/first.jpg',
+      link: 'https://vdrs.com/news-media/2024-marks-strong-year-for-van-dyk/',
+      type: 'html' as const
+    },
+    {
+      id: 11,
+      title: 'Why Buy Bollegraaf Baler: Testimonials from Users',
+      excerpt: 'Real customer testimonials highlight the performance, reliability, and value of Bollegraaf balers in recycling operations.',
+      category: t('newsMediaArticles.categoryProductUpdates'),
+      date: '2024-09-15',
       readTime: '5 min read',
-      image: '/Images/van-dyk-direct.jpg',
-      featured: false,
-      link: 'https://example.com/news/university-partnerships',
-      type: 'html',
-      views: '1.4k'
+      image: '/Images/bollegraaf-products.jpg',
+      link: 'https://vdrs.com/news-media/why-buy-bollegraaf-baler-testimonials-from-users/',
+      type: 'html' as const
+    },
+    {
+      id: 12,
+      title: 'Simple Retrofit at Great Northern Fibers Has Major Impact on OCC and News Recovery',
+      excerpt: 'Strategic equipment retrofit dramatically improves old corrugated cardboard and newsprint recovery rates.',
+      category: t('newsMediaArticles.categoryCaseStudies'),
+      date: '2024-09-10',
+      readTime: '6 min read',
+      image: '/Images/tomra-optical-sorting.jpg',
+      link: 'https://vdrs.com/news-media/simple-retrofit-at-great-northern-fibers-has-major-impact-on-occ-and-news-recovery-2/',
+      type: 'html' as const
+    },
+    {
+      id: 13,
+      title: 'A Look at the Equipment Add-Ons Helping Recycling Facilities Boost Consistency and Reduce Missorts',
+      excerpt: 'Advanced equipment enhancements improve sorting accuracy and operational efficiency at material recovery facilities.',
+      category: t('newsMediaArticles.categoryTechnology'),
+      date: '2024-09-05',
+      readTime: '7 min read',
+      image: '/Images/greyparrot-ai-recognition.jpg',
+      link: 'https://vdrs.com/news-media/a-look-at-the-equipment-add-ons-helping-recycling-facilities-boost-consistency-and-reduce-missorts/',
+      type: 'html' as const
+    },
+    {
+      id: 14,
+      title: 'Van Dyk Recycling Solutions Introduces GÜNTHER Splitter Screen to Its Line of MRF Equipment',
+      excerpt: 'New GÜNTHER splitter screen technology added to Van Dyk\'s comprehensive MRF equipment portfolio.',
+      category: t('newsMediaArticles.categoryProductUpdates'),
+      date: '2024-08-20',
+      readTime: '5 min read',
+      image: '/Images/mrf-systems.jpg',
+      link: 'https://vdrs.com/news-media/van-dyk-recycling-solutions-introduces-gunther-splitter-screen-to-its-line-of-mrf-equipment-2/',
+      type: 'html' as const
+    },
+    {
+      id: 15,
+      title: 'Delivering the Best Solutions to the Customer',
+      excerpt: 'Van Dyk\'s commitment to customer success through innovative solutions and exceptional service.',
+      category: t('newsMediaArticles.categoryCompanyNews'),
+      date: '2024-08-15',
+      readTime: '6 min read',
+      image: '/Images/van-dyk-university.jpg',
+      link: 'https://vdrs.com/news-media/delivering-the-best-solutions-to-the-customer/',
+      type: 'html' as const
+    },
+    {
+      id: 16,
+      title: 'Van Dyk in 2022: From New Designs to Startups',
+      excerpt: 'A retrospective look at Van Dyk\'s achievements, new designs, and facility startups throughout 2022.',
+      category: t('newsMediaArticles.categoryCompanyNews'),
+      date: '2024-08-10',
+      readTime: '7 min read',
+      image: '/Images/first.jpg',
+      link: 'https://vdrs.com/news-media/van-dyk-in-2022-from-new-designs-to-startups/',
+      type: 'html' as const
+    },
+    {
+      id: 17,
+      title: 'Greyparrot and Van Dyk Partner to Revolutionize U.S. Waste Sorting and Processing with AI',
+      excerpt: 'Strategic partnership brings AI waste analytics to North American recycling facilities, with Van Dyk serving as exclusive U.S. distributor of Greyparrot Analyzers.',
+      category: t('newsMediaArticles.categoryPartnerships'),
+      date: '2024-05-02',
+      readTime: '8 min read',
+      image: '/Images/greyparrot-ai-recognition.jpg',
+      link: 'https://vdrs.com/news-media/greyparrot-and-van-dyk-partner-to-revolutionize-u-s-waste-sorting-and-processing-with-ai/',
+      type: 'html' as const
     }
-  ];
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort latest to oldest
+
+  // Format view count
+  const formatViews = (count: number): string => {
+    if (count >= 1000) {
+      return `${(count / 1000).toFixed(1)}k`;
+    }
+    return count.toString();
+  };
+
+  // Get view count for an article
+  const getArticleViews = (articleId: number): number => {
+    return articleViews[articleId] || 0;
+  };
+
+  // Increment view count when article is clicked
+  const incrementViewCount = (articleId: number) => {
+    setArticleViews(prev => {
+      const newViews = { ...prev, [articleId]: (prev[articleId] || 0) + 1 };
+      localStorage.setItem('article-views', JSON.stringify(newViews));
+      return newViews;
+    });
+  };
 
   // Newsletter popup logic
   useEffect(() => {
@@ -181,17 +302,16 @@ const NewsMedia = () => {
     const now = Date.now();
     const oneDay = 24 * 60 * 60 * 1000;
 
+    let timer: number | null = null;
     if (!hasSeenPopup || (lastSeen && now - parseInt(lastSeen) > oneDay)) {
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         setShowNewsletterPopup(true);
       }, 3000);
-
-      setCloseTimeoutId(timer);
     }
 
     return () => {
-      if (closeTimeoutId) {
-        clearTimeout(closeTimeoutId);
+      if (timer !== null) {
+        clearTimeout(timer);
       }
     };
   }, []);
@@ -216,18 +336,32 @@ const NewsMedia = () => {
     setEmailError('');
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      localStorage.setItem('newsletter-popup-seen', 'true');
-      localStorage.setItem('newsletter-popup-last-seen', Date.now().toString());
-      setSubscriptionSuccess(true);
-      
-      setTimeout(() => {
-        setShowNewsletterPopup(false);
-        setSubscriptionSuccess(false);
-        setEmail('');
-      }, 3000);
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        localStorage.setItem('newsletter-popup-seen', 'true');
+        localStorage.setItem('newsletter-popup-last-seen', Date.now().toString());
+        localStorage.setItem('newsletter-subscribed', 'true');
+        setSubscriptionSuccess(true);
+        
+        setTimeout(() => {
+          setShowNewsletterPopup(false);
+          setSubscriptionSuccess(false);
+          setEmail('');
+        }, 3000);
+      } else {
+        setEmailError(data.message || t('newsMedia.somethingWentWrong'));
+      }
     } catch (error) {
+      console.error('Newsletter subscription error:', error);
       setEmailError(t('newsMedia.somethingWentWrong'));
     } finally {
       setIsSubscribing(false);
@@ -244,8 +378,13 @@ const NewsMedia = () => {
   };
 
   const handleArticleClick = (article: Article) => {
+    incrementViewCount(article.id);
     setSelectedArticle(article);
     setShowArticleModal(true);
+  };
+
+  const loadMore = () => {
+    setVisibleCount(prev => Math.min(prev + 9, filteredNews.length));
   };
 
   const closeArticleModal = () => {
@@ -262,15 +401,20 @@ const NewsMedia = () => {
     });
   };
 
+  // Get unique categories for filtering
+  const categories = ['All', ...Array.from(new Set(newsData.map(article => article.category)))];
+
   const filteredNews = newsData.filter(article => {
+    const matchesCategory = activeCategory === 'All' || article.category === activeCategory;
     const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          article.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          article.category.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesSearch;
+    return matchesCategory && matchesSearch;
   });
 
-  const featuredNews = filteredNews.filter(article => article.featured);
-  const regularNews = filteredNews.filter(article => !article.featured);
+  // Display only visible articles (9 at a time)
+  const displayNews = filteredNews.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredNews.length;
 
   return (
     <div className="min-h-screen bg-white">
@@ -278,14 +422,13 @@ const NewsMedia = () => {
       <section className="relative text-white py-24 -mt-20 pt-24 overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="/Images/pollutec-trade-show.jpg"
+            src={IMAGE_ASSIGNMENTS.newsMedia.hero}
             alt="News & Media"
             className="w-full h-full object-cover object-center scale-105"
             loading="eager"
-            fetchPriority="high"
+            {...({ fetchpriority: "high" } as any)}
             onError={(e) => {
-              console.log('Hero image failed to load, using fallback');
-              e.currentTarget.src = '/Images/first.jpg';
+              e.currentTarget.src = IMAGE_ASSIGNMENTS.homepage.heroFallback;
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-vd-blue-dark/95 via-vd-blue/90 to-vd-blue-dark/95" />
@@ -294,9 +437,9 @@ const NewsMedia = () => {
         <div className="container mx-auto px-4 relative z-10 pt-20">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <motion.div
-              initial={fadeInUp.initial}
-              animate={fadeInUp.animate}
-              transition={fadeInUp.transition}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
               className="max-w-3xl w-full"
             >
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
@@ -324,87 +467,30 @@ const NewsMedia = () => {
                 className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-vd-orange focus:border-transparent transition-all"
               />
             </div>
-          </div>
-        </div>
-
-        {/* Featured Articles */}
-        {featuredNews.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-vd-blue mb-6">{t('newsMedia.featuredArticles')}</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {featuredNews.map((article) => (
-                <motion.article
-                  key={article.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group cursor-pointer"
-                  onClick={() => handleArticleClick(article)}
+            {/* Category Filters */}
+            <div className="flex flex-wrap gap-2 mt-2">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    activeCategory === category
+                      ? 'bg-vd-orange text-white shadow-md'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
                 >
-                  <div className="relative h-64 overflow-hidden">
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      width="600"
-                      height="256"
-                      loading="lazy"
-                      onError={(e) => {
-                        e.currentTarget.src = '/Images/first.jpg';
-                      }}
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-vd-orange text-white px-3 py-1 rounded-full text-sm font-medium">
-                        {t('newsMedia.featured')}
-                      </span>
-                    </div>
-                    {article.trending && (
-                      <div className="absolute top-4 right-4">
-                        <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                          {t('newsMedia.trending')}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
-                      <span className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {formatDate(article.date)}
-                      </span>
-                      <span className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {article.readTime}
-                      </span>
-                      <span className="flex items-center">
-                        <Eye className="w-4 h-4 mr-1" />
-                        {article.views}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-bold text-vd-blue mb-3 leading-tight group-hover:text-vd-orange transition-colors">
-                      {article.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {article.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-vd-orange bg-orange-50 px-3 py-1 rounded-full">
-                        {article.category}
-                      </span>
-                      <ArrowRight className="w-5 h-5 text-vd-orange group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </motion.article>
+                  {category}
+                </button>
               ))}
             </div>
           </div>
-        )}
+        </div>
 
-        {/* Regular Articles */}
+        {/* News Articles - 3x4 Grid */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-vd-blue mb-6">{t('newsMedia.latestNews')}</h2>
           <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {regularNews.map((article) => (
+            {displayNews.map((article) => (
               <motion.article
                 key={article.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -412,6 +498,15 @@ const NewsMedia = () => {
                 transition={{ duration: 0.5 }}
                 className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group cursor-pointer"
                 onClick={() => handleArticleClick(article)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleArticleClick(article);
+                  }
+                }}
+                tabIndex={0}
+                role="button"
+                aria-label={`Read article: ${article.title}`}
               >
                 <div className="relative overflow-hidden h-48">
                   <img
@@ -425,13 +520,6 @@ const NewsMedia = () => {
                       e.currentTarget.src = '/Images/first.jpg';
                     }}
                   />
-                  {article.trending && (
-                    <div className="absolute top-4 right-4">
-                      <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium">
-                        {t('newsMedia.trending')}
-                      </span>
-                    </div>
-                  )}
                 </div>
                 <div className="p-6">
                   <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
@@ -445,7 +533,7 @@ const NewsMedia = () => {
                     </span>
                     <span className="flex items-center">
                       <Eye className="w-4 h-4 mr-1" />
-                      {article.views}
+                      {formatViews(getArticleViews(article.id))}
                     </span>
                   </div>
                   <h3 className="font-bold text-vd-blue mb-3 leading-tight group-hover:text-vd-orange transition-colors text-xl">
@@ -463,7 +551,76 @@ const NewsMedia = () => {
                 </div>
               </motion.article>
             ))}
+
+            {/* External Articles from URLs */}
+            {!isLoadingExternal && externalArticles.map((article) => (
+              <motion.article
+                key={article.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group cursor-pointer"
+                onClick={() => window.open(article.url, '_blank', 'noopener,noreferrer')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    window.open(article.url, '_blank', 'noopener,noreferrer');
+                  }
+                }}
+                tabIndex={0}
+                role="button"
+                aria-label={`Read external article: ${article.title}`}
+              >
+                <div className="relative overflow-hidden h-48">
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      e.currentTarget.src = '/Images/first.jpg';
+                    }}
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
+                    {article.publishDate && (
+                      <span className="flex items-center">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        {new Date(article.publishDate).toLocaleDateString()}
+                      </span>
+                    )}
+                    <span className="text-vd-orange font-medium">{article.source}</span>
+                  </div>
+                  <h3 className="font-bold text-vd-blue mb-3 leading-tight group-hover:text-vd-orange transition-colors text-xl">
+                    {article.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4 leading-relaxed line-clamp-2">
+                    {article.description || 'Click to read full article...'}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-vd-orange bg-orange-50 px-3 py-1 rounded-full">
+                      External Article
+                    </span>
+                    <ArrowRight className="w-5 h-5 text-vd-orange group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </motion.article>
+            ))}
           </div>
+          
+          {/* Read More Button */}
+          {hasMore && (
+            <div className="flex justify-center mt-8">
+              <motion.button
+                onClick={loadMore}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-vd-orange hover:bg-vd-orange-alt text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-2"
+              >
+                <span>{t('newsMedia.readMore') || 'Read More'}</span>
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
+            </div>
+          )}
         </div>
 
         {filteredNews.length === 0 && (
@@ -477,93 +634,90 @@ const NewsMedia = () => {
           )}
         </div>
 
-      {/* Newsletter Popup */}
+      {/* Newsletter Popup - Floating Widget (No Backdrop) */}
       <AnimatePresence>
         {showNewsletterPopup && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={closePopup}
+            initial={{ opacity: 0, x: 20, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: 20, scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className="fixed top-20 right-6 z-50 max-w-sm w-full mx-4"
+            data-newsletter-popup
+            style={{ maxHeight: 'calc(100vh - 6rem)' }}
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={closePopup}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
-                aria-label={t('newsMedia.closeNewsletterPopup')}
-              >
-                <X className="h-6 w-6" />
-              </button>
+              <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+                {/* Close Button */}
+                <button
+                  onClick={closePopup}
+                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10 bg-white rounded-full p-1 hover:bg-gray-50"
+                  aria-label={t('newsMedia.closeNewsletterPopup')}
+                >
+                  <X className="h-5 w-5" />
+                </button>
 
-              {subscriptionSuccess ? (
-                <div className="text-center py-8">
-                  <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold text-vd-blue mb-2">{t('newsMedia.thankYouSubscribing')}</h3>
-                  <p className="text-gray-600">{t('newsMedia.subscriptionSuccess')}</p>
-          </div>
-              ) : (
-                <>
-                  <div className="text-center mb-6">
-                    <Mail className="h-12 w-12 text-vd-orange mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold text-vd-blue mb-2">{t('newsMedia.stayUpdated')}</h3>
-                    <p className="text-gray-600">{t('newsMedia.newsletterDescription')}</p>
-        </div>
+                {subscriptionSuccess ? (
+                  <div className="p-6 text-center">
+                    <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-3" />
+                    <h3 className="text-xl font-bold text-vd-blue mb-2">{t('newsMedia.thankYouSubscribing')}</h3>
+                    <p className="text-gray-600 text-sm">{t('newsMedia.subscriptionSuccess')}</p>
+                  </div>
+                ) : (
+                  <div className="p-6">
+                    <div className="mb-4">
+                      <Mail className="h-8 w-8 text-vd-orange mb-3" />
+                      <h3 className="text-xl font-bold text-vd-blue mb-1">{t('newsMedia.stayUpdated')}</h3>
+                      <p className="text-gray-600 text-sm">{t('newsMedia.newsletterDescription')}</p>
+                    </div>
 
-                  <form onSubmit={(e) => { e.preventDefault(); handleSubscribe(); }} className="space-y-4">
-                    <div>
-                      <label htmlFor="email-subscribe" className="sr-only">Email address</label>
-                      <input
-                        type="email"
-                        id="email-subscribe"
-                        autoComplete="email"
-                        placeholder={t('newsMedia.enterYourEmail')}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-vd-orange focus:border-transparent transition-all ${
-                          emailError ? 'border-red-500' : 'border-gray-200'
-                        }`}
-                        aria-invalid={!!emailError}
-                        aria-describedby={emailError ? 'email-error' : undefined}
-                      />
-                      {emailError && (
-                        <p id="email-error" className="text-red-500 text-sm mt-1">{emailError}</p>
-                      )}
-      </div>
-                    <button
-                      type="submit"
-                      className="w-full bg-vd-orange text-white py-3 rounded-xl font-semibold hover:bg-vd-orange-alt transition-colors flex items-center justify-center space-x-2"
-                      disabled={isSubscribing}
-                    >
-                      {isSubscribing ? (
-                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                      ) : (
-                        <>
-                          <span>{t('newsMedia.subscribeNow')}</span>
-                          <ArrowRight className="h-5 w-5" />
-                        </>
-                      )}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleMaybeLater}
-                      className="w-full text-gray-500 hover:text-gray-700 transition-colors text-sm"
-                    >
-                      {t('newsMedia.maybeLater')}
-                    </button>
-                  </form>
-                </>
-              )}
-            </motion.div>
+                    <form onSubmit={(e) => { e.preventDefault(); handleSubscribe(); }} className="space-y-3">
+                      <div>
+                        <label htmlFor="email-subscribe" className="sr-only">Email address</label>
+                        <input
+                          type="email"
+                          id="email-subscribe"
+                          autoComplete="email"
+                          placeholder={t('newsMedia.enterYourEmail')}
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:ring-2 focus:ring-vd-orange focus:border-transparent transition-all ${
+                            emailError ? 'border-red-500' : 'border-gray-200'
+                          }`}
+                          aria-invalid={!!emailError}
+                          aria-describedby={emailError ? 'email-error' : undefined}
+                        />
+                        {emailError && (
+                          <p id="email-error" className="text-red-500 text-xs mt-1">{emailError}</p>
+                        )}
+                      </div>
+                      <button
+                        type="submit"
+                        className="w-full bg-vd-orange text-white py-2.5 rounded-xl font-semibold hover:bg-vd-orange-alt transition-colors flex items-center justify-center space-x-2 text-sm"
+                        disabled={isSubscribing}
+                      >
+                        {isSubscribing ? (
+                          <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                        ) : (
+                          <>
+                            <span>{t('newsMedia.subscribeNow')}</span>
+                            <ArrowRight className="h-4 w-4" />
+                          </>
+                        )}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleMaybeLater}
+                        className="w-full text-gray-500 hover:text-gray-700 transition-colors text-xs"
+                      >
+                        {t('newsMedia.maybeLater')}
+                      </button>
+                    </form>
+                  </div>
+                )}
+              </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -630,7 +784,7 @@ const NewsMedia = () => {
                       href={selectedArticle.link} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="inline-flex items-center text-vd-orange hover:text-vd-orange-alt font-medium"
+                      className="inline-flex items-center text-vd-orange hover:text-vd-blue font-semibold"
                     >
                       {t('newsMedia.readFullArticle')}
                       <ExternalLink className="inline-block w-4 h-4 ml-1" />

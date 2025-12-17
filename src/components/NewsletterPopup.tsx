@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Mail, CheckCircle } from 'lucide-react';
 
@@ -27,50 +27,35 @@ const NewsletterPopup: React.FC<NewsletterPopupProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  // Prevent body scroll when modal is open and ensure modal is visible
-  useEffect(() => {
-    if (isOpen) {
-      // Scroll to top immediately
-      window.scrollTo(0, 0);
-      // Prevent body scroll
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
-
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop with blur */}
+          {/* Backdrop with blur - non-blocking, allows scroll */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-md z-[9998]"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998]"
             data-testid="modal-backdrop"
             onClick={onClose}
             role="dialog"
             aria-modal="true"
           />
           
-          {/* Modal Card */}
+          {/* Modal Card - centered in viewport, scrolls with page */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ 
               type: 'spring',
               stiffness: 300,
               damping: 30,
               duration: 0.4
             }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] w-full max-w-md px-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">

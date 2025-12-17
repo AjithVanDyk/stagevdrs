@@ -1,13 +1,20 @@
-// Centralized animation configurations for smooth, intuitive animations
-// Using optimized easing curves and spring physics for natural motion
+/**
+ * @fileoverview Centralized animation configurations for smooth, intuitive animations.
+ * Uses optimized easing curves and spring physics for natural motion.
+ * All animations respect reduced motion preferences.
+ * @author Van Dyk Recycling Solutions
+ * @module utils/animations
+ */
+
+import type { Variant, Transition, ViewportProps } from 'framer-motion';
 
 type MotionDefinition = {
-  initial?: Record<string, unknown>;
-  animate?: Record<string, unknown>;
-  exit?: Record<string, unknown>;
-  transition?: Record<string, unknown>;
-  whileInView?: Record<string, unknown>;
-  viewport?: Record<string, unknown>;
+  initial?: Variant;
+  animate?: Variant;
+  exit?: Variant;
+  transition?: Transition;
+  whileInView?: Variant;
+  viewport?: ViewportProps;
 };
 
 const reducedMotionState = { opacity: 1, scale: 1, x: 0, y: 0 };
@@ -183,6 +190,24 @@ export const animationConfig: Record<string, MotionDefinition> = {
   }
 };
 
+/**
+ * Gets motion configuration for a specific animation variant, respecting reduced motion preferences.
+ * Returns reduced motion fallback if user prefers reduced motion, otherwise returns the variant config.
+ * 
+ * @param {keyof typeof animationConfig} variant - Animation variant name (e.g., 'fadeInUp', 'pageTransition')
+ * @param {boolean} prefersReducedMotion - Whether user prefers reduced motion
+ * @param {MotionDefinition} [overrides={}] - Optional overrides to apply to the animation config
+ * @returns {MotionDefinition} Complete motion configuration ready for Framer Motion
+ * 
+ * @example
+ * ```typescript
+ * const config = getMotionConfig('fadeInUp', prefersReducedMotion);
+ * 
+ * <motion.div {...config}>
+ *   Content
+ * </motion.div>
+ * ```
+ */
 export const getMotionConfig = (
   variant: keyof typeof animationConfig,
   prefersReducedMotion: boolean,
@@ -201,7 +226,19 @@ export const getMotionConfig = (
   };
 };
 
-// Easing functions for CSS transitions
+/**
+ * Predefined easing functions for CSS transitions.
+ * Provides Material Design and custom easing curves for smooth animations.
+ * 
+ * @constant {Object} easing
+ * @property {string} standard - Material Design standard easing
+ * @property {string} decelerate - Deceleration curve
+ * @property {string} accelerate - Acceleration curve
+ * @property {string} smooth - Smooth natural curve
+ * @property {string} easeOut - Ease out curve
+ * @property {string} easeInOut - Ease in-out curve
+ * @property {string} bounce - Bouncy curve for playful elements
+ */
 export const easing = {
   // Material Design easing
   standard: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -217,7 +254,27 @@ export const easing = {
   bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
 };
 
-// Helper function to create staggered animations
+/**
+ * Creates a staggered animation configuration for animating lists or grids.
+ * Children elements animate in sequence with the specified delays.
+ * 
+ * @param {number} [delay=0.08] - Delay between each child animation (seconds)
+ * @param {number} [delayChildren=0.1] - Initial delay before first child animates (seconds)
+ * @returns {MotionDefinition} Stagger animation configuration
+ * 
+ * @example
+ * ```typescript
+ * const stagger = createStagger(0.1, 0.2);
+ * 
+ * <motion.div variants={stagger}>
+ *   {items.map(item => (
+ *     <motion.div key={item.id} variants={fadeInUp}>
+ *       {item.content}
+ *     </motion.div>
+ *   ))}
+ * </motion.div>
+ * ```
+ */
 export const createStagger = (delay: number = 0.08, delayChildren: number = 0.1) => ({
   animate: {
     transition: {
@@ -227,7 +284,19 @@ export const createStagger = (delay: number = 0.08, delayChildren: number = 0.1)
   }
 });
 
-// Helper for scroll-triggered animations
+/**
+ * Pre-configured animation for scroll-triggered elements.
+ * Animates elements as they enter the viewport with fade and slide up effect.
+ * 
+ * @constant {MotionDefinition} scrollAnimation
+ * 
+ * @example
+ * ```typescript
+ * <motion.div {...scrollAnimation}>
+ *   Content that animates on scroll
+ * </motion.div>
+ * ```
+ */
 export const scrollAnimation = {
   initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
@@ -240,7 +309,18 @@ export const scrollAnimation = {
   }
 };
 
-// Smooth scroll behavior
+/**
+ * Smooth scroll behavior configuration for programmatic scrolling.
+ * 
+ * @constant {Object} smoothScroll
+ * @property {ScrollBehavior} behavior - 'smooth' scroll behavior
+ * @property {ScrollLogicalPosition} block - 'start' alignment
+ * 
+ * @example
+ * ```typescript
+ * element.scrollIntoView(smoothScroll);
+ * ```
+ */
 export const smoothScroll = {
   behavior: 'smooth' as ScrollBehavior,
   block: 'start' as ScrollLogicalPosition

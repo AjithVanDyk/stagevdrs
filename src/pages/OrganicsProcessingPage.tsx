@@ -1,42 +1,45 @@
 import React from 'react';
 import SolutionPageTemplate from '../components/SolutionPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const OrganicsProcessingPage: React.FC = () => {
+  const { t } = useTranslation();
   const solution = {
     id: 3,
-    name: 'Organics Processing',
+    name: t('solutions.solution3Name'),
     image: '/Images/organics-processing.jpg',
-    description: 'Advanced organics processing solutions for efficient handling of food waste, yard waste, and other organic materials. Our technology maximizes organic recovery and produces valuable compost.',
+    description: t('solutions.solution3Description'),
     features: [
-      'Food waste processing',
-      'Yard waste handling',
-      'Compost production',
-      'Odor control systems',
-      'Pathogen reduction',
-      'Nutrient recovery',
-      'Automated processing',
-      'Environmental compliance',
-      'Modular system design',
-      'Quality control monitoring'
+      t('solutions.solution3Feature1'),
+      t('solutions.solution3Feature2'),
+      t('solutions.solution3Feature3'),
+      t('solutions.solution3Feature4'),
+      t('solutions.solution3Feature5'),
+      t('solutions.solution3Feature6'),
+      t('solutions.solution3Feature7'),
+      t('solutions.solution3Feature8'),
     ],
     specifications: {
-      'Processing Capacity': 'Up to 75 tons per day',
-      'Compost Production': 'High-quality compost output',
-      'Pathogen Reduction': '99.9%+ pathogen elimination',
-      'Odor Control': 'Advanced odor management',
-      'Processing Time': '14-21 day cycle',
-      'Nutrient Recovery': 'Optimal nutrient retention',
-      'Maintenance': 'Low maintenance requirements',
-      'System Design': 'Modular and scalable',
-      'Installation': 'Turnkey installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('solutions.solution3Spec1Key')]: t('solutions.solution3Spec1Value'),
+      [t('solutions.solution3Spec2Key')]: t('solutions.solution3Spec2Value'),
+      [t('solutions.solution3Spec3Key')]: t('solutions.solution3Spec3Value'),
+      [t('solutions.solution3Spec4Key')]: t('solutions.solution3Spec4Value'),
+      [t('solutions.solution3Spec5Key')]: t('solutions.solution3Spec5Value'),
+      [t('solutions.solution3Spec6Key')]: t('solutions.solution3Spec6Value'),
     },
     applications: [
-      { name: 'Food waste processing', link: '/solutions/organics-processing' },
-      { name: 'Compost refining', link: '/solutions/composting-densimetric-tables' },
-      { name: 'Odor control', link: '/equipment/centriair-odor-control' },
-      { name: 'Yard waste' },
-      { name: 'Green waste' }
+      { name: t('solutions.solution3App1') },
+      { name: t('solutions.solution3App2') },
+      { name: t('solutions.solution3App3') },
+      { name: t('solutions.solution3App4') },
+      { name: t('solutions.solution3App5') },
+    ],
+    benefits: [
+      t('solutions.solution3Benefit1'),
+      t('solutions.solution3Benefit2'),
+      t('solutions.solution3Benefit3'),
+      t('solutions.solution3Benefit4'),
+      t('solutions.solution3Benefit5'),
     ],
     equipment: [
       { name: 'Gunther Screen', link: '/equipment/gunther-screens' },

@@ -1,6 +1,31 @@
+/**
+ * @fileoverview Reusable Button component with multiple variants, sizes, and states.
+ * Supports both button and anchor link rendering with animations and accessibility features.
+ * @author Van Dyk Recycling Solutions
+ * @module components/Button
+ */
+
 import React from 'react';
 import { motion } from 'framer-motion';
 
+/**
+ * Button component props.
+ * 
+ * @interface ButtonProps
+ * @property {React.ReactNode} children - Button content (text, icons, etc.)
+ * @property {() => void} [onClick] - Click handler function
+ * @property {'button' | 'submit' | 'reset'} [type='button'] - HTML button type
+ * @property {'primary' | 'secondary' | 'outline' | 'ghost'} [variant='primary'] - Visual style variant
+ * @property {'sm' | 'md' | 'lg'} [size='md'] - Button size
+ * @property {string} [className] - Additional CSS classes
+ * @property {boolean} [disabled=false] - Whether button is disabled
+ * @property {boolean} [loading=false] - Whether button is in loading state (shows spinner)
+ * @property {React.ReactNode} [icon] - Optional icon element
+ * @property {'left' | 'right'} [iconPosition='left'] - Icon position relative to text
+ * @property {string} [href] - If provided, renders as anchor link instead of button
+ * @property {string} [target] - Link target (e.g., '_blank' for new tab)
+ * @property {string} [rel] - Link rel attribute (e.g., 'noopener noreferrer')
+ */
 interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
@@ -17,6 +42,35 @@ interface ButtonProps {
   rel?: string;
 }
 
+/**
+ * Reusable Button component with multiple variants, sizes, and states.
+ * Automatically renders as anchor link if `href` prop is provided.
+ * Includes hover animations, loading states, and accessibility features.
+ * 
+ * @param {ButtonProps} props - Button component props
+ * @returns {JSX.Element} Button or anchor element with animations
+ * 
+ * @example
+ * ```tsx
+ * // Basic button
+ * <Button onClick={handleClick}>Click Me</Button>
+ * 
+ * // Primary button with icon
+ * <Button variant="primary" icon={<Icon />} iconPosition="left">
+ *   Submit
+ * </Button>
+ * 
+ * // Link button
+ * <Button href="/contact" variant="outline">
+ *   Contact Us
+ * </Button>
+ * 
+ * // Loading state
+ * <Button loading disabled>
+ *   Processing...
+ * </Button>
+ * ```
+ */
 const Button: React.FC<ButtonProps> = ({
   children,
   onClick,

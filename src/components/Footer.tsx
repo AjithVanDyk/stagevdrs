@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Facebook, Linkedin, Youtube, Instagram } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Linkedin, Youtube, Instagram, ChevronDown, ExternalLink } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 import { getMotionConfig } from '../utils/animations';
@@ -34,6 +34,7 @@ const TwitterXIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 const Footer: React.FC = () => {
   const { t } = useTranslation();
   const prefersReducedMotion = usePrefersReducedMotion();
+  const [expandedSections, setExpandedSections] = useState<{ [key: string]: boolean }>({});
 
   const getRevealProps = (delay = 0) => {
     const base = getMotionConfig('fadeInUp', prefersReducedMotion, {
@@ -88,11 +89,11 @@ const Footer: React.FC = () => {
       title: t('nav.services'),
       links: [
         { to: '/support', label: t('services.unmatchedSupport') },
-        { to: '/parts-in-stock', label: t('services.spareParts') },
-        { to: '/pmi', label: t('services.pmiPlans') },
+        { to: 'https://www.shopvandykdirect.com/', label: 'Order Spare Parts', isExternal: true },
+        { to: '/pmi', label: t('services.maintenancePrograms') },
         { to: '/van-dyk-university', label: t('services.vanDykUniversity') },
         { to: '/test-center', label: t('services.testCenter') },
-        { to: '/quote', label: t('common.getAQuote') }
+        { to: '/faq', label: 'FAQs' }
       ]
     },
     {
@@ -101,6 +102,14 @@ const Footer: React.FC = () => {
         { to: '/news-media', label: t('newsMedia.latestNews') },
         { to: '/videos', label: t('newsMedia.videos') },
         { to: '/expert-tips', label: t('newsMedia.expertTips') }
+      ]
+    },
+    {
+      title: t('nav.aboutUs'),
+      links: [
+        { to: '/about', label: t('about.meetOurTeam') },
+        { to: '/careers', label: t('about.careers') },
+        { to: '/contact', label: t('about.contactUs') }
       ]
     },
   ], [t]);
@@ -136,8 +145,8 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-gradient-to-b from-vd-blue to-vd-blue-dark text-white" role="contentinfo">
-      <div className="container mx-auto py-12 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12">
+      <div className="container mx-auto py-8 px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-8 lg:gap-6">
           {/* Company Info - Left Section */}
           <motion.div
             {...getRevealProps()}
@@ -145,17 +154,20 @@ const Footer: React.FC = () => {
             role="region"
             aria-label="Company Information"
           >
-            <img 
-              src="/Images/VAN DYK-logo-WHITE.png" 
-              alt="Van Dyk Recycling Solutions Logo" 
-              className="max-h-12 md:max-h-16 w-auto mb-4 object-contain" 
-              loading="lazy"
-              decoding="async"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-              }} 
-            />
+              <div className="mb-4 flex justify-start items-start w-full">
+                <img 
+                  src="/Images/van-dyk-logo-white.svg" 
+                  alt="Van Dyk Recycling Solutions Logo" 
+                  className="h-auto max-h-48 w-auto object-contain object-left-top"
+                  style={{ transform: 'scale(1.25)', transformOrigin: 'left top' }}
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                  }} 
+                />
+              </div>
             <p className="text-white mb-6 text-sm leading-relaxed">
               {t('footer.companyDescription')}
             </p>
@@ -204,72 +216,109 @@ const Footer: React.FC = () => {
           </motion.div>
 
           {/* Footer Navigation Sections - Right Section */}
-          {footerSections.map((section, index) => (
-            <motion.div
-              key={section.title}
-              {...getRevealProps(index * 0.1)}
-              role="region"
-              aria-label={`${section.title} links`}
-              className="lg:col-span-1"
-            >
-              <h3 className="text-base font-semibold mb-4 text-vd-orange">{section.title}</h3>
-              <ul className="space-y-2">
-                {section.links.map((link) => (
-                  <li key={link.label}>
-                    {link.isExternal ? (
-                      <a 
-                        href={link.to}
-                        className="text-white hover:text-vd-orange transition-colors duration-200 text-sm block"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${link.label} (opens in new tab)`}
-                      >
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link 
-                        to={link.to}
-                        className="text-white hover:text-vd-orange transition-colors duration-200 text-sm block"
-                      >
-                        {link.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+          {footerSections.map((section, index) => {
+            const isExpanded = expandedSections[section.title] || false;
+            const visibleLinks = section.links.slice(0, 4);
+            const hiddenLinks = section.links.slice(4);
+            const hasMoreLinks = section.links.length > 4;
+
+            return (
+              <motion.div
+                key={section.title}
+                {...getRevealProps(index * 0.1)}
+                role="region"
+                aria-label={`${section.title} links`}
+                className="lg:col-span-1"
+              >
+                <h3 className="text-base font-semibold mb-4 text-vd-orange">{section.title}</h3>
+                <ul className="space-y-2">
+                  {visibleLinks.map((link) => (
+                    <li key={link.label}>
+                      {link.isExternal ? (
+                        <a 
+                          href={link.to}
+                          className="text-white hover:text-vd-orange transition-colors duration-200 text-sm block flex items-center space-x-1"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${link.label} (opens in new tab)`}
+                        >
+                          <span>{link.label}</span>
+                          <ExternalLink className="w-3 h-3 inline-block" />
+                        </a>
+                      ) : (
+                        <Link 
+                          to={link.to}
+                          className="text-white hover:text-vd-orange transition-colors duration-200 text-sm block"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                  {isExpanded && hiddenLinks.map((link) => (
+                    <li key={link.label}>
+                      {link.isExternal ? (
+                        <a 
+                          href={link.to}
+                          className="text-white hover:text-vd-orange transition-colors duration-200 text-sm block flex items-center space-x-1"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${link.label} (opens in new tab)`}
+                        >
+                          <span>{link.label}</span>
+                          <ExternalLink className="w-3 h-3 inline-block" />
+                        </a>
+                      ) : (
+                        <Link 
+                          to={link.to}
+                          className="text-white hover:text-vd-orange transition-colors duration-200 text-sm block"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                {hasMoreLinks && (
+                  <button
+                    onClick={() => setExpandedSections(prev => ({ ...prev, [section.title]: !isExpanded }))}
+                    className="mt-3 text-vd-orange hover:text-white text-sm font-medium flex items-center transition-colors duration-200"
+                    aria-expanded={isExpanded}
+                    aria-label={isExpanded ? `Collapse ${section.title} links` : `Expand ${section.title} links`}
+                  >
+                    {isExpanded ? 'Show Less' : 'View More'}
+                    <ChevronDown className={`w-4 h-4 ml-1 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
+                  </button>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* About Us Horizontal Section */}
-        <div className="border-t border-white/10 mt-8 pt-6">
-          <h3 className="text-sm font-semibold mb-4 text-vd-orange text-center">{t('footer.aboutUs')}</h3>
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-            <Link to="/careers" className="text-white hover:text-vd-orange transition-colors duration-200 text-sm">
-              {t('footer.careers')}
+        <div className="border-t border-white/10 mt-6 pt-6 text-center text-white">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-4">
+            <Link to="/accessibility" className="text-white hover:text-vd-orange transition-colors duration-200 text-sm">
+              {t('footer.accessibility')}
             </Link>
-            <Link to="/contact" className="text-white hover:text-vd-orange transition-colors duration-200 text-sm">
-              {t('footer.contactUs')}
+            <Link to="/ccpa-rights" className="text-white hover:text-vd-orange transition-colors duration-200 text-sm">
+              {t('footer.doNotSell')}
             </Link>
             <Link to="/cookie-policy" className="text-white hover:text-vd-orange transition-colors duration-200 text-sm">
               {t('footer.cookiePolicy')}
             </Link>
-            <Link to="/news-media" className="text-white hover:text-vd-orange transition-colors duration-200 text-sm">
-              {t('footer.newsMedia')}
-            </Link>
-            <Link to="/about" className="text-white hover:text-vd-orange transition-colors duration-200 text-sm">
-              {t('footer.overview')}
+            <Link to="/gdpr-rights" className="text-white hover:text-vd-orange transition-colors duration-200 text-sm">
+              {t('footer.gdprRights')}
             </Link>
             <Link to="/privacy-policy" className="text-white hover:text-vd-orange transition-colors duration-200 text-sm">
               {t('footer.privacyPolicy')}
+            </Link>
+            <Link to="/terms" className="text-white hover:text-vd-orange transition-colors duration-200 text-sm">
+              {t('footer.termsOfService')}
             </Link>
             <Link to="/sitemap" className="text-white hover:text-vd-orange transition-colors duration-200 text-sm">
               {t('footer.sitemap')}
             </Link>
           </div>
-        </div>
-
-        <div className="border-t border-white/10 mt-6 pt-6 text-center text-white">
           <p className="text-sm">&copy; {new Date().getFullYear()} Van Dyk Recycling Solutions. {t('footer.allRightsReserved')}</p>
         </div>
       </div>

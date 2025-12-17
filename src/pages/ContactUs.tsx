@@ -8,7 +8,7 @@ import {
   Briefcase, Wrench, User, MapPin, Phone, Mail, Clock, 
   Send, Building2, MessageSquare, ChevronLeft, ChevronRight, X,
   FileText, CheckCircle, DollarSign, Globe,
-  Award, Target, Heart, Zap, AlertCircle
+  Award, Target, Heart, Zap, AlertCircle, ArrowRight
 } from 'lucide-react';
 import { IMAGE_ASSIGNMENTS } from '../config/images';
 import { submitContactForm, FormSubmissionResult } from '../utils/formSubmission';
@@ -307,6 +307,10 @@ const AboutCareersContact = () => {
         exit={{ scale: 0.95, opacity: 0 }}
         className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="job-modal-title"
+        aria-describedby="job-modal-description"
       >
         {/* Header with gradient */}
         <div className={`bg-gradient-to-r ${job.color} text-white p-6 rounded-t-2xl`}>
@@ -455,18 +459,19 @@ const AboutCareersContact = () => {
             </p>
           </div>
           
-          <div className="w-full h-full rounded-lg overflow-hidden border border-gray-200">
-            <iframe 
-              src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=7YKQMSwus0K6eGyqSyijxbLJzBecdydNjMz8TRHTYd1UQVNMVFpNMFFGMFpGNVRFMEdVWlZNOVFIQi4u&embed=true" 
-              width="100%" 
-              height="100%" 
-              frameBorder="0" 
-              marginWidth="0" 
-              marginHeight="0" 
-              style={{ border: 'none', maxWidth: '100%', maxHeight: '100%' }}
-              allow="fullscreen; web-share"
-              title={`Application form for ${jobRole.title}`}
-            />
+          <div className="w-full h-full flex items-center justify-center">
+            <div className="text-center p-8">
+              <p className="text-lg text-gray-700 mb-6">
+                You will be redirected to our job application form.
+              </p>
+              <a
+                href="/job-application"
+                className="bg-vd-orange hover:bg-vd-orange-alt text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors inline-flex items-center justify-center"
+              >
+                Go to Application Form
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </a>
+            </div>
           </div>
         </div>
       </motion.div>

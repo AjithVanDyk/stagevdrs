@@ -1,35 +1,27 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const GreyparrotAIPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 9,
-    name: 'Greyparrot AI',
+    name: t('equipment.equipment9Name'),
     image: '/Images/greyparrot-ai-new.jpg',
-    description: 'Advanced AI-powered waste analytics and material recognition technology. Greyparrot AI provides real-time insights and optimization for waste processing operations.',
+    description: t('equipment.equipment9Description'),
     features: [
-      'AI-powered material recognition',
-      'Real-time waste analytics',
-      'Advanced computer vision',
-      'Automated material identification',
-      'Performance optimization insights',
-      'Data-driven decision making',
-      'Cloud-based analytics platform',
-      'Easy integration capabilities',
-      'Scalable AI technology',
-      'Comprehensive reporting'
+      t('equipment.equipment9Feature1'),
+      t('equipment.equipment9Feature2'),
+      t('equipment.equipment9Feature3'),
+      t('equipment.equipment9Feature4'),
+      t('equipment.equipment9Feature5'),
+      t('equipment.equipment9Feature6'),
     ],
     specifications: {
-      'Recognition Accuracy': '99%+ material identification',
-      'Processing Speed': 'Real-time analysis',
-      'AI Technology': 'Advanced computer vision',
-      'Data Analytics': 'Cloud-based platform',
-      'Integration': 'Easy system integration',
-      'Scalability': 'Scalable AI technology',
-      'Reporting': 'Comprehensive analytics',
-      'Maintenance': 'Minimal maintenance required',
-      'Installation': 'Easy setup and installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('equipment.equipment9Spec1Key')]: t('equipment.equipment9Spec1Value'),
+      [t('equipment.equipment9Spec2Key')]: t('equipment.equipment9Spec2Value'),
+      [t('equipment.equipment9Spec3Key')]: t('equipment.equipment9Spec3Value'),
+      [t('equipment.equipment9Spec4Key')]: t('equipment.equipment9Spec4Value'),
     },
     applications: [
       { name: 'Single stream recycling', link: '/solutions/single-stream-recycling' },
@@ -44,9 +36,9 @@ const GreyparrotAIPage: React.FC = () => {
       'https://youtu.be/xjqEJdePkS4'  // E-Waste Processing Tomra Autosort Optical Sorter Finder Mode
     ],
     gallery: [
-      '/Images/Equipment/Greyparrot AI/Greyparrot-GP5-on-belt.png',
-      '/Images/Equipment/Greyparrot AI/_DSF3561 copy.jpg',
-      '/Images/Equipment/Greyparrot AI/_DSF3580 copy.jpg'
+      '/Images/Equipment/Greyparrot%20AI/Greyparrot-GP5-on-belt.png',
+      '/Images/Equipment/Greyparrot%20AI/_DSF3561%20copy.jpg',
+      '/Images/Equipment/Greyparrot%20AI/_DSF3580%20copy.jpg'
     ],
     testimonials: [
       {

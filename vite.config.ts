@@ -8,7 +8,7 @@ export default defineConfig({
     jsxImportSource: 'react',
   })],
   optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion', 'lucide-react', 'react-helmet-async', '@sentry/react'],
+    include: ['react', 'react-dom', 'framer-motion', 'lucide-react', 'react-helmet-async', '@sentry/react', '@vercel/analytics/react', '@vercel/speed-insights/react'],
     exclude: [],
   },
   resolve: {
@@ -42,7 +42,7 @@ export default defineConfig({
           'icons': ['lucide-react'],
           'forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
           'seo': ['react-helmet-async'],
-          'monitoring': ['@sentry/react']
+          'monitoring': ['@sentry/react', '@vercel/analytics/react', '@vercel/speed-insights/react']
         },
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',

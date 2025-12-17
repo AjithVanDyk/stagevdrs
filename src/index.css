@@ -215,7 +215,14 @@ body {
   background-color: #ffffff;
   overflow-x: hidden; /* Prevent horizontal scroll */
   min-width: 320px; /* Minimum mobile width */
+  line-height: 1.5; /* Consistent line spacing */
 }
+
+/* Global line spacing for all text elements - consistent with body */
+h1, h2, h3, h4, h5, h6, p, span, div, li, td, th, label, input, textarea, select, button, a {
+  line-height: inherit; /* Inherit from parent to avoid conflicts */
+}
+
 
 /* Enhanced smooth scrolling for all elements */
 * {

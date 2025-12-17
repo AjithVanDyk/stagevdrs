@@ -1,37 +1,46 @@
 import React from 'react';
 import SolutionPageTemplate from '../components/SolutionPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const WasteToEnergyPage: React.FC = () => {
+  const { t } = useTranslation();
   const solution = {
     id: 9,
-    name: 'Waste to Energy Recycling',
+    name: t('solutions.solution9Name'),
     image: '/Images/waste-to-energy.jpg',
-    description: 'Advanced waste-to-energy solutions that convert non-recyclable waste into clean, renewable energy. Our technology maximizes energy recovery while minimizing environmental impact.',
+    description: t('solutions.solution9Description'),
     features: [
-      'Non-recyclable waste conversion',
-      'Clean energy generation',
-      'Advanced combustion technology',
-      'Emission control systems',
-      'Energy recovery optimization',
-      'Automated waste processing',
-      'Environmental compliance',
-      'Modular system design',
-      'Real-time monitoring',
-      'Sustainable energy production'
+      t('solutions.solution9Feature1'),
+      t('solutions.solution9Feature2'),
+      t('solutions.solution9Feature3'),
+      t('solutions.solution9Feature4'),
+      t('solutions.solution9Feature5'),
+      t('solutions.solution9Feature6'),
+      t('solutions.solution9Feature7'),
+      t('solutions.solution9Feature8'),
     ],
     specifications: {
-      'Processing Capacity': 'Up to 200 tons per day',
-      'Energy Generation': 'Up to 50 MW per facility',
-      'Efficiency': '85%+ energy recovery',
-      'Emission Control': '99.9%+ pollutant removal',
-      'Waste Types': 'Non-recyclable municipal waste',
-      'Power Output': 'Clean electricity generation',
-      'Maintenance': 'Low maintenance requirements',
-      'System Design': 'Modular and scalable',
-      'Installation': 'Turnkey installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('solutions.solution9Spec1Key')]: t('solutions.solution9Spec1Value'),
+      [t('solutions.solution9Spec2Key')]: t('solutions.solution9Spec2Value'),
+      [t('solutions.solution9Spec3Key')]: t('solutions.solution9Spec3Value'),
+      [t('solutions.solution9Spec4Key')]: t('solutions.solution9Spec4Value'),
+      [t('solutions.solution9Spec5Key')]: t('solutions.solution9Spec5Value'),
+      [t('solutions.solution9Spec6Key')]: t('solutions.solution9Spec6Value'),
     },
-    applications: [],
+    applications: [
+      { name: t('solutions.solution9App1') },
+      { name: t('solutions.solution9App2') },
+      { name: t('solutions.solution9App3') },
+      { name: t('solutions.solution9App4') },
+      { name: t('solutions.solution9App5') },
+    ],
+    benefits: [
+      t('solutions.solution9Benefit1'),
+      t('solutions.solution9Benefit2'),
+      t('solutions.solution9Benefit3'),
+      t('solutions.solution9Benefit4'),
+      t('solutions.solution9Benefit5'),
+    ],
     equipment: [
       { name: 'Bollegraaf', link: '/equipment/bollegraaf' },
       { name: 'Lubo', link: '/equipment/lubo-screening' },

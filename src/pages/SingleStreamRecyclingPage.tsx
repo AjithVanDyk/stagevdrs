@@ -1,37 +1,46 @@
 import React from 'react';
 import SolutionPageTemplate from '../components/SolutionPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const SingleStreamRecyclingPage: React.FC = () => {
+  const { t } = useTranslation();
   const solution = {
     id: 1,
-    name: 'Single Stream Recycling',
+    name: t('solutions.solution1Name'),
     image: '/Images/single-stream-recycling.jpg',
-    description: 'Comprehensive single stream recycling solutions that process mixed recyclables efficiently. Our advanced technology separates paper, plastic, metal, and glass in one streamlined process.',
+    description: t('solutions.solution1Description'),
     features: [
-      'Mixed recyclable processing in one stream',
-      'Advanced optical sorting technology',
-      'High-efficiency material separation',
-      'Automated sorting and baling systems',
-      'Real-time quality monitoring',
-      'Flexible processing capabilities',
-      'Low contamination rates',
-      'Energy efficient operation',
-      'Modular system design',
-      'Comprehensive material recovery'
+      t('solutions.solution1Feature1'),
+      t('solutions.solution1Feature2'),
+      t('solutions.solution1Feature3'),
+      t('solutions.solution1Feature4'),
+      t('solutions.solution1Feature5'),
+      t('solutions.solution1Feature6'),
+      t('solutions.solution1Feature7'),
+      t('solutions.solution1Feature8'),
     ],
     specifications: {
-      'Processing Capacity': 'Up to 50 tons per hour',
-      'Material Recovery': '95%+ recovery rate',
-      'Contamination Level': '<5% contamination',
-      'Sorting Accuracy': '99%+ material identification',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Low maintenance requirements',
-      'System Design': 'Modular and scalable',
-      'Material Types': 'Paper, plastic, metal, glass',
-      'Installation': 'Turnkey installation',
-      'Warranty': '2-year comprehensive warranty'
+      [t('solutions.solution1Spec1Key')]: t('solutions.solution1Spec1Value'),
+      [t('solutions.solution1Spec2Key')]: t('solutions.solution1Spec2Value'),
+      [t('solutions.solution1Spec3Key')]: t('solutions.solution1Spec3Value'),
+      [t('solutions.solution1Spec4Key')]: t('solutions.solution1Spec4Value'),
+      [t('solutions.solution1Spec5Key')]: t('solutions.solution1Spec5Value'),
+      [t('solutions.solution1Spec6Key')]: t('solutions.solution1Spec6Value'),
     },
-    applications: [],
+    applications: [
+      { name: t('solutions.solution1App1') },
+      { name: t('solutions.solution1App2') },
+      { name: t('solutions.solution1App3') },
+      { name: t('solutions.solution1App4') },
+      { name: t('solutions.solution1App5') },
+    ],
+    benefits: [
+      t('solutions.solution1Benefit1'),
+      t('solutions.solution1Benefit2'),
+      t('solutions.solution1Benefit3'),
+      t('solutions.solution1Benefit4'),
+      t('solutions.solution1Benefit5'),
+    ],
     equipment: [
       { name: 'Bollegraaf', link: '/equipment/bollegraaf' },
       { name: 'Lubo', link: '/equipment/lubo-screening' },

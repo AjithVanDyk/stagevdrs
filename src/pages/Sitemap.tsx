@@ -90,6 +90,7 @@ const Sitemap = () => {
       pages: [
         { name: 'Services', path: '/support', description: 'Complete services overview' },
         { name: 'Support', path: '/support', description: 'Lifetime customer support' },
+        { name: 'Recycling Equipment FAQs', path: '/faq', description: 'Frequently asked questions about recycling equipment, MRF systems, and sorting technology' },
         { name: 'Parts', path: '/parts-in-stock', description: 'Parts in stock for immediate delivery' },
         { name: 'Preventive Maintenance', path: '/pmi', description: 'PMI plans and services' },
         { name: 'Training', path: '/van-dyk-university', description: 'Professional training programs' },
@@ -119,7 +120,12 @@ const Sitemap = () => {
       category: 'Legal & Policies',
       pages: [
         { name: 'Privacy Policy', path: '/privacy-policy', description: 'Privacy policy and data protection' },
-        { name: 'Cookie Policy', path: '/cookie-policy', description: 'Cookie usage and preferences' }
+        { name: 'Cookie Policy', path: '/cookie-policy', description: 'Cookie usage and preferences' },
+        { name: 'Accessibility Statement', path: '/accessibility', description: 'Website accessibility commitment and compliance' },
+        { name: 'CCPA Rights', path: '/ccpa-rights', description: 'California Consumer Privacy Act rights' },
+        { name: 'GDPR Rights', path: '/gdpr-rights', description: 'General Data Protection Regulation rights' },
+        { name: 'Terms of Service', path: '/terms', description: 'Terms and conditions of use' },
+        { name: 'Site Map', path: '/sitemap', description: 'Complete site map and navigation' }
       ]
     }
   ];

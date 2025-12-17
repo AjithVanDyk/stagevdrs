@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle, Star, Quote, X, Play, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, CheckCircle, Star, Quote, X, Play, ChevronLeft, ChevronRight, Mail, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import QuoteForm from './QuoteForm';
 import { useTranslation } from '../hooks/useTranslation';
+import { submitCatalogueRequest } from '../utils/formSubmission';
 
 interface ApplicationItem {
   name: string;
@@ -38,6 +39,9 @@ const EquipmentPageTemplate: React.FC<EquipmentPageProps> = ({ equipment }) => {
   const [videoError, setVideoError] = React.useState<string | null>(null);
   const [currentGallerySlide, setCurrentGallerySlide] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
+  const [catalogueEmail, setCatalogueEmail] = useState('');
+  const [catalogueStatus, setCatalogueStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [catalogueError, setCatalogueError] = useState('');
   
   const replacePlaceholders = (text: string, replacements: { [key: string]: string }) => {
     let result = text;
@@ -92,9 +96,107 @@ const EquipmentPageTemplate: React.FC<EquipmentPageProps> = ({ equipment }) => {
     }
   };
 
+  const getYouTubeVideoId = (url: string): string | null => {
+    if (!url) return null;
+    
+    // Handle youtu.be format: https://youtu.be/VIDEO_ID
+    const youtuBeMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+    if (youtuBeMatch) return youtuBeMatch[1];
+    
+    // Handle youtube.com/watch?v=VIDEO_ID
+    const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+    if (watchMatch) return watchMatch[1];
+    
+    // Handle youtube.com/embed/VIDEO_ID
+    const embedMatch = url.match(/\/embed\/([a-zA-Z0-9_-]+)/);
+    if (embedMatch) return embedMatch[1];
+    
+    // Fallback: try to extract from URL path
+    const pathMatch = url.split('/').pop()?.split('?')[0];
+    if (pathMatch && pathMatch.length > 5) return pathMatch;
+    
+    return null;
+  };
+
   const getYouTubeEmbedUrl = (url: string) => {
-    const videoId = url.split('v=')[1]?.split('&')[0] || url.split('/').pop();
+    const videoId = getYouTubeVideoId(url);
+    if (!videoId) return '';
     return `https://www.youtube.com/embed/${videoId}`;
+  };
+
+  // Map equipment to manufacturer/brand for Product schema
+  const getManufacturerInfo = (equipmentName: string) => {
+    const nameLower = equipmentName.toLowerCase();
+    if (nameLower.includes('bollegraaf')) {
+      return { brand: 'Bollegraaf', manufacturer: 'Bollegraaf' };
+    } else if (nameLower.includes('tomra')) {
+      return { brand: 'TOMRA', manufacturer: 'TOMRA' };
+    } else if (nameLower.includes('pellenc')) {
+      return { brand: 'Pellenc ST', manufacturer: 'Pellenc ST' };
+    } else if (nameLower.includes('lubo')) {
+      return { brand: 'Lubo', manufacturer: 'Lubo' };
+    } else if (nameLower.includes('smicon')) {
+      return { brand: 'Smicon', manufacturer: 'Smicon' };
+    } else if (nameLower.includes('gunther')) {
+      return { brand: 'Gunther', manufacturer: 'Gunther' };
+    } else if (nameLower.includes('centriair')) {
+      return { brand: 'Centriair', manufacturer: 'Centriair' };
+    } else if (nameLower.includes('greyparrot')) {
+      return { brand: 'Greyparrot', manufacturer: 'Greyparrot AI' };
+    } else if (nameLower.includes('densimetric')) {
+      return { brand: 'Densimetric', manufacturer: 'Densimetric' };
+    } else if (nameLower.includes('beefoam') || nameLower.includes('bee foam')) {
+      return { brand: 'BeeFoam', manufacturer: 'BeeFoam' };
+    } else if (nameLower.includes('reckelberg')) {
+      return { brand: 'Reckelberg Environmental Technologies', manufacturer: 'Reckelberg Environmental Technologies' };
+    } else if (nameLower.includes('walair')) {
+      return { brand: 'Walair', manufacturer: 'Walair' };
+    } else if (nameLower.includes('pre-owned') || nameLower.includes('certified')) {
+      return { brand: 'Van Dyk Recycling Solutions', manufacturer: 'Various' };
+    }
+    return { brand: 'Van Dyk Recycling Solutions', manufacturer: 'Van Dyk Recycling Solutions' };
+  };
+
+  // Generate Product schema for SEO
+  const manufacturerInfo = getManufacturerInfo(equipment.name);
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": equipment.name,
+    "description": equipment.description,
+    "image": equipment.image,
+    "brand": {
+      "@type": "Brand",
+      "name": manufacturerInfo.brand
+    },
+    "manufacturer": {
+      "@type": "Organization",
+      "name": manufacturerInfo.manufacturer
+    },
+    "sku": `VDRS-${equipment.id || 'EQUIPMENT'}`,
+    "mpn": equipment.id?.toString() || "N/A",
+    "additionalProperty": Object.entries(equipment.specifications || {}).map(([key, value]) => ({
+      "@type": "PropertyValue",
+      "name": key,
+      "value": value || ""
+    })),
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "priceCurrency": "USD",
+      "price": "0",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "0",
+        "priceCurrency": "USD",
+        "valueAddedTaxIncluded": true
+      },
+      "seller": {
+        "@type": "Organization",
+        "name": "Van Dyk Recycling Solutions",
+        "url": "https://vdrs.com"
+      }
+    }
   };
 
   return (
@@ -115,6 +217,7 @@ const EquipmentPageTemplate: React.FC<EquipmentPageProps> = ({ equipment }) => {
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-vd-blue/40 via-vd-blue/30 to-black/40"></div>
+        <div className="absolute inset-0 bg-gray-600/50"></div>
         <div className="container mx-auto px-4 relative z-10 flex items-center justify-center min-h-[400px]">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -165,7 +268,7 @@ const EquipmentPageTemplate: React.FC<EquipmentPageProps> = ({ equipment }) => {
               {t('common.keyFeatures')}
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              {replacePlaceholders(t('common.keyFeaturesDesc'), { name: equipment.name })}
+              {t('common.keyFeaturesDesc').replace(/\{name\}/g, '').trim()}
             </p>
           </motion.div>
 
@@ -192,7 +295,7 @@ const EquipmentPageTemplate: React.FC<EquipmentPageProps> = ({ equipment }) => {
         </div>
       </section>
 
-      {/* Specifications Section */}
+      {/* Catalogue Request Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
@@ -200,40 +303,129 @@ const EquipmentPageTemplate: React.FC<EquipmentPageProps> = ({ equipment }) => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="max-w-2xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-vd-blue-dark mb-4">
-              {t('common.technicalSpecifications')}
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              {replacePlaceholders(t('common.technicalSpecificationsDesc'), { name: equipment.name })}
-            </p>
-          </motion.div>
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-vd-blue-dark mb-4">
+                {t('common.technicalSpecifications')}
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Request our detailed equipment catalogue for {equipment.name}. We'll send you complete technical specifications, features, and pricing information directly to your email.
+              </p>
+            </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-              <div className="grid md:grid-cols-2 gap-0">
-                {Object.entries(equipment.specifications).map(([key, value], index) => (
-                  <div
-                    key={index}
-                    className={`p-6 border-b border-gray-200 ${
-                      index % 2 === 0 ? 'border-r border-gray-200' : ''
+            {catalogueStatus === 'success' ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="bg-green-50 border-2 border-green-200 rounded-xl p-8 text-center"
+              >
+                <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
+                <h3 className="text-2xl font-bold text-green-800 mb-2">Request Received!</h3>
+                <p className="text-lg text-green-700 mb-4">
+                  Thank you! Someone from Van Dyk Recycling Solutions will reach out to you soon.
+                </p>
+                <button
+                  onClick={() => {
+                    setCatalogueEmail('');
+                    setCatalogueStatus('idle');
+                    setCatalogueError('');
+                  }}
+                  className="bg-vd-orange hover:bg-vd-orange-alt text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                >
+                  Request Another Catalogue
+                </button>
+              </motion.div>
+            ) : (
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <form
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    if (!catalogueEmail || !catalogueEmail.includes('@')) {
+                      setCatalogueError('Please enter a valid email address');
+                      return;
+                    }
+
+                    setCatalogueStatus('submitting');
+                    setCatalogueError('');
+
+                    const result = await submitCatalogueRequest({
+                      email: catalogueEmail,
+                      equipmentName: equipment.name,
+                      equipmentId: equipment.id?.toString(),
+                    });
+
+                    if (result.success) {
+                      setCatalogueStatus('success');
+                    } else {
+                      setCatalogueStatus('error');
+                      setCatalogueError(result.message || 'An error occurred. Please try again.');
+                    }
+                  }}
+                  className="space-y-6"
+                >
+                  <div>
+                    <label htmlFor="catalogue-email" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Email Address <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <Mail className="h-5 w-5 text-gray-400" />
+                      </div>
+                      <input
+                        type="email"
+                        id="catalogue-email"
+                        value={catalogueEmail}
+                        onChange={(e) => {
+                          setCatalogueEmail(e.target.value);
+                          setCatalogueError('');
+                        }}
+                        disabled={catalogueStatus === 'submitting'}
+                        className={`block w-full pl-10 pr-3 py-3 border rounded-xl focus:ring-2 focus:ring-vd-orange focus:border-vd-orange transition-all ${
+                          catalogueError ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                        } ${catalogueStatus === 'submitting' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        placeholder="your.email@example.com"
+                        required
+                      />
+                    </div>
+                    {catalogueError && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="flex items-center mt-2 text-red-600 text-sm"
+                      >
+                        <AlertCircle className="w-4 h-4 mr-1" />
+                        {catalogueError}
+                      </motion.div>
+                    )}
+                  </div>
+
+                  <motion.button
+                    type="submit"
+                    disabled={catalogueStatus === 'submitting' || !catalogueEmail}
+                    whileHover={catalogueStatus !== 'submitting' && catalogueEmail ? { scale: 1.02 } : {}}
+                    whileTap={catalogueStatus !== 'submitting' && catalogueEmail ? { scale: 0.98 } : {}}
+                    className={`w-full bg-vd-orange hover:bg-vd-orange-alt text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors flex items-center justify-center space-x-2 ${
+                      catalogueStatus === 'submitting' || !catalogueEmail
+                        ? 'opacity-50 cursor-not-allowed'
+                        : ''
                     }`}
                   >
-                    <div className="flex justify-between items-center">
-                      <span className="font-semibold text-gray-700">{key}</span>
-                      <span className="text-vd-blue-dark font-bold">{value}</span>
-                    </div>
-                  </div>
-                ))}
+                    {catalogueStatus === 'submitting' ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                        <span>Submitting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="w-5 h-5" />
+                        <span>Request Equipment Catalogue</span>
+                      </>
+                    )}
+                  </motion.button>
+                </form>
               </div>
-            </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -314,18 +506,21 @@ const EquipmentPageTemplate: React.FC<EquipmentPageProps> = ({ equipment }) => {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentGallerySlide}
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.5 }}
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
                     className="relative"
                   >
                     <div className="relative w-full h-[28rem] overflow-hidden">
-                      <img
+                      <motion.img
                         src={galleryItems[currentGallerySlide]}
                         alt={`${equipment.name} - ${t('common.image')} ${currentGallerySlide + 1}`}
                         className="w-full h-full object-cover"
                         loading="lazy"
+                        initial={{ scale: 1.1 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.6 }}
                         onError={(e) => {
                           e.currentTarget.src = '/Images/image-1749759453479.png';
                         }}
@@ -471,17 +666,6 @@ const EquipmentPageTemplate: React.FC<EquipmentPageProps> = ({ equipment }) => {
                   variants={fadeInUp}
                   className="bg-white p-6 rounded-xl shadow-lg"
                 >
-                  <div className="flex items-center mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-5 h-5 ${
-                          i < testimonial.rating ? 'text-vd-orange' : 'text-gray-300'
-                        }`}
-                        fill={i < testimonial.rating ? 'currentColor' : 'none'}
-                      />
-                    ))}
-                  </div>
                   <p className="text-gray-700 mb-4 italic">"{testimonial.quote}"</p>
                   <div>
                     <p className="font-semibold text-vd-blue-dark">{testimonial.name}</p>
@@ -510,15 +694,18 @@ const EquipmentPageTemplate: React.FC<EquipmentPageProps> = ({ equipment }) => {
               {replacePlaceholders(t('common.readyToGetStartedDesc'), { name: equipment.name })}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setShowQuoteForm(true)}
-                className="bg-vd-orange hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center space-x-2 transition-colors"
               >
-                <Quote className="w-5 h-5" />
-                <span>{t('common.getAQuote')}</span>
-              </motion.button>
+                <Link
+                  to="/quote"
+                  className="bg-vd-orange hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center space-x-2 transition-colors"
+                >
+                  <Quote className="w-5 h-5" />
+                  <span>{t('common.getAQuote')}</span>
+                </Link>
+              </motion.div>
               <Link
                 to="/contact"
                 className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-vd-blue px-8 py-4 rounded-xl font-semibold text-lg flex items-center justify-center space-x-2 transition-colors"
@@ -615,6 +802,7 @@ const EquipmentPageTemplate: React.FC<EquipmentPageProps> = ({ equipment }) => {
         )}
       </AnimatePresence>
 
+
       {/* Quote Form Modal */}
       <AnimatePresence>
         {showQuoteForm && (
@@ -650,6 +838,14 @@ const EquipmentPageTemplate: React.FC<EquipmentPageProps> = ({ equipment }) => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Product Schema Markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productSchema)
+        }}
+      />
     </div>
   );
 };

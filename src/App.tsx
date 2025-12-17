@@ -8,12 +8,16 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import CookieConsentBanner from './components/CookieConsentBanner';
-import { LanguageProvider } from './contexts/LanguageContext';
+import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
+import { useTranslation } from './hooks/useTranslation';
+import LoadingComponent from './components/LoadingComponent';
 import { initializeImageLoading } from './utils/imageLoader';
 import serviceWorkerManager from './utils/serviceWorker';
 import { initializePerformanceMonitoring } from './utils/performanceMonitor';
 import { accessibilityManager } from './utils/accessibility';
 import { initSentry, SentryErrorBoundary } from './utils/sentry';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const Home = React.lazy(() => import('./pages/Home'));
 const Equipment = React.lazy(() => import('./pages/Equipment'));
@@ -26,16 +30,22 @@ const OurCustomersInTheNews = React.lazy(() => import('./pages/OurCustomersInThe
 const ContactUs = React.lazy(() => import('./pages/ContactUs'));
 const About = React.lazy(() => import('./pages/About'));
 const Careers = React.lazy(() => import('./pages/Careers'));
+const JobApplication = React.lazy(() => import('./pages/JobApplication'));
 const Support = React.lazy(() => import('./pages/Support'));
 const PMI = React.lazy(() => import('./pages/PMI'));
 const QuoteForm = React.lazy(() => import('./components/QuoteForm'));
 const TestCenter = React.lazy(() => import('./pages/TestCenter'));
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 const CookiePolicy = React.lazy(() => import('./pages/CookiePolicy'));
+const CCPARights = React.lazy(() => import('./pages/CCPARights'));
+const GDPRRights = React.lazy(() => import('./pages/GDPRRights'));
+const Accessibility = React.lazy(() => import('./pages/Accessibility'));
+const TermsOfService = React.lazy(() => import('./pages/TermsOfService'));
 const VanDykUniversity = React.lazy(() => import('./pages/VanDykUniversity'));
 const PartsInStock = React.lazy(() => import('./pages/PartsInStock'));
 const RemoteTroubleshooting = React.lazy(() => import('./pages/RemoteTroubleshooting'));
 const Sitemap = React.lazy(() => import('./pages/Sitemap'));
+const FAQ = React.lazy(() => import('./pages/FAQ'));
 
 // Individual Equipment Pages
 const BollegraafPage = React.lazy(() => import('./pages/BollegraafPage'));
@@ -79,37 +89,30 @@ const createLazyComponent = (importFunc: () => Promise<any>) => {
         console.error('Failed to load component:', error);
       }
       return {
-        default: () => (
-          <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="text-center">
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                Loading...
-              </h2>
-              <p className="text-gray-600 mb-4">
-                Please wait while we load the page.
-              </p>
-            </div>
-          </div>
-        )
+        default: LoadingComponent
       };
     })
   );
 };
 
-const NotFound = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gray-100">
-    <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg text-center">
-      <h1 className="text-4xl font-bold text-vd-blue mb-4">404</h1>
-      <p className="text-gray-600 mb-4">Page not found</p>
-      <Link
-        to="/"
-        className="inline-block bg-vd-blue text-white py-2 px-4 rounded hover:bg-vd-blue-dark transition-colors duration-200"
-      >
-        Return Home
-      </Link>
+const NotFound = () => {
+  const { t } = useTranslation();
+  
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg text-center">
+        <h1 className="text-4xl font-bold text-vd-blue mb-4">{t('notFound.title')}</h1>
+        <p className="text-gray-600 mb-4">{t('notFound.message')}</p>
+        <Link
+          to="/"
+          className="inline-block bg-vd-blue text-white py-2 px-4 rounded hover:bg-vd-blue-dark transition-colors duration-200"
+        >
+          {t('notFound.returnHome')}
+        </Link>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // Smooth scroll handler component
 const SmoothScrollHandler = () => {
@@ -146,7 +149,7 @@ const AppRoutes = () => {
 
   return (
     <NavigationErrorBoundary>
-      <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gray-100"><div className="text-gray-600">Loading page...</div></div>}>
+      <Suspense fallback={<LoadingComponent />}>
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
@@ -174,11 +177,18 @@ const AppRoutes = () => {
               <Route path="/contact" element={<ContactUs />} />
               <Route path="/about" element={<About />} />
               <Route path="/careers" element={<Careers />} />
+              <Route path="/job-application" element={<JobApplication />} />
               <Route path="/pmi" element={<PMI />} />
               <Route path="/quote" element={<QuoteForm />} />
               <Route path="/test-center" element={<TestCenter />} />
+              <Route path="/faq" element={<FAQ />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/cookie-policy" element={<CookiePolicy />} />
+              <Route path="/ccpa-rights" element={<CCPARights />} />
+              <Route path="/gdpr-rights" element={<GDPRRights />} />
+              <Route path="/accessibility" element={<Accessibility />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
               <Route path="/van-dyk-university" element={<VanDykUniversity />} />
               <Route path="/parts-in-stock" element={<PartsInStock />} />
               <Route path="/remote-troubleshooting" element={<RemoteTroubleshooting />} />
@@ -236,14 +246,21 @@ function App() {
     // Temporarily disable service worker to fix module loading issues
     // serviceWorkerManager.register();
     
-    // Unregister any existing service workers
+    // Unregister any existing service workers to prevent caching issues
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(registrations => {
         registrations.forEach(registration => {
-          if (process.env.NODE_ENV === 'development') {
-            console.log('Unregistering service worker for testing:', registration.scope);
-          }
           registration.unregister();
+        });
+      });
+    }
+    
+    // Clear browser cache for translations on version change
+    if ('caches' in window) {
+      caches.keys().then(names => {
+        names.forEach(name => {
+          // Clear all caches to ensure fresh translations
+          caches.delete(name);
         });
       });
     }
@@ -262,23 +279,33 @@ function App() {
   return (
     <SentryErrorBoundary>
       <HelmetProvider>
-        <ErrorBoundary>
-          <LanguageProvider>
+        <LanguageProvider>
+          <ErrorBoundaryWrapper>
             <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
               <div className="min-h-screen bg-white">
                 <Navbar />
                 <SmoothScrollHandler />
-                <AppRoutes />
+                <main role="main">
+                  <AppRoutes />
+                </main>
                 <Footer />
                 <Chatbot />
                 <CookieConsentBanner />
+                <SpeedInsights />
+                <Analytics />
               </div>
             </Router>
-          </LanguageProvider>
-        </ErrorBoundary>
+          </ErrorBoundaryWrapper>
+        </LanguageProvider>
       </HelmetProvider>
     </SentryErrorBoundary>
   );
 }
+
+// Wrapper component to provide language to ErrorBoundary
+const ErrorBoundaryWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { language } = useLanguage();
+  return <ErrorBoundary language={language}>{children}</ErrorBoundary>;
+};
 
 export default App;

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, Eye, X, BookOpen, Lightbulb } from 'lucide-react';
 import { animationConfig } from '../utils/animations';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface ExpertTip {
   id: number;
@@ -19,6 +20,7 @@ interface ExpertTip {
 }
 
 const ExpertTips = () => {
+  const { t } = useTranslation();
   const [selectedTip, setSelectedTip] = useState<ExpertTip | null>(null);
   const [showTipModal, setShowTipModal] = useState(false);
   const fadeInUp = animationConfig.fadeInUp;
@@ -26,47 +28,43 @@ const ExpertTips = () => {
   const expertTips: ExpertTip[] = [
     {
       id: 1,
-      title: 'Maximizing Baler Efficiency: 10 Essential Maintenance Tips',
-      description: 'Learn the critical maintenance practices that keep your balers running at peak performance and extend their operational life.',
-      category: 'Maintenance',
+      title: t('expertTips.tip1Title'),
+      description: t('expertTips.tip1Description'),
+      category: t('expertTips.categoryMaintenance'),
       date: '2024-12-20',
       readTime: '8 min read',
       image: '/Images/bollegraaf-products.jpg',
       link: 'https://vdrs.com/expert-tips/maximizing-baler-efficiency/',
       views: '2.3k',
-      featured: true,
-      trending: true,
-      fullContent: '<p>Proper maintenance is crucial for maximizing baler efficiency and longevity. Here are 10 essential tips...</p>'
+      fullContent: `<p>${t('expertTips.tip1Content')}</p>`
     },
     {
       id: 2,
-      title: 'Optical Sorting Optimization: Getting the Best Results',
-      description: 'Expert guidance on configuring and optimizing optical sorting systems for maximum material recovery rates.',
-      category: 'Technology',
+      title: t('expertTips.tip2Title'),
+      description: t('expertTips.tip2Description'),
+      category: t('expertTips.categoryTechnology'),
       date: '2024-12-18',
       readTime: '6 min read',
       image: '/Images/tomra-optical-sorting.jpg',
       link: 'https://vdrs.com/expert-tips/optical-sorting-optimization/',
       views: '1.8k',
-      featured: true
     },
     {
       id: 3,
-      title: 'Single Stream Processing: Common Mistakes to Avoid',
-      description: 'Avoid costly mistakes in single stream processing with these expert insights and best practices.',
-      category: 'Processing',
+      title: t('expertTips.tip3Title'),
+      description: t('expertTips.tip3Description'),
+      category: t('expertTips.categoryProcessing'),
       date: '2024-12-15',
       readTime: '7 min read',
       image: '/Images/single-stream-recycling.jpg',
       link: 'https://vdrs.com/expert-tips/single-stream-mistakes/',
       views: '1.5k',
-      trending: true
     },
     {
       id: 4,
-      title: 'Food Waste Depackaging: Safety and Efficiency Guidelines',
-      description: 'Essential safety protocols and efficiency tips for food waste depackaging operations.',
-      category: 'Safety',
+      title: t('expertTips.tip4Title'),
+      description: t('expertTips.tip4Description'),
+      category: t('expertTips.categorySafety'),
       date: '2024-12-12',
       readTime: '5 min read',
       image: '/Images/smicon-depackager.jpg',
@@ -75,21 +73,20 @@ const ExpertTips = () => {
     },
     {
       id: 5,
-      title: 'MRF Design: Layout Optimization for Maximum Throughput',
-      description: 'Strategic layout design principles for material recovery facilities to maximize processing efficiency.',
-      category: 'Design',
+      title: t('expertTips.tip5Title'),
+      description: t('expertTips.tip5Description'),
+      category: t('expertTips.categoryDesign'),
       date: '2024-12-10',
       readTime: '9 min read',
       image: '/Images/mrf-systems.jpg',
       link: 'https://vdrs.com/expert-tips/mrf-design-optimization/',
       views: '2.1k',
-      featured: true
     },
     {
       id: 6,
-      title: 'Odor Control: Best Practices for Waste Processing Facilities',
-      description: 'Comprehensive guide to effective odor management in waste processing operations.',
-      category: 'Environmental',
+      title: t('expertTips.tip6Title'),
+      description: t('expertTips.tip6Description'),
+      category: t('expertTips.categoryEnvironmental'),
       date: '2024-12-08',
       readTime: '6 min read',
       image: '/Images/centriair-equipment.jpg',
@@ -98,46 +95,45 @@ const ExpertTips = () => {
     },
     {
       id: 7,
-      title: 'Equipment Troubleshooting: Quick Diagnostic Methods',
-      description: 'Fast and effective troubleshooting techniques for common equipment issues in recycling facilities.',
-      category: 'Troubleshooting',
+      title: t('expertTips.tip7Title'),
+      description: t('expertTips.tip7Description'),
+      category: t('expertTips.categoryTroubleshooting'),
       date: '2024-12-05',
       readTime: '8 min read',
-      image: '/Images/equipment-maintenance.jpg',
+      image: '/Images/image-1749759453479.png', // Fallback: equipment-maintenance.jpg not found
       link: 'https://vdrs.com/expert-tips/equipment-troubleshooting/',
       views: '1.9k',
-      trending: true
     },
     {
       id: 8,
-      title: 'Energy Efficiency: Reducing Power Consumption in MRFs',
-      description: 'Practical strategies for reducing energy consumption while maintaining processing efficiency.',
-      category: 'Efficiency',
+      title: t('expertTips.tip8Title'),
+      description: t('expertTips.tip8Description'),
+      category: t('expertTips.categoryEfficiency'),
       date: '2024-12-03',
       readTime: '7 min read',
-      image: '/Images/energy-efficiency.jpg',
+      image: '/Images/image-1749759453479.png', // Fallback: energy-efficiency.jpg not found
       link: 'https://vdrs.com/expert-tips/energy-efficiency-mrfs/',
       views: '1.4k'
     },
     {
       id: 9,
-      title: 'Material Quality: Ensuring High-Quality Output',
-      description: 'Techniques for maintaining consistent material quality throughout the recycling process.',
-      category: 'Quality',
+      title: t('expertTips.tip9Title'),
+      description: t('expertTips.tip9Description'),
+      category: t('expertTips.categoryQuality'),
       date: '2024-12-01',
       readTime: '6 min read',
-      image: '/Images/material-quality.jpg',
+      image: '/Images/image-1749759453479.png', // Fallback: material-quality.jpg not found
       link: 'https://vdrs.com/expert-tips/material-quality-control/',
       views: '1.6k'
     },
     {
       id: 10,
-      title: 'Staff Training: Building a Skilled Workforce',
-      description: 'Effective training programs for developing skilled operators and maintenance personnel.',
-      category: 'Training',
+      title: t('expertTips.tip10Title'),
+      description: t('expertTips.tip10Description'),
+      category: t('expertTips.categoryTraining'),
       date: '2024-11-28',
       readTime: '5 min read',
-      image: '/Images/staff-training.jpg',
+      image: '/Images/van-dyk-university.jpg', // Using training-related image
       link: 'https://vdrs.com/expert-tips/staff-training-programs/',
       views: '1.3k'
     }
@@ -181,10 +177,10 @@ const ExpertTips = () => {
             alt="Expert Tips"
             className="w-full h-full object-cover object-center scale-105"
             loading="eager"
-            fetchPriority="high"
+            {...({ fetchpriority: "high" } as any)}
             onError={(e) => {
               if (import.meta.env.DEV) {
-                console.log('Hero image failed to load, using fallback');
+                console.warn('Hero image failed to load, using fallback');
               }
               e.currentTarget.src = '/Images/first.jpg';
             }}
@@ -251,13 +247,6 @@ const ExpertTips = () => {
                         e.currentTarget.src = '/Images/first.jpg';
                       }}
                     />
-                    {tip.trending && (
-                      <div className="absolute top-4 right-4">
-                        <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium">
-                          Trending
-                        </span>
-                      </div>
-                    )}
                     <div className="absolute bottom-4 left-4">
                       <div className="bg-white/90 rounded-full p-2">
                         <Lightbulb className="w-5 h-5 text-vd-orange" />

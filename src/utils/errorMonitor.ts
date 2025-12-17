@@ -118,7 +118,7 @@ class ErrorMonitor {
     }
   }
 
-  private async sendToAnalyticsService(metric: any): Promise<void> {
+  private async sendToAnalyticsService(metric: Record<string, unknown>): Promise<void> {
     try {
       // In a real application, integrate with analytics service
       // Analytics metric logged
@@ -131,8 +131,16 @@ class ErrorMonitor {
 // Export singleton instance
 export const errorMonitor = ErrorMonitor.getInstance();
 
+/**
+ * Error info structure from React error boundaries.
+ */
+interface ReactErrorInfo {
+  componentStack?: string;
+  [key: string]: unknown;
+}
+
 // Utility function for React error boundaries
-export const logReactError = (error: Error, errorInfo: any): void => {
+export const logReactError = (error: Error, errorInfo: ReactErrorInfo): void => {
   errorMonitor.logError({
     message: error.message,
     stack: error.stack,
@@ -157,7 +165,7 @@ export const measurePerformance = (name: string, fn: () => void): void => {
   });
 };
 
-export const measureAsyncPerformance = async (name: string, fn: () => Promise<any>): Promise<any> => {
+export const measureAsyncPerformance = async <T>(name: string, fn: () => Promise<T>): Promise<T> => {
   const start = performance.now();
   const result = await fn();
   const end = performance.now();

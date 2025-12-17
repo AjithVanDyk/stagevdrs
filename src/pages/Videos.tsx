@@ -124,7 +124,7 @@ const Videos = () => {
       category: 'Composting',
       date: '2024-12-03',
       duration: '3:30',
-      thumbnail: '/Images/densimetric-table.jpg',
+      thumbnail: '/Images/densimetric-table-new.jpg',
       videoUrl: 'https://youtu.be/5VvtScst8yI',
       views: '7.8k'
     },
@@ -190,10 +190,10 @@ const Videos = () => {
             alt="Videos"
             className="w-full h-full object-cover object-center scale-105"
             loading="eager"
-            fetchPriority="high"
+            {...({ fetchpriority: "high" } as any)}
             onError={(e) => {
               if (import.meta.env.DEV) {
-                console.log('Hero image failed to load, using fallback');
+                console.warn('Hero image failed to load, using fallback');
               }
               e.currentTarget.src = '/Images/first.jpg';
             }}
@@ -404,7 +404,6 @@ const Videos = () => {
 };
 
 export default Videos;
-
 
 
 

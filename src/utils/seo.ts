@@ -1,4 +1,26 @@
-// SEO utility for generating dynamic meta tags per page
+/**
+ * @fileoverview SEO utility for generating dynamic meta tags per page.
+ * Provides structured data for search engines and social media sharing.
+ * @author Van Dyk Recycling Solutions
+ * @module utils/seo
+ */
+
+/**
+ * SEO metadata structure for pages.
+ * 
+ * @interface SEOData
+ * @property {string} title - Page title (will be prefixed with site name)
+ * @property {string} description - Meta description for search engines
+ * @property {string} [keywords] - Comma-separated keywords
+ * @property {string} [image] - Open Graph image URL
+ * @property {string} [url] - Canonical URL for the page
+ * @property {'website' | 'article' | 'product'} [type='website'] - Open Graph type
+ * @property {string} [publishedTime] - ISO 8601 publication date
+ * @property {string} [modifiedTime] - ISO 8601 modification date
+ * @property {string} [author] - Author name
+ * @property {string} [section] - Content section/category
+ * @property {string[]} [tags] - Content tags
+ */
 export interface SEOData {
   title: string;
   description: string;
@@ -13,9 +35,54 @@ export interface SEOData {
   tags?: string[];
 }
 
-export const generateSEOData = (pageData: SEOData): SEOData => {
+/**
+ * Generates complete SEO data with language support and hreflang URLs.
+ * Automatically adds site name to title, generates canonical URLs, and creates
+ * hreflang links for multi-language support.
+ * 
+ * @param {SEOData} pageData - Base SEO data for the page
+ * @param {string} [language='en'] - Current language code
+ * @param {string} [pathname='/'] - Current page pathname
+ * @returns {SEOData & { hreflangUrls?: { lang: string; url: string }[] }} Complete SEO data with hreflang URLs
+ * 
+ * @example
+ * ```typescript
+ * const seoData = generateSEOData({
+ *   title: 'Equipment Catalog',
+ *   description: 'Browse our recycling equipment',
+ *   url: '/equipment'
+ * }, 'en', '/equipment');
+ * 
+ * // Returns: {
+ * //   title: 'Equipment Catalog | Van Dyk Recycling Solutions',
+ * //   description: 'Browse our recycling equipment',
+ * //   url: 'https://vdrs.com/equipment',
+ * //   hreflangUrls: [
+ * //     { lang: 'en', url: 'https://vdrs.com/en/equipment' },
+ * //     { lang: 'fr', url: 'https://vdrs.com/fr/equipment' },
+ * //     ...
+ * //   ]
+ * // }
+ * ```
+ */
+export const generateSEOData = (
+  pageData: SEOData,
+  language: string = 'en',
+  pathname: string = '/'
+): SEOData & { hreflangUrls?: { lang: string; url: string }[] } => {
   const baseUrl = 'https://vdrs.com';
   const defaultImage = 'https://vdrs.com/Images/VDRS-lockup-mod-8-19-22-350.png';
+  
+  // Generate language-prefixed URLs for hreflang
+  // Note: This assumes route-based language routing will be implemented
+  // For now, URLs will be /en/path, /fr/path, /es/path
+  const currentPath = pageData.url || pathname;
+  const hreflangUrls = [
+    { lang: 'en', url: `${baseUrl}/en${currentPath === '/' ? '' : currentPath}` },
+    { lang: 'fr', url: `${baseUrl}/fr${currentPath === '/' ? '' : currentPath}` },
+    { lang: 'es', url: `${baseUrl}/es${currentPath === '/' ? '' : currentPath}` },
+    { lang: 'x-default', url: `${baseUrl}/en${currentPath === '/' ? '' : currentPath}` }
+  ];
   
   return {
     title: `${pageData.title} | Van Dyk Recycling Solutions`,
@@ -28,7 +95,8 @@ export const generateSEOData = (pageData: SEOData): SEOData => {
     modifiedTime: pageData.modifiedTime,
     author: pageData.author || 'Van Dyk Recycling Solutions',
     section: pageData.section,
-    tags: pageData.tags
+    tags: pageData.tags,
+    hreflangUrls
   };
 };
 
@@ -76,6 +144,14 @@ export const SEO_PAGES = {
     url: '/careers'
   },
   
+  faq: {
+    title: 'Recycling Equipment FAQs - Van Dyk Recycling Solutions',
+    description: 'Get answers to common questions about recycling equipment, MRF systems, sorting technology, and recycling processes. Expert guidance on choosing, maintaining, and optimizing recycling systems.',
+    keywords: 'recycling equipment FAQs, MRF equipment, recycling systems, sorting technology, single stream recycling FAQs, plastic recycling, recycling sorting, material recovery facility, recycling equipment questions, recycling technology FAQs, MRF FAQs, optical sorting FAQs, baler FAQs, recycling maintenance FAQs',
+    url: '/faq'
+  },
+  
+  
   privacy: {
     title: 'Privacy Policy',
     description: 'Van Dyk Recycling Solutions Privacy Policy - Learn how we collect, use, and protect your personal information when you visit our website or use our services.',
@@ -88,6 +164,34 @@ export const SEO_PAGES = {
     description: 'Understand how Van Dyk Recycling Solutions uses cookies, analytics, and tracking technologies, plus how you can manage your preferences.',
     keywords: 'cookie policy, cookies, tracking technologies, GDPR cookies, CCPA cookies',
     url: '/cookie-policy'
+  },
+
+  ccpa: {
+    title: 'California Privacy Rights (CCPA/CPRA)',
+    description: 'Your California privacy rights under the California Consumer Privacy Act and California Privacy Rights Act. Learn how to exercise your rights to access, delete, and opt-out of data sales.',
+    keywords: 'CCPA, CPRA, California privacy rights, do not sell my information, California consumer privacy',
+    url: '/ccpa-rights'
+  },
+
+  gdpr: {
+    title: 'GDPR Rights - Data Protection',
+    description: 'Exercise your data protection rights under the General Data Protection Regulation (GDPR). Request access, deletion, portability, and more.',
+    keywords: 'GDPR rights, data protection, privacy rights, data access, data deletion, EU privacy',
+    url: '/gdpr-rights'
+  },
+
+  accessibility: {
+    title: 'Accessibility Statement',
+    description: 'Van Dyk Recycling Solutions commitment to digital accessibility. Learn about our WCAG 2.1 AA compliance and accessibility features.',
+    keywords: 'accessibility, WCAG, digital accessibility, accessible website, disability access',
+    url: '/accessibility'
+  },
+
+  terms: {
+    title: 'Terms of Service',
+    description: 'Terms of Service for Van Dyk Recycling Solutions website. Read our usage terms, liability limitations, and intellectual property rights.',
+    keywords: 'terms of service, terms and conditions, website terms, usage agreement',
+    url: '/terms'
   }
 };
 

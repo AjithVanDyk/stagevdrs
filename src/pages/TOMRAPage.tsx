@@ -1,35 +1,32 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const TOMRAPage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 3,
-    name: 'TOMRA Optical Sorting',
-    image: '/Images/Equipment/Tomra Optical sorters/product image_tomra.jpg',
-    description: 'Advanced optical sorting technology using near-infrared spectroscopy and artificial intelligence for precise material identification and separation. TOMRA systems deliver exceptional accuracy and efficiency.',
+    name: t('equipment.equipment3Name'),
+    image: '/Images/Equipment/Tomra%20Optical%20sorters/product%20image_tomra.jpg',
+    description: t('equipment.equipment3Description'),
     features: [
-      'Near-infrared (NIR) spectroscopy technology',
-      'AI-powered material recognition',
-      'High-speed sorting up to 20 tph',
-      'Multi-material detection capabilities',
-      'Precise ejection system',
-      'Real-time quality monitoring',
-      'Low maintenance design',
-      'Energy efficient operation',
-      'Modular installation options',
-      'Advanced data analytics'
+      t('equipment.equipment3Feature1'),
+      t('equipment.equipment3Feature2'),
+      t('equipment.equipment3Feature3'),
+      t('equipment.equipment3Feature4'),
+      t('equipment.equipment3Feature5'),
+      t('equipment.equipment3Feature6'),
+      t('equipment.equipment3Feature7'),
+      t('equipment.equipment3Feature8'),
     ],
     specifications: {
-      'Sorting Speed': 'Up to 20 tons per hour',
-      'Detection Accuracy': '99.7% material identification',
-      'Technology': 'Near-infrared spectroscopy',
-      'Ejection Precision': '99.9% accuracy',
-      'Power Consumption': 'Energy efficient design',
-      'Maintenance': 'Minimal maintenance required',
-      'Installation': 'Modular design',
-      'Data Analytics': 'Real-time monitoring',
-      'Material Types': 'Plastics, paper, metals, glass',
-      'Operating Range': '-20°C to +60°C'
+      [t('equipment.equipment3Spec1Key')]: t('equipment.equipment3Spec1Value'),
+      [t('equipment.equipment3Spec2Key')]: t('equipment.equipment3Spec2Value'),
+      [t('equipment.equipment3Spec3Key')]: t('equipment.equipment3Spec3Value'),
+      [t('equipment.equipment3Spec4Key')]: t('equipment.equipment3Spec4Value'),
+      [t('equipment.equipment3Spec5Key')]: t('equipment.equipment3Spec5Value'),
+      [t('equipment.equipment3Spec6Key')]: t('equipment.equipment3Spec6Value'),
+      [t('equipment.equipment3Spec7Key')]: t('equipment.equipment3Spec7Value'),
     },
     applications: [
       { name: 'Single stream recycling', link: '/solutions/single-stream-recycling' },
@@ -50,13 +47,13 @@ const TOMRAPage: React.FC = () => {
       'https://youtu.be/bnpoNRYk7_I'  // E-Scrap Recycling Processing with Tomra Optical Sorter at Premier Surplus Dawsonville GA
     ],
     gallery: [
-      '/Images/Equipment/Tomra Optical sorters/Gallery 1_tomra.jpg',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 2_tomra.png',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 3_tomra.png',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 4_tomra.jpeg',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 5_tomra.jpg',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 6_tomra.jpeg',
-      '/Images/Equipment/Tomra Optical sorters/Gallery 7_tomra.png'
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%201_tomra.jpg',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%202_tomra.png',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%203_tomra.png',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%204_tomra.jpeg',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%205_tomra.jpg',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%206_tomra.jpeg',
+      '/Images/Equipment/Tomra%20Optical%20sorters/Gallery%207_tomra.png'
     ],
     testimonials: [
       {

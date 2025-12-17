@@ -1,35 +1,27 @@
 import React from 'react';
 import EquipmentPageTemplate from '../components/EquipmentPageTemplate';
+import { useTranslation } from '../hooks/useTranslation';
 
 const DensimetricTablePage: React.FC = () => {
+  const { t } = useTranslation();
   const equipment = {
     id: 10,
-    name: 'Densimetric Table',
+    name: t('equipment.equipment10Name'),
     image: '/Images/densimetric-table-new.jpg',
-    description: 'Advanced densimetric separation technology for efficient material sorting based on density differences. Our densimetric tables provide precise separation of materials with varying densities.',
+    description: t('equipment.equipment10Description'),
     features: [
-      'Density-based material separation',
-      'High-precision sorting technology',
-      'Multiple density separation stages',
-      'Automated material handling',
-      'Low maintenance design',
-      'Energy efficient operation',
-      'Modular construction',
-      'Easy integration capabilities',
-      'Precise density control',
-      'Robust construction materials'
+      t('equipment.equipment10Feature1'),
+      t('equipment.equipment10Feature2'),
+      t('equipment.equipment10Feature3'),
+      t('equipment.equipment10Feature4'),
+      t('equipment.equipment10Feature5'),
+      t('equipment.equipment10Feature6'),
     ],
     specifications: {
-      'Separation Accuracy': '99%+ density-based sorting',
-      'Throughput': 'Up to 40 tons per hour',
-      'Density Range': '0.1 to 6.0 g/cm³',
-      'Separation Stages': '1-2 stage configurations',
-      'Power Consumption': 'Low energy consumption',
-      'Maintenance': 'Minimal maintenance required',
-      'Construction': 'Modular design',
-      'Integration': 'Easy system integration',
-      'Control': 'Automated density control',
-      'Warranty': '2-year comprehensive warranty'
+      [t('equipment.equipment10Spec1Key')]: t('equipment.equipment10Spec1Value'),
+      [t('equipment.equipment10Spec2Key')]: t('equipment.equipment10Spec2Value'),
+      [t('equipment.equipment10Spec3Key')]: t('equipment.equipment10Spec3Value'),
+      [t('equipment.equipment10Spec4Key')]: t('equipment.equipment10Spec4Value'),
     },
     applications: [
       { name: 'Compost refining', link: '/solutions/composting-densimetric-tables' },
@@ -40,10 +32,10 @@ const DensimetricTablePage: React.FC = () => {
       'https://youtu.be/uyoDglUAzWw'  // New Densimetric Table
     ],
     gallery: [
-      '/Images/Equipment/Densimetric table/Densimetric table_Zbest.jpeg',
-      '/Images/Equipment/Densimetric table/Dtable_Clean compost pic.JPG',
-      '/Images/Equipment/Densimetric table/Dtable_Dirty Compost Infeed.JPG',
-      '/Images/Equipment/Densimetric table/Dtable_Heavy contamination.JPG'
+      '/Images/Equipment/Densimetric%20table/Densimetric%20table_Zbest.jpeg',
+      '/Images/Equipment/Densimetric%20table/Dtable_Clean%20compost%20pic.JPG',
+      '/Images/Equipment/Densimetric%20table/Dtable_Dirty%20Compost%20Infeed.JPG',
+      '/Images/Equipment/Densimetric%20table/Dtable_Heavy%20contamination.JPG'
     ],
     testimonials: []
   };

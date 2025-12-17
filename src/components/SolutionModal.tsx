@@ -29,6 +29,10 @@ const SolutionModal: React.FC<SolutionModalProps> = ({ solution, isOpen, onClose
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="solution-modal-title"
+            aria-describedby="solution-modal-description"
           >
             {/* Header */}
             <div className="relative h-64 bg-gradient-to-r from-vd-blue-dark to-vd-blue">
@@ -45,9 +49,9 @@ const SolutionModal: React.FC<SolutionModalProps> = ({ solution, isOpen, onClose
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-6 left-6 text-white">
-                <h2 className="text-4xl font-bold mb-2 leading-tight">{solution.title}</h2>
+                <h2 id="solution-modal-title" className="text-4xl font-bold mb-2 leading-tight">{solution.title}</h2>
                 {solution.description && (
-                  <p className="text-lg opacity-90">{solution.description}</p>
+                  <p id="solution-modal-description" className="text-lg opacity-90">{solution.description}</p>
                 )}
               </div>
               <button

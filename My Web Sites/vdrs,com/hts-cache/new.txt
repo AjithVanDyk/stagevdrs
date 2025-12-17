@@ -1,3 +1,0 @@
-date	size'/'remotesize	flags(request:Update,Range state:File response:Modified,Chunked,gZipped)	statuscode	status ('servermsg')	MIME	Etag|Date	URL	localfile	(from URL)
-13:20:48	114/114	---M-Z	200	added ('OK')	text/plain	etag:%226c33e6-e0-61e83f872ef34-gzip%22	http://vdrs.com/robots.txt		(from )
-13:20:50	0/0	---MC-	301	error ('Moved%20Permanently')	text/html	date:Fri,%2029%20Aug%202025%2017:20:50%20GMT	http://vdrs.com/	C:/My%20Web%20Sites/vdrs,com/index-2.html	(from )

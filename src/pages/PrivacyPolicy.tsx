@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Shield, Lock, Eye, Database, Mail, Phone, MapPin } from 'lucide-react';
 import SEO from '../components/SEO';
@@ -251,6 +252,96 @@ const PrivacyPolicy = () => {
             <motion.section variants={fadeInUp} className="mb-12">
               <div className="bg-white rounded-2xl shadow-lg p-8">
                 <h2 className="text-2xl font-bold text-vd-blue-dark mb-6">
+                  {t('privacyPolicy.legalBasisTitle')}
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  {t('privacyPolicy.legalBasisIntro')}
+                </p>
+                <ul className="list-disc list-inside text-gray-700 space-y-3 ml-4">
+                  <li>{t('privacyPolicy.legalBasisConsent')}</li>
+                  <li>{t('privacyPolicy.legalBasisContract')}</li>
+                  <li>{t('privacyPolicy.legalBasisLegitimateInterest')}</li>
+                  <li>{t('privacyPolicy.legalBasisLegalObligation')}</li>
+                </ul>
+              </div>
+            </motion.section>
+
+            <motion.section variants={fadeInUp} className="mb-12">
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-vd-blue-dark mb-6">
+                  {t('privacyPolicy.retentionTitle')}
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  {t('privacyPolicy.retentionIntro')}
+                </p>
+                <ul className="list-disc list-inside text-gray-700 space-y-3 ml-4">
+                  <li>{t('privacyPolicy.retentionContact')}</li>
+                  <li>{t('privacyPolicy.retentionAnalytics')}</li>
+                  <li>{t('privacyPolicy.retentionCookies')}</li>
+                  <li>{t('privacyPolicy.retentionMarketing')}</li>
+                </ul>
+              </div>
+            </motion.section>
+
+            <motion.section variants={fadeInUp} className="mb-12">
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-vd-blue-dark mb-6">
+                  {t('privacyPolicy.internationalTransfersTitle')}
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  {t('privacyPolicy.internationalTransfersIntro')}
+                </p>
+                <p className="text-gray-700 leading-relaxed mb-3 font-semibold">
+                  {t('privacyPolicy.internationalTransfersServices')}
+                </p>
+                <ul className="list-disc list-inside text-gray-700 space-y-3 ml-4 mb-4">
+                  <li>{t('privacyPolicy.internationalTransfersVercel')}</li>
+                  <li>{t('privacyPolicy.internationalTransfersGoogle')}</li>
+                </ul>
+                <p className="text-gray-700 leading-relaxed">
+                  {t('privacyPolicy.internationalTransfersSafeguards')}
+                </p>
+              </div>
+            </motion.section>
+
+            <motion.section variants={fadeInUp} className="mb-12">
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-vd-blue-dark mb-6">
+                  {t('privacyPolicy.breachNotificationTitle')}
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  {t('privacyPolicy.breachNotificationIntro')}
+                </p>
+                <ul className="list-disc list-inside text-gray-700 space-y-3 ml-4 mb-4">
+                  <li>{t('privacyPolicy.breachNotification72Hours')}</li>
+                  <li>{t('privacyPolicy.breachNotificationUsers')}</li>
+                </ul>
+                <p className="text-gray-700 leading-relaxed mb-3">
+                  {t('privacyPolicy.breachNotificationProcess')}
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  {t('privacyPolicy.breachNotificationContact')}
+                </p>
+              </div>
+            </motion.section>
+
+            <motion.section variants={fadeInUp} className="mb-12">
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-vd-blue-dark mb-6">
+                  {t('privacyPolicy.dpoTitle') || 'Data Protection Officer (DPO)'}
+                </h2>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  {t('privacyPolicy.dpoNote') || 'Under GDPR, a Data Protection Officer (DPO) is required for organizations that process large amounts of personal data or engage in systematic monitoring. Based on our current data processing activities, we have determined that a DPO is not required at this time. However, if you have questions about data protection, please contact us at info@vdrs.com.'}
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  {t('privacyPolicy.dpoContact') || 'For data protection inquiries, please contact: info@vdrs.com or call (203) 967-1100.'}
+                </p>
+              </div>
+            </motion.section>
+
+            <motion.section variants={fadeInUp} className="mb-12">
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-vd-blue-dark mb-6">
                   {t('privacyPolicy.rightsTitle')}
                 </h2>
                 <p className="text-gray-700 leading-relaxed mb-6">
@@ -270,6 +361,25 @@ const PrivacyPolicy = () => {
                       </ul>
                     </div>
                   ))}
+                </div>
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    {t('privacyPolicy.exerciseRightsNote') || 'To exercise your privacy rights, please visit our dedicated pages:'}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <Link
+                      to="/gdpr-rights"
+                      className="inline-flex items-center px-4 py-2 bg-vd-blue hover:bg-vd-blue-dark text-white font-semibold rounded-lg transition-colors"
+                    >
+                      {t('privacyPolicy.gdprRightsLink') || 'GDPR Rights'}
+                    </Link>
+                    <Link
+                      to="/ccpa-rights"
+                      className="inline-flex items-center px-4 py-2 bg-vd-orange hover:bg-vd-orange-alt text-white font-semibold rounded-lg transition-colors"
+                    >
+                      {t('privacyPolicy.ccpaRightsLink') || 'California Privacy Rights (CCPA)'}
+                    </Link>
+                  </div>
                 </div>
               </div>
             </motion.section>

@@ -1,6 +1,23 @@
+/**
+ * @fileoverview Skeleton loading components for improved perceived performance.
+ * Provides animated placeholder UI while content is loading.
+ * @author Van Dyk Recycling Solutions
+ * @module components/Skeleton
+ */
+
 import React from 'react';
 import { motion } from 'framer-motion';
 
+/**
+ * Skeleton component props.
+ * 
+ * @interface SkeletonProps
+ * @property {string} [className] - Additional CSS classes
+ * @property {'text' | 'rectangular' | 'circular' | 'card'} [variant='rectangular'] - Shape variant
+ * @property {string | number} [width] - Width (CSS value or number)
+ * @property {string | number} [height] - Height (CSS value or number)
+ * @property {'pulse' | 'wave'} [animation='pulse'] - Animation type
+ */
 interface SkeletonProps {
   className?: string;
   variant?: 'text' | 'rectangular' | 'circular' | 'card';
@@ -9,6 +26,25 @@ interface SkeletonProps {
   animation?: 'pulse' | 'wave';
 }
 
+/**
+ * Skeleton loading component for displaying animated placeholders.
+ * Improves perceived performance by showing loading states instead of blank screens.
+ * 
+ * @param {SkeletonProps} props - Skeleton component props
+ * @returns {JSX.Element} Animated skeleton element
+ * 
+ * @example
+ * ```tsx
+ * // Basic skeleton
+ * <Skeleton variant="rectangular" width="100%" height="200px" />
+ * 
+ * // Text skeleton
+ * <Skeleton variant="text" width="80%" />
+ * 
+ * // Circular avatar skeleton
+ * <Skeleton variant="circular" width={50} height={50} />
+ * ```
+ */
 const Skeleton: React.FC<SkeletonProps> = ({
   className = '',
   variant = 'rectangular',
@@ -48,7 +84,18 @@ const Skeleton: React.FC<SkeletonProps> = ({
   );
 };
 
-// Pre-built skeleton components
+/**
+ * Pre-built skeleton card component for equipment/solution cards.
+ * 
+ * @param {Object} props - Component props
+ * @param {string} [props.className] - Additional CSS classes
+ * @returns {JSX.Element} Skeleton card layout
+ * 
+ * @example
+ * ```tsx
+ * {loading ? <SkeletonCard /> : <EquipmentCard data={equipment} />}
+ * ```
+ */
 export const SkeletonCard: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div className={`bg-white rounded-xl shadow-lg p-6 ${className}`}>
     <Skeleton variant="rectangular" height="200px" className="mb-4" />
@@ -61,6 +108,19 @@ export const SkeletonCard: React.FC<{ className?: string }> = ({ className = '' 
   </div>
 );
 
+/**
+ * Pre-built skeleton text component for multi-line text placeholders.
+ * 
+ * @param {Object} props - Component props
+ * @param {number} [props.lines=3] - Number of text lines to display
+ * @param {string} [props.className] - Additional CSS classes
+ * @returns {JSX.Element} Multi-line skeleton text
+ * 
+ * @example
+ * ```tsx
+ * {loading ? <SkeletonText lines={5} /> : <ArticleContent />}
+ * ```
+ */
 export const SkeletonText: React.FC<{ lines?: number; className?: string }> = ({ 
   lines = 3, 
   className = '' 
@@ -77,6 +137,16 @@ export const SkeletonText: React.FC<{ lines?: number; className?: string }> = ({
   </div>
 );
 
+/**
+ * Pre-built skeleton navbar component for navigation loading state.
+ * 
+ * @returns {JSX.Element} Skeleton navbar layout
+ * 
+ * @example
+ * ```tsx
+ * {loading ? <SkeletonNavbar /> : <Navbar />}
+ * ```
+ */
 export const SkeletonNavbar: React.FC = () => (
   <div className="bg-white shadow-lg p-4">
     <div className="container mx-auto flex justify-between items-center">
