@@ -1,3 +1,4 @@
+/// <reference types="node" />
 /**
  * @fileoverview Contact form API endpoint handler.
  * Handles contact form submissions with validation, rate limiting, reCAPTCHA verification,
@@ -203,7 +204,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (recipientEmail) {
       try {
-        const { sendEmail, formatContactFormEmail, formatTrainingRequestEmail, formatContactConfirmationEmail, formatTrainingRequestConfirmationEmail } = await import('./email');
+        const { sendEmail, formatContactFormEmail, formatTrainingRequestEmail, formatContactConfirmationEmail, formatTrainingRequestConfirmationEmail } = await import('./email.js');
         
         // Send notification email
         const emailResult = await sendEmail({

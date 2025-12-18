@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { z } from 'zod';
 
 type VercelRequest = {
@@ -77,7 +78,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const testCenterEmail = process.env.TEST_CENTER_EMAIL || 'info@vdrs.com';
     if (testCenterEmail) {
       try {
-        const { sendEmail, formatTestCenterFormEmail, formatTestCenterConfirmationEmail } = await import('./email');
+        const { sendEmail, formatTestCenterFormEmail, formatTestCenterConfirmationEmail } = await import('./email.js');
         
         // Send notification email
         const emailResult = await sendEmail({

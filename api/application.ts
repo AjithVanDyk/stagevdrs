@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { z } from 'zod';
 
 type VercelRequest = {
@@ -89,7 +90,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Send email notification to achirca@vdrs.com
     const hrEmail = 'achirca@vdrs.com';
     try {
-      const { sendEmail, formatJobApplicationEmail } = await import('./email');
+      const { sendEmail, formatJobApplicationEmail } = await import('./email.js');
       const emailResult = await sendEmail({
         to: hrEmail,
         subject: `New Job Application: ${formData.position} - ${formData.fullName}`,

@@ -1,3 +1,4 @@
+/// <reference types="node" />
 /**
  * @fileoverview Quote request API endpoint handler.
  * Handles quote form submissions with validation, rate limiting, and email notifications.
@@ -179,7 +180,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const quoteEmail = process.env.QUOTE_EMAIL || 'info@vdrs.com';
     if (quoteEmail) {
       try {
-        const { sendEmail, formatQuoteFormEmail, formatQuoteConfirmationEmail } = await import('./email');
+        const { sendEmail, formatQuoteFormEmail, formatQuoteConfirmationEmail } = await import('./email.js');
         
         // Send notification email with solution names
         const emailResult = await sendEmail({
