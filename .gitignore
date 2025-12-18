@@ -116,15 +116,6 @@ storybook-static/
 .bolt/
 .vite/
 
-# Exclude large files
-*.pptx
-*.ppt
-*.docx
-*.doc
-*.mp4
-*.avi
-*.mov
-*.wmv
 
 # Exclude development files
 *.local
@@ -213,8 +204,6 @@ pids/
 # Exclude VSCode test
 .vscode-test
 
-# PDF files in source code (shouldn't be in components)
-src/components/*.pdf
 
 # Development scripts
 extract_news_articles.py
@@ -238,9 +227,3 @@ hts-cache/
 *.backup
 *.old
 
-# Images directory at root (if not needed)
-Images/
-
-# Large video files (already covered by *.mp4 but being explicit)
-Image_to_Spinner_Loading_Video.mp4
-plastics-recycling-white-bg.mp4

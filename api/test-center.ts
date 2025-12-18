@@ -84,7 +84,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const emailResult = await sendEmail({
           to: testCenterEmail,
           subject: `New Test Center Request from ${formData.fullName} - ${formData.companyName}`,
-          html: formatTestCenterFormEmail(formData),
+          html: formatTestCenterFormEmail({
+            fullName: formData.fullName,
+            companyName: formData.companyName,
+            email: formData.email,
+            phone: formData.phone,
+            materialStreams: formData.materialStreams,
+            desiredOutcomes: formData.desiredOutcomes,
+          }),
           replyTo: formData.email,
         });
 
@@ -92,7 +99,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const confirmationResult = await sendEmail({
           to: formData.email,
           subject: 'Thank You for Your Test Center Request - Van Dyk Recycling Solutions',
-          html: formatTestCenterConfirmationEmail(formData),
+          html: formatTestCenterConfirmationEmail({
+            fullName: formData.fullName,
+          }),
         });
 
         if (!emailResult.success) {

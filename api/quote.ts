@@ -185,9 +185,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         // Send notification email with solution names
         const emailResult = await sendEmail({
           to: quoteEmail,
-          subject: `New Quote Request from ${formData.firstName} ${formData.lastName} - ${formData.company}`,
+          subject: `New Quote Request from ${formData.firstName} ${formData.lastName ?? ''} - ${formData.company}`,
           html: formatQuoteFormEmail({
-            ...formData,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            company: formData.company,
+            city: formData.city,
+            state: formData.state,
+            country: formData.country,
+            additionalDetails: formData.additionalDetails,
+            selectedEquipment: formData.selectedEquipment,
+            selectedSolutions: formData.selectedSolutions,
             selectedSolutionNames: solutionNames,
           }),
           replyTo: formData.email,
@@ -197,7 +207,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const confirmationResult = await sendEmail({
           to: formData.email,
           subject: 'Thank You for Your Quote Request - Van Dyk Recycling Solutions',
-          html: formatQuoteConfirmationEmail(formData),
+          html: formatQuoteConfirmationEmail({
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+          }),
         });
 
         if (!emailResult.success) {
