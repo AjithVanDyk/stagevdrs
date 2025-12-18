@@ -1,4 +1,13 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+type VercelRequest = {
+  method?: string;
+  body?: any;
+  headers?: Record<string, string | string[] | undefined>;
+};
+
+type VercelResponse = {
+  status: (code: number) => VercelResponse;
+  json: (data: any) => void;
+};
 
 // This endpoint should be protected with authentication in production
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -37,7 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     // Send newsletter to all subscribers
-    const { sendEmail, formatNewsletterEmail } = await import('../email');
+    const { sendEmail, formatNewsletterEmail } = await import('../email.js');
     let successCount = 0;
     let failCount = 0;
 

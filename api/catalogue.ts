@@ -1,8 +1,13 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
 
-type VercelResponseType = {
-  status: (code: number) => VercelResponseType;
+type VercelRequest = {
+  method?: string;
+  body?: any;
+  headers?: Record<string, string | string[] | undefined>;
+};
+
+type VercelResponse = {
+  status: (code: number) => VercelResponse;
   json: (data: any) => void;
 };
 
@@ -36,7 +41,7 @@ const catalogueRequestSchema = z.object({
   equipmentId: z.string().optional(),
 });
 
-export default async function handler(req: VercelRequest, res: VercelResponseType) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Method not allowed' });
@@ -71,7 +76,7 @@ export default async function handler(req: VercelRequest, res: VercelResponseTyp
     const { email, equipmentName, equipmentId } = validationResult.data;
 
     // Send catalogue email to user
-    const { sendEmail, formatCatalogueEmail } = await import('./email');
+    const { sendEmail, formatCatalogueEmail } = await import('./email.js');
     
     try {
       // Send catalogue to user
@@ -156,3 +161,4 @@ export default async function handler(req: VercelRequest, res: VercelResponseTyp
     });
   }
 }
+

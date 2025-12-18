@@ -52,7 +52,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
       // Send welcome email
       try {
-        const { sendEmail, formatNewsletterWelcomeEmail } = await import('../email');
+        const { sendEmail, formatNewsletterWelcomeEmail } = await import('../email.js');
         await sendEmail({
           to: normalizedEmail,
           subject: 'Welcome to Van Dyk Recycling Solutions Newsletter',
