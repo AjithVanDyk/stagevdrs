@@ -200,12 +200,17 @@ async function sendEmailSMTP(options: EmailOptions): Promise<EmailResult> {
  * Format form submission as HTML email
  */
 export function formatContactFormEmail(formData: {
-  name: string;
-  company: string;
-  email: string;
-  phone: string;
-  message: string;
+  name?: string;
+  company?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
 }): string {
+  const name = formData.name ?? '';
+  const company = formData.company ?? '';
+  const email = formData.email ?? '';
+  const phone = formData.phone ?? '';
+  const message = formData.message ?? '';
   return `
     <!DOCTYPE html>
     <html>
@@ -229,24 +234,24 @@ export function formatContactFormEmail(formData: {
           </div>
           <div class="content">
             <div class="field">
-              <div class="label">Name:</div>
-              <div class="value">${escapeHtml(formData.name)}</div>
+                <div class="label">Name:</div>
+              <div class="value">${escapeHtml(name)}</div>
             </div>
             <div class="field">
-              <div class="label">Company:</div>
-              <div class="value">${escapeHtml(formData.company)}</div>
+                <div class="label">Company:</div>
+              <div class="value">${escapeHtml(company)}</div>
             </div>
             <div class="field">
-              <div class="label">Email:</div>
-              <div class="value"><a href="mailto:${escapeHtml(formData.email)}">${escapeHtml(formData.email)}</a></div>
+                <div class="label">Email:</div>
+              <div class="value"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></div>
             </div>
             <div class="field">
-              <div class="label">Phone:</div>
-              <div class="value"><a href="tel:${escapeHtml(formData.phone)}">${escapeHtml(formData.phone)}</a></div>
+                <div class="label">Phone:</div>
+              <div class="value"><a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></div>
             </div>
             <div class="field">
-              <div class="label">Message:</div>
-              <div class="value">${escapeHtml(formData.message).replace(/\n/g, '<br>')}</div>
+                <div class="label">Message:</div>
+              <div class="value">${escapeHtml(message).replace(/\n/g, '<br>')}</div>
             </div>
           </div>
           <div class="footer">
@@ -354,26 +359,42 @@ export function formatQuoteFormEmail(formData: {
 }
 
 export function formatJobApplicationEmail(formData: {
-  fullName: string;
-  email: string;
-  phone: string;
-  address: string;
-  authorizedToWork: string;
-  requiresSponsorship: string;
-  position: string;
-  availableStartDate: string;
-  desiredSalaryRange: string;
-  highestEducation: string;
-  workExperience: string;
-  references: string;
+  fullName?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  authorizedToWork?: string;
+  requiresSponsorship?: string;
+  position?: string;
+  availableStartDate?: string;
+  desiredSalaryRange?: string;
+  highestEducation?: string;
+  workExperience?: string;
+  references?: string;
   resumeLink?: string;
   resume?: string;
   resumeFileName?: string;
-  howDidYouHear: string;
-  certification: string;
-  signature: string;
-  todaysDate: string;
+  howDidYouHear?: string;
+  certification?: string;
+  signature?: string;
+  todaysDate?: string;
 }): string {
+  const fullName = formData.fullName ?? '';
+  const email = formData.email ?? '';
+  const phone = formData.phone ?? '';
+  const address = formData.address ?? '';
+  const authorizedToWork = formData.authorizedToWork ?? '';
+  const requiresSponsorship = formData.requiresSponsorship ?? '';
+  const position = formData.position ?? '';
+  const availableStartDate = formData.availableStartDate ?? '';
+  const desiredSalaryRange = formData.desiredSalaryRange ?? '';
+  const highestEducation = formData.highestEducation ?? '';
+  const workExperience = formData.workExperience ?? '';
+  const references = formData.references ?? '';
+  const howDidYouHear = formData.howDidYouHear ?? '';
+  const certification = formData.certification ?? '';
+  const signature = formData.signature ?? '';
+  const todaysDate = formData.todaysDate ?? '';
   return `
     <!DOCTYPE html>
     <html>
@@ -723,7 +744,8 @@ export function formatTestCenterFormEmail(formData: {
 }
 
 // Confirmation Email Templates
-export function formatContactConfirmationEmail(formData: { name: string }): string {
+export function formatContactConfirmationEmail(formData: { name?: string }): string {
+  const name = formData.name ?? '';
   return `
     <!DOCTYPE html>
     <html>
@@ -743,7 +765,7 @@ export function formatContactConfirmationEmail(formData: { name: string }): stri
             <h1>Thank You for Contacting Us!</h1>
           </div>
           <div class="content">
-            <p>Dear ${escapeHtml(formData.name)},</p>
+            <p>Dear ${escapeHtml(name)},</p>
             <p>Thank you for reaching out to Van Dyk Recycling Solutions. We have received your message and our team will get back to you within 24 hours.</p>
             <p>We appreciate your interest in our recycling solutions and look forward to assisting you.</p>
             <p>Best regards,<br>The Van Dyk Recycling Solutions Team</p>
@@ -792,7 +814,8 @@ export function formatQuoteConfirmationEmail(formData: { firstName: string; last
   `;
 }
 
-export function formatTrainingRequestConfirmationEmail(formData: { name: string }): string {
+export function formatTrainingRequestConfirmationEmail(formData: { name?: string }): string {
+  const name = formData.name ?? '';
   return `
     <!DOCTYPE html>
     <html>
@@ -812,7 +835,7 @@ export function formatTrainingRequestConfirmationEmail(formData: { name: string 
             <h1>Thank You for Your Training Request!</h1>
           </div>
           <div class="content">
-            <p>Dear ${escapeHtml(formData.name)},</p>
+            <p>Dear ${escapeHtml(name)},</p>
             <p>Thank you for your interest in Van Dyk University training programs. We have received your training request and our team will review it and contact you shortly.</p>
             <p>Our training coordinators will work with you to schedule the best training program for your needs.</p>
             <p>Best regards,<br>The Van Dyk University Team</p>
