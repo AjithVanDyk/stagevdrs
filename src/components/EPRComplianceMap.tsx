@@ -1021,8 +1021,8 @@ const EPRComplianceMap: React.FC = () => {
                     }
                   }}
                 >
-                {/* US States */}
-                <Geographies geography="https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json">
+                {/* US States - served from local JSON to avoid CSP issues on Vercel */}
+                <Geographies geography="/us-states-10m.json">
                   {({ geographies }) =>
                     geographies.map((geo) => {
                       // Convert FIPS code to state abbreviation

@@ -261,18 +261,22 @@ export function formatContactFormEmail(formData: {
 
 export function formatQuoteFormEmail(formData: {
   firstName: string;
-  lastName: string;
+  lastName?: string;
   email: string;
   phone: string;
   company: string;
-  city: string;
-  state: string;
-  country: string;
+  city?: string;
+  state?: string;
+  country?: string;
   additionalDetails?: string;
   selectedEquipment?: string[];
   selectedSolutions?: number[];
   selectedSolutionNames?: string[];
 }): string {
+  const safeLastName = formData.lastName ?? '';
+  const city = formData.city ?? '';
+  const state = formData.state ?? '';
+  const country = formData.country ?? '';
   return `
     <!DOCTYPE html>
     <html>
@@ -297,7 +301,7 @@ export function formatQuoteFormEmail(formData: {
           <div class="content">
             <div class="field">
               <div class="label">Name:</div>
-              <div class="value">${escapeHtml(formData.firstName)} ${escapeHtml(formData.lastName)}</div>
+              <div class="value">${escapeHtml(formData.firstName)} ${escapeHtml(safeLastName)}</div>
             </div>
             <div class="field">
               <div class="label">Email:</div>
@@ -313,7 +317,7 @@ export function formatQuoteFormEmail(formData: {
             </div>
             <div class="field">
               <div class="label">Location:</div>
-              <div class="value">${escapeHtml(formData.city)}, ${escapeHtml(formData.state)}, ${escapeHtml(formData.country)}</div>
+              <div class="value">${escapeHtml(city)}, ${escapeHtml(state)}, ${escapeHtml(country)}</div>
             </div>
             ${formData.selectedEquipment && formData.selectedEquipment.length > 0 ? `
             <div class="field">
@@ -648,13 +652,19 @@ export function formatTrainingRequestEmail(formData: {
 }
 
 export function formatTestCenterFormEmail(formData: {
-  fullName: string;
-  companyName: string;
-  email: string;
-  phone: string;
-  materialStreams: string;
-  desiredOutcomes: string;
+  fullName?: string;
+  companyName?: string;
+  email?: string;
+  phone?: string;
+  materialStreams?: string;
+  desiredOutcomes?: string;
 }): string {
+  const fullName = formData.fullName ?? '';
+  const companyName = formData.companyName ?? '';
+  const email = formData.email ?? '';
+  const phone = formData.phone ?? '';
+  const materialStreams = formData.materialStreams ?? '';
+  const desiredOutcomes = formData.desiredOutcomes ?? '';
   return `
     <!DOCTYPE html>
     <html>
@@ -679,27 +689,27 @@ export function formatTestCenterFormEmail(formData: {
           <div class="content">
             <div class="field">
               <div class="label">Full Name:</div>
-              <div class="value">${escapeHtml(formData.fullName)}</div>
+              <div class="value">${escapeHtml(fullName)}</div>
             </div>
             <div class="field">
               <div class="label">Company:</div>
-              <div class="value">${escapeHtml(formData.companyName)}</div>
+              <div class="value">${escapeHtml(companyName)}</div>
             </div>
             <div class="field">
               <div class="label">Email:</div>
-              <div class="value"><a href="mailto:${escapeHtml(formData.email)}">${escapeHtml(formData.email)}</a></div>
+              <div class="value"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></div>
             </div>
             <div class="field">
               <div class="label">Phone:</div>
-              <div class="value"><a href="tel:${escapeHtml(formData.phone)}">${escapeHtml(formData.phone)}</a></div>
+              <div class="value"><a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></div>
             </div>
             <div class="field">
               <div class="label">Material Streams:</div>
-              <div class="value">${escapeHtml(formData.materialStreams).replace(/\n/g, '<br>')}</div>
+              <div class="value">${escapeHtml(materialStreams).replace(/\n/g, '<br>')}</div>
             </div>
             <div class="field">
               <div class="label">Desired Outcomes:</div>
-              <div class="value">${escapeHtml(formData.desiredOutcomes).replace(/\n/g, '<br>')}</div>
+              <div class="value">${escapeHtml(desiredOutcomes).replace(/\n/g, '<br>')}</div>
             </div>
           </div>
           <div class="footer">
@@ -747,7 +757,8 @@ export function formatContactConfirmationEmail(formData: { name: string }): stri
   `;
 }
 
-export function formatQuoteConfirmationEmail(formData: { firstName: string; lastName: string }): string {
+export function formatQuoteConfirmationEmail(formData: { firstName: string; lastName?: string }): string {
+  const lastName = formData.lastName ?? '';
   return `
     <!DOCTYPE html>
     <html>
@@ -816,6 +827,7 @@ export function formatTrainingRequestConfirmationEmail(formData: { name: string 
 }
 
 export function formatTestCenterConfirmationEmail(formData: { fullName: string }): string {
+  const fullName = formData.fullName ?? '';
   return `
     <!DOCTYPE html>
     <html>
@@ -835,7 +847,7 @@ export function formatTestCenterConfirmationEmail(formData: { fullName: string }
             <h1>Thank You for Your Test Center Request!</h1>
           </div>
           <div class="content">
-            <p>Dear ${escapeHtml(formData.fullName)},</p>
+            <p>Dear ${escapeHtml(fullName)},</p>
             <p>Thank you for your interest in the Van Dyk Test Center. We have received your testing request and our team will review it and contact you shortly to discuss your testing needs.</p>
             <p>The Test Center team will work with you to schedule your material testing and help you achieve your recycling goals.</p>
             <p>Best regards,<br>The Van Dyk Test Center Team</p>
