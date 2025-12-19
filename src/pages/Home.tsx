@@ -190,20 +190,25 @@ const Home = () => {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover object-center z-0"
           style={{
             transform: 'scale(1.1)',
             objectPosition: 'center 30%'
           }}
           onError={(e) => {
             // Fallback to image if video fails to load
+            console.error('Video failed to load:', e);
             const videoElement = e.currentTarget as HTMLVideoElement;
             const fallbackImg = document.createElement('img');
             fallbackImg.src = IMAGE_ASSIGNMENTS.homepage.heroFallback;
-            fallbackImg.className = 'absolute inset-0 w-full h-full object-cover object-center';
+            fallbackImg.className = 'absolute inset-0 w-full h-full object-cover object-center z-0';
             fallbackImg.style.transform = 'scale(1.1)';
             fallbackImg.style.objectPosition = 'center 30%';
             videoElement.parentNode?.replaceChild(fallbackImg, videoElement);
+          }}
+          onLoadedData={() => {
+            console.log('Video loaded successfully');
           }}
         >
           <source src="/videos/homepage.mp4" type="video/mp4" />
@@ -211,7 +216,7 @@ const Home = () => {
           <img 
             src={IMAGE_ASSIGNMENTS.homepage.heroFallback}
             alt="Van Dyk Recycling Solutions"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center z-0"
             style={{
               transform: 'scale(1.1)',
               objectPosition: 'center 30%'
