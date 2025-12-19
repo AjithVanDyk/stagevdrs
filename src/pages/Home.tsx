@@ -198,8 +198,16 @@ const Home = () => {
           }}
           onError={(e) => {
             // Fallback to image if video fails to load
-            console.error('Video failed to load:', e);
             const videoElement = e.currentTarget as HTMLVideoElement;
+            const error = videoElement.error;
+            console.error('Video failed to load:', {
+              errorCode: error?.code,
+              errorMessage: error?.message,
+              networkState: videoElement.networkState,
+              readyState: videoElement.readyState,
+              src: videoElement.currentSrc || videoElement.src,
+              allSources: Array.from(videoElement.querySelectorAll('source')).map(s => s.src)
+            });
             const fallbackImg = document.createElement('img');
             fallbackImg.src = IMAGE_ASSIGNMENTS.homepage.heroFallback;
             fallbackImg.className = 'absolute inset-0 w-full h-full object-cover object-center z-0';
@@ -209,6 +217,19 @@ const Home = () => {
           }}
           onLoadedData={() => {
             console.log('Video loaded successfully');
+          }}
+          onCanPlay={(e) => {
+            console.log('Video can play - attempting to play');
+            const video = e.currentTarget as HTMLVideoElement;
+            video.play().catch(err => {
+              console.warn('Autoplay blocked or play failed:', err);
+            });
+          }}
+          onLoadStart={() => {
+            console.log('Video load started');
+          }}
+          onStalled={() => {
+            console.warn('Video stalled - network issue?');
           }}
         >
           <source src="/videos/homepage.mp4" type="video/mp4" />

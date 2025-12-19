@@ -613,12 +613,17 @@ export function formatApplicationFormEmail(formData: {
 }
 
 export function formatTrainingRequestEmail(formData: {
-  name: string;
-  company: string;
-  email: string;
-  phone: string;
-  message: string;
+  name?: string;
+  company?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
 }): string {
+  const name = formData.name ?? '';
+  const company = formData.company ?? '';
+  const email = formData.email ?? '';
+  const phone = formData.phone ?? '';
+  const message = formData.message ?? '';
   return `
     <!DOCTYPE html>
     <html>
@@ -643,23 +648,23 @@ export function formatTrainingRequestEmail(formData: {
           <div class="content">
             <div class="field">
               <div class="label">Name:</div>
-              <div class="value">${escapeHtml(formData.name)}</div>
+              <div class="value">${escapeHtml(name)}</div>
             </div>
             <div class="field">
               <div class="label">Company:</div>
-              <div class="value">${escapeHtml(formData.company)}</div>
+              <div class="value">${escapeHtml(company)}</div>
             </div>
             <div class="field">
               <div class="label">Email:</div>
-              <div class="value"><a href="mailto:${escapeHtml(formData.email)}">${escapeHtml(formData.email)}</a></div>
+              <div class="value"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></div>
             </div>
             <div class="field">
               <div class="label">Phone:</div>
-              <div class="value"><a href="tel:${escapeHtml(formData.phone)}">${escapeHtml(formData.phone)}</a></div>
+              <div class="value"><a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></div>
             </div>
             <div class="field">
               <div class="label">Training Details:</div>
-              <div class="value">${escapeHtml(formData.message).replace(/\n/g, '<br>')}</div>
+              <div class="value">${escapeHtml(message).replace(/\n/g, '<br>')}</div>
             </div>
           </div>
           <div class="footer">
