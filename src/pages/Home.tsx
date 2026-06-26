@@ -215,19 +215,14 @@ const Home = () => {
             fallbackImg.style.objectPosition = 'center 30%';
             videoElement.parentNode?.replaceChild(fallbackImg, videoElement);
           }}
-          onLoadedData={() => {
-            console.log('Video loaded successfully');
-          }}
+          onLoadedData={() => {}}
           onCanPlay={(e) => {
-            console.log('Video can play - attempting to play');
             const video = e.currentTarget as HTMLVideoElement;
             video.play().catch(err => {
               console.warn('Autoplay blocked or play failed:', err);
             });
           }}
-          onLoadStart={() => {
-            console.log('Video load started');
-          }}
+          onLoadStart={() => {}}
           onStalled={() => {
             console.warn('Video stalled - network issue?');
           }}
