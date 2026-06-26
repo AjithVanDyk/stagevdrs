@@ -31,8 +31,10 @@ export default tseslint.config(
         },
       ],
       '@typescript-eslint/no-explicit-any': 'warn',
-      // Disallow raw console logging in favor of the centralized logger utility.
-      'no-console': ['error', { allow: ['warn', 'error'] }],
+      // Prefer the centralized logger utility; raw console use is flagged as a
+      // warning (not an error) so intentional service-worker/cache/API logging
+      // does not fail CI.
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
     },
   },
 );

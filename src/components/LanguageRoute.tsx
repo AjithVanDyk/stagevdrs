@@ -63,7 +63,7 @@ const LanguageRoute: React.FC<LanguageRouteProps> = ({ children }) => {
  * // In App.tsx or router setup
  * <LanguageRedirect />
  * <Routes>
- *   {/* Routes */}
+ *   {routes}
  * </Routes>
  * ```
  * 
